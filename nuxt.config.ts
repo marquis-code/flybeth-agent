@@ -2,8 +2,18 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
+    devServer: {
+    port: 3003,
+    host: 'localhost' // or '0.0.0.0' to allow external access
+  },
+
   app: {
     head: {
+      title: 'Flybeth Agent | Premium Travel Management',
+      meta: [
+        { name: 'description', content: 'Flybeth Agent Portal — Empowering travel professionals with intelligent tools.' },
+        { name: 'author', content: 'Flybeth' },
+      ],
       link: [
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
