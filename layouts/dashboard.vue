@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen overflow-hidden bg-[#F8F9FA] flex font-sans text-neutral-800">
+  <div class="h-screen overflow-hidden bg-[#F0F2F5] flex font-sans text-neutral-800">
     <!-- Desktop Sidebar -->
     <aside class="w-72 bg-white flex-shrink-0 hidden lg:flex flex-col border-r border-gray-200 z-20 relative">
       <div class="p-8 pb-10 flex items-center space-x-4 relative z-10 border-b border-gray-100">
@@ -47,31 +47,44 @@
 
     <!-- Mobile Header & Navigation Toggle -->
     <div class="flex-grow flex flex-col min-w-0">
-      <header class="bg-white/80 backdrop-blur-md border-b border-gray-100 h-20 flex items-center justify-between px-6 lg:px-10 sticky top-0 z-30">
+      <header class="bg-white/90 backdrop-blur-xl border-b border-gray-100 h-24 flex items-center justify-between px-8 lg:px-12 sticky top-0 z-30 shadow-sm shadow-gray-200/50">
+        <!-- Decoration for Premium Feel -->
+        <div class="absolute inset-x-0 bottom-0 h-[2px] bg-gradient-to-r from-transparent via-primary/10 to-transparent"></div>
+        
         <div class="flex items-center">
-          <button @click="isMobileMenuOpen = true" class="lg:hidden p-2 mr-4 text-neutral/60 hover:text-primary transition-colors">
+          <button @click="isMobileMenuOpen = true" class="lg:hidden p-3 mr-4 text-neutral-500 hover:text-primary hover:bg-gray-100 rounded-xl transition-all">
             <Bars3Icon class="h-6 w-6" />
           </button>
-          <div>
-            <h1 class="text-2xl  font-bold text-primary-dark leading-none capitalize">{{ currentPageTitle }}</h1>
-            <p class="text-xs text-neutral/40 mt-1 font-medium hidden sm:block">Welcome back to your travel dashboard</p>
+          <div class="space-y-0.5">
+            <h1 class="text-3xl font-black text-primary-dark tracking-tight capitalize">{{ currentPageTitle }}</h1>
+            <p class="text-[10px] text-primary/60 font-black uppercase tracking-[0.2em] hidden sm:block">Flybeth Agent Intelligence Portal</p>
           </div>
         </div>
 
-        <div class="flex items-center space-x-2 sm:space-x-5">
-          <button @click="isSearchModalOpen = true" class="hidden sm:flex items-center bg-gray-100 hover:bg-gray-200 rounded-lg px-4 py-2.5 transition-all duration-300 w-40 lg:w-64 text-left border border-gray-200">
-            <MagnifyingGlassIcon class="h-4 w-4 text-gray-500 mr-3" />
-            <span class="text-xs text-gray-500 font-bold flex-grow tracking-wider">Search all records</span>
-            <span class="text-[9px] text-gray-400 font-black px-1.5 py-0.5 bg-white rounded shadow-sm border border-gray-200">⌘K</span>
+        <div class="flex items-center space-x-6">
+          <div class="hidden md:flex items-center space-x-8 mr-4">
+            <div class="text-right">
+              <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-0.5">System Status</p>
+              <div class="flex items-center justify-end space-x-2">
+                <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
+                <span class="text-[10px] font-bold text-gray-900">Live API Node Active</span>
+              </div>
+            </div>
+          </div>
+
+          <button @click="isSearchModalOpen = true" class="hidden sm:flex items-center bg-gray-50 hover:bg-white rounded-2xl px-6 py-3.5 transition-all duration-300 w-48 lg:w-72 text-left border border-gray-200 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/10 group">
+            <MagnifyingGlassIcon class="h-4 w-4 text-gray-400 group-hover:text-primary transition-colors mr-4" />
+            <span class="text-xs text-gray-400 font-bold flex-grow tracking-wider group-hover:text-gray-900 transition-colors">Global Search...</span>
+            <span class="text-[9px] text-gray-400 font-black px-2 py-1 bg-white rounded-lg shadow-sm border border-gray-100 group-hover:border-primary/20">⌘K</span>
           </button>
           
-          <button @click="isSearchModalOpen = true" class="sm:hidden p-2 text-neutral-500 hover:text-primary transition-colors">
+          <button @click="isSearchModalOpen = true" class="sm:hidden p-3 bg-gray-50 rounded-xl text-neutral-500 hover:text-primary transition-all">
             <MagnifyingGlassIcon class="h-6 w-6" />
           </button>
           
-          <button class="relative p-2.5 text-neutral-500 hover:text-primary hover:bg-primary/5 rounded-full transition-all duration-200 group">
+          <button class="relative p-3.5 bg-gray-50 text-neutral-500 hover:text-primary hover:bg-primary/5 rounded-2xl transition-all duration-300 group">
             <BellIcon class="h-6 w-6" />
-            <span class="absolute top-2.5 right-2.5 h-2.5 w-2.5 bg-red-500 border-2 border-white rounded-full group-hover:scale-110 transition-transform"></span>
+            <span class="absolute top-3.5 right-3.5 h-3 w-3 bg-secondary border-2 border-white rounded-full group-hover:scale-110 transition-transform"></span>
           </button>
         </div>
       </header>
@@ -195,10 +208,10 @@ const navigationDetail = ref('')
 
 const navigation = [
   { name: 'Overview', href: '/dashboard', icon: HomeIcon, detail: 'Accessing platform overview' },
-  { name: 'Bookings', href: '/dashboard/bookings', icon: TicketIcon, detail: 'Syncing your reservations' },
+  { name: 'Bookings', href: '/dashboard/bookings', icon: TicketIcon, detail: 'Loading your bookings' },
   { name: 'Travelers', href: '/dashboard/customers', icon: UsersIcon, detail: 'Loading traveler profiles' },
-  { name: 'Insights', href: '/dashboard/reports', icon: ChartBarIcon, detail: 'Calculating agency performance' },
-  { name: 'Settings', href: '/dashboard/settings', icon: Cog6ToothIcon, detail: 'Managing account parameters' },
+  { name: 'Insights', href: '/dashboard/reports', icon: ChartBarIcon, detail: 'Loading performance data' },
+  { name: 'Settings', href: '/dashboard/settings', icon: Cog6ToothIcon, detail: 'Loading your settings' },
 ]
 
 const currentPageTitle = computed(() => {

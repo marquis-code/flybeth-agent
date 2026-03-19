@@ -1,12 +1,8 @@
 <template>
-  <div class="min-h-screen bg-white font-sans text-neutral-900 selection:bg-secondary/20 selection:text-secondary p-8 lg:p-20">
+  <div class="bg-white p-8 lg:p-20">
     <div class="max-w-4xl mx-auto space-y-12">
       <!-- Header -->
       <div class="space-y-4">
-        <NuxtLink to="/" class="inline-flex items-center space-x-2 text-neutral-400 hover:text-primary-dark transition-colors group">
-          <ArrowLeftIcon class="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-          <span class="text-xs font-bold tracking-wider">Back to home</span>
-        </NuxtLink>
         <h1 class="text-5xl lg:text-7xl font-black text-primary-dark tracking-tighter leading-tight">
           Terms and conditions.
         </h1>
@@ -56,14 +52,6 @@
             Flybeth reserves the right to terminate or restrict access to the Agent Portal at its sole discretion, including for reasons of non-payment, fraudulent activity, or failure to meet the Professional Code of Conduct. Upon termination, all pending commissions will be settled according to the standard audit process.
           </p>
         </section>
-      </div>
-
-      <!-- Footer Branding -->
-      <div class="pt-20 border-t border-neutral-100 flex items-center justify-between opacity-50">
-        <div class="flex items-center space-x-2">
-        <img src="@/assets/img/logo.png" class="w-auto h-12" alt="logo"  />
-        </div>
-        <p class="text-sm font-black tracking-widest">Global partner network</p>
       </div>
     </div>
   </div>

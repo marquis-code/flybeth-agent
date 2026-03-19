@@ -7,9 +7,9 @@
       </div>
 
       <div class="space-y-4">
-        <h1 class="text-4xl font-black text-primary-dark tracking-tighter">Security confirmation.</h1>
+        <h1 class="text-4xl font-black text-primary-dark tracking-tighter">Verify your email.</h1>
         <p class="text-neutral-400 font-medium">
-          A verification code has been dispatched to <br />
+          A verification code has been sent to <br />
           <strong class="text-primary-dark">{{ email }}</strong>
         </p>
       </div>
@@ -29,7 +29,7 @@
             class="shadow-xl shadow-primary-dark/20"
             :disabled="otp.length !== 6"
           >
-            Verify & access portal
+            Verify & sign in
           </BaseButton>
 
           <p class="text-sm font-medium text-neutral-400">
@@ -100,7 +100,7 @@ const handleVerify = async () => {
       otp: otp.value
     })
     localStorage.removeItem('verify_email')
-    router.push('/dashboard')
+    await navigateTo('/dashboard', { replace: true })
   } catch (error) {
     // Error handled in useAuth
   }

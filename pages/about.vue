@@ -1,17 +1,5 @@
 <template>
-  <div class="min-h-screen bg-white font-sans text-neutral-900 overflow-x-hidden">
-    <nav class="bg-white border-b border-neutral-100 py-8 fixed top-0 w-full z-10">
-      <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <NuxtLink to="/" class="flex items-center space-x-3 group">
-          <img src="@/assets/img/logo.png" class="w-auto h-12" alt="logo" />
-        </NuxtLink>
-        <div class="flex items-center space-x-8">
-          <NuxtLink to="/auth/login" class="text-sm font-black text-neutral-400 hover:text-primary-dark transition-colors tracking-widest">Sign in</NuxtLink>
-          <BaseButton to="/auth/register" variant="primary" size="md" class="px-8 py-3">Join today</BaseButton>
-        </div>
-      </div>
-    </nav>
-
+  <div class="bg-white">
     <!-- About Hero -->
     <section class="pt-48 pb-24 bg-white relative overflow-hidden">
       <!-- Decorative background blur -->

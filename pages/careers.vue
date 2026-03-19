@@ -1,20 +1,10 @@
 <template>
-  <div class="min-h-screen bg-white font-sans text-neutral-900 overflow-x-hidden">
-    <!-- Header -->
-    <nav class="bg-white border-b border-neutral-100 py-6 sticky top-0 z-10">
-      <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <NuxtLink to="/" class="flex items-center space-x-3">
-          <img src="@/assets/img/logo.png" class="w-auto h-10" alt="logo" />
-        </NuxtLink>
-        <NuxtLink to="/contact" class="text-sm font-black text-primary hover:text-primary-dark transition-colors tracking-widest uppercase truncate">Speak to an advisor</NuxtLink>
-      </div>
-    </nav>
-
-    <section class="py-24 bg-white relative">
+  <div class="bg-white">
+    <section class="relative pt-24 pb-16 lg:pt-32 lg:pb-24 overflow-hidden bg-primary-dark">
       <div class="max-w-4xl mx-auto px-6 lg:px-10 space-y-16">
         <div class="space-y-6">
           <h2 class="text-xs font-black text-secondary tracking-[0.4em] uppercase">Join the network</h2>
-          <h1 class="text-5xl lg:text-7xl font-black text-primary-dark tracking-tighter leading-tight">
+          <h1 class="text-5xl lg:text-7xl font-black text-white tracking-tighter leading-tight">
              Careers in <br />
              <span class="text-primary italic">travel tech.</span>
           </h1>

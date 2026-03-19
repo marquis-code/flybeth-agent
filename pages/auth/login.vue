@@ -22,8 +22,8 @@
 
         <div class="relative z-10 pt-12 border-t border-neutral-200/50">
           <div class="flex items-center space-x-12 opacity-40 grayscale group-hover:opacity-100 transition-all duration-1000">
-             <span class="text-xl font-black tracking-tighter">Registry</span>
-             <span class="text-xl font-black tracking-tighter">Secure</span>
+             <span class="text-xl font-black tracking-tighter">Trusted</span>
+             <span class="text-xl font-black tracking-tighter">Reliable</span>
              <span class="text-xl font-black tracking-tighter">v1.0</span>
           </div>
         </div>
@@ -34,7 +34,7 @@
         <div class="max-w-md w-full mx-auto space-y-12">
           <div class="space-y-4">
             <h1 class="text-4xl font-black text-primary-dark tracking-tighter">Welcome back.</h1>
-            <p class="text-neutral-400 font-medium">Please enter your professional credentials to access your account.</p>
+            <p class="text-neutral-400 font-medium">Enter your email and password to sign in.</p>
           </div>
 
           <form @submit.prevent="handleLogin" class="space-y-8">
@@ -92,9 +92,7 @@
             </div>
           </form>
 
-          <p class="text-[9px] font-black text-neutral-200 tracking-[0.2em] text-center">
-            Secured by Flybeth global security hub • Node 04-a
-          </p>
+
         </div>
       </div>
     </div>

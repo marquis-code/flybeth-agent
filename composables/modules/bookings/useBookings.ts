@@ -4,8 +4,8 @@ import { useUser } from "../auth/user";
 
 export const useBookings = () => {
     const loading = ref(false);
-    const bookings = ref([]);
-    const stats = ref(null);
+    const bookings = ref<any[]>([]);
+    const stats = ref<any>(null);
     const { user } = useUser();
 
     const fetchBookings = async (params?: any) => {

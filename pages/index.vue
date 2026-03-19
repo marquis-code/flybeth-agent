@@ -1,34 +1,5 @@
 <template>
   <div class="min-h-screen bg-[#FDFDFD] font-sans text-neutral-900 overflow-x-hidden selection:bg-primary selection:text-white">
-    <!-- Premium Navigation -->
-    <nav 
-      class="fixed top-0 w-full z-50 transition-all duration-700 border-b"
-      :class="scrolled ? 'bg-white/90 backdrop-blur-xl border-neutral-100 py-4 shadow-sm' : 'bg-transparent border-transparent py-8'"
-    >
-      <div class="max-w-7xl mx-auto px-6 lg:px-10 flex justify-between items-center">
-        <div class="flex items-center space-x-3 group cursor-pointer" @click="scrollToTop">
-           <img src="@/assets/img/logo.png" class="w-auto h-12" alt="logo"  />
-        </div>  
-
-        <div class="hidden md:flex items-center space-x-10">
-          <NuxtLink 
-            v-for="link in navLinks" 
-            :key="link.name" 
-            :to="link.href" 
-            class="text-sm font-black text-neutral-400 hover:text-primary-dark transition-colors tracking-[0.2em]"
-          >
-            {{ link.name }}
-          </NuxtLink>
-        </div>
-
-        <div class="flex items-center space-x-6">
-          <NuxtLink to="/auth/login" class="text-sm font-black tracking-[0.2em] text-neutral-400 hover:text-primary-dark transition-colors">Sign in</NuxtLink>
-          <BaseButton to="/auth/register" variant="primary" size="md" class="px-7 py-3 shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30 transition-all">
-            Join platform
-          </BaseButton>
-        </div>
-      </div>
-    </nav>
 
     <!-- Immersive Hero Section -->
     <section class="relative pt-40 pb-24 lg:pt-48 lg:pb-32 overflow-hidden bg-white">
@@ -43,7 +14,7 @@
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
               <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-secondary"></span>
             </span>
-            <span class="text-sm font-black text-primary-dark tracking-[0.2em]">Secure node verification active</span>
+            <span class="text-sm font-black text-primary-dark tracking-[0.2em]">Platform is live</span>
           </div>
 
           <h1 class="text-6xl lg:text-8xl font-black text-primary-dark leading-[1.05] tracking-tighter">
@@ -114,7 +85,7 @@
     <section id="features" class="py-32 bg-white relative">
       <div class="max-w-7xl mx-auto px-6 lg:px-10">
         <div class="mb-20 text-center max-w-3xl mx-auto observe-me">
-          <h2 class="text-sm font-black text-secondary tracking-[0.4em] mb-4 uppercase">Advanced infrastructure</h2>
+          <h2 class="text-sm font-black text-secondary tracking-[0.4em] mb-4 uppercase">Powerful features</h2>
           <h3 class="text-5xl lg:text-6xl font-black text-primary-dark tracking-tighter leading-tight">
             Everything you need to <span class="block text-primary">operate at scale.</span>
           </h3>
@@ -182,81 +153,48 @@
     </section>
 
     <!-- High-Impact CTA Section -->
-    <section class="py-32 lg:py-48 relative overflow-hidden bg-primary-dark">
-      <!-- Moody Background -->
-      <div class="absolute inset-0 opacity-20">
-        <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&q=80&w=2000" alt="Luxury Travel" class="w-full h-full object-cover mix-blend-overlay" />
-      </div>
-      <div class="absolute inset-0 bg-gradient-to-t from-primary-dark via-primary-dark/95 to-transparent"></div>
+    <section class="py-32 lg:py-48 relative overflow-hidden bg-white">
+      <!-- Bright Decorative Background -->
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[1000px] bg-primary/5 rounded-full blur-[150px] pointer-events-none"></div>
+      <div class="absolute bottom-0 right-0 w-[600px] h-[600px] bg-secondary/8 rounded-full blur-[120px] pointer-events-none"></div>
+      <div class="absolute top-20 left-0 w-[400px] h-[400px] bg-blue-100/50 rounded-full blur-[100px] pointer-events-none"></div>
 
-      <div class="relative z-10 max-w-4xl mx-auto px-6 text-center text-white observe-me">
-        <span class="inline-block py-2 px-5 mb-8 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-sm font-black tracking-[0.3em] text-secondary">
-          Join the elite network
+      <div class="relative z-10 max-w-4xl mx-auto px-6 text-center observe-me">
+        <span class="inline-block py-2.5 px-6 mb-8 rounded-full bg-primary/5 border border-primary/10 text-sm font-black tracking-[0.3em] text-primary">
+          Get started today
         </span>
-        <h2 class="text-5xl lg:text-7xl font-black tracking-tighter leading-tight mb-8">
-          Ready to elevate your <br />
-          <span class="italic text-white/50">travel business?</span>
+        <h2 class="text-5xl lg:text-7xl font-black tracking-tighter leading-tight mb-8 text-primary-dark">
+          Ready to grow your <br />
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">travel business?</span>
         </h2>
-        <p class="text-xl text-white/60 font-medium max-w-2xl mx-auto mb-16 leading-relaxed">
-          The industry's most powerful B2B travel fulfillment engine is ready. Standardize your operations and maximize your margins today.
+        <p class="text-xl text-neutral-500 font-medium max-w-2xl mx-auto mb-16 leading-relaxed">
+          Join thousands of travel agents who trust Flybeth for wholesale rates, instant bookings, and powerful analytics. Start your free trial today.
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
-          <BaseButton to="/auth/register" size="lg" variant="primary" class="px-14 py-5 shadow-2xl shadow-primary/20 hover:scale-105 transition-transform duration-500">
-            Create agent account
+          <BaseButton to="/auth/register" size="lg" variant="primary" class="px-14 py-5 shadow-2xl shadow-primary/20 hover:scale-105 hover:-translate-y-1 transition-all duration-500">
+            Create your free account
           </BaseButton>
-          <a href="#" class="text-sm font-bold text-white hover:text-secondary transition-colors underline underline-offset-4 decoration-white/30 hover:decoration-secondary">Contact enterprise sales</a>
+          <a href="#" class="text-sm font-bold text-neutral-500 hover:text-primary transition-colors underline underline-offset-4 decoration-neutral-300 hover:decoration-primary">Contact our sales team</a>
         </div>
       </div>
     </section>
-
-    <!-- Professional Footer -->
-    <footer class="bg-[#111] py-20 border-t border-neutral-800 text-neutral-400">
-      <div class="max-w-7xl mx-auto px-6 lg:px-10">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-16 mb-20">
-          <div class="col-span-1 md:col-span-2 space-y-8">
-            <div class="flex items-center space-x-3">
-               <img src="@/assets/img/logo.png" class="w-auto h-12" alt="logo"  />
-            </div>
-            <p class="font-medium max-w-sm leading-relaxed text-sm">
-              Empowering global travel advisors with intelligent B2B infrastructure, direct API connectivity, and wholesale inventory frameworks.
-            </p>
-          </div>
-          <div v-for="col in footerLinks" :key="col.title">
-            <h4 class="text-xs font-black text-white tracking-[0.4em] mb-8 uppercase">{{ col.title }}</h4>
-            <ul class="space-y-4">
-              <li v-for="link in col.links" :key="link.name">
-                <NuxtLink :to="link.href" class="text-sm font-medium hover:text-white transition-colors">{{ link.name }}</NuxtLink>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="flex flex-col md:flex-row justify-between items-center pt-10 border-t border-neutral-800">
-          <p class="font-bold text-sm tracking-widest text-neutral-500">© 2026 Flybeth B2B travel technologies.</p>
-          <div class="flex space-x-8 mt-8 md:mt-0">
-            <NuxtLink to="/privacy" class="text-sm font-black tracking-[0.2em] hover:text-white transition-colors">Privacy</NuxtLink>
-            <NuxtLink to="/terms" class="text-sm font-black tracking-[0.2em] hover:text-white transition-colors">Terms</NuxtLink>
-          </div>
-        </div>
-      </div>
-    </footer>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { 
-  GlobeAltIcon, 
-  BanknotesIcon,
-  ShieldCheckIcon,
-  SparklesIcon,
-  CheckIcon
+  CheckIcon, 
+  BanknotesIcon, 
+  ArrowRightIcon, 
+  SparklesIcon, 
+  ShieldCheckIcon, 
+  GlobeAltIcon,
+  BoltIcon,
+  CpuChipIcon,
+  ChartBarIcon,
+  UserGroupIcon
 } from '@heroicons/vue/24/outline'
-
-const scrolled = ref(false)
-
-const handleScroll = () => {
-  scrolled.value = window.scrollY > 50
-}
 
 const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -278,46 +216,14 @@ const setupObserver = () => {
 }
 
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
-  
   // Staggered reveal for hero elements is handled via simple CSS animation classes
   // Wait a tick for DOM to setup, then trigger observer
   setTimeout(() => setupObserver(), 100)
 })
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
 })
 
-const navLinks = [
-  { name: 'Features', href: '/features' },
-  { name: 'Solutions', href: '/solutions' },
-  { name: 'Resources', href: '/help-center' },
-  { name: 'Pricing', href: '/pricing' },
-]
-
-const footerLinks = [
-  {
-    title: 'Platform',
-    links: [
-      { name: 'Airlines', href: '/platform/airlines' },
-      { name: 'Properties', href: '/platform/properties' },
-      { name: 'Car rentals', href: '/platform/cars' },
-      { name: 'Transfers', href: '/platform/transfers' },
-      { name: 'API integration', href: '/platform/api' }
-    ]
-  },
-  {
-    title: 'Company',
-    links: [
-      { name: 'About us', href: '/about' },
-      { name: 'Careers', href: '/careers' },
-      { name: 'Security matrix', href: '/security' },
-      { name: 'Status', href: '/status' },
-      { name: 'Contact', href: '/contact' }
-    ]
-  }
-]
 </script>
 
 <style scoped>

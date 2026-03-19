@@ -1,261 +1,469 @@
 <template>
-  <div class="bg-white rounded-[2rem] border border-neutral-200 shadow-xl shadow-neutral-200/50 overflow-hidden isolate relative w-full">
-    <!-- Decorative subtle gradient bg -->
-    <div class="absolute inset-x-0 top-0 h-32 bg-gradient-to-br from-primary/5 to-secondary/5 -z-10"></div>
-    
-    <div class="p-8 lg:p-10">
-      <!-- Header & Trip Type -->
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
-        <div>
-          <h2 class="text-2xl font-serif font-black text-primary-dark tracking-tight">Search global inventory</h2>
-          <p class="text-xs text-neutral-500 font-medium mt-1">Live rates from Amadeus & Duffel providers</p>
+  <div class="bg-white rounded-[2.5rem] border border-gray-200 relative w-full shadow-sm">
+    <!-- Premium Header Gradient -->
+    <div class="absolute inset-x-0 top-0 h-40 bg-gradient-to-br from-primary/5 via-secondary/5 to-transparent -z-10"></div>
+
+    <div class="p-8 lg:p-12">
+      <!-- Trip Type & Travelers Header -->
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8 mb-10 pb-8 border-b border-gray-100">
+        <div class="flex items-center p-1 bg-gray-50 rounded-full w-fit border border-gray-200">
+          <button 
+            v-for="type in tripTypes" 
+            :key="type.id"
+            @click="tripType = type.id"
+            class="px-6 py-2.5 rounded-full text-xs font-black tracking-widest transition-all duration-300"
+            :class="tripType === type.id ? 'bg-primary-dark text-white shadow-lg' : 'text-gray-500 hover:text-primary'"
+          >
+            {{ type.label.toUpperCase() }}
+          </button>
         </div>
-        
-        <div class="flex items-center p-1 bg-neutral-100 rounded-xl w-fit">
-          <button 
-            @click="tripType = 'round'" 
-            class="px-5 py-2 text-sm font-black tracking-wider rounded-lg transition-all text-neutral-500 hover:text-primary-dark"
-            :class="tripType === 'round' ? 'bg-white shadow-sm text-primary-dark' : ''"
-          >
-            Round trip
-          </button>
-          <button 
-            @click="tripType = 'oneway'" 
-            class="px-5 py-2 text-sm font-black tracking-wider rounded-lg transition-all text-neutral-500 hover:text-primary-dark"
-            :class="tripType === 'oneway' ? 'bg-white shadow-sm text-primary-dark' : ''"
-          >
-            One way
-          </button>
+
+        <div class="flex items-center space-x-6">
+          <!-- Travelers Selector -->
+          <div class="relative" ref="travelerPopoverRef">
+            <button 
+              @click="showTravelers = !showTravelers"
+              class="flex items-center space-x-3 px-5 py-3 bg-white border border-gray-200 rounded-2xl hover:border-primary transition-all group h-[58px]"
+            >
+              <UsersIcon class="h-5 w-5 text-gray-400 group-hover:text-primary" />
+              <span class="text-sm font-bold text-gray-900">{{ totalTravelers }} Traveler{{ totalTravelers > 1 ? 's' : '' }}</span>
+              <ChevronDownIcon class="h-4 w-4 text-gray-400 transition-transform" :class="showTravelers ? 'rotate-180' : ''" />
+            </button>
+            <!-- Travelers Dropdown -->
+            <Transition name="slide-up">
+              <div v-if="showTravelers" class="absolute top-full right-0 mt-3 w-80 bg-white border border-gray-200 shadow-2xl rounded-[2rem] z-[100] p-8 space-y-8 animate-in fade-in slide-in-from-top-4">
+                <div v-for="cat in travelerCategories" :key="cat.id" class="flex items-center justify-between">
+                  <div>
+                    <p class="text-sm font-black text-gray-900">{{ cat.label }}</p>
+                    <p class="text-[10px] font-bold text-gray-400 mt-0.5">{{ cat.description }}</p>
+                  </div>
+                  <div class="flex items-center space-x-4">
+                    <button @click="updateTravelerCount(cat.id, -1)" class="w-10 h-10 rounded-xl border border-gray-200 flex items-center justify-center hover:bg-gray-50 disabled:opacity-20 transition-all">-</button>
+                    <span class="text-lg font-black w-6 text-center">{{ travelerCounts[cat.id as keyof typeof travelerCounts] }}</span>
+                    <button @click="updateTravelerCount(cat.id, 1)" class="w-10 h-10 rounded-xl border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-all">+</button>
+                  </div>
+                </div>
+                <BaseButton @click="showTravelers = false" variant="primary" block class="rounded-xl h-12">Apply</BaseButton>
+              </div>
+            </Transition>
+          </div>
+
+          <!-- Cabin Selector -->
+          <div class="relative" ref="cabinRef">
+            <button 
+              @click="showCabin = !showCabin"
+              class="flex items-center space-x-3 px-5 py-2.5 bg-white border border-gray-200 rounded-2xl hover:border-primary transition-all group h-[58px]"
+            >
+              <SparklesIcon class="h-5 w-5 text-gray-400 group-hover:text-primary" />
+              <span class="text-sm font-bold text-gray-900">{{ activeCabinLabel }}</span>
+              <ChevronDownIcon class="h-4 w-4 text-gray-400 transition-transform" :class="showCabin ? 'rotate-180' : ''" />
+            </button>
+            <!-- Cabin Dropdown -->
+            <Transition name="slide-up">
+              <div v-if="showCabin" class="absolute top-full right-0 mt-3 w-56 bg-white border border-gray-200 shadow-2xl rounded-[1.5rem] z-[100] overflow-hidden p-2">
+                <button 
+                  v-for="cab in cabinClasses" :key="cab.id" 
+                  @click="selectCabin(cab)"
+                  class="w-full text-left px-5 py-3.5 text-xs font-black tracking-widest rounded-xl transition-all"
+                  :class="cabinClass === cab.id ? 'bg-primary-dark text-white' : 'text-gray-500 hover:bg-gray-50'"
+                >
+                  {{ cab.label.toUpperCase() }}
+                </button>
+              </div>
+            </Transition>
+          </div>
         </div>
       </div>
 
       <!-- Search Inputs Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-4 lg:gap-6 relative">
-        
-        <!-- Origin Input with Dropdown -->
-        <div class="md:col-span-3 relative" ref="originContainerRef">
-          <label class="block text-sm font-black tracking-widest text-neutral-400 mb-2">Origin</label>
-          <div class="relative bg-neutral-50 border border-neutral-200 rounded-xl focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all">
-            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 font-bold">
-              <AirplaneIcon class="h-4 w-4" />
-            </span>
-            <input 
-              v-model="originQuery"
-              @focus="originOpen = true"
-              ref="originInputRef"
-              type="text" 
-              placeholder="City or airport code" 
-              class="w-full bg-transparent pl-12 pr-4 py-4 text-sm font-bold text-gray-900 outline-none placeholder:font-medium placeholder:text-neutral-400"
-            />
-          </div>
-          <!-- Origin Dropdown -->
-          <div v-if="originOpen && filteredOrigin.length" class="absolute top-full left-0 right-0 mt-2 bg-white border border-neutral-100 shadow-2xl rounded-xl z-50 max-h-60 overflow-y-auto">
-            <button 
-              v-for="airport in filteredOrigin" 
-              :key="airport.code"
-              @click="selectOrigin(airport)"
-              class="w-full text-left px-4 py-3 hover:bg-neutral-50 border-b border-neutral-50 last:border-0 transition-colors flex items-center justify-between group"
-            >
-              <div>
-                <p class="text-sm font-bold text-gray-900 group-hover:text-primary">{{ airport.city }}</p>
-                <p class="text-sm font-medium text-neutral-400 mt-0.5">{{ airport.name }}</p>
-              </div>
-              <span class="text-xs font-black text-neutral-300 bg-neutral-100 px-2 py-1 rounded-md">{{ airport.code }}</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Destination Input with Dropdown -->
-        <div class="md:col-span-3 relative" ref="destContainerRef">
-          <label class="block text-sm font-black tracking-widest text-neutral-400 mb-2">Destination</label>
-          <div class="relative bg-neutral-50 border border-neutral-200 rounded-xl focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all">
-            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 font-bold">
-              <MapPinIcon class="h-4 w-4" />
-            </span>
-            <input 
-              v-model="destQuery"
-              @focus="destOpen = true"
-              ref="destInputRef"
-              type="text" 
-              placeholder="City or airport code" 
-              class="w-full bg-transparent pl-12 pr-4 py-4 text-sm font-bold text-gray-900 outline-none placeholder:font-medium placeholder:text-neutral-400"
-            />
-          </div>
-          <!-- Dest Dropdown -->
-          <div v-if="destOpen && filteredDest.length" class="absolute top-full left-0 right-0 mt-2 bg-white border border-neutral-100 shadow-2xl rounded-xl z-50 max-h-60 overflow-y-auto">
-            <button 
-              v-for="airport in filteredDest" 
-              :key="airport.code"
-              @click="selectDest(airport)"
-              class="w-full text-left px-4 py-3 hover:bg-neutral-50 border-b border-neutral-50 last:border-0 transition-colors flex items-center justify-between group"
-            >
-              <div>
-                <p class="text-sm font-bold text-gray-900 group-hover:text-secondary">{{ airport.city }}</p>
-                <p class="text-sm font-medium text-neutral-400 mt-0.5">{{ airport.name }}</p>
-              </div>
-              <span class="text-xs font-black text-neutral-300 bg-neutral-100 px-2 py-1 rounded-md">{{ airport.code }}</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Dates -->
-        <div class="md:col-span-3">
-          <label class="block text-sm font-black tracking-widest text-neutral-400 mb-2">Dates</label>
-          <div class="flex items-center bg-neutral-50 border border-neutral-200 rounded-xl focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all overflow-hidden h-[54px] px-4 gap-2">
-            <CalendarIcon class="h-4 w-4 text-neutral-400 shrink-0" />
-            <input 
-              v-model="departureDate"
-              ref="dateInputRef"
-              type="date" 
-              class="w-full bg-transparent text-sm font-bold text-gray-900 outline-none placeholder:font-medium placeholder:text-neutral-400 cursor-pointer"
-            />
-            <span class="text-neutral-300 pointer-events-none" v-if="tripType === 'round'">-</span>
-            <input 
-              v-if="tripType === 'round'"
-              v-model="returnDate"
-              type="date" 
-              class="w-full bg-transparent text-sm font-bold text-gray-900 outline-none placeholder:font-medium placeholder:text-neutral-400 cursor-pointer"
-            />
-          </div>
-        </div>
-
-        <!-- Passengers & CTA -->
-        <div class="md:col-span-3 flex items-end gap-3">
-          <div class="w-1/3">
-            <label class="text-sm font-black tracking-widest text-neutral-400 mb-2 flex items-center gap-1"><UserIcon class="h-3 w-3"/> Pax</label>
-            <div class="bg-neutral-50 border border-neutral-200 rounded-xl h-[54px] flex items-center px-4">
-              <input v-model.number="passengers" type="number" min="1" max="9" class="w-full bg-transparent text-sm font-bold text-gray-900 outline-none text-center" />
-            </div>
-          </div>
-          <div class="w-2/3">
-            <BaseButton @click="handleSearch" :loading="isSearching" variant="primary" size="lg" class="w-full h-[54px] text-xs shadow-xl shadow-primary/20 hover:scale-[1.02]">
-              Search
-            </BaseButton>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Render Results -->
-    <div v-if="flightResults.length > 0" class="border-t border-neutral-100 bg-neutral-50 p-8 lg:p-10">
-      <h3 class="text-lg font-serif font-black text-gray-900 mb-6 flex items-center gap-3">
-        <SparklesIcon class="h-5 w-5 text-secondary" />
-        Available flights
-      </h3>
-      <div class="space-y-4">
+      <div class="space-y-6">
         <div 
-          v-for="flight in flightResults" 
-          :key="flight.id" 
-          class="bg-white border border-neutral-200 rounded-2xl p-6 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 flex flex-col md:flex-row md:items-center justify-between gap-6 group"
+          v-for="(leg, index) in flightLegs" 
+          :key="index"
+          class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-end relative"
         >
-          <div class="flex items-center gap-6 flex-1">
-            <div class="w-12 h-12 bg-neutral-100 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-primary/5 transition-colors">
-              <span class="text-sm font-black text-neutral-400 group-hover:text-primary">{{ flight.airline.substring(0,3) }}</span>
-            </div>
-            <div class="flex-1 grid grid-cols-3 gap-4 items-center">
-              <div>
-                <p class="text-xl font-bold text-gray-900">{{ flight.departureTime }}</p>
-                <p class="text-xs font-black tracking-wider text-neutral-400 mt-1">{{ flight.origin }}</p>
-              </div>
-              <div class="flex flex-col items-center justify-center px-4">
-                <p class="text-[9px] font-black tracking-widest text-neutral-300 mb-1 border-b border-neutral-200 w-full text-center pb-1">Direct</p>
-                <p class="text-sm font-bold text-secondary">{{ flight.airline }} {{ flight.flightNumber }}</p>
-              </div>
-              <div class="text-right">
-                <p class="text-xl font-bold text-gray-900">{{ flight.arrivalTime }}</p>
-                <p class="text-xs font-black tracking-wider text-neutral-400 mt-1">{{ flight.destination }}</p>
-              </div>
+          <div v-if="tripType === 'multi'" class="lg:col-span-12 mb-2">
+            <div class="flex items-center justify-between">
+              <h4 class="text-[10px] font-black text-primary uppercase tracking-[0.2em]">Flight {{ index + 1 }}</h4>
+              <button v-if="flightLegs.length > 1" @click="removeLeg(index)" class="text-[10px] font-black text-red-500 uppercase tracking-widest hover:underline">Remove</button>
             </div>
           </div>
-          <div class="flex items-center justify-between md:flex-col md:items-end md:justify-center border-t border-neutral-100 md:border-t-0 md:border-l md:pl-6 pt-4 md:pt-0 shrink-0">
-            <p class="text-2xl font-serif font-black text-primary-dark mb-2">${{ flight.price.toFixed(2) }}</p>
-            <div class="flex items-center gap-2">
-              <span class="text-[9px] font-black tracking-wider text-neutral-400 bg-neutral-100 px-2 py-1 rounded-md">via {{ flight.provider }}</span>
-              <BaseButton size="sm" variant="outline" class="border-primary/20 text-primary hover:bg-primary hover:text-white">Select</BaseButton>
+
+          <!-- Origin -->
+          <div class="lg:col-span-4 relative" :ref="el => originRefs[index] = el">
+            <AnimatedInput 
+              v-model="leg.originQuery" 
+              label="Leaving from" 
+              :icon="MapPinIcon"
+              @input="handleAirportSearch(leg.originQuery)"
+              @focus="openOrigin(index)"
+            />
+            <!-- Suggestions Dropdown -->
+            <div v-if="activeLeg === index && activeSide === 'origin'" class="absolute top-full left-0 right-0 mt-3 bg-white border border-gray-200 shadow-2xl rounded-[2rem] z-[110] max-h-[400px] overflow-y-auto p-3 animate-in fade-in slide-in-from-top-4">
+              <div v-if="!airportResults.length" class="p-8 text-center space-y-4">
+                <div class="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto">
+                  <MagnifyingGlassIcon class="h-8 w-8 text-gray-300" />
+                </div>
+                <p class="text-sm font-bold text-gray-400">Search by city or airport</p>
+              </div>
+              <button 
+                v-else
+                v-for="airport in airportResults" :key="airport.iataCode"
+                @click="selectAirport(index, 'origin', airport)"
+                class="w-full flex items-center justify-between p-4 hover:bg-gray-50 rounded-2xl transition-all group border border-transparent hover:border-gray-100 mb-1"
+              >
+                <div class="flex items-center space-x-4">
+                  <div class="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center text-gray-400 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+                    <PaperAirplaneIcon class="h-6 w-6" />
+                  </div>
+                  <div class="text-left">
+                    <p class="text-sm font-black text-gray-900 group-hover:text-primary transition-colors">{{ airport.address?.cityName }}, {{ airport.address?.countryName }}</p>
+                    <p class="text-[10px] font-bold text-gray-400">{{ airport.name }}</p>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <span class="px-2 py-1 bg-gray-100 rounded text-[10px] font-black text-gray-500 group-hover:bg-primary group-hover:text-white transition-colors">{{ airport.iataCode }}</span>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Swap Button (desktop) -->
+          <div v-if="tripType !== 'multi'" class="hidden lg:flex lg:col-span-1 justify-center -mx-5 pb-5 z-20">
+            <button @click="swapLocations" class="w-12 h-12 rounded-2xl bg-white border border-gray-200 flex items-center justify-center text-gray-400 hover:text-primary hover:border-primary hover:scale-110 shadow-lg transition-all">
+              <ArrowsRightLeftIcon class="h-5 w-5" />
+            </button>
+          </div>
+
+          <!-- Destination -->
+          <div class="lg:col-span-4 relative" :ref="el => destRefs[index] = el">
+            <AnimatedInput 
+              v-model="leg.destQuery" 
+              label="Going to" 
+              :icon="MapPinIcon"
+              @input="handleAirportSearch(leg.destQuery)"
+              @focus="openDest(index)"
+            />
+            <!-- Suggestions Dropdown -->
+            <div v-if="activeLeg === index && activeSide === 'dest'" class="absolute top-full left-0 right-0 mt-3 bg-white border border-gray-200 shadow-2xl rounded-[2rem] z-[110] max-h-[400px] overflow-y-auto p-3 animate-in fade-in slide-in-from-top-4">
+              <div v-if="!airportResults.length" class="p-8 text-center space-y-4">
+                <div class="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto">
+                  <MagnifyingGlassIcon class="h-8 w-8 text-gray-300" />
+                </div>
+                <p class="text-sm font-bold text-gray-400">Search by city or airport</p>
+              </div>
+              <button 
+                v-else
+                v-for="airport in airportResults" :key="airport.iataCode"
+                @click="selectAirport(index, 'dest', airport)"
+                class="w-full flex items-center justify-between p-4 hover:bg-gray-50 rounded-2xl transition-all group border border-transparent hover:border-gray-100 mb-1"
+              >
+                <div class="flex items-center space-x-4">
+                  <div class="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center text-gray-400 group-hover:bg-secondary/10 group-hover:text-secondary transition-colors">
+                    <PaperAirplaneIcon class="h-6 w-6" />
+                  </div>
+                  <div class="text-left">
+                    <p class="text-sm font-black text-gray-900 group-hover:text-secondary transition-colors">{{ airport.address?.cityName }}, {{ airport.address?.countryName }}</p>
+                    <p class="text-[10px] font-bold text-gray-400">{{ airport.name }}</p>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <span class="px-2 py-1 bg-gray-100 rounded text-[10px] font-black text-gray-500 group-hover:bg-secondary group-hover:text-white transition-colors">{{ airport.iataCode }}</span>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Dates -->
+          <div :class="tripType === 'round' ? 'lg:col-span-3' : 'lg:col-span-3'">
+            <div v-if="tripType === 'round' && index === 0" class="w-full">
+              <DateRangePicker 
+                v-model="dateRange"
+              />
+            </div>
+            <div v-else class="grid grid-cols-1 gap-3">
+              <AnimatedInput v-model="leg.departureDate" label="Depart" type="date" :icon="CalendarIcon" />
             </div>
           </div>
         </div>
       </div>
+
+      <!-- Bottom Actions -->
+      <div class="mt-12 flex flex-col sm:flex-row sm:items-center justify-between gap-8 pt-8 border-t border-gray-100">
+        <button 
+          v-if="tripType === 'multi' && flightLegs.length < 5"
+          @click="addLeg"
+          class="flex items-center space-x-3 text-xs font-black tracking-[0.2em] text-primary hover:text-primary-dark transition-all group"
+        >
+          <div class="w-8 h-8 rounded-full border-2 border-primary flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all">
+            <PlusIcon class="h-4 w-4" />
+          </div>
+          <span>ADD ANOTHER FLIGHT</span>
+        </button>
+        <div v-else></div>
+
+        <BaseButton 
+          @click="handleSearch" 
+          :loading="isSearching" 
+          variant="primary" 
+          size="lg" 
+          class="px-12 h-[58px] rounded-[1.5rem] font-black tracking-[0.2em] text-xs shadow-2xl shadow-primary/20 hover:scale-[1.05] active:scale-95 transition-all"
+        >
+          <MagnifyingGlassIcon class="h-5 w-5 mr-3" />
+          SEARCH FLIGHTS
+        </BaseButton>
+      </div>
     </div>
+
+    <!-- Results Section -->
+    <Transition name="fade">
+      <div v-if="flightResults.length > 0" class="border-t border-gray-200 bg-gray-50/50 p-8 lg:p-12">
+        <div class="flex items-center justify-between mb-10">
+          <h3 class="text-xl font-black text-gray-900 tracking-tight">Available Departures</h3>
+          <div class="flex items-center space-x-2 text-xs font-bold text-gray-500">
+            <span>Sorted by</span>
+            <span class="text-primary font-black">Best value</span>
+          </div>
+        </div>
+        
+        <div class="space-y-4">
+          <div 
+            v-for="flight in flightResults" 
+            :key="flight.id" 
+            class="bg-white border border-gray-200 rounded-[2rem] p-8 hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 group relative overflow-hidden"
+          >
+            <!-- Badge -->
+            <div class="absolute top-0 right-10 px-4 py-1.5 bg-secondary text-[8px] font-black text-white rounded-b-xl tracking-widest uppercase shadow-sm">Cheapest</div>
+
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-10">
+              <div class="flex items-center space-x-8 flex-1">
+                <div class="w-20 h-20 bg-gray-50 rounded-3xl flex items-center justify-center p-4 border border-gray-100 group-hover:border-primary/20 transition-colors">
+                  <img :src="`https://ui-avatars.com/api/?name=${flight.airline}&background=random&bold=true&color=fff&rounded=true`" class="w-full h-full object-contain" />
+                </div>
+                
+                <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                  <div class="text-left">
+                    <p class="text-2xl font-black text-gray-900">{{ flight.departureTime || '09:00' }}</p>
+                    <p class="text-[10px] font-black tracking-[0.2em] text-gray-400 mt-1 uppercase">{{ flight.origin || 'ABC' }}</p>
+                  </div>
+                  
+                  <div class="flex flex-col items-center justify-center relative">
+                    <p class="text-[9px] font-black tracking-[0.3em] text-gray-300 uppercase mb-4">6h 45m • Direct</p>
+                    <div class="w-full h-px bg-gray-100 relative mb-4">
+                      <div class="absolute top-1/2 left-0 -translate-y-1/2 w-2 h-2 rounded-full border-2 border-gray-200 bg-white"></div>
+                      <div class="absolute top-1/2 right-0 -translate-y-1/2 w-2 h-2 rounded-full border-2 border-gray-200 bg-white"></div>
+                      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-2">
+                        <PaperAirplaneIcon class="h-4 w-4 text-primary group-hover:translate-x-10 transition-transform duration-1000" />
+                      </div>
+                    </div>
+                    <p class="text-[10px] font-bold text-gray-400">{{ flight.airline }} {{ flight.flightNumber }}</p>
+                  </div>
+
+                  <div class="text-right">
+                    <p class="text-2xl font-black text-gray-900">{{ flight.arrivalTime || '15:45' }}</p>
+                    <p class="text-[10px] font-black tracking-[0.2em] text-gray-400 mt-1 uppercase">{{ flight.destination || 'XYZ' }}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between lg:flex-col lg:items-end lg:justify-center border-t lg:border-t-0 lg:border-l border-gray-100 pt-8 lg:pt-0 lg:pl-10 shrink-0 space-y-2">
+                <div class="text-left lg:text-right">
+                  <p class="text-sm font-bold text-gray-400 line-through">${{ (flight.price * 1.2).toFixed(2) }}</p>
+                  <p class="text-4xl font-black text-primary-dark tracking-tighter">${{ flight.price?.toFixed(2) }}</p>
+                </div>
+                <BaseButton variant="primary" class="rounded-xl px-8 h-12 text-[10px] font-black tracking-widest shadow-lg active:scale-95 transition-all">SELECT FLIGHT</BaseButton>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Transition>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useFlights } from '~/composables/modules/flights/useFlights'
 import { onClickOutside } from '@vueuse/core'
-// Icons
-import { PaperAirplaneIcon as AirplaneIcon, MapPinIcon, CalendarIcon, UserIcon, SparklesIcon } from '@heroicons/vue/24/outline'
+import AnimatedInput from '@/components/ui/AnimatedInput.vue'
+import DateRangePicker from '@/components/ui/DateRangePicker.vue'
+import { 
+  MapPinIcon, 
+  CalendarIcon, 
+  SparklesIcon, 
+  ChevronDownIcon, 
+  MinusIcon, 
+  PlusIcon,
+  ArrowsRightLeftIcon,
+  PaperAirplaneIcon,
+  XMarkIcon,
+  UsersIcon,
+  MagnifyingGlassIcon
+} from '@heroicons/vue/24/outline'
 
-const { majorAirports, flightResults, isSearching, searchFlights } = useFlights()
+const { airportResults, flightResults, isSearching, searchAirports, searchFlights } = useFlights()
 
 const tripType = ref('round')
-const originQuery = ref('')
-const selectedOrigin = ref('')
-const originOpen = ref(false)
+const tripTypes = [
+  { id: 'round', label: 'Roundtrip' },
+  { id: 'oneway', label: 'One-way' },
+  { id: 'multi', label: 'Multi-city' }
+]
 
-const destQuery = ref('')
-const selectedDest = ref('')
-const destOpen = ref(false)
+const flightLegs = ref([
+  { originQuery: '', originCode: '', destQuery: '', destCode: '', departureDate: '' }
+])
+const dateRange = ref({ start: '', end: '' })
+const returnDate = computed(() => dateRange.value.end)
 
-const departureDate = ref('')
-const returnDate = ref('')
-const passengers = ref(1)
-
-const originInputRef = ref<HTMLInputElement | null>(null)
-const destInputRef = ref<HTMLInputElement | null>(null)
-const dateInputRef = ref<HTMLInputElement | null>(null)
-
-const originContainerRef = ref(null)
-const destContainerRef = ref(null)
-
-// Smart close on outside click
-onClickOutside(originContainerRef, () => originOpen.value = false)
-onClickOutside(destContainerRef, () => destOpen.value = false)
-
-// Computed Filters
-const filteredOrigin = computed(() => {
-  if (!originQuery.value) return majorAirports
-  const lower = originQuery.value.toLowerCase()
-  return majorAirports.filter(a => a.city.toLowerCase().includes(lower) || a.code.toLowerCase().includes(lower) || a.name.toLowerCase().includes(lower))
+watch(() => dateRange.value.start, (newVal) => {
+  if (flightLegs.value[0]) flightLegs.value[0].departureDate = newVal
 })
 
-const filteredDest = computed(() => {
-  if (!destQuery.value) return majorAirports
-  const lower = destQuery.value.toLowerCase()
-  return majorAirports.filter(a => a.city.toLowerCase().includes(lower) || a.code.toLowerCase().includes(lower) || a.name.toLowerCase().includes(lower))
-})
+// Travelers Popover
+const showTravelers = ref(false)
+const travelerPopoverRef = ref(null)
+const travelerCounts = ref({ adults: 1, children: 0, infants: 0 })
+const travelerCategories = [
+  { id: 'adults', label: 'Adults', description: 'Ages 18+' },
+  { id: 'children', label: 'Children', description: 'Ages 2-17' },
+  { id: 'infants', label: 'Infants', description: 'Under 2' }
+]
+const totalTravelers = computed(() => travelerCounts.value.adults + travelerCounts.value.children + travelerCounts.value.infants)
 
-// Auto-Advance Handlers
-const selectOrigin = (airport: any) => {
-  originQuery.value = `${airport.city} (${airport.code})`
-  selectedOrigin.value = airport.code
-  originOpen.value = false
-  // Instantly slide focus to destination for seamless wizard UX
-  setTimeout(() => {
-    destInputRef.value?.focus()
-  }, 50)
+// Cabin Class
+const showCabin = ref(false)
+const cabinRef = ref(null)
+const cabinClass = ref('ECONOMY')
+const cabinClasses = [
+  { id: 'ECONOMY', label: 'Economy' },
+  { id: 'PREMIUM_ECONOMY', label: 'Premium Economy' },
+  { id: 'BUSINESS', label: 'Business' },
+  { id: 'FIRST', label: 'First Class' }
+]
+const activeCabinLabel = computed(() => cabinClasses.find(c => c.id === cabinClass.value)?.label)
+
+// Dropdown state
+const activeLeg = ref<number | null>(null)
+const activeSide = ref<'origin' | 'dest' | null>(null)
+const originRefs = ref<any[]>([])
+const destRefs = ref<any[]>([])
+
+onClickOutside(travelerPopoverRef, () => showTravelers.value = false)
+onClickOutside(cabinRef, () => showCabin.value = false)
+
+const openOrigin = (index: number) => {
+  activeLeg.value = index
+  activeSide.value = 'origin'
+  const leg = flightLegs.value[index]
+  if (leg && leg.originQuery.length >= 2) searchAirports(leg.originQuery)
+}
+const openDest = (index: number) => {
+  activeLeg.value = index
+  activeSide.value = 'dest'
+  const leg = flightLegs.value[index]
+  if (leg && leg.destQuery.length >= 2) searchAirports(leg.destQuery)
 }
 
-const selectDest = (airport: any) => {
-  destQuery.value = `${airport.city} (${airport.code})`
-  selectedDest.value = airport.code
-  destOpen.value = false
-  // Instantly slide focus to dates
-  setTimeout(() => {
-    dateInputRef.value?.focus()
-    // HTML5 date inputs can't be programmatically 'opened', but focusing them is standard semantic progression.
-  }, 50)
+let searchTimeout: any = null
+const handleAirportSearch = (val: string) => {
+  clearTimeout(searchTimeout)
+  searchTimeout = setTimeout(() => {
+    if (val.length >= 2) searchAirports(val)
+  }, 300)
+}
+
+const selectAirport = (index: number, side: 'origin' | 'dest', airport: any) => {
+  const leg = flightLegs.value[index]
+  if (!leg) return
+  if (side === 'origin') {
+    leg.originQuery = `${airport.address.cityName} (${airport.iataCode})`
+    leg.originCode = airport.iataCode
+  } else {
+    leg.destQuery = `${airport.address.cityName} (${airport.iataCode})`
+    leg.destCode = airport.iataCode
+  }
+  activeLeg.value = null
+  activeSide.value = null
+}
+
+const swapLocations = () => {
+  const leg = flightLegs.value[0]
+  if (!leg) return
+  const tempQuery = leg.originQuery
+  const tempCode = leg.originCode
+  leg.originQuery = leg.destQuery
+  leg.originCode = leg.destCode
+  leg.destQuery = tempQuery
+  leg.destCode = tempCode
+}
+
+const updateTravelerCount = (type: string, delta: number) => {
+  const catId = type as keyof typeof travelerCounts.value
+  const current = travelerCounts.value[catId]
+  if (current + delta >= 0 && totalTravelers.value + delta <= 9) {
+     if (type === 'adults' && current + delta < 1) return
+     travelerCounts.value[catId] = current + delta
+  }
+}
+
+const selectCabin = (cab: any) => {
+  cabinClass.value = cab.id
+  showCabin.value = false
+}
+
+const addLeg = () => {
+  const lastLeg = flightLegs.value[flightLegs.value.length - 1]
+  if (!lastLeg) return
+  flightLegs.value.push({
+    originQuery: lastLeg.destQuery,
+    originCode: lastLeg.destCode,
+    destQuery: '',
+    destCode: '',
+    departureDate: ''
+  })
+}
+const removeLeg = (index: number) => {
+  flightLegs.value.splice(index, 1)
 }
 
 const handleSearch = () => {
-  if (!selectedOrigin.value || !selectedDest.value || !departureDate.value) return
+  if (flightLegs.value.length === 0) return
+  const leg = flightLegs.value[0]!
+  if (!leg.originCode || !leg.destCode || !leg.departureDate) return
+  
   searchFlights({
-    origin: selectedOrigin.value,
-    destination: selectedDest.value,
-    departureDate: departureDate.value,
+    origin: leg.originCode,
+    destination: leg.destCode,
+    departureDate: leg.departureDate,
     returnDate: tripType.value === 'round' ? returnDate.value : undefined,
-    adults: passengers.value
+    adults: travelerCounts.value.adults,
+    children: travelerCounts.value.children,
+    infants: travelerCounts.value.infants,
+    cabinClass: cabinClass.value
   })
 }
+
+watch(tripType, (newVal) => {
+  if (newVal !== 'multi' && flightLegs.value.length > 1) {
+    flightLegs.value = [flightLegs.value[0]!]
+  }
+})
 </script>
+
+<style scoped>
+.slide-up-enter-active, .slide-up-leave-active {
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.slide-up-enter-from, .slide-up-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
+}
+</style>

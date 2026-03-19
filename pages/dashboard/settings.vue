@@ -8,7 +8,7 @@
 
     <!-- Agency Profile Section -->
     <BaseCard :padding="false" class="overflow-hidden border-none shadow-sm group">
-      <div class="p-8 bg-primary/5 border-b border-gray-100 flex items-center space-x-5">
+      <div class="p-8 bg-primary/5 border-b border-gray-200 flex items-center space-x-5">
         <div class="h-16 w-16 rounded-2xl bg-white shadow-sm flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-300">
           <BuildingOfficeIcon class="h-8 w-8" />
         </div>
@@ -29,7 +29,7 @@
         <div class="space-y-2">
           <label class="block text-sm font-bold text-primary/80 tracking-tight">Corporate address</label>
           <textarea 
-            class="block w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-3 text-neutral focus:border-secondary focus:ring-2 focus:ring-secondary/10 outline-none transition-all h-32"
+            class="block w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-neutral focus:border-secondary focus:ring-2 focus:ring-secondary/10 outline-none transition-all h-32"
             placeholder="123 Travel Way, Suite 100, New York, NY 10001"
           ></textarea>
         </div>
@@ -41,7 +41,7 @@
 
     <!-- Security Section -->
     <BaseCard :padding="false" class="overflow-hidden border-none shadow-sm group">
-      <div class="p-8 bg-red-50/30 border-b border-gray-100 flex items-center space-x-5">
+      <div class="p-8 bg-red-50/30 border-b border-gray-200 flex items-center space-x-5">
         <div class="h-16 w-16 rounded-2xl bg-white shadow-sm flex items-center justify-center text-red-500 group-hover:scale-110 transition-transform duration-300">
           <ShieldCheckIcon class="h-8 w-8" />
         </div>

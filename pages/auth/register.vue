@@ -73,7 +73,7 @@
                 <CheckIcon class="absolute w-3 h-3 text-white left-1 opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" />
               </div>
               <label for="terms" class="text-[11px] text-neutral-400 font-medium leading-relaxed group-hover:text-primary-dark transition-colors">
-                I agree to Flybeth's Professional Code of Conduct and Global Logistics Deployment Protocol.
+                I agree to Flybeth's Terms of Service and Privacy Policy.
               </label>
             </div>
 
@@ -110,7 +110,7 @@ const form = ref({
 const perks = [
   { title: 'Global Flight Rates', desc: 'Secure net rates not available to the general public.' },
   { title: 'Analytics Dashboard', desc: 'Real-time booking management and automated reporting.' },
-  { title: 'Priority Support', desc: 'Dedicated regional node manager for your account.' }
+  { title: 'Priority Support', desc: 'Dedicated account manager for your agency.' }
 ]
 
 const agencyTypes = [

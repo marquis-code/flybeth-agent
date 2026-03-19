@@ -1,7 +1,7 @@
 <template>
   <div class="space-y-10">
     <!-- Header Actions -->
-    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-8 pb-4 border-b border-gray-100">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-8 pb-4 border-b border-gray-200">
       <div class="space-y-1">
         <h2 class="text-4xl font-black text-primary-dark tracking-tight">Manage reservations</h2>
         <p class="text-neutral/40 font-bold tracking-widest text-xs uppercase">Track and manage your bookings</p>
@@ -14,12 +14,29 @@
     <!-- Active Booking Engine -->
     <Transition name="slide-down">
       <div v-if="showWizard" class="w-full animate-in fade-in slide-in-from-top-4 duration-500">
-        <FlightSearchWizard />
+        <FlightSearchWizard v-if="wizardTab === 'Flights'" />
+        <CarSearchWizard v-else-if="wizardTab === 'Cars'" />
+        <ActivitySearchWizard v-else-if="wizardTab === 'Activities'" />
+        <TransferSearchWizard v-else-if="wizardTab === 'Transfers'" />
+        <FlightSearchWizard v-else />
+
+        <!-- Wizard Tab Switcher -->
+        <div class="flex items-center justify-center space-x-2 mt-4">
+          <button
+            v-for="wt in wizardTabs"
+            :key="wt.name"
+            @click="wizardTab = wt.name"
+            class="px-5 py-2 text-xs font-black tracking-wider rounded-full border transition-all"
+            :class="wizardTab === wt.name ? 'bg-primary-dark text-white border-primary-dark' : 'bg-white text-neutral-500 border-neutral-200 hover:border-primary/30 hover:text-primary'"
+          >
+            {{ wt.label }}
+          </button>
+        </div>
       </div>
     </Transition>
 
     <!-- Modern Tab Interface -->
-    <div class="flex items-center space-x-2 p-1 bg-white rounded-full shadow-sm w-fit border border-gray-100 overflow-x-auto no-scrollbar">
+    <div class="flex items-center space-x-2 p-1 bg-white rounded-full shadow-sm w-fit border border-gray-200 overflow-x-auto no-scrollbar">
       <button 
         v-for="tab in serviceTabs" 
         :key="tab.name"
@@ -33,7 +50,7 @@
     </div>
 
     <!-- Filters & Search -->
-    <BaseCard :padding="false" class="border border-gray-100 shadow-sm overflow-hidden">
+    <BaseCard :padding="false" class="border border-gray-200 shadow-sm overflow-hidden">
       <div class="p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-end bg-white relative">
         <div class="lg:col-span-5 relative group">
           <label class="text-sm font-black tracking-widest text-neutral/40 mb-3 block px-1 uppercase">Search all bookings</label>
@@ -65,7 +82,7 @@
           </select>
         </div>
         <div class="lg:col-span-2">
-          <BaseButton variant="outline" block class="h-[52px] border-gray-100 font-black">
+          <BaseButton variant="outline" block class="h-[52px] border-gray-200 font-black">
             Full filters
           </BaseButton>
         </div>
@@ -80,20 +97,20 @@
           <span class="text-sm font-black tracking-widest text-neutral/40 uppercase">Active bookings: {{ filteredBookings.length }} records</span>
         </div>
         <div class="flex items-center space-x-3">
-          <button class="p-3 bg-white rounded-2xl border border-gray-100 text-neutral/40 hover:text-primary hover:border-primary/20 transition-all shadow-sm">
+          <button class="p-3 bg-white rounded-2xl border border-gray-200 text-neutral/40 hover:text-primary hover:border-primary/20 transition-all shadow-sm">
             <ArrowDownTrayIcon class="h-4 w-4" />
           </button>
-          <button class="p-3 bg-white rounded-2xl border border-gray-100 text-neutral/40 hover:text-primary hover:border-primary/20 transition-all shadow-sm">
+          <button class="p-3 bg-white rounded-2xl border border-gray-200 text-neutral/40 hover:text-primary hover:border-primary/20 transition-all shadow-sm">
             <PrinterIcon class="h-4 w-4" />
           </button>
         </div>
       </div>
 
-      <BaseCard :padding="false" class="border border-gray-100 shadow-sm overflow-hidden">
+      <BaseCard :padding="false" class="border border-gray-200 shadow-sm overflow-hidden">
         <div class="overflow-x-auto">
           <table class="w-full text-left">
             <thead>
-              <tr class="bg-gray-50/50 border-b border-gray-100">
+              <tr class="bg-gray-50/50 border-b border-gray-200">
                 <th v-for="header in headers" :key="header.key" class="px-10 py-6 text-sm font-black tracking-widest text-neutral/40">
                   {{ header.label }}
                 </th>
@@ -113,7 +130,7 @@
                     </div>
                     <div class="flex flex-col">
                       <span class="font-black text-primary-dark group-hover:underline cursor-pointer decoration-secondary decoration-2 underline-offset-4">{{ item.service }}</span>
-                      <span class="text-sm text-neutral/30 font-bold mt-1">Premium class</span>
+                      <span class="text-sm text-neutral/30 font-bold mt-1">Standard booking</span>
                     </div>
                   </div>
                 </td>
@@ -154,7 +171,7 @@
           <div class="absolute -top-10 -right-10 w-40 h-40 bg-secondary/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-1000"></div>
           <div class="relative z-10 space-y-8">
             <div class="flex items-center justify-between">
-              <h4 class="text-[11px] font-black tracking-[0.2em] text-white/40">Live status</h4>
+              <h4 class="text-[11px] font-black tracking-[0.2em] text-white/40">Booking status</h4>
               <span class="px-4 py-1.5 bg-secondary/20 text-secondary text-sm font-black tracking-widest rounded-full border border-secondary/30">
                 Verified
               </span>
@@ -179,26 +196,26 @@
         <!-- Technical Details Grid -->
         <div class="grid grid-cols-2 gap-8">
           <div class="space-y-2">
-            <p class="text-sm font-black text-neutral/30 tracking-widest">Global PNR</p>
+            <p class="text-sm font-black text-neutral/30 tracking-widest">Booking reference</p>
             <p class="text-sm font-black text-primary-dark font-mono tracking-widest">FB-XM9283-{{ selectedBooking.id }}</p>
           </div>
           <div class="space-y-2 text-right">
-            <p class="text-sm font-black text-neutral/30 tracking-widest">Service channel</p>
-            <p class="text-sm font-black text-primary-dark">GDS direct-node B</p>
+            <p class="text-sm font-black text-neutral/30 tracking-widest">Booking source</p>
+            <p class="text-sm font-black text-primary-dark">Online booking</p>
           </div>
           <div class="space-y-2">
-            <p class="text-sm font-black text-neutral/30 tracking-widest">Loyalty tier</p>
-            <p class="text-sm font-black text-secondary">Elite platinum</p>
+            <p class="text-sm font-black text-neutral/30 tracking-widest">Customer tier</p>
+            <p class="text-sm font-black text-secondary">Premium</p>
           </div>
           <div class="space-y-2 text-right">
-            <p class="text-sm font-black text-neutral/30 tracking-widest">Last sync</p>
+            <p class="text-sm font-black text-neutral/30 tracking-widest">Last updated</p>
             <p class="text-sm font-black text-primary-dark">{{ new Date().toLocaleTimeString() }}</p>
           </div>
         </div>
 
         <!-- Action Grid -->
         <div class="space-y-6">
-          <h4 class="text-xs font-black tracking-widest text-primary-dark px-1 border-l-4 border-secondary ml-1">Critical protocols</h4>
+          <h4 class="text-xs font-black tracking-widest text-primary-dark px-1 border-l-4 border-secondary ml-1">Actions</h4>
           <div class="grid grid-cols-3 gap-4">
             <button class="flex flex-col items-center justify-center p-6 bg-gray-50 hover:bg-primary-dark hover:text-white rounded-[2rem] transition-all duration-300 group">
               <PrinterIcon class="h-6 w-6 mb-3 text-primary group-hover:text-secondary" />
@@ -210,7 +227,7 @@
             </button>
             <button class="flex flex-col items-center justify-center p-6 bg-gray-50 hover:bg-red-500 hover:text-white rounded-[2rem] transition-all duration-300 group">
               <XMarkIcon class="h-6 w-6 mb-3 text-red-500 group-hover:text-white" />
-              <span class="text-[9px] font-black">Revoke</span>
+              <span class="text-[9px] font-black">Cancel</span>
             </button>
           </div>
         </div>
@@ -226,8 +243,8 @@
       
       <template #footer>
         <div class="flex items-center space-x-4 p-4">
-          <BaseButton variant="outline" @click="selectedBooking = null" class="flex-1">Stow profile</BaseButton>
-          <BaseButton variant="primary" class="flex-1 shadow-sm">Execute sync</BaseButton>
+          <BaseButton variant="outline" @click="selectedBooking = null" class="flex-1">Close</BaseButton>
+          <BaseButton variant="primary" class="flex-1">Sync booking</BaseButton>
         </div>
       </template>
     </BaseSidedrawer>
@@ -235,14 +252,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { useBookings } from '@/composables/modules/bookings/useBookings'
 import FlightSearchWizard from '@/components/flights/FlightSearchWizard.vue'
+import CarSearchWizard from '@/components/cars/CarSearchWizard.vue'
+import ActivitySearchWizard from '@/components/activities/ActivitySearchWizard.vue'
+import TransferSearchWizard from '@/components/transfers/TransferSearchWizard.vue'
 import { 
   PaperAirplaneIcon,
   HomeModernIcon,
   KeyIcon,
   MapIcon,
   GiftIcon,
+  TruckIcon,
+  SparklesIcon as SparklesTabIcon,
+  ArrowsRightLeftIcon,
   MagnifyingGlassIcon, 
   EllipsisVerticalIcon, 
   PlusIcon,
@@ -260,60 +284,89 @@ definePageMeta({
 
 const activeTab = ref('All')
 const selectedBooking = ref<any>(null)
-const showWizard = ref(true)
+const showWizard = ref(false)
+const wizardTab = ref('Flights')
+
+const { bookings: allBookings, fetchBookings, loading } = useBookings()
+
+onMounted(() => {
+  fetchBookings()
+})
+
+const wizardTabs = [
+  { name: 'Flights', label: 'Flights' },
+  { name: 'Cars', label: 'Cars' },
+  { name: 'Activities', label: 'Activities' },
+  { name: 'Transfers', label: 'Transfers' },
+]
 
 const serviceTabs = [
   { name: 'All', label: 'Overview', icon: MapIcon },
-  { name: 'Flights', label: 'Air Transit', icon: PaperAirplaneIcon },
-  { name: 'Stays', label: 'Accommodations', icon: HomeModernIcon },
-  { name: 'Cars', label: 'Ground Logistics', icon: KeyIcon },
+  { name: 'Flights', label: 'Flights', icon: PaperAirplaneIcon },
+  { name: 'Stays', label: 'Stays', icon: HomeModernIcon },
+  { name: 'Cars', label: 'Car Rentals', icon: TruckIcon },
+  { name: 'Activities', label: 'Activities', icon: SparklesTabIcon },
+  { name: 'Transfers', label: 'Transfers', icon: ArrowsRightLeftIcon },
   { name: 'Packages', label: 'Bundles', icon: GiftIcon },
 ]
 
 const headers = [
-  { key: 'reference', label: 'Protocol ID' },
-  { key: 'service', label: 'Service profile' },
-  { key: 'customer', label: 'Principal client' },
-  { key: 'status', label: 'Lifecycle' },
-  { key: 'amount', label: 'Yield' },
+  { key: 'reference', label: 'Booking ID' },
+  { key: 'service', label: 'Service' },
+  { key: 'customer', label: 'Customer' },
+  { key: 'status', label: 'Status' },
+  { key: 'amount', label: 'Amount' },
   { key: 'actions', label: '' },
 ]
 
-const bookings = [
-  { id: 1, reference: 'FLY-XM92A', service: 'Air Transit: Emirates First', customer: 'Sarah Johnson', email: 'sarah.j@example.com', status: 'Confirmed', amount: '8,200', date: 'Feb 14, 2026' },
-  { id: 2, reference: 'FLY-XM92B', service: 'Air Transit: BA Club World', customer: 'Michael Chen', email: 'm.chen@example.com', status: 'Pending', amount: '4,850', date: 'Feb 14, 2026' },
-  { id: 3, reference: 'FLY-XM92C', service: 'Ground Logistics: Tesla Plaid', customer: 'David Smith', email: 'd.smith@example.com', status: 'Cancelled', amount: '1,450', date: 'Feb 13, 2026' },
-  { id: 4, reference: 'FLY-XM92D', service: 'Accommodations: Aman Tokyo', customer: 'Emma Wilson', email: 'emma.w@example.com', status: 'Confirmed', amount: '12,100', date: 'Feb 12, 2026' },
-  { id: 5, reference: 'FLY-XM92E', service: 'Bundles: Maldives Escape', customer: 'James Brown', email: 'james.b@example.com', status: 'Confirmed', amount: '15,150', date: 'Feb 12, 2026' },
-  { id: 6, reference: 'FLY-XM92F', service: 'Accommodations: Ritz Paris', customer: 'Olivia White', email: 'olivia.w@example.com', status: 'Confirmed', amount: '9,450', date: 'Feb 11, 2026' },
-]
-
 const filteredBookings = computed(() => {
-  if (activeTab.value === 'All') return bookings
-  return bookings.filter(b => b.service.includes(activeTab.value.slice(0, 3)))
+  const data = allBookings.value || []
+  if (activeTab.value === 'All') return data
+  
+  return data.filter((b: any) => {
+    if (activeTab.value === 'Flights' && b.flights?.length) return true
+    if (activeTab.value === 'Stays' && b.stays?.length) return true
+    if (activeTab.value === 'Cars' && b.cars?.length) return true
+    if (activeTab.value === 'Activities' && b.activities?.length) return true
+    if (activeTab.value === 'Transfers' && b.transfers?.length) return true
+    if (activeTab.value === 'Packages' && b.packageId) return true
+    return false
+  })
 })
 
-const getTypeIcon = (service: string) => {
-  if (service.includes('Stay') || service.includes('Acc')) return HomeModernIcon
-  if (service.includes('Flight') || service.includes('Air')) return PaperAirplaneIcon
-  if (service.includes('Car') || service.includes('Ground')) return KeyIcon
+const getServiceDescription = (item: any) => {
+  if (item.flights?.length) return `Flight: ${item.flights[0].flight?.airline || 'Airline'} (${item.flights[0].flight?.origin} - ${item.flights[0].flight?.destination})`
+  if (item.stays?.length) return `Stay: ${item.stays[0].stay?.name || 'Hotel'}`
+  if (item.cars?.length) return `Car: ${item.cars[0].car?.brand || 'Rental'}`
+  return 'Custom Package'
+}
+
+const getTypeIcon = (item: any) => {
+  if (item.stays?.length) return HomeModernIcon
+  if (item.flights?.length) return PaperAirplaneIcon
+  if (item.cars?.length) return KeyIcon
   return GiftIcon
 }
 
-const getTypeColor = (service: string) => {
-  if (service.includes('Stay') || service.includes('Acc')) return 'text-blue-500 bg-blue-50/50'
-  if (service.includes('Flight') || service.includes('Air')) return 'text-purple-500 bg-purple-50/50'
-  if (service.includes('Car') || service.includes('Ground')) return 'text-orange-500 bg-orange-50/50'
+const getTypeColor = (item: any) => {
+  if (item.stays?.length) return 'text-blue-500 bg-blue-50/50'
+  if (item.flights?.length) return 'text-purple-500 bg-purple-50/50'
+  if (item.cars?.length) return 'text-orange-500 bg-orange-50/50'
   return 'text-secondary bg-secondary/10'
 }
 
 const statusClass = (status: string) => {
-  switch (status) {
-    case 'Confirmed': return 'text-secondary bg-secondary/5 border-secondary/20'
-    case 'Pending': return 'text-yellow-600 bg-yellow-50 border-yellow-200'
-    case 'Cancelled': return 'text-red-500 bg-red-50 border-red-100'
-    default: return 'text-neutral/40 bg-gray-50 border-gray-200'
-  }
+  if (!status) return 'text-neutral/40 bg-gray-50 border-gray-200'
+  const s = status.toLowerCase()
+  if (s === 'confirmed' || s === 'ticketed') return 'text-secondary bg-secondary/5 border-secondary/20'
+  if (s === 'pending') return 'text-yellow-600 bg-yellow-50 border-yellow-200'
+  if (s === 'cancelled') return 'text-red-500 bg-red-50 border-red-100'
+  return 'text-neutral/40 bg-gray-50 border-gray-200'
+}
+
+const formatDate = (date: string) => {
+  if (!date) return 'N/A'
+  return new Date(date).toLocaleDateString()
 }
 </script>
 

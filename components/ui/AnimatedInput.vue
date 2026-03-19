@@ -1,13 +1,23 @@
 <template>
   <div class="mb-2 relative">
     <div class="relative input-container">
+      <!-- Icon Support -->
+      <component 
+        v-if="icon" 
+        :is="icon" 
+        :class="[
+          'absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 transition-all duration-300 pointer-events-none z-20',
+          isFocused || modelValue ? 'text-primary' : 'text-gray-400'
+        ]"
+      />
+
       <label 
         :for="inputId"
         :class="[
           'absolute transition-all duration-300 ease-in-out pointer-events-none z-10',
           isFocused || modelValue ? 
-            'text-xs text-gray-500 left-3 top-2' : 
-            `text-base text-gray-500 left-3 ${type === 'textarea' ? 'top-4' : 'top-1/2 transform -translate-y-1/2'}`
+            'text-[9px] font-black uppercase tracking-[0.15em] text-primary left-5 top-2.5' : 
+            `text-sm font-bold text-gray-400 ${type === 'textarea' ? 'top-5' : 'top-1/2 transform -translate-y-1/2'} ${icon ? 'left-12' : 'left-5'}`
         ]"
       >
         {{ label }}
@@ -21,7 +31,7 @@
         :readonly="readonly"
         :rows="rows"
         :class="[
-          'w-full py-4 pt-6 px-3 bg-gray-50 border border-gray-200 focus:outline-none focus:ring-1 focus:ring-[#033958] focus:border-[#033958] transition-all duration-300 resize-none',
+          'w-full py-5 pt-8 px-4 bg-white border border-gray-200 focus:outline-none focus:ring-4 focus:ring-secondary/10 focus:border-secondary transition-all duration-500 resize-none font-bold text-gray-900',
           roundedClasses,
           disabled ? 'opacity-50 cursor-not-allowed' : '',
           (hasError || (errorMessage && showError)) ? 'border-red-500 ring-red-500' : ''
@@ -41,7 +51,8 @@
         :readonly="readonly || type === 'date' || type === 'time' || type === 'datetime-local'"
         :autocomplete="autocomplete"
         :class="[
-          'w-full py-4 pt-6 px-3 bg-gray-50 border border-gray-200 focus:outline-none focus:ring-1 focus:ring-[#033958] focus:border-[#033958] transition-all duration-300',
+          'w-full py-4 pt-7 px-5 bg-white border border-gray-200 focus:outline-none focus:ring-4 focus:ring-secondary/10 focus:border-secondary transition-all duration-500 font-bold text-gray-900',
+          icon ? 'pl-12' : '',
           roundedClasses,
           disabled ? 'opacity-50 cursor-not-allowed' : '',
           (type === 'date' || type === 'time' || type === 'datetime-local') ? 'cursor-pointer' : '',
@@ -518,6 +529,7 @@ interface Props {
   position?: 'top' | 'middle' | 'bottom' | 'standalone'
   hasError?: boolean
   rows?: number
+  icon?: any
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -852,17 +864,15 @@ const formatDateModel = (date: Date): string => {
 }
 
 const parseDTString = (dtStr: string) => {
-  const parts = dtStr.split(',').map(p => p.trim())
-  if (parts.length >= 3) {
-    const datePart = `${parts[0]}, ${parts[1]}, ${parts[2]}`
-    const date = new Date(datePart)
-    const timePart = parts[3] || '12:00 PM'
-    if (match && !isNaN(date.getTime())) {
+  const match = dtStr.match(/^(.*),\s*(\d{1,2}):(\d{2})\s*(AM|PM)$/i)
+  if (match && match[1] && match[2] && match[3] && match[4]) {
+    const date = new Date(match[1])
+    if (!isNaN(date.getTime())) {
       return {
         date,
-        hour: match[1] ? match[1].padStart(2, '0') : '12',
-        minute: match[2] || '00',
-        period: (match[3] ? match[3].toUpperCase() : 'PM') as 'AM' | 'PM'
+        hour: match[2].padStart(2, '0'),
+        minute: match[3],
+        period: (match[4].toUpperCase()) as 'AM' | 'PM'
       }
     }
   }

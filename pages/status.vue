@@ -1,18 +1,5 @@
 <template>
-  <div class="min-h-screen bg-white font-sans text-neutral-900 overflow-x-hidden">
-    <!-- Header -->
-    <nav class="bg-white border-b border-neutral-100 py-6 sticky top-0 z-10">
-      <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <NuxtLink to="/" class="flex items-center space-x-3">
-          <img src="@/assets/img/logo.png" class="w-auto h-10" alt="logo" />
-        </NuxtLink>
-        <div class="flex items-center space-x-2">
-           <span class="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></span>
-           <span class="text-xs font-black text-primary-dark tracking-widest uppercase">Nodes operational</span>
-        </div>
-      </div>
-    </nav>
-
+  <div class="bg-white">
     <section class="py-24 bg-white relative">
       <div class="max-w-4xl mx-auto px-6 lg:px-10 space-y-16">
         <div class="text-center space-y-6">
@@ -65,10 +52,6 @@
         </div>
       </div>
     </section>
-
-    <footer class="py-12 bg-neutral-50 border-t border-neutral-100 text-center">
-        <p class="text-sm text-neutral-400 font-medium">© 2026 Flybeth Status Monitoring.</p>
-    </footer>
   </div>
 </template>
 

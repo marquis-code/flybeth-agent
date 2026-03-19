@@ -1,14 +1,5 @@
 <template>
-  <div class="min-h-screen bg-white font-sans text-neutral-900 overflow-x-hidden">
-    <nav class="bg-white border-b border-neutral-100 py-8 sticky top-0 w-full z-10">
-      <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <NuxtLink to="/" class="flex items-center space-x-3 group">
-          <img src="@/assets/img/logo.png" class="w-auto h-12" alt="logo" />
-        </NuxtLink>
-        <BaseButton to="/auth/register" variant="primary" size="md">Start your trial</BaseButton>
-      </div>
-    </nav>
-
+  <div class="bg-white">
     <!-- Features Hero -->
     <section class="py-24 lg:py-32 bg-neutral-50 border-b border-neutral-100 overflow-hidden relative">
       <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
@@ -74,12 +65,6 @@
           </div>
        </div>
     </section>
-
-    <footer class="py-12 bg-white text-center">
-       <div class="max-w-7xl mx-auto px-6">
-          <p class="text-sm text-neutral-400 font-medium">© 2026 Flybeth. B2B travel fulfillment optimized.</p>
-       </div>
-    </footer>
   </div>
 </template>
 

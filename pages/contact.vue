@@ -1,13 +1,6 @@
 <template>
-  <div class="min-h-screen bg-white font-sans text-neutral-900 overflow-x-hidden">
-    <!-- Header -->
-    <nav class="bg-white/80 backdrop-blur-md border-b border-neutral-100 py-6 sticky top-0 z-10">
-      <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <NuxtLink to="/" class="flex items-center space-x-3">
-          <img src="@/assets/img/logo.png" class="w-auto h-10" alt="logo" />
-        </NuxtLink>
-      </div>
-    </nav>
+  <div class="bg-white">
+    
 
     <section class="py-24 lg:py-32">
       <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-24">
@@ -96,9 +89,7 @@
       </div>
     </section>
 
-    <footer class="bg-white border-t border-neutral-100 py-12 text-center">
-        <p class="text-sm text-neutral-400 font-medium">© 2026 Flybeth. Intelligent infrastructure for travel experts.</p>
-    </footer>
+    
   </div>
 </template>
 

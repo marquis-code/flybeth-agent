@@ -14,7 +14,7 @@ export const GATEWAY_ENDPOINT_WITH_AUTH = axios.create({
 
 // Add interceptors if needed (e.g., for auth tokens)
 GATEWAY_ENDPOINT_WITH_AUTH.interceptors.request.use((config) => {
-  const token = localStorage.getItem("auth_token");
+  const token = localStorage.getItem("token");
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }

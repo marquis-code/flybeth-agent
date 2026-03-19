@@ -51,15 +51,15 @@ const props = defineProps({
 const variantClasses = computed(() => {
   switch (props.variant) {
     case 'primary':
-      return 'bg-primary-dark text-white shadow-md shadow-primary-dark/10 hover:shadow-lg hover:bg-neutral-800 focus:ring-primary-dark/20'
+      return 'bg-primary-dark text-white hover:bg-neutral-800 focus:ring-primary-dark/20'
     case 'secondary':
-      return 'bg-secondary text-white shadow-md shadow-secondary/10 hover:shadow-lg hover:brightness-110 focus:ring-secondary/20'
+      return 'bg-secondary text-white hover:brightness-110 focus:ring-secondary/20'
     case 'outline':
       return 'border border-neutral-200 text-primary-dark bg-white hover:border-primary-dark hover:bg-neutral-50 focus:ring-primary-dark/10'
     case 'ghost':
       return 'text-neutral-600 hover:bg-neutral-50 focus:ring-neutral-100'
     case 'danger':
-      return 'bg-red-600 text-white shadow-md shadow-red-600/10 hover:shadow-lg hover:bg-red-700 focus:ring-red-600/20'
+      return 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-600/20'
     default:
       return ''
   }

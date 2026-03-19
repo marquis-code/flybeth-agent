@@ -4,7 +4,7 @@
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 relative">
       <div class="space-y-2">
         <div class="flex items-center space-x-3 mb-2">
-          <span class="px-3 py-1 bg-green-50 text-green-700 text-sm font-bold tracking-widest rounded-full border border-green-100">Status normal</span>
+          <span class="px-3 py-1 bg-green-50 text-green-700 text-sm font-bold tracking-widest rounded-full border border-green-200">Online</span>
           <span class="text-neutral-400 text-sm font-bold tracking-widest">• {{ new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) }}</span>
         </div>
         <h2 class="text-4xl  font-bold text-gray-900 tracking-tight leading-none">
@@ -29,10 +29,10 @@
 
     <!-- Stats Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      <BaseCard v-for="stat in stats" :key="stat.name" hover :padding="false" class="relative group overflow-hidden border border-gray-200 shadow-sm bg-white cursor-pointer hover:border-primary/30 transition-colors">
+      <BaseCard v-for="stat in stats" :key="stat.name" hover :padding="false" class="relative group overflow-hidden border border-gray-200 bg-white cursor-pointer hover:border-primary/30 transition-colors">
         <div class="p-6 relative z-10">
           <div class="flex items-start justify-between mb-6">
-            <div class="p-3 rounded-xl bg-gray-50 border border-gray-100 text-primary">
+            <div class="p-3 rounded-xl bg-primary/5 border border-primary/10 text-primary">
               <component :is="stat.icon" class="h-6 w-6" />
             </div>
             <div class="flex flex-col items-end">
@@ -67,7 +67,7 @@
           </div>
         </div>
         
-        <BaseCard :padding="false" class="border border-gray-200 shadow-sm bg-white overflow-hidden rounded-xl">
+        <BaseCard :padding="false" class="border border-gray-200 bg-white overflow-hidden rounded-xl">
           <div class="overflow-x-auto">
             <table class="w-full text-left">
               <thead>
@@ -78,19 +78,19 @@
                 </tr>
               </thead>
               <tbody class="divide-y divide-gray-100">
-                <tr v-for="item in displayedBookings" :key="item.id" class="hover:bg-gray-50 cursor-pointer transition-colors group">
+                <tr v-for="item in displayedBookings" :key="item._id" class="hover:bg-gray-50 cursor-pointer transition-colors group">
                   <td class="px-6 py-5">
                     <div class="flex flex-col">
-                      <span class="font-bold text-gray-900 group-hover:text-primary transition-colors">{{ item.service }}</span>
-                      <span class="text-xs text-gray-400 font-medium mt-0.5">{{ item.reference }}</span>
+                      <span class="font-bold text-gray-900 group-hover:text-primary transition-colors">{{ getServiceDescription(item) }}</span>
+                      <span class="text-xs text-gray-400 font-medium mt-0.5">{{ item.pnr }}</span>
                     </div>
                   </td>
                   <td class="px-6 py-5">
-                    <div class="flex items-center space-x-3">
+                    <div class="flex items-center space-x-3" v-if="item.contactDetails">
                       <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-xs font-bold text-primary">
-                        {{ item.customer.split(' ').map((n: any) => n[0]).join('') }}
+                        {{ item.contactDetails.name?.split(' ').map((n: any) => n[0]).join('') || 'U' }}
                       </div>
-                      <span class="text-sm font-medium text-gray-700">{{ item.customer }}</span>
+                      <span class="text-sm font-medium text-gray-700">{{ item.contactDetails.name }}</span>
                     </div>
                   </td>
                   <td class="px-6 py-5">
@@ -99,10 +99,10 @@
                     </span>
                   </td>
                   <td class="px-6 py-5">
-                    <span class=" font-bold text-gray-900 text-base">${{ item.amount }}</span>
+                    <span class=" font-bold text-gray-900 text-base">${{ item.pricing?.totalAmount?.toLocaleString() }}</span>
                   </td>
                   <td class="px-6 py-5">
-                    <span class="text-xs font-medium text-gray-500">{{ item.date }}</span>
+                    <span class="text-xs font-medium text-gray-500">{{ formatDate(item.createdAt) }}</span>
                   </td>
                 </tr>
               </tbody>
@@ -113,12 +113,12 @@
 
       <!-- Quick Actions and Performance -->
       <div class="lg:col-span-4 space-y-6">
-        <BaseCard :padding="false" class="bg-white border border-gray-200 shadow-sm relative overflow-hidden group rounded-xl">
+        <BaseCard :padding="false" class="bg-white border border-gray-200 relative overflow-hidden group rounded-xl">
           <div class="p-8 relative z-10 space-y-6">
             <div class="flex items-center justify-between border-b border-gray-100 pb-6">
               <div class="space-y-1">
                 <p class="text-gray-500 text-sm font-bold tracking-wider">Monthly Yield</p>
-                <p class="text-4xl  font-bold text-gray-900 tracking-tight">$12,450</p>
+                <p class="text-4xl  font-bold text-gray-900 tracking-tight">${{ monthlyYield.toLocaleString() }}</p>
               </div>
               <div class="p-3 bg-primary/10 rounded-xl border border-primary/20">
                 <CurrencyDollarIcon class="h-6 w-6 text-primary" />
@@ -129,24 +129,24 @@
               <div class="flex justify-between items-end">
                 <div class="space-y-1">
                   <span class="text-gray-500 text-sm font-bold tracking-wider">Progress to Target</span>
-                  <p class="text-lg font-bold text-gray-900">83.4%</p>
+                  <p class="text-lg font-bold text-gray-900">{{ progressPercentage.toFixed(1) }}%</p>
                 </div>
                 <div class="text-right">
                   <span class="text-gray-400 text-sm font-bold tracking-wider">Target</span>
-                  <p class="text-sm font-medium text-gray-600">$15,000</p>
+                  <p class="text-sm font-medium text-gray-600">${{ targetRevenue.toLocaleString() }}</p>
                 </div>
               </div>
               <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
-                <div class="bg-primary h-full w-[83%] rounded-full transition-all duration-1000"></div>
+                <div class="bg-primary h-full rounded-full transition-all duration-1000" :style="{ width: progressPercentage + '%' }"></div>
               </div>
               <p class="text-[11px] text-gray-500 font-medium leading-relaxed mt-2">
-                Based on current trajectories, you will exceed your target by 4.2% if momentum continues.
+                Based on current trajectories, you will reach {{ progressPercentage.toFixed(1) }}% of your target this month.
               </p>
             </div>
           </div>
         </BaseCard>
 
-        <BaseCard class="border border-gray-200 shadow-sm bg-white p-8 rounded-xl">
+        <BaseCard class="border border-gray-200 bg-white p-8 rounded-xl">
           <h3 class="text-base font-bold text-gray-900 mb-6 tracking-wider">Quick Actions</h3>
           <div class="grid grid-cols-2 gap-4">
             <BaseButton variant="outline" class="flex-col animate-none h-24 space-y-2 rounded-xl group border-gray-200 hover:border-primary hover:bg-primary/5 shadow-none" @click="navigateTo('/dashboard/bookings')">
@@ -207,72 +207,84 @@ const bookingHeaders = [
   { key: 'date', label: 'Date' },
 ]
 
-const stats = [
+const stats = computed(() => [
   {
     name: 'Total Revenue',
-    value: '$435,230',
+    value: statsData.value ? `$${statsData.value.totalRevenue.toLocaleString()}` : '$0',
     trend: '+12.5%',
     trendClass: 'text-secondary',
     icon: CurrencyDollarIcon,
     iconClass: 'text-secondary shadow-secondary/10'
   },
   {
-    name: 'Live Bookings',
-    value: '1,128',
+    name: 'Total Bookings',
+    value: statsData.value ? statsData.value.totalBookings.toLocaleString() : '0',
     trend: '+8.2%',
     trendClass: 'text-secondary',
     icon: TicketIcon,
     iconClass: 'text-primary shadow-primary/10'
   },
   {
-    name: 'Market Share',
-    value: '14.2%',
+    name: 'Confirmed',
+    value: statsData.value?.byStatus?.confirmed?.count.toLocaleString() || '0',
     trend: '+14.1%',
     trendClass: 'text-secondary',
     icon: UsersIcon,
     iconClass: 'text-blue-500 shadow-blue-500/10'
   },
   {
-    name: 'Network Trust',
+    name: 'Rating',
     value: '9.8',
     trend: '+0.2',
     trendClass: 'text-secondary',
     icon: StarIcon,
     iconClass: 'text-yellow-600 shadow-yellow-600/10'
   }
-]
-
-const today = new Date().toISOString().split('T')[0]
-const recentBookings = [
-  { id: 1, service: 'Emirates First Class (DXB-LHR)', reference: 'FLY-82930', customer: 'Sarah Johnson', status: 'Confirmed', amount: '8,200', date: 'Just now', timestamp: today },
-  { id: 2, service: 'Villa Alila Manggis - Bali', reference: 'FLY-82931', customer: 'Michael Chen', status: 'Pending', amount: '12,850', date: '12 mins ago', timestamp: today },
-  { id: 3, service: 'Bentley Bentayga Rental', reference: 'FLY-82932', customer: 'David Smith', status: 'Cancelled', amount: '1,450', date: '1 hour ago', timestamp: today },
-  { id: 4, service: 'Amanyara Providenciales', reference: 'FLY-82933', customer: 'Emma Wilson', status: 'Confirmed', amount: '14,100', date: '2 hours ago', timestamp: today },
-  { id: 5, service: 'Private Island Tour - Maldives', reference: 'FLY-82934', customer: 'James Brown', status: 'Confirmed', amount: '3,150', date: 'Today, 10:45 AM', timestamp: today },
-]
+])
 
 const filterDate = ref('')
 const displayedBookings = computed(() => {
-  if (!filterDate.value) return recentBookings
-  return recentBookings.filter(b => b.timestamp === filterDate.value)
+  const data = bookings.value || []
+  if (!filterDate.value) return data.slice(0, 5)
+  return data.filter((b: any) => new Date(b.createdAt).toISOString().split('T')[0] === filterDate.value).slice(0, 5)
 })
 
 const { user } = useUser()
-const { bookings, fetchBookings, fetchStats } = useBookings()
+const { bookings, stats: statsData, fetchBookings, fetchStats } = useBookings()
+
+const monthlyYield = computed(() => statsData.value?.totalRevenue || 0)
+const targetRevenue = 15000
+const progressPercentage = computed(() => Math.min(100, (monthlyYield.value / targetRevenue) * 100))
 
 onMounted(() => {
-  fetchBookings()
+  fetchBookings({ limit: 10 })
   fetchStats()
 })
 
-const statusClass = (status: string) => {
-  switch (status) {
-    case 'Confirmed': return 'text-secondary bg-secondary/5 border-secondary/20'
-    case 'Pending': return 'text-yellow-600 bg-yellow-50 border-yellow-200'
-    case 'Cancelled': return 'text-red-500 bg-red-50 border-red-100'
-    default: return 'text-neutral/40 bg-gray-50 border-gray-200'
-  }
+const getServiceDescription = (item: any) => {
+  if (item.flights?.length) return `Flight: ${item.flights[0].flight?.airline || 'Airline'} (${item.flights[0].flight?.origin} - ${item.flights[0].flight?.destination})`
+  if (item.stays?.length) return `Stay: ${item.stays[0].stay?.name || 'Hotel'}`
+  if (item.cars?.length) return `Car: ${item.cars[0].car?.brand || 'Rental'}`
+  return 'Custom Package'
 }
+
+const statusClass = (status: string) => {
+  const s = status.toLowerCase()
+  if (s === 'confirmed' || s === 'ticketed') return 'text-secondary bg-secondary/5 border-secondary/20'
+  if (s === 'pending') return 'text-yellow-600 bg-yellow-50 border-yellow-200'
+  if (s === 'cancelled') return 'text-red-500 bg-red-50 border-red-100'
+  return 'text-neutral/40 bg-gray-50 border-gray-200'
+}
+
+const formatDate = (date: string) => {
+  const d = new Date(date)
+  const now = new Date()
+  const diff = now.getTime() - d.getTime()
+  if (diff < 3600000) return 'Just now'
+  if (diff < 86400000) return `${Math.floor(diff / 3600000)} hours ago`
+  return d.toLocaleDateString()
+}
+
 const handleBroadcast = () => {
   alert('Broadcast feature is ready to be linked to the messaging schema.')
 }

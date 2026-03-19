@@ -23,6 +23,7 @@ export const useAuth = () => {
                 });
                 return res.data;
             }
+            throw new Error("Login failed");
         } catch (error: any) {
             console.error(error);
             showToast({
@@ -45,7 +46,7 @@ export const useAuth = () => {
             if (res.status === 200 || res.status === 201) {
                 showToast({
                     title: "Registration Success",
-                    message: "Identity node created. Verification required.",
+                    message: "Account created! Please verify your email.",
                     toastType: "success",
                 });
                 return res.data;
@@ -76,11 +77,12 @@ export const useAuth = () => {
                 setUser(user);
                 showToast({
                     title: "Access Granted",
-                    message: "Security verification successful",
+                    message: "Verified successfully",
                     toastType: "success",
                 });
                 return res.data;
             }
+            throw new Error("Verification failed");
         } catch (error: any) {
             console.error(error);
             showToast({
@@ -114,7 +116,7 @@ export const useAuth = () => {
             if (res.status === 200 || res.status === 201) {
                 showToast({
                     title: "Code Resent",
-                    message: "A new security code has been dispatched.",
+                    message: "A new code has been sent to your email.",
                     toastType: "success",
                 });
                 return res.data;

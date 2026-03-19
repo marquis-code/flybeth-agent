@@ -9,7 +9,7 @@
       <div class="space-y-4">
         <h1 class="text-4xl font-black text-primary-dark tracking-tighter">Reset password.</h1>
         <p class="text-neutral-400 font-medium">
-          Initialize your new professional credentials below.
+          Enter your new password below.
         </p>
       </div>
 
@@ -40,7 +40,7 @@
             :loading="loading"
             class="shadow-xl shadow-primary-dark/20"
           >
-            Update credentials
+            Reset password
           </BaseButton>
 
           <div class="pt-4 text-center">

@@ -1,24 +1,13 @@
 <template>
-  <div class="min-h-screen bg-[#FDFDFD] font-sans text-neutral-900 overflow-x-hidden">
-    <!-- Static Header -->
-    <nav class="bg-white border-b border-neutral-100 py-6 sticky top-0 z-10">
-      <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <NuxtLink to="/" class="flex items-center space-x-3">
-          <img src="@/assets/img/logo.png" class="w-auto h-10" alt="logo" />
-        </NuxtLink>
-        <NuxtLink to="/auth/register" class="text-sm font-black text-primary hover:text-primary-dark transition-colors tracking-widest">Start free trial</NuxtLink>
-      </div>
-    </nav>
-
-    <!-- Pricing Hero -->
-    <section class="py-24 bg-white relative">
+  <div class="bg-white">
+    <section class="relative pt-24 pb-16 lg:pt-32 lg:pb-24 overflow-hidden bg-primary-dark">
       <div class="max-w-4xl mx-auto px-6 text-center space-y-6">
         <h2 class="text-sm font-black text-secondary tracking-[0.4em] uppercase">Pricing modules</h2>
-        <h1 class="text-5xl lg:text-7xl font-black text-primary-dark tracking-tighter leading-tight">
+        <h1 class="text-5xl lg:text-7xl font-black text-white tracking-tighter leading-tight">
           Simple, wholesale <br />
           <span class="text-primary italic">transparency.</span>
         </h1>
-        <p class="text-xl text-neutral-500 font-medium leading-relaxed max-w-2xl mx-auto">
+        <p class="text-xl text-white/70 font-medium leading-relaxed max-w-2xl mx-auto">
           Flybeth was built to put profits back in the hands of agents. No hidden fees, no complicated tiers—just direct access to wholesale inventory.
         </p>
       </div>
@@ -83,26 +72,6 @@
         </div>
       </div>
     </section>
-
-    <!-- FAQ Preview -->
-    <section class="py-24 bg-neutral-50 border-t border-neutral-100 mb-20">
-      <div class="max-w-4xl mx-auto px-6">
-        <h3 class="text-3xl font-black text-primary-dark text-center mb-16 tracking-tight">Common inquiries</h3>
-        <div class="space-y-8">
-           <div v-for="faq in faqs" :key="faq.q" class="space-y-3">
-              <h4 class="text-lg font-bold text-primary-dark">{{ faq.q }}</h4>
-              <p class="text-neutral-500 leading-relaxed font-medium">{{ faq.a }}</p>
-           </div>
-        </div>
-        <div class="text-center mt-20">
-           <NuxtLink to="/help-center" class="text-sm font-black text-primary tracking-widest hover:text-primary-dark transition-colors uppercase border-b-2 border-primary/20 pb-2">Visit Help Center</NuxtLink>
-        </div>
-      </div>
-    </section>
-
-    <footer class="py-12 text-center text-sm font-medium text-neutral-400">
-       © 2026 Flybeth B2B. Empowering travel intelligence.
-    </footer>
   </div>
 </template>
 
@@ -126,17 +95,6 @@ const enterpriseFeatures = [
   'Dedicated account manager',
   'Advanced analytics suite',
   'Multi-currency settlement'
-]
-
-const faqs = [
-  { 
-    q: 'How does Flybeth offer wholesale rates?', 
-    a: 'We aggregate inventory directly from global GDS and NDC pools, passing the direct-access price to our agents without the retail markups typically found on public travel sites.' 
-  },
-  { 
-    q: 'Are there any hidden transaction fees?', 
-    a: 'No. The price you see in the results is the net wholesale rate. Any markups or service fees you add are entirely yours to keep.' 
-  }
 ]
 </script>
 

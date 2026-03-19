@@ -1,14 +1,5 @@
 <template>
-  <div class="min-h-screen bg-white font-sans text-neutral-900 overflow-x-hidden">
-    <nav class="bg-white border-b border-neutral-100 py-6 sticky top-0 z-10 font-sans">
-      <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <NuxtLink to="/" class="flex items-center space-x-3">
-          <img src="@/assets/img/logo.png" class="w-auto h-10" alt="logo" />
-        </NuxtLink>
-        <BaseButton to="/auth/register" variant="primary" size="sm">Get started</BaseButton>
-      </div>
-    </nav>
-
+  <div class="bg-white">
     <section class="py-24 bg-white relative">
       <div class="max-w-4xl mx-auto px-6 lg:px-10 space-y-12">
         <div class="space-y-6">
@@ -52,10 +43,6 @@
         </div>
       </div>
     </section>
-
-    <footer class="py-12 text-center text-sm font-medium text-neutral-400 border-t border-neutral-100">
-       © 2026 Flybeth Security. Zero-trust architecture as standard.
-    </footer>
   </div>
 </template>
 

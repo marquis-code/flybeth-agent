@@ -1,15 +1,5 @@
 <template>
   <div class="min-h-screen bg-white font-sans text-neutral-900 overflow-x-hidden">
-    <!-- Basic Nav -->
-    <nav class="bg-white border-b border-neutral-100 py-6 sticky top-0 z-10 font-sans">
-      <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <NuxtLink to="/" class="flex items-center space-x-3">
-          <img src="@/assets/img/logo.png" class="w-auto h-10" alt="logo" />
-        </NuxtLink>
-        <NuxtLink to="/auth/login" class="text-sm font-bold text-neutral-400 hover:text-primary transition-colors">Sign in</NuxtLink>
-      </div>
-    </nav>
-
     <!-- Solutions Hero -->
     <section class="py-24 bg-white relative">
       <div class="max-w-4xl mx-auto px-6 text-center space-y-6">
@@ -67,10 +57,6 @@
            </div>
         </div>
     </section>
-
-    <footer class="py-12 bg-white text-center text-sm font-medium text-neutral-400">
-        © 2026 Flybeth Solutions. Powering travel excellence.
-    </footer>
   </div>
 </template>
 

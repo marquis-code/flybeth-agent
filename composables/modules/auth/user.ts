@@ -2,10 +2,21 @@ import { ref } from "vue";
 
 const isBrowser = typeof window !== "undefined";
 
+const safeParseUser = () => {
+    if (!isBrowser) return null;
+    try {
+        const raw = localStorage.getItem("user");
+        if (!raw || raw === "undefined") return null;
+        return JSON.parse(raw);
+    } catch {
+        return null;
+    }
+};
+
 export const useUser = () => {
     const token = ref(isBrowser ? localStorage.getItem("token") || "" : "");
     const refreshToken = ref(isBrowser ? localStorage.getItem("refreshToken") || "" : "");
-    const user = ref(isBrowser ? JSON.parse(localStorage.getItem("user") || "null") : null);
+    const user = ref(safeParseUser());
 
     const setToken = (newToken: string) => {
         token.value = newToken;
