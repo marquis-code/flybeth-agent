@@ -18,22 +18,19 @@
       <ChevronDownIcon class="h-4 w-4 text-gray-400 transition-transform duration-300" :class="isOpen ? 'rotate-180' : ''" />
     </div>
 
-    <!-- Dropdown Content -->
     <Transition name="picker">
       <div 
         v-if="isOpen"
-        class="absolute top-full left-0 mt-4 bg-white border border-gray-200 shadow-2xl rounded-[2.5rem] z-[100] min-w-[700px] overflow-hidden animate-in fade-in slide-in-from-top-4"
+        class="absolute top-full left-0 mt-4 bg-white border border-gray-200 shadow-2xl rounded-[2.5rem] z-[9999] min-w-[700px] overflow-hidden animate-in fade-in slide-in-from-top-4"
       >
-        <!-- Tabs -->
-        <div class="flex items-center border-b border-gray-100">
-          <button 
-            v-for="tab in ['Calendar', 'Flexible dates']" :key="tab"
-            @click="activeTab = tab"
-            class="flex-1 py-5 text-xs font-black tracking-widest uppercase transition-all relative"
-            :class="activeTab === tab ? 'text-primary' : 'text-gray-400 hover:text-gray-600'"
-          >
-            {{ tab }}
-            <div v-if="activeTab === tab" class="absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-primary rounded-full"></div>
+        <!-- Header (Tabs Removed as requested) -->
+        <div class="px-8 pt-8 flex items-center justify-between border-b border-gray-100 pb-4">
+          <div class="flex items-center space-x-2">
+            <CalendarIcon class="h-5 w-5 text-primary" />
+            <span class="text-xs font-black tracking-widest uppercase text-gray-900">Select Travel Dates</span>
+          </div>
+          <button @click="isOpen = false" class="p-2 hover:bg-gray-50 rounded-full transition-all text-gray-400 hover:text-gray-900">
+            <XMarkIcon class="h-5 w-5" />
           </button>
         </div>
 
@@ -121,7 +118,8 @@ import {
   CalendarIcon, 
   ChevronDownIcon, 
   ChevronLeftIcon, 
-  ChevronRightIcon 
+  ChevronRightIcon,
+  XMarkIcon
 } from '@heroicons/vue/24/outline'
 
 const props = defineProps<{

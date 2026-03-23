@@ -7,8 +7,8 @@
       <!-- Header Area -->
       <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8 mb-10 pb-8 border-b border-gray-100">
         <div class="space-y-1">
-          <h2 class="text-3xl font-black text-gray-900 tracking-tight italic">Elite Transfers</h2>
-          <p class="text-xs font-bold text-gray-400 tracking-widest uppercase">Private & shared transfers from live provider networks</p>
+          <h2 class="text-3xl font-black text-gray-900 tracking-tight italic">Elite Airport Transfers</h2>
+          <p class="text-xs font-bold text-gray-400 tracking-widest uppercase">Private & shared airport transfers from live provider networks</p>
         </div>
         
         <div class="flex items-center space-x-6">
@@ -35,7 +35,7 @@
             />
             <!-- Suggestions Dropdown -->
             <Transition name="slide-up">
-              <div v-if="airportOpen && filteredAirports.length" class="absolute top-full left-0 right-0 mt-3 bg-white border border-gray-200 shadow-2xl rounded-[2rem] z-[110] max-h-[400px] overflow-y-auto p-3 animate-in fade-in slide-in-from-top-4">
+              <div v-if="airportOpen && filteredAirports.length" class="absolute top-full left-0 right-0 mt-3 bg-white border border-gray-200 shadow-2xl rounded-[2rem] z-[9999] max-h-[400px] overflow-y-auto p-3 animate-in fade-in slide-in-from-top-4">
                 <button 
                   v-for="airport in filteredAirports" :key="airport.code"
                   @click="selectAirport(airport)"

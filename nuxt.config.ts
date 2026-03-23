@@ -7,6 +7,14 @@ export default defineNuxtConfig({
     host: 'localhost' // or '0.0.0.0' to allow external access
   },
 
+    nitro: {
+    prerender: {
+      routes: ['/', '/404.html'],  // Changed: Added '/' to generate index.html
+      ignore: ['/dynamic-routes', '/api'],
+      failOnError: false
+    }
+  },
+
   app: {
     head: {
       title: 'Flybeth - Premium B2B Travel Solutions & Flight Booking',
@@ -22,7 +30,7 @@ export default defineNuxtConfig({
         // Open Graph Meta Tags
         { property: "og:title", content: "Flybeth - Premium B2B Travel Solutions" },
         { property: "og:description", content: "Empowering travel agencies with exclusive wholesale inventory and seamless booking technology." },
-        { property: "og:image", content: "/assets/img/logo.png" },
+        { property: "og:image", content: "/logo.png" },
         { property: "og:url", content: "https://agent.flybeth.com" },
         { property: "og:type", content: "website" },
         { property: "og:site_name", content: "Flybeth" },
@@ -31,7 +39,7 @@ export default defineNuxtConfig({
         { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:title", content: "Flybeth - Premium B2B Travel Solutions" },
         { name: "twitter:description", content: "Empowering travel agencies with exclusive wholesale inventory and seamless booking technology." },
-        { name: "twitter:image", content: "/assets/img/logo.png" },
+        { name: "twitter:image", content: "/logo.png" },
         { name: "twitter:site", content: "@flybeth" },
       ],
       link: [
@@ -39,7 +47,7 @@ export default defineNuxtConfig({
         { rel: "shortcut icon", href: "/favicon.ico", type: "image/x-icon" },
         { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
         { rel: "icon", type: "image/png", sizes: "96x96", href: "/favicon-96x96.png" },
-        { rel: "icon", type: "image/svg+xml", href: "/assets/img/logo.png" },
+        { rel: "icon", type: "image/png", href: "/logo.png" },
 
         { rel: "preconnect", href: "https://fonts.googleapis.com" },
         { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "anonymous" },

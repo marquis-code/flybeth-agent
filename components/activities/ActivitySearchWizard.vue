@@ -25,7 +25,7 @@
             />
             <!-- Suggestions Dropdown -->
             <Transition name="slide-up">
-              <div v-if="destOpen && filteredDest.length" class="absolute top-full left-0 right-0 mt-3 bg-white border border-gray-200 shadow-2xl rounded-[2rem] z-[110] max-h-[400px] overflow-y-auto p-3 animate-in fade-in slide-in-from-top-4">
+              <div v-if="destOpen && filteredDest.length" class="absolute top-full left-0 right-0 mt-3 bg-white border border-gray-200 shadow-2xl rounded-[2rem] z-[9999] max-h-[400px] overflow-y-auto p-3 animate-in fade-in slide-in-from-top-4">
                 <button 
                   v-for="dest in filteredDest" :key="dest.city"
                   @click="selectDest(dest)"

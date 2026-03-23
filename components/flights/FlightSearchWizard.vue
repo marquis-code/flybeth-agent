@@ -60,7 +60,7 @@
             </button>
             <!-- Cabin Dropdown -->
             <Transition name="slide-up">
-              <div v-if="showCabin" class="absolute top-full right-0 mt-3 w-56 bg-white border border-gray-200 shadow-2xl rounded-[1.5rem] z-[100] overflow-hidden p-2">
+              <div v-if="showCabin" class="absolute top-full right-0 mt-3 w-56 bg-white border border-gray-200 shadow-2xl rounded-[1.5rem] z-[9999] overflow-hidden p-2">
                 <button 
                   v-for="cab in cabinClasses" :key="cab.id" 
                   @click="selectCabin(cab)"
@@ -99,7 +99,7 @@
               @focus="openOrigin(index)"
             />
             <!-- Suggestions Dropdown -->
-            <div v-if="activeLeg === index && activeSide === 'origin'" class="absolute top-full left-0 right-0 mt-3 bg-white border border-gray-200 shadow-2xl rounded-[2rem] z-[110] max-h-[400px] overflow-y-auto p-3 animate-in fade-in slide-in-from-top-4">
+            <div v-if="activeLeg === index && activeSide === 'origin'" class="absolute top-full left-0 right-0 mt-3 bg-white border border-gray-200 shadow-2xl rounded-[2rem] z-[9999] max-h-[400px] overflow-y-auto p-3 animate-in fade-in slide-in-from-top-4">
               <div v-if="!airportResults.length" class="p-8 text-center space-y-4">
                 <div class="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto">
                   <MagnifyingGlassIcon class="h-8 w-8 text-gray-300" />
@@ -145,7 +145,7 @@
               @focus="openDest(index)"
             />
             <!-- Suggestions Dropdown -->
-            <div v-if="activeLeg === index && activeSide === 'dest'" class="absolute top-full left-0 right-0 mt-3 bg-white border border-gray-200 shadow-2xl rounded-[2rem] z-[110] max-h-[400px] overflow-y-auto p-3 animate-in fade-in slide-in-from-top-4">
+            <div v-if="activeLeg === index && activeSide === 'dest'" class="absolute top-full left-0 right-0 mt-3 bg-white border border-gray-200 shadow-2xl rounded-[2rem] z-[9999] max-h-[400px] overflow-y-auto p-3 animate-in fade-in slide-in-from-top-4">
               <div v-if="!airportResults.length" class="p-8 text-center space-y-4">
                 <div class="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto">
                   <MagnifyingGlassIcon class="h-8 w-8 text-gray-300" />

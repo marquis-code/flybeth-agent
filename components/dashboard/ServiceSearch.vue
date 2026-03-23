@@ -23,12 +23,12 @@
     <div class="relative min-h-[400px]">
       <Transition name="page-fade" mode="out-in">
         <div :key="activeService" class="w-full">
-          <FlightSearchWizard v-if="activeService === 'flights'" />
-          <StaySearchWizard v-else-if="activeService === 'hotels' || activeService === 'luxury-hotels'" :is-luxury="activeService === 'luxury-hotels'" />
+          <StaySearchWizard v-if="activeService === 'properties'" />
+          <FlightSearchWizard v-else-if="activeService === 'flights'" />
+          <PackageSearchWizard v-else-if="activeService === 'packages'" />
           <CarSearchWizard v-else-if="activeService === 'cars'" />
-          <TransferSearchWizard v-else-if="activeService === 'transfers'" />
-          <TravelInsuranceWizard v-else-if="activeService === 'insurance'" />
           <ActivitySearchWizard v-else-if="activeService === 'activities'" />
+          <TransferSearchWizard v-else-if="activeService === 'airport-transfers'" />
         </div>
       </Transition>
     </div>
@@ -40,26 +40,26 @@ import { ref, onMounted, watch } from 'vue'
 import { 
   PaperAirplaneIcon, 
   HomeModernIcon, 
-  StarIcon, 
+  BuildingOffice2Icon,
+  ShoppingBagIcon,
   KeyIcon, 
-  TruckIcon, 
-  ShieldCheckIcon, 
-  RocketLaunchIcon
+  RocketLaunchIcon,
+  TruckIcon
 } from '@heroicons/vue/24/outline'
 
 // Wizards
 import FlightSearchWizard from '@/components/flights/FlightSearchWizard.vue'
 import StaySearchWizard from '@/components/stays/StaySearchWizard.vue'
+import PackageSearchWizard from '@/components/packages/PackageSearchWizard.vue'
 import CarSearchWizard from '@/components/cars/CarSearchWizard.vue'
 import TransferSearchWizard from '@/components/transfers/TransferSearchWizard.vue'
-import TravelInsuranceWizard from '@/components/insurance/TravelInsuranceWizard.vue'
 import ActivitySearchWizard from '@/components/activities/ActivitySearchWizard.vue'
 
 const props = defineProps<{
   initialService?: string
 }>()
 
-const activeService = ref(props.initialService || 'flights')
+const activeService = ref(props.initialService || 'properties')
 const serviceRefs = ref<Record<string, any>>({})
 const indicatorStyle = ref({ width: '0px', left: '0px' })
 
@@ -82,13 +82,12 @@ watch(activeService, () => {
 })
 
 const services = [
+  { id: 'properties', label: 'Properties', icon: BuildingOffice2Icon },
   { id: 'flights', label: 'Flights', icon: PaperAirplaneIcon },
-  { id: 'hotels', label: 'Stays', icon: HomeModernIcon },
-  { id: 'luxury-hotels', label: 'Luxury', icon: StarIcon },
-  { id: 'cars', label: 'Car Rentals', icon: KeyIcon },
-  { id: 'transfers', label: 'Transfers', icon: TruckIcon },
-  { id: 'insurance', label: 'Insurance', icon: ShieldCheckIcon },
+  { id: 'packages', label: 'Packages', icon: ShoppingBagIcon },
+  { id: 'cars', label: 'Cars', icon: KeyIcon },
   { id: 'activities', label: 'Activities', icon: RocketLaunchIcon },
+  { id: 'airport-transfers', label: 'Airport transfers', icon: TruckIcon },
 ]
 </script>
 

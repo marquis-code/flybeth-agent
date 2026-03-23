@@ -2,7 +2,7 @@
 
 // src/composables/core/useCustomToast.ts
 import { ref, shallowRef, onMounted, createApp, h } from 'vue'
-import ToastComponent from '@/components/ui/Toast.vue'
+import ToastComponent from '@/components/ui/CoreToast.vue'
 
 type ToastType = 'success' | 'error' | 'warning' | 'info'
 

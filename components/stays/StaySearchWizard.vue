@@ -10,8 +10,8 @@
       <!-- Header Area -->
       <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8 mb-10 pb-8 border-b border-white/10">
         <div class="space-y-1">
-          <h2 class="text-3xl font-black text-white tracking-tight italic">Luxury Stays & Hotels</h2>
-          <p class="text-xs font-bold text-white/40 tracking-widest uppercase">Curated collection of the world's finest accommodations</p>
+          <h2 class="text-3xl font-black text-white tracking-tight italic">Premium Properties</h2>
+          <p class="text-xs font-bold text-white/40 tracking-widest uppercase">Curated stays from global hospitality networks</p>
         </div>
         
         <div class="flex items-center space-x-6">
@@ -38,7 +38,7 @@
             />
             <!-- Suggestions Dropdown -->
             <Transition name="slide-up">
-              <div v-if="destOpen && filteredDestinations.length" class="absolute top-full left-0 right-0 mt-3 bg-white border border-gray-200 shadow-2xl rounded-[2rem] z-[110] max-h-[400px] overflow-y-auto p-3 animate-in fade-in slide-in-from-top-4">
+              <div v-if="destOpen && filteredDestinations.length" class="absolute top-full left-0 right-0 mt-3 bg-white border border-gray-200 shadow-2xl rounded-[2rem] z-[9999] max-h-[400px] overflow-y-auto p-3 animate-in fade-in slide-in-from-top-4">
                 <button 
                   v-for="dest in filteredDestinations" :key="dest.city"
                   @click="selectDest(dest)"
@@ -76,7 +76,7 @@
             </button>
             <!-- Guests Dropdown -->
             <Transition name="slide-up">
-              <div v-if="showGuests" class="absolute top-full right-0 left-0 lg:left-auto mt-3 w-full lg:w-80 bg-white border border-gray-200 shadow-2xl rounded-[2rem] z-[100] p-8 space-y-8 animate-in fade-in slide-in-from-top-4">
+              <div v-if="showGuests" class="absolute top-full right-0 left-0 lg:left-auto mt-3 w-full lg:w-80 bg-white border border-gray-200 shadow-2xl rounded-[2rem] z-[9999] p-8 space-y-8 animate-in fade-in slide-in-from-top-4">
                 <div v-for="cat in guestCategories" :key="cat.id" class="flex items-center justify-between">
                   <div>
                     <p class="text-sm font-black text-gray-900">{{ cat.label }}</p>
