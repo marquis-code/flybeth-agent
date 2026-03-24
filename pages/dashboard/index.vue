@@ -1,5 +1,23 @@
 <template>
   <div class="space-y-12">
+    <!-- Verification Status Banner -->
+    <div v-if="user?.agentStatus !== 'approved'" class="bg-white border-b border-neutral-100 p-6 lg:px-10 sticky top-0 z-40 backdrop-blur-xl bg-white/80">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center space-x-6">
+          <div :class="['w-14 h-14 rounded-[1.25rem] flex items-center justify-center shrink-0 shadow-sm', statusIconBg]">
+            <component :is="statusIcon" class="w-7 h-7" :class="statusIconColor" />
+          </div>
+          <div>
+            <h4 class="text-lg font-black text-primary-dark tracking-tight">Application Status: <span class="uppercase text-secondary ml-1">{{ user?.agentStatus || 'pending' }}</span></h4>
+            <p class="text-sm text-neutral-400 font-medium max-w-xl leading-relaxed">{{ statusMessage }}</p>
+          </div>
+        </div>
+        <div class="flex items-center space-x-4">
+          <BaseButton v-if="user?.agentStatus === 'pending'" size="sm" variant="secondary">Complete Profile</BaseButton>
+          <BaseButton size="sm" variant="outline" class="border-neutral-200">Contact Support</BaseButton>
+        </div>
+      </div>
+    </div>
     <!-- Hero / Welcome Section -->
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 relative">
       <div class="space-y-2">
@@ -190,8 +208,47 @@ import {
   PlusIcon,
   CalendarIcon,
   InformationCircleIcon,
-  ArrowUpRightIcon
+  ArrowUpRightIcon,
+  ClockIcon,
+  CheckCircleIcon,
+  ExclamationCircleIcon
 } from '@heroicons/vue/24/outline'
+
+const statusIcon = computed(() => {
+  switch(user.value?.agentStatus) {
+    case 'under_review': return InformationCircleIcon
+    case 'rejected': return ExclamationCircleIcon
+    case 'suspended': return ExclamationCircleIcon
+    default: return ClockIcon
+  }
+})
+
+const statusIconBg = computed(() => {
+  switch(user.value?.agentStatus) {
+    case 'under_review': return 'bg-blue-50'
+    case 'rejected': return 'bg-red-50'
+    case 'suspended': return 'bg-red-50'
+    default: return 'bg-yellow-50'
+  }
+})
+
+const statusIconColor = computed(() => {
+  switch(user.value?.agentStatus) {
+    case 'under_review': return 'text-blue-600'
+    case 'rejected': return 'text-red-600'
+    case 'suspended': return 'text-red-600'
+    default: return 'text-yellow-600'
+  }
+})
+
+const statusMessage = computed(() => {
+  switch(user.value?.agentStatus) {
+    case 'under_review': return 'Our compliance team is currently reviewing your documents. You have limited view access until approval.'
+    case 'rejected': return 'Your application was not approved. Please contact our support team for further details.'
+    case 'suspended': return 'Your account has been suspended due to a policy violation. Reach out to your account manager.'
+    default: return 'Your application has been received. Please ensure all documents are uploaded to expedite the review process.'
+  }
+})
 
 import ServiceSearch from '@/components/dashboard/ServiceSearch.vue'
 

@@ -69,6 +69,10 @@ const form = reactive({
   token: ''
 })
 
+definePageMeta({
+  layout: 'auth'
+})
+
 onMounted(() => {
   form.token = route.query.token as string || ''
   if (!form.token) {

@@ -63,6 +63,10 @@ const timer = ref(60)
 const resending = ref(false)
 let timerInterval: any = null
 
+definePageMeta({
+  layout: 'auth'
+})
+
 const { verifyOtp, resendOtp, loading } = useAuth()
 const router = useRouter()
 const route = useRoute()

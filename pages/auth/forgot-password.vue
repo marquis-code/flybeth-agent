@@ -58,6 +58,10 @@ import { ref } from 'vue'
 import AnimatedInput from '@/components/ui/AnimatedInput.vue'
 import { useAuth } from '@/composables/modules/auth/useAuth'
 
+definePageMeta({
+  layout: 'auth'
+})
+
 const email = ref('')
 const success = ref(false)
 const { forgotPassword, loading } = useAuth()

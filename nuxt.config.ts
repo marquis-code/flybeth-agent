@@ -79,4 +79,10 @@ export default defineNuxtConfig({
     preload: true,
   },
   css: ['~/assets/css/main.css', '~/assets/font/stylesheet.css'],
+  runtimeConfig: {
+    public: {
+      googleMapsApiKey: process.env.VITE_GOOGLE_API_KEY || process.env.GOOGLE_API_KEY,
+      apiBase: process.env.VITE_BASE_URL || 'http://localhost:3000/api/v1'
+    }
+  }
 })
