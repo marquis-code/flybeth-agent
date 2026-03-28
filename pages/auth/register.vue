@@ -27,7 +27,7 @@
             </div>
             <div>
               <p class="text-xs font-black text-primary-dark tracking-widest">{{ perk.title }}</p>
-              <p class="text-[11px] text-neutral-400 mt-1">{{ perk.desc }}</p>
+              <p class="text-[12px] text-neutral-500 mt-1">{{ perk.desc }}</p>
             </div>
           </div>
         </div>
@@ -38,13 +38,13 @@
         <div class="max-w-xl w-full mx-auto space-y-8">
           <div class="space-y-2">
             <div class="flex items-center justify-between mb-4">
-              <span class="text-[10px] font-black uppercase tracking-widest text-secondary">Step {{ currentStep }} of 7</span>
+              <span class="text-[11px] font-black uppercase tracking-widest text-secondary">Step {{ currentStep }} of 7</span>
               <div class="flex space-x-1">
                 <div v-for="s in 7" :key="s" :class="['h-1 w-6 rounded-full transition-all duration-500', s <= currentStep ? 'bg-secondary' : 'bg-neutral-100']"></div>
               </div>
             </div>
             <h1 class="text-3xl font-black text-primary-dark tracking-tighter">{{ stepTitles[currentStep-1] }}</h1>
-            <p class="text-neutral-400 text-sm font-medium">{{ stepDescriptions[currentStep-1] }}</p>
+            <p class="text-neutral-500 text-sm font-medium">{{ stepDescriptions[currentStep-1] }}</p>
           </div>
 
           <form @submit.prevent="handleSubmit" class="space-y-8">
@@ -95,21 +95,22 @@
                 <AnimatedInput v-model="form.firstName" label="Contact First Name" required />
                 <AnimatedInput v-model="form.lastName" label="Contact Last Name" required />
               </div>
-              <AnimatedInput v-model="form.phone" label="Phone Number" type="tel" required />
+              <PhoneNumberInput v-model="form.phone" label="Phone Number" required />
               <div class="space-y-4">
                 <div class="flex items-center space-x-2">
                   <input type="checkbox" v-model="sameAsPhone" class="rounded border-neutral-200 text-secondary focus:ring-secondary">
-                  <span class="text-xs text-neutral-400 font-medium">WhatsApp same as phone</span>
+                  <span class="text-[13px] text-neutral-500 font-medium">WhatsApp same as phone</span>
                 </div>
-                <AnimatedInput v-if="!sameAsPhone" v-model="form.whatsappNumber" label="WhatsApp Number" type="tel" />
+                <PhoneNumberInput v-if="!sameAsPhone" v-model="form.whatsappNumber" label="WhatsApp Number" />
               </div>
             </div>
 
             <!-- Step 4: Identity Verification (KYC) -->
             <div v-if="currentStep === 4" class="space-y-6">
-              <div class="p-8 border-2 border-dashed border-neutral-100 rounded-[2rem] text-center space-y-4 hover:border-secondary/20 transition-all group relative">
+              <div class="p-8 border-2 border-dashed border-neutral-100 rounded-[2rem] text-center space-y-4 hover:border-secondary/20 transition-all group relative overflow-hidden">
                 <div v-if="form.idCardUrl" class="absolute inset-0 z-0">
-                  <img :src="form.idCardUrl" class="w-full h-full object-cover opacity-20" />
+                  <embed v-if="isPdf(form.idCardUrl)" :src="form.idCardUrl + '#toolbar=0&navpanes=0&scrollbar=0'" class="w-full h-full opacity-20 pointer-events-none object-cover" />
+                  <img v-else :src="form.idCardUrl" class="w-full h-full object-cover opacity-20" />
                 </div>
                 <div class="relative z-10">
                   <div class="w-16 h-16 bg-secondary/5 rounded-2xl flex items-center justify-center mx-auto mb-4">
@@ -121,13 +122,14 @@
                   <BaseButton :loading="uploadingFields.idCard" type="button" variant="secondary" size="sm" @click="$el.querySelector('#idUpload').click()" class="mt-4">
                     {{ form.idCardUrl ? 'Change File' : 'Choose File' }}
                   </BaseButton>
-                  <p v-if="form.idCardUrl" class="text-[10px] text-green-600 font-bold mt-2 uppercase tracking-widest">Document Uploaded ✓</p>
+                  <p v-if="form.idCardUrl" class="text-xs text-green-600 font-bold mt-2 uppercase tracking-widest">Document Uploaded ✓</p>
                 </div>
               </div>
 
-              <div class="p-8 border-2 border-dashed border-neutral-100 rounded-[2rem] text-center space-y-4 hover:border-secondary/20 transition-all group relative">
+              <div class="p-8 border-2 border-dashed border-neutral-100 rounded-[2rem] text-center space-y-4 hover:border-secondary/20 transition-all group relative overflow-hidden">
                 <div v-if="form.selfieUrl" class="absolute inset-0 z-0">
-                  <img :src="form.selfieUrl" class="w-full h-full object-cover opacity-20" />
+                  <embed v-if="isPdf(form.selfieUrl)" :src="form.selfieUrl + '#toolbar=0&navpanes=0&scrollbar=0'" class="w-full h-full opacity-20 pointer-events-none object-cover" />
+                  <img v-else :src="form.selfieUrl" class="w-full h-full object-cover opacity-20" />
                 </div>
                 <div class="relative z-10">
                   <div class="w-16 h-16 bg-secondary/5 rounded-2xl flex items-center justify-center mx-auto mb-4">
@@ -139,7 +141,7 @@
                   <BaseButton :loading="uploadingFields.selfie" type="button" variant="secondary" size="sm" @click="$el.querySelector('#selfieUpload').click()" class="mt-4">
                     {{ form.selfieUrl ? 'Change Photo' : 'Capture Photo' }}
                   </BaseButton>
-                  <p v-if="form.selfieUrl" class="text-[10px] text-green-600 font-bold mt-2 uppercase tracking-widest">Selfie Captured ✓</p>
+                  <p v-if="form.selfieUrl" class="text-xs text-green-600 font-bold mt-2 uppercase tracking-widest">Selfie Captured ✓</p>
                 </div>
               </div>
             </div>
@@ -151,9 +153,11 @@
                    <h4 class="text-xs font-black text-secondary uppercase tracking-widest">Nigeria Compliance (CAC)</h4>
                    <InfoTooltip text="Corporate Affairs Commission certificate is required for all Nigerian businesses." />
                 </div>
-                <div class="p-10 border-2 border-dashed border-neutral-100 rounded-[2.5rem] text-center space-y-6 group relative transition-all hover:border-secondary/20">
+                <div class="p-10 border-2 border-dashed border-neutral-100 rounded-[2.5rem] text-center space-y-6 group relative transition-all hover:border-secondary/20 overflow-hidden">
                   <div v-if="form.cacCertificateUrl" class="absolute inset-0 z-0">
-                    <div class="absolute inset-0 bg-secondary/5 z-0"></div>
+                    <embed v-if="isPdf(form.cacCertificateUrl)" :src="form.cacCertificateUrl + '#toolbar=0&navpanes=0&scrollbar=0'" class="w-full h-full opacity-20 pointer-events-none object-cover" />
+                    <img v-else :src="form.cacCertificateUrl" class="w-full h-full object-cover opacity-20" />
+                    <div class="absolute inset-0 bg-secondary/10 backdrop-blur-[1px] z-10"></div>
                   </div>
                   <div class="relative z-10">
                     <div class="w-20 h-20 bg-secondary/5 rounded-[2rem] flex items-center justify-center mx-auto mb-4">
@@ -166,8 +170,8 @@
                       {{ form.cacCertificateUrl ? 'Replace Certificate' : 'Choose Certificate' }}
                     </BaseButton>
                     <div v-if="form.cacCertificateUrl" class="mt-4 pt-4 border-t border-neutral-100">
-                       <span class="text-[10px] font-black text-green-600 uppercase tracking-widest flex items-center justify-center">
-                         <CheckCircleIcon class="w-3 h-3 mr-1" /> Document Verified locally
+                       <span class="text-[11px] font-black text-green-600 uppercase tracking-widest flex items-center justify-center">
+                         <CheckCircleIcon class="w-4 h-4 mr-1" /> Document Verified locally
                        </span>
                     </div>
                   </div>
@@ -188,9 +192,11 @@
                       </div>
                    </div>
 
-                   <div class="p-10 border-2 border-dashed border-neutral-100 rounded-[2.5rem] text-center space-y-6 group relative transition-all hover:border-secondary/20">
+                   <div class="p-10 border-2 border-dashed border-neutral-100 rounded-[2.5rem] text-center space-y-6 group relative transition-all hover:border-secondary/20 overflow-hidden">
                     <div v-if="form.llcDocsUrl" class="absolute inset-0 z-0">
-                      <div class="absolute inset-0 bg-secondary/5 z-0"></div>
+                      <embed v-if="isPdf(form.llcDocsUrl)" :src="form.llcDocsUrl + '#toolbar=0&navpanes=0&scrollbar=0'" class="w-full h-full opacity-20 pointer-events-none object-cover" />
+                      <img v-else :src="form.llcDocsUrl" class="w-full h-full object-cover opacity-20" />
+                      <div class="absolute inset-0 bg-secondary/10 backdrop-blur-[1px] z-10"></div>
                     </div>
                     <div class="relative z-10">
                       <div class="w-20 h-20 bg-secondary/5 rounded-[2rem] flex items-center justify-center mx-auto mb-4">
@@ -222,7 +228,7 @@
             <div v-if="currentStep === 6" class="space-y-6">
               <div class="space-y-6">
                 <div class="flex items-center justify-between">
-                   <h4 class="text-[10px] font-black text-secondary tracking-[0.2em] uppercase">Payout Account</h4>
+                   <h4 class="text-[11px] font-black text-secondary tracking-[0.2em] uppercase">Payout Account</h4>
                    <InfoTooltip text="We'll use this to send your wholesale commissions. Nigerian agents are paid via Paystack." />
                 </div>
                 <div class="grid md:grid-cols-2 gap-6">
@@ -280,7 +286,7 @@
                   <input :id="term.id" type="checkbox" v-model="form.agreements[term.id]" required class="peer appearance-none w-5 h-5 border-2 border-neutral-200 rounded-lg checked:bg-secondary checked:border-secondary transition-all cursor-pointer">
                   <CheckIcon class="absolute w-3 h-3 text-white left-1 opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" />
                 </div>
-                <label :for="term.id" class="text-[11px] text-neutral-400 font-medium leading-relaxed group-hover:text-primary-dark transition-colors">
+                <label :for="term.id" class="text-xs text-neutral-500 font-medium leading-relaxed group-hover:text-primary-dark transition-colors">
                   {{ term.label }}
                 </label>
               </div>
@@ -301,7 +307,7 @@
             </div>
             
             <div class="text-center pt-4">
-              <NuxtLink to="/auth/login" class="px-8 py-3 bg-neutral-50 hover:bg-neutral-100 text-[10px] font-black tracking-[0.2em] text-neutral-400 hover:text-primary-dark rounded-xl transition-all uppercase">Save & Exit Registration</NuxtLink>
+              <NuxtLink to="/auth/login" class="px-8 py-3 bg-neutral-50 hover:bg-neutral-100 text-[11px] font-black tracking-[0.2em] text-neutral-500 hover:text-primary-dark rounded-xl transition-all uppercase">Save & Exit Registration</NuxtLink>
             </div>
           </form>
         </div>
@@ -322,6 +328,7 @@ import {
 } from '@heroicons/vue/24/solid'
 import SelectInput from '~/components/ui/SelectInput.vue'
 import AnimatedInput from '~/components/ui/AnimatedInput.vue'
+import PhoneNumberInput from '~/components/ui/PhoneNumberInput.vue'
 import GoogleAddressAutocomplete from '~/components/ui/GoogleAddressAutocomplete.vue'
 import InfoTooltip from '~/components/ui/InfoTooltip.vue'
 import { useAuth } from '@/composables/modules/auth/useAuth'
@@ -342,6 +349,9 @@ const { banks, loadingBanks, verifyingAccount, fetchBanks, verifyAccount } = use
 const { showToast } = useCustomToast()
 const currentStep = ref(1)
 const sameAsPhone = ref(true)
+
+const isPdf = (url: string | null) => url ? url.toLowerCase().includes('.pdf') : false
+
 
 
 definePageMeta({
@@ -406,7 +416,7 @@ const submissionTerms = [
   { id: 'fraud', label: 'I agree to the Flybeth anti-fraud policy and document authenticity rules.' }
 ]
 
-const countries = ['Nigeria', 'United States', 'United Kingdom', 'Ghana', 'Kenya', 'South Africa', 'Canada']
+const countries = ['Nigeria', 'United States', 'United Kingdom', 'Ghana', 'Kenya', 'South Africa', 'Canada', 'Australia', 'UAE', 'Tanzania', 'Uganda', 'Rwanda']
 
 const perks = [
   { title: 'Global Flight Rates', desc: 'Secure net rates not available to the general public.' },
@@ -472,7 +482,7 @@ const handleFileUpload = async (event: any, type: 'image' | 'document', field: s
     const res = await uploadFile(file, type)
     if (res && res.data && res.data.url) {
       (form.value as any)[field + 'Url'] = res.data.url
-      showToast({ title: 'Success', message: 'Document uploaded and verified', toastType: 'success' })
+      // showToast({ title: 'Success', message: 'Document uploaded and verified', toastType: 'success' })
     }
   } catch (error) {
     console.error('Upload failed', error)
@@ -484,15 +494,36 @@ const handleFileUpload = async (event: any, type: 'image' | 'document', field: s
 const handleSubmit = async () => {
   try {
     const payload = {
-      ...form.value,
-      role: 'agent',
-      whatsappNumber: sameAsPhone.value ? form.value.phone : form.value.whatsappNumber
+      email: form.value.email,
+      password: form.value.password,
+      agencyName: form.value.agencyName,
+      registrationNumber: form.value.registrationNumber,
+      country: form.value.country,
+      businessAddress: form.value.businessAddress,
+      website: form.value.website,
+      firstName: form.value.firstName,
+      lastName: form.value.lastName,
+      phone: form.value.phone,
+      whatsappNumber: sameAsPhone.value ? form.value.phone : form.value.whatsappNumber,
+      idCardUrl: form.value.idCardUrl,
+      selfieUrl: form.value.selfieUrl,
+      cacCertificateUrl: form.value.cacCertificateUrl,
+      llcDocsUrl: form.value.llcDocsUrl,
+      ein: form.value.ein,
+      billingAddress: form.value.billingAddress,
+      bankAccountDetails: {
+        bankName: form.value.bankName,
+        bankCode: form.value.bankCode,
+        accountNumber: form.value.accountNumber,
+        accountHolder: form.value.accountHolder,
+      },
+      role: 'agent'
     }
     
     await register(payload)
     localStorage.setItem('verify_email', form.value.email)
     navigateTo({
-      path: '/auth/verify',
+      path: '/auth/success',
       query: { email: form.value.email }
     })
   } catch (error) {

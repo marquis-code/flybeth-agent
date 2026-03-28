@@ -4,7 +4,7 @@
     <nav class="bg-white border-b border-neutral-100 py-6">
       <div class="max-w-7xl mx-auto px-6 lg:px-10 flex justify-between items-center">
         <NuxtLink to="/help-center" class="flex items-center space-x-3 group">
-          <img src="/logo.png" class="w-auto h-10" alt="logo" />
+          <img src="@/assets/img/logo.png" class="w-auto h-10" alt="logo" />
         </NuxtLink>
         <NuxtLink to="/help-center" class="text-sm font-bold text-primary hover:text-primary-dark transition-colors flex items-center space-x-2">
           <ChevronLeftIcon class="h-4 w-4" />

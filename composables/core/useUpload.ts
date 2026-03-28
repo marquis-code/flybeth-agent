@@ -43,8 +43,13 @@ export const useUpload = () => {
         }
     }
 
+    const uploadImage = (file: File, folder?: string) => uploadFile(file, 'image', folder)
+    const uploadDocument = (file: File, folder?: string) => uploadFile(file, 'document', folder)
+
     return {
         uploading,
-        uploadFile
+        uploadFile,
+        uploadImage,
+        uploadDocument
     }
 }

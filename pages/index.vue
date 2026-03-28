@@ -9,13 +9,13 @@
       
       <div class="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
         <div class="flex flex-col items-center text-center max-w-4xl mx-auto space-y-10 reveal-1">
-          <div class="inline-flex items-center space-x-3 px-5 py-2 bg-white rounded-full border border-neutral-100 shadow-sm">
+          <!-- <div class="inline-flex items-center space-x-3 px-5 py-2 bg-white rounded-full border border-neutral-100 shadow-sm">
             <span class="relative flex h-2.5 w-2.5">
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
               <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-secondary"></span>
             </span>
             <span class="text-sm font-black text-primary-dark tracking-[0.2em]">Platform is live</span>
-          </div>
+          </div> -->
 
           <h1 class="text-6xl lg:text-8xl font-black text-primary-dark leading-[1.05] tracking-tighter">
             Scale your agency.<br />

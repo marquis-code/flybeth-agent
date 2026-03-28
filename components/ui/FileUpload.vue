@@ -3,7 +3,7 @@
     <label v-if="label" class="text-xs font-black text-primary-dark tracking-widest uppercase">{{ label }}</label>
     <div 
       class="relative group cursor-pointer"
-      @click="$refs.fileInput.click()"
+      @click="triggerFileInput"
       @dragover.prevent="isDragging = true"
       @dragleave.prevent="isDragging = false"
       @drop.prevent="handleDrop"
@@ -32,21 +32,38 @@
         </template>
         
         <template v-else>
-          <div class="flex items-center space-x-4 w-full">
-            <div class="w-12 h-12 bg-secondary/10 rounded-2xl flex items-center justify-center text-secondary shrink-0">
-                <DocumentIcon v-if="isDocument" class="w-6 h-6" />
-                <PhotoIcon v-else class="w-6 h-6" />
+          <div class="w-full relative group/preview rounded-2xl overflow-hidden">
+            <!-- PDF Document View -->
+            <div v-if="isPdfUrl" class="w-full flex items-center space-x-4 p-4 bg-white rounded-xl border border-neutral-100">
+                <div class="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center text-red-500 shrink-0">
+                    <DocumentIcon class="w-6 h-6" />
+                </div>
+                <div class="flex-grow min-w-0">
+                   <p class="text-sm font-bold text-primary-dark truncate">{{ fileName || 'Document' }}</p>
+                   <div class="flex items-center space-x-3 mt-1">
+                      <a :href="modelValue" target="_blank" class="text-[10px] text-secondary font-bold hover:underline uppercase tracking-wider">Preview</a>
+                   </div>
+                </div>
+                <button 
+                    class="p-2 bg-red-50 hover:bg-red-100 rounded-lg text-red-500 transition-colors"
+                    @click.stop="clearFile"
+                >
+                    <XMarkIcon class="w-5 h-5" />
+                </button>
             </div>
-            <div class="flex-grow min-w-0">
-               <p class="text-sm font-bold text-primary-dark truncate">{{ fileName || 'File selected' }}</p>
-               <p class="text-[10px] text-neutral-400 font-medium uppercase tracking-wider">File ready for upload</p>
+            
+            <!-- Image View -->
+            <div v-else class="w-full relative aspect-[2/1] rounded-xl overflow-hidden bg-neutral-100 shadow-inner">
+               <img :src="modelValue" class="w-full h-full object-cover" alt="Preview" />
+               <div class="absolute inset-0 bg-black/50 opacity-0 group-hover/preview:opacity-100 transition-all duration-300 flex items-center justify-center backdrop-blur-[2px]">
+                  <button 
+                      @click.stop="clearFile" 
+                      class="bg-white/10 hover:bg-red-500 text-white p-3 rounded-full transition-colors backdrop-blur-md border border-white/20 hover:border-red-500 hover:shadow-lg hover:shadow-red-500/20"
+                  >
+                      <XMarkIcon class="w-6 h-6" />
+                  </button>
+               </div>
             </div>
-            <button 
-                class="p-2 hover:bg-red-50 rounded-xl text-neutral-400 hover:text-red-500 transition-colors"
-                @click.stop="clearFile"
-            >
-                <XMarkIcon class="w-5 h-5" />
-            </button>
           </div>
         </template>
       </div>
@@ -96,6 +113,10 @@ const isDocument = computed(() => {
   return props.accept.includes('pdf') || props.accept.includes('doc')
 })
 
+const isPdfUrl = computed(() => {
+  return props.modelValue?.toLowerCase().includes('.pdf') || isDocument.value && fileName.value.toLowerCase().includes('.pdf')
+})
+
 const handleFileChange = (event: Event) => {
   const el = event.target as HTMLInputElement
   if (el.files && el.files[0]) {
@@ -118,5 +139,9 @@ const clearFile = () => {
   fileName.value = ''
   emit('update:modelValue', '')
   if (fileInput.value) fileInput.value.value = ''
+}
+
+const triggerFileInput = () => {
+  fileInput.value?.click()
 }
 </script>

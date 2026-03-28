@@ -6,11 +6,11 @@
       <div class="mb-16">
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
            <div class="space-y-2">
-             <h4 class="text-[10px] font-black text-secondary tracking-[0.4em] uppercase">Step {{ currentStep }} of 7</h4>
+             <h4 class="text-[11px] font-black text-secondary tracking-[0.4em] uppercase">Step {{ currentStep }} of 7</h4>
              <h1 class="text-4xl lg:text-5xl font-black text-primary-dark tracking-tighter">
-               {{ steps[currentStep - 1].title }}
+               {{ steps[currentStep - 1]?.title }}
              </h1>
-             <p class="text-neutral-400 font-medium max-w-xl">{{ steps[currentStep - 1].description }}</p>
+             <p class="text-neutral-500 font-medium max-w-xl">{{ steps[currentStep - 1]?.description }}</p>
            </div>
            
            <div class="flex items-center space-x-2">
@@ -63,7 +63,7 @@
                   <AnimatedInput v-model="form.businessRegistrationNumber" label="Registration Number" placeholder="e.g. RC 123456" required />
                </div>
                <div class="grid md:grid-cols-2 gap-8">
-                  <SelectInput v-model="form.country" label="Country" :options="['Nigeria', 'USA', 'UK', 'Ghana', 'Kenya', 'South Africa']" required />
+                  <SelectInput v-model="form.country" label="Country" :options="['Nigeria', 'USA', 'UK', 'Ghana', 'Kenya', 'South Africa', 'Canada', 'Australia', 'UAE', 'Tanzania', 'Uganda', 'Rwanda']" required />
                   <AnimatedInput v-model="form.website" label="Website / Social Media (Optional)" placeholder="https://" />
                </div>
                <div class="space-y-6">
@@ -77,8 +77,8 @@
           <div v-if="currentStep === 3" class="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
             <div class="p-8 bg-white rounded-[2.5rem] border border-neutral-100 shadow-sm space-y-10">
                <div class="grid md:grid-cols-2 gap-8">
-                  <AnimatedInput v-model="form.phone" label="Phone Number" placeholder="+234..." required />
-                  <AnimatedInput v-model="form.whatsappNumber" label="WhatsApp Number" placeholder="+234..." />
+                  <PhoneNumberInput v-model="form.phone" label="Phone Number" required />
+                  <PhoneNumberInput v-model="form.whatsappNumber" label="WhatsApp Number" />
                </div>
                <div class="p-6 bg-neutral-50 rounded-2xl border border-neutral-100 flex items-center space-x-4 cursor-pointer" @click="matchWhatsapp">
                   <div class="w-5 h-5 rounded-md border-2 border-neutral-200 flex items-center justify-center transition-colors" :class="form.whatsappNumber === form.phone ? 'bg-secondary border-secondary' : ''">
@@ -96,7 +96,8 @@
                   <FileUpload 
                     v-model="form.kycDocuments.idCard" 
                     label="Government Issued ID" 
-                    help-text="NIN, Voter's Card, or Passport"
+                    help-text="NIN, Voter's Card, or Passport (Image or PDF)"
+                    accept="image/*,application/pdf"
                     :loading="uploadingId"
                     @change="handleIdUpload"
                   />
@@ -104,6 +105,7 @@
                     v-model="form.kycDocuments.selfie" 
                     label="Live Selfie" 
                     help-text="Front-facing clear photo"
+                    accept="image/*,application/pdf"
                     :loading="uploadingSelfie"
                     @change="handleSelfieUpload"
                   />
@@ -111,7 +113,7 @@
                
                <div class="flex items-start space-x-4 p-6 bg-yellow-50 rounded-2xl border border-yellow-100 text-yellow-800">
                   <ShieldCheckIcon class="w-6 h-6 text-yellow-600 shrink-0" />
-                  <p class="text-[11px] font-medium leading-relaxed">
+                  <p class="text-sm font-medium leading-relaxed">
                     Flybeth takes security seriously. Your identity documents are encrypted and only used for verification. Ensure your ID is valid and the photo is clear.
                   </p>
                </div>
@@ -298,6 +300,7 @@ import {
 } from '@heroicons/vue/24/solid'
 import AnimatedInput from '~/components/ui/AnimatedInput.vue'
 import SelectInput from '~/components/ui/SelectInput.vue'
+import PhoneNumberInput from '~/components/ui/PhoneNumberInput.vue'
 import FileUpload from '~/components/ui/FileUpload.vue'
 import BaseButton from '~/components/ui/BaseButton.vue'
 import { useAuth } from '@/composables/modules/auth/useAuth'
