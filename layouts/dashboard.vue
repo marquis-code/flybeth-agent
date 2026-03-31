@@ -11,12 +11,16 @@
       </div>
       
       <nav class="mt-4 flex-grow px-6 space-y-2 relative z-10 pt-4">
-        <NuxtLink 
+        <component 
+          :is="item.isDisabledIfPending && user?.agentStatus === 'pending' ? 'div' : 'NuxtLink'"
           v-for="item in navigation" 
           :key="item.name" 
-          :to="item.href"
+          :to="item.isDisabledIfPending && user?.agentStatus === 'pending' ? undefined : item.href"
           class="flex items-center px-5 py-4 text-xs font-bold tracking-widest rounded-xl transition-all duration-300 group relative"
-          :class="[route.path === item.href ? 'bg-primary/5 text-primary font-black' : 'text-neutral-500 hover:text-primary hover:bg-gray-50']"
+          :class="[
+            route.path === item.href ? 'bg-primary/5 text-primary font-black' : 'text-neutral-500 hover:text-primary hover:bg-gray-50',
+            item.isDisabledIfPending && user?.agentStatus === 'pending' ? 'opacity-40 cursor-not-allowed grayscale' : 'cursor-pointer'
+          ]"
         >
           <component 
             :is="item.icon" 
@@ -25,7 +29,7 @@
           />
           {{ item.name }}
           <div v-if="route.path === item.href" class="ml-auto w-1.5 h-1.5 bg-primary rounded-full"></div>
-        </NuxtLink>
+        </component>
       </nav>
 
       <div class="p-6 border-t border-gray-100 space-y-4 bg-gray-50/50 mt-auto">
@@ -98,6 +102,22 @@
           :service-detail="navigationDetail"
         />
 
+        <!-- Verification/Review Banner -->
+        <div v-if="user?.agentStatus === 'pending'" class="bg-gradient-to-r from-secondary to-orange-500 p-4 lg:p-6 text-white flex flex-col sm:flex-row items-center justify-between shadow-lg shadow-secondary/20 relative z-30">
+          <div class="flex items-center space-x-4 mb-4 sm:mb-0">
+             <div class="w-12 h-12 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center shrink-0 border border-white/30">
+               <span class="text-2xl animate-bounce">⏳</span>
+             </div>
+             <div>
+               <h3 class="text-lg font-black tracking-tight leading-tight">Account Under Review</h3>
+               <p class="text-sm font-medium text-white/80">Our compliance team is currently verifying your documents. Full platform access will be granted shortly.</p>
+             </div>
+          </div>
+          <div class="hidden md:block px-6 py-2 bg-white/10 border border-white/20 rounded-full text-[10px] font-black uppercase tracking-[0.2em] whitespace-nowrap">
+             Priority Verification Node: Active
+          </div>
+        </div>
+
         <div class="p-8 lg:p-12 max-w-[1600px] mx-auto">
           <slot />
         </div>
@@ -107,17 +127,21 @@
     <!-- Mobile Sidedrawer Navigation -->
     <BaseSidedrawer :show="isMobileMenuOpen" title="Navigation" @close="isMobileMenuOpen = false">
       <div class="space-y-2">
-        <NuxtLink 
+        <component 
+          :is="item.isDisabledIfPending && user?.agentStatus === 'pending' ? 'div' : 'NuxtLink'"
           v-for="item in navigation" 
           :key="item.name" 
-          :to="item.href"
+          :to="item.isDisabledIfPending && user?.agentStatus === 'pending' ? undefined : item.href"
           @click="isMobileMenuOpen = false"
           class="flex items-center px-4 py-4 text-base font-medium rounded-xl transition-all"
-          :class="[route.path === item.href ? 'bg-primary/5 text-primary border-l-4 border-secondary' : 'text-neutral hover:bg-gray-50']"
+          :class="[
+            route.path === item.href ? 'bg-primary/5 text-primary border-l-4 border-secondary' : 'text-neutral hover:bg-gray-50',
+            item.isDisabledIfPending && user?.agentStatus === 'pending' ? 'opacity-40 cursor-not-allowed' : ''
+          ]"
         >
           <component :is="item.icon" class="h-6 w-6 mr-4" :class="[route.path === item.href ? 'text-primary' : 'text-neutral/40']" />
           {{ item.name }}
-        </NuxtLink>
+        </component>
       </div>
       
       <template #footer>
@@ -207,11 +231,11 @@ const navigationTitle = ref('')
 const navigationDetail = ref('')
 
 const navigation = [
-  { name: 'Overview', href: '/dashboard', icon: HomeIcon, detail: 'Accessing platform overview' },
-  { name: 'Bookings', href: '/dashboard/bookings', icon: TicketIcon, detail: 'Loading your bookings' },
-  { name: 'Travelers', href: '/dashboard/customers', icon: UsersIcon, detail: 'Loading traveler profiles' },
-  { name: 'Insights', href: '/dashboard/reports', icon: ChartBarIcon, detail: 'Loading performance data' },
-  { name: 'Settings', href: '/dashboard/settings', icon: Cog6ToothIcon, detail: 'Loading your settings' },
+  { name: 'Overview', href: '/dashboard', icon: HomeIcon, detail: 'Accessing platform overview', isDisabledIfPending: true },
+  { name: 'Bookings', href: '/dashboard/bookings', icon: TicketIcon, detail: 'Loading your bookings', isDisabledIfPending: true },
+  { name: 'Travelers', href: '/dashboard/customers', icon: UsersIcon, detail: 'Loading traveler profiles', isDisabledIfPending: true },
+  { name: 'Insights', href: '/dashboard/reports', icon: ChartBarIcon, detail: 'Loading performance data', isDisabledIfPending: true },
+  { name: 'Settings', href: '/dashboard/settings', icon: Cog6ToothIcon, detail: 'Loading your settings', isDisabledIfPending: true },
 ]
 
 const currentPageTitle = computed(() => {

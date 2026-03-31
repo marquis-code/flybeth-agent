@@ -2,22 +2,14 @@
   <div class="min-h-screen bg-[#FDFDFD] font-sans text-neutral-900 overflow-x-hidden selection:bg-primary selection:text-white">
 
     <!-- Immersive Hero Section -->
-    <section class="relative pt-40 pb-24 lg:pt-48 lg:pb-32 overflow-hidden bg-white">
+    <section class="relative pt-24 pb-20 md:pt-32 lg:pt-36 lg:pb-32 overflow-hidden bg-white">
       <!-- Decorative Background Elements -->
       <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
       <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-secondary/5 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/3 pointer-events-none"></div>
       
       <div class="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
-        <div class="flex flex-col items-center text-center max-w-4xl mx-auto space-y-10 reveal-1">
-          <!-- <div class="inline-flex items-center space-x-3 px-5 py-2 bg-white rounded-full border border-neutral-100 shadow-sm">
-            <span class="relative flex h-2.5 w-2.5">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-secondary"></span>
-            </span>
-            <span class="text-sm font-black text-primary-dark tracking-[0.2em]">Platform is live</span>
-          </div> -->
-
-          <h1 class="text-6xl lg:text-8xl font-black text-primary-dark leading-[1.05] tracking-tighter">
+        <div class="flex flex-col items-center text-center max-w-4xl mx-auto space-y-8 reveal-1">
+          <h1 class="text-6xl md:text-7xl lg:text-[5.5rem] font-black text-primary-dark leading-[1.02] tracking-tighter lg:tracking-[-0.04em]">
             Scale your agency.<br />
             <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-dark to-secondary">Without limits.</span>
           </h1>

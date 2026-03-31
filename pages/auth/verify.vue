@@ -104,7 +104,7 @@ const handleVerify = async () => {
       otp: otp.value
     })
     localStorage.removeItem('verify_email')
-    await navigateTo('/dashboard', { replace: true })
+    await navigateTo('/auth/login', { replace: true })
   } catch (error) {
     // Error handled in useAuth
   }

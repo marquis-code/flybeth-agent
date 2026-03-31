@@ -1,22 +1,27 @@
 <template>
-  <div class="space-y-12">
+  <div class="space-y-12 relative">
     <!-- Verification Status Banner -->
-    <div v-if="user?.agentStatus !== 'approved'" class="bg-white border-b border-neutral-100 p-6 lg:px-10 sticky top-0 z-40 backdrop-blur-xl bg-white/80">
-      <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-        <div class="flex items-center space-x-6">
-          <div :class="['w-14 h-14 rounded-[1.25rem] flex items-center justify-center shrink-0 shadow-sm', statusIconBg]">
-            <component :is="statusIcon" class="w-7 h-7" :class="statusIconColor" />
+    <div v-if="user?.agentStatus === 'pending'" class="absolute inset-0 z-50 backdrop-blur-[6px] bg-white/10 flex items-center justify-center pointer-events-auto rounded-[3rem]">
+       <div class="bg-white/80 backdrop-blur-2xl p-10 rounded-[3rem] border border-white shadow-2xl text-center max-w-lg mx-auto transform -translate-y-20">
+          <div class="w-20 h-20 bg-secondary/10 rounded-[2rem] flex items-center justify-center mx-auto mb-6">
+             <span class="text-4xl animate-pulse">🔒</span>
           </div>
-          <div>
-            <h4 class="text-lg font-black text-primary-dark tracking-tight">Application Status: <span class="uppercase text-secondary ml-1">{{ user?.agentStatus || 'pending' }}</span></h4>
-            <p class="text-sm text-neutral-400 font-medium max-w-xl leading-relaxed">{{ statusMessage }}</p>
+          <h2 class="text-3xl font-black text-primary-dark tracking-tighter mb-4">Features Locked</h2>
+          <p class="text-neutral-500 font-medium leading-relaxed">
+            Your workspace is being prepared. Once our team approves your application, you'll have full access to global flight rates and luxury stay inventory.
+          </p>
+          <div class="mt-8 pt-8 border-t border-neutral-100 flex items-center justify-center space-x-6">
+             <div class="text-center">
+                <p class="text-[10px] font-black uppercase tracking-widest text-neutral-400 mb-1">Status</p>
+                <p class="text-xs font-black text-secondary uppercase tracking-widest">Under Review</p>
+             </div>
+             <div class="h-8 w-[1px] bg-neutral-100"></div>
+             <div class="text-center">
+                <p class="text-[10px] font-black uppercase tracking-widest text-neutral-400 mb-1">Estimated Time</p>
+                <p class="text-xs font-black text-primary-dark uppercase tracking-widest">24-48 Hours</p>
+             </div>
           </div>
-        </div>
-        <div class="flex items-center space-x-4">
-          <BaseButton v-if="user?.agentStatus === 'pending'" size="sm" variant="secondary">Complete Profile</BaseButton>
-          <BaseButton size="sm" variant="outline" class="border-neutral-200">Contact Support</BaseButton>
-        </div>
-      </div>
+       </div>
     </div>
     <!-- Hero / Welcome Section -->
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 relative">
