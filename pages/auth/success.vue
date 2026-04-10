@@ -24,7 +24,7 @@
            </div>
         </div>
 
-        <h1 class="text-3xl md:text-4xl font-black text-primary-dark tracking-tighter mb-4">
+        <h1 class="text-3xl md:text-4xl  text-primary-dark tracking-tighter mb-4">
           Welcome to the family!
         </h1>
         
@@ -38,7 +38,7 @@
                  <EnvelopeIcon class="w-5 h-5 text-orange-500" />
               </div>
               <div>
-                 <h4 class="text-sm font-black text-primary-dark">Keep an eye on your inbox</h4>
+                 <h4 class="text-sm  text-primary-dark">Keep an eye on your inbox</h4>
                  <p class="text-[13px] text-neutral-400 mt-1 leading-relaxed">
                    Flybeth is currently in an exclusive preview phase. We will reach out personally via email the absolute moment we launch!
                  </p>

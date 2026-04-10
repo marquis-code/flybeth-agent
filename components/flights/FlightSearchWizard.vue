@@ -11,7 +11,7 @@
             v-for="type in tripTypes" 
             :key="type.id"
             @click="tripType = type.id"
-            class="px-6 py-2.5 rounded-full text-xs font-black tracking-widest transition-all duration-300"
+            class="px-6 py-2.5 rounded-full text-xs  tracking-widest transition-all duration-300"
             :class="tripType === type.id ? 'bg-primary-dark text-white shadow-lg' : 'text-gray-500 hover:text-primary'"
           >
             {{ type.label.toUpperCase() }}
@@ -34,12 +34,12 @@
               <div v-if="showTravelers" class="absolute top-full right-0 mt-3 w-80 bg-white border border-gray-200 shadow-2xl rounded-[2rem] z-[100] p-8 space-y-8 animate-in fade-in slide-in-from-top-4">
                 <div v-for="cat in travelerCategories" :key="cat.id" class="flex items-center justify-between">
                   <div>
-                    <p class="text-sm font-black text-gray-900">{{ cat.label }}</p>
+                    <p class="text-sm  text-gray-900">{{ cat.label }}</p>
                     <p class="text-[10px] font-bold text-gray-400 mt-0.5">{{ cat.description }}</p>
                   </div>
                   <div class="flex items-center space-x-4">
                     <button @click="updateTravelerCount(cat.id, -1)" class="w-10 h-10 rounded-xl border border-gray-200 flex items-center justify-center hover:bg-gray-50 disabled:opacity-20 transition-all">-</button>
-                    <span class="text-lg font-black w-6 text-center">{{ travelerCounts[cat.id as keyof typeof travelerCounts] }}</span>
+                    <span class="text-lg  w-6 text-center">{{ travelerCounts[cat.id as keyof typeof travelerCounts] }}</span>
                     <button @click="updateTravelerCount(cat.id, 1)" class="w-10 h-10 rounded-xl border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-all">+</button>
                   </div>
                 </div>
@@ -64,7 +64,7 @@
                 <button 
                   v-for="cab in cabinClasses" :key="cab.id" 
                   @click="selectCabin(cab)"
-                  class="w-full text-left px-5 py-3.5 text-xs font-black tracking-widest rounded-xl transition-all"
+                  class="w-full text-left px-5 py-3.5 text-xs  tracking-widest rounded-xl transition-all"
                   :class="cabinClass === cab.id ? 'bg-primary-dark text-white' : 'text-gray-500 hover:bg-gray-50'"
                 >
                   {{ cab.label.toUpperCase() }}
@@ -84,8 +84,8 @@
         >
           <div v-if="tripType === 'multi'" class="lg:col-span-12 mb-2">
             <div class="flex items-center justify-between">
-              <h4 class="text-[10px] font-black text-primary uppercase tracking-[0.2em]">Flight {{ index + 1 }}</h4>
-              <button v-if="flightLegs.length > 1" @click="removeLeg(index)" class="text-[10px] font-black text-red-500 uppercase tracking-widest hover:underline">Remove</button>
+              <h4 class="text-[10px]  text-primary uppercase tracking-[0.2em]">Flight {{ index + 1 }}</h4>
+              <button v-if="flightLegs.length > 1" @click="removeLeg(index)" class="text-[10px]  text-red-500 uppercase tracking-widest hover:underline">Remove</button>
             </div>
           </div>
 
@@ -117,12 +117,12 @@
                     <PaperAirplaneIcon class="h-6 w-6" />
                   </div>
                   <div class="text-left">
-                    <p class="text-sm font-black text-gray-900 group-hover:text-primary transition-colors">{{ airport.address?.cityName }}, {{ airport.address?.countryName }}</p>
+                    <p class="text-sm  text-gray-900 group-hover:text-primary transition-colors">{{ airport.address?.cityName }}, {{ airport.address?.countryName }}</p>
                     <p class="text-[10px] font-bold text-gray-400">{{ airport.name }}</p>
                   </div>
                 </div>
                 <div class="text-right">
-                  <span class="px-2 py-1 bg-gray-100 rounded text-[10px] font-black text-gray-500 group-hover:bg-primary group-hover:text-white transition-colors">{{ airport.iataCode }}</span>
+                  <span class="px-2 py-1 bg-gray-100 rounded text-[10px]  text-gray-500 group-hover:bg-primary group-hover:text-white transition-colors">{{ airport.iataCode }}</span>
                 </div>
               </button>
             </div>
@@ -163,12 +163,12 @@
                     <PaperAirplaneIcon class="h-6 w-6" />
                   </div>
                   <div class="text-left">
-                    <p class="text-sm font-black text-gray-900 group-hover:text-secondary transition-colors">{{ airport.address?.cityName }}, {{ airport.address?.countryName }}</p>
+                    <p class="text-sm  text-gray-900 group-hover:text-secondary transition-colors">{{ airport.address?.cityName }}, {{ airport.address?.countryName }}</p>
                     <p class="text-[10px] font-bold text-gray-400">{{ airport.name }}</p>
                   </div>
                 </div>
                 <div class="text-right">
-                  <span class="px-2 py-1 bg-gray-100 rounded text-[10px] font-black text-gray-500 group-hover:bg-secondary group-hover:text-white transition-colors">{{ airport.iataCode }}</span>
+                  <span class="px-2 py-1 bg-gray-100 rounded text-[10px]  text-gray-500 group-hover:bg-secondary group-hover:text-white transition-colors">{{ airport.iataCode }}</span>
                 </div>
               </button>
             </div>
@@ -193,7 +193,7 @@
         <button 
           v-if="tripType === 'multi' && flightLegs.length < 5"
           @click="addLeg"
-          class="flex items-center space-x-3 text-xs font-black tracking-[0.2em] text-primary hover:text-primary-dark transition-all group"
+          class="flex items-center space-x-3 text-xs  tracking-[0.2em] text-primary hover:text-primary-dark transition-all group"
         >
           <div class="w-8 h-8 rounded-full border-2 border-primary flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all">
             <PlusIcon class="h-4 w-4" />
@@ -207,7 +207,7 @@
           :loading="isSearching" 
           variant="primary" 
           size="lg" 
-          class="px-12 h-[58px] rounded-[1.5rem] font-black tracking-[0.2em] text-xs shadow-2xl shadow-primary/20 hover:scale-[1.05] active:scale-95 transition-all"
+          class="px-12 h-[58px] rounded-[1.5rem]  tracking-[0.2em] text-xs shadow-2xl shadow-primary/20 hover:scale-[1.05] active:scale-95 transition-all"
         >
           <MagnifyingGlassIcon class="h-5 w-5 mr-3" />
           SEARCH FLIGHTS
@@ -219,10 +219,10 @@
     <Transition name="fade">
       <div v-if="flightResults.length > 0" class="border-t border-gray-200 bg-gray-50/50 p-8 lg:p-12">
         <div class="flex items-center justify-between mb-10">
-          <h3 class="text-xl font-black text-gray-900 tracking-tight">Available Departures</h3>
+          <h3 class="text-xl  text-gray-900 tracking-tight">Available Departures</h3>
           <div class="flex items-center space-x-2 text-xs font-bold text-gray-500">
             <span>Sorted by</span>
-            <span class="text-primary font-black">Best value</span>
+            <span class="text-primary ">Best value</span>
           </div>
         </div>
         
@@ -233,7 +233,7 @@
             class="bg-white border border-gray-200 rounded-[2rem] p-8 hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 group relative overflow-hidden"
           >
             <!-- Badge -->
-            <div class="absolute top-0 right-10 px-4 py-1.5 bg-secondary text-[8px] font-black text-white rounded-b-xl tracking-widest uppercase shadow-sm">Cheapest</div>
+            <div class="absolute top-0 right-10 px-4 py-1.5 bg-secondary text-[8px]  text-white rounded-b-xl tracking-widest uppercase shadow-sm">Cheapest</div>
 
             <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-10">
               <div class="flex items-center space-x-8 flex-1">
@@ -243,12 +243,12 @@
                 
                 <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
                   <div class="text-left">
-                    <p class="text-2xl font-black text-gray-900">{{ flight.departureTime || '09:00' }}</p>
-                    <p class="text-[10px] font-black tracking-[0.2em] text-gray-400 mt-1 uppercase">{{ flight.origin || 'ABC' }}</p>
+                    <p class="text-2xl  text-gray-900">{{ flight.departureTime || '09:00' }}</p>
+                    <p class="text-[10px]  tracking-[0.2em] text-gray-400 mt-1 uppercase">{{ flight.origin || 'ABC' }}</p>
                   </div>
                   
                   <div class="flex flex-col items-center justify-center relative">
-                    <p class="text-[9px] font-black tracking-[0.3em] text-gray-300 uppercase mb-4">6h 45m • Direct</p>
+                    <p class="text-[9px]  tracking-[0.3em] text-gray-300 uppercase mb-4">6h 45m • Direct</p>
                     <div class="w-full h-px bg-gray-100 relative mb-4">
                       <div class="absolute top-1/2 left-0 -translate-y-1/2 w-2 h-2 rounded-full border-2 border-gray-200 bg-white"></div>
                       <div class="absolute top-1/2 right-0 -translate-y-1/2 w-2 h-2 rounded-full border-2 border-gray-200 bg-white"></div>
@@ -260,8 +260,8 @@
                   </div>
 
                   <div class="text-right">
-                    <p class="text-2xl font-black text-gray-900">{{ flight.arrivalTime || '15:45' }}</p>
-                    <p class="text-[10px] font-black tracking-[0.2em] text-gray-400 mt-1 uppercase">{{ flight.destination || 'XYZ' }}</p>
+                    <p class="text-2xl  text-gray-900">{{ flight.arrivalTime || '15:45' }}</p>
+                    <p class="text-[10px]  tracking-[0.2em] text-gray-400 mt-1 uppercase">{{ flight.destination || 'XYZ' }}</p>
                   </div>
                 </div>
               </div>
@@ -269,9 +269,9 @@
               <div class="flex items-center justify-between lg:flex-col lg:items-end lg:justify-center border-t lg:border-t-0 lg:border-l border-gray-100 pt-8 lg:pt-0 lg:pl-10 shrink-0 space-y-2">
                 <div class="text-left lg:text-right">
                   <p class="text-sm font-bold text-gray-400 line-through">${{ (flight.price * 1.2).toFixed(2) }}</p>
-                  <p class="text-4xl font-black text-primary-dark tracking-tighter">${{ flight.price?.toFixed(2) }}</p>
+                  <p class="text-4xl  text-primary-dark tracking-tighter">${{ flight.price?.toFixed(2) }}</p>
                 </div>
-                <BaseButton variant="primary" class="rounded-xl px-8 h-12 text-[10px] font-black tracking-widest shadow-lg active:scale-95 transition-all">SELECT FLIGHT</BaseButton>
+                <BaseButton variant="primary" class="rounded-xl px-8 h-12 text-[10px]  tracking-widest shadow-lg active:scale-95 transition-all">SELECT FLIGHT</BaseButton>
               </div>
             </div>
           </div>

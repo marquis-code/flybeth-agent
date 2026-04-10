@@ -3,7 +3,7 @@
     <!-- Header Actions -->
     <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-8 pb-4 border-b border-gray-200">
       <div class="space-y-1">
-        <h2 class="text-4xl font-black text-primary-dark tracking-tight">Manage reservations</h2>
+        <h2 class="text-4xl  text-primary-dark tracking-tight">Manage reservations</h2>
         <p class="text-neutral/40 font-bold tracking-widest text-xs uppercase">Track and manage your bookings</p>
       </div>
       <BaseButton @click="showWizard = !showWizard" variant="primary" class="shadow-sm py-4 px-10 border border-primary/20">
@@ -26,7 +26,7 @@
             v-for="wt in wizardTabs"
             :key="wt.name"
             @click="wizardTab = wt.name"
-            class="px-5 py-2 text-xs font-black tracking-wider rounded-full border transition-all"
+            class="px-5 py-2 text-xs  tracking-wider rounded-full border transition-all"
             :class="wizardTab === wt.name ? 'bg-primary-dark text-white border-primary-dark' : 'bg-white text-neutral-500 border-neutral-200 hover:border-primary/30 hover:text-primary'"
           >
             {{ wt.label }}
@@ -45,7 +45,7 @@
         :class="activeTab === tab.name ? 'bg-primary-dark text-white border border-primary-dark scale-105' : 'text-neutral/40 hover:text-primary hover:bg-primary/5'"
       >
         <component :is="tab.icon" class="h-4 w-4 transition-transform group-hover:scale-110" />
-        <span class="text-sm font-black tracking-widest">{{ tab.label }}</span>
+        <span class="text-sm  tracking-widest">{{ tab.label }}</span>
       </button>
     </div>
 
@@ -53,7 +53,7 @@
     <BaseCard :padding="false" class="border border-gray-200 shadow-sm overflow-hidden">
       <div class="p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-end bg-white relative">
         <div class="lg:col-span-5 relative group">
-          <label class="text-sm font-black tracking-widest text-neutral/40 mb-3 block px-1 uppercase">Search all bookings</label>
+          <label class="text-sm  tracking-widest text-neutral/40 mb-3 block px-1 uppercase">Search all bookings</label>
           <div class="relative">
             <MagnifyingGlassIcon class="absolute left-5 top-1/2 -translate-y-1/2 h-5 w-5 text-neutral/30 group-focus-within:text-primary transition-colors" />
             <input 
@@ -64,7 +64,7 @@
           </div>
         </div>
         <div class="lg:col-span-3">
-          <label class="text-sm font-black tracking-widest text-neutral/40 mb-3 block px-1 uppercase">Booking status</label>
+          <label class="text-sm  tracking-widest text-neutral/40 mb-3 block px-1 uppercase">Booking status</label>
           <select class="w-full px-6 py-4 bg-gray-50 border-none rounded-3xl text-sm font-bold text-primary-dark focus:ring-4 focus:ring-primary/5 outline-none appearance-none cursor-pointer">
             <option>All operations</option>
             <option>Confirmed</option>
@@ -74,7 +74,7 @@
           </select>
         </div>
         <div class="lg:col-span-2">
-          <label class="text-sm font-black tracking-widest text-neutral/40 mb-3 block px-1 uppercase">Sort by</label>
+          <label class="text-sm  tracking-widest text-neutral/40 mb-3 block px-1 uppercase">Sort by</label>
           <select class="w-full px-6 py-4 bg-gray-50 border-none rounded-3xl text-sm font-bold text-primary-dark focus:ring-4 focus:ring-primary/5 outline-none appearance-none cursor-pointer">
             <option>Newest first</option>
             <option>Oldest first</option>
@@ -82,7 +82,7 @@
           </select>
         </div>
         <div class="lg:col-span-2">
-          <BaseButton variant="outline" block class="h-[52px] border-gray-200 font-black">
+          <BaseButton variant="outline" block class="h-[52px] border-gray-200 ">
             Full filters
           </BaseButton>
         </div>
@@ -94,7 +94,7 @@
       <div class="flex items-center justify-between px-4">
         <div class="flex items-center space-x-2">
           <div class="w-2 h-2 bg-secondary rounded-full animate-pulse"></div>
-          <span class="text-sm font-black tracking-widest text-neutral/40 uppercase">Active bookings: {{ filteredBookings.length }} records</span>
+          <span class="text-sm  tracking-widest text-neutral/40 uppercase">Active bookings: {{ filteredBookings.length }} records</span>
         </div>
         <div class="flex items-center space-x-3">
           <button class="p-3 bg-white rounded-2xl border border-gray-200 text-neutral/40 hover:text-primary hover:border-primary/20 transition-all shadow-sm">
@@ -111,7 +111,7 @@
           <table class="w-full text-left">
             <thead>
               <tr class="bg-gray-50/50 border-b border-gray-200">
-                <th v-for="header in headers" :key="header.key" class="px-10 py-6 text-sm font-black tracking-widest text-neutral/40">
+                <th v-for="header in headers" :key="header.key" class="px-10 py-6 text-sm  tracking-widest text-neutral/40">
                   {{ header.label }}
                 </th>
               </tr>
@@ -119,7 +119,7 @@
             <tbody class="divide-y divide-gray-50">
               <tr v-for="item in filteredBookings" :key="item.id" class="hover:bg-primary/[0.02] transition-colors group">
                 <td class="px-10 py-8">
-                  <span class="font-mono text-[11px] font-black text-primary/40 tracking-wider group-hover:text-primary transition-colors cursor-copy">{{ item.reference }}</span>
+                  <span class="font-mono text-[11px]  text-primary/40 tracking-wider group-hover:text-primary transition-colors cursor-copy">{{ item.reference }}</span>
                 </td>
                 <td class="px-10 py-8">
                   <div class="flex items-center space-x-5">
@@ -129,25 +129,25 @@
                       <component :is="getTypeIcon(item.service)" class="h-6 w-6 relative z-10" />
                     </div>
                     <div class="flex flex-col">
-                      <span class="font-black text-primary-dark group-hover:underline cursor-pointer decoration-secondary decoration-2 underline-offset-4">{{ item.service }}</span>
+                      <span class=" text-primary-dark group-hover:underline cursor-pointer decoration-secondary decoration-2 underline-offset-4">{{ item.service }}</span>
                       <span class="text-sm text-neutral/30 font-bold mt-1">Standard booking</span>
                     </div>
                   </div>
                 </td>
                 <td class="px-10 py-8">
                   <div class="flex flex-col">
-                    <span class="font-black text-primary-dark">{{ item.customer }}</span>
+                    <span class=" text-primary-dark">{{ item.customer }}</span>
                     <span class="text-sm text-neutral/30 font-bold mt-1">{{ item.email }}</span>
                   </div>
                 </td>
                 <td class="px-10 py-8">
-                  <span class="px-5 py-1.5 rounded-full text-[9px] font-black tracking-[0.15em] border border-current transition-all" :class="statusClass(item.status)">
+                  <span class="px-5 py-1.5 rounded-full text-[9px]  tracking-[0.15em] border border-current transition-all" :class="statusClass(item.status)">
                     {{ item.status }}
                   </span>
                 </td>
                 <td class="px-10 py-8 text-right">
                   <div class="flex flex-col items-end">
-                    <span class=" font-black text-primary-dark text-[22px] tracking-tighter">${{ item.amount }}</span>
+                    <span class="  text-primary-dark text-[22px] tracking-tighter">${{ item.amount }}</span>
                     <span class="text-sm text-neutral/30 font-bold mt-0.5">{{ item.date }}</span>
                   </div>
                 </td>
@@ -171,22 +171,22 @@
           <div class="absolute -top-10 -right-10 w-40 h-40 bg-secondary/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-1000"></div>
           <div class="relative z-10 space-y-8">
             <div class="flex items-center justify-between">
-              <h4 class="text-[11px] font-black tracking-[0.2em] text-white/40">Booking status</h4>
-              <span class="px-4 py-1.5 bg-secondary/20 text-secondary text-sm font-black tracking-widest rounded-full border border-secondary/30">
+              <h4 class="text-[11px]  tracking-[0.2em] text-white/40">Booking status</h4>
+              <span class="px-4 py-1.5 bg-secondary/20 text-secondary text-sm  tracking-widest rounded-full border border-secondary/30">
                 Verified
               </span>
             </div>
             <div class="space-y-2">
               <p class="text-xs font-bold text-white/60">{{ selectedBooking.service }}</p>
-              <h3 class="text-4xl  font-black tracking-tight leading-none">{{ selectedBooking.customer }}</h3>
+              <h3 class="text-4xl   tracking-tight leading-none">{{ selectedBooking.customer }}</h3>
             </div>
             <div class="pt-6 border-t border-white/10 flex items-center justify-between">
               <div>
-                <p class="text-[9px] font-black tracking-widest text-white/30 uppercase">Total revenue</p>
-                <p class="text-3xl font-black text-secondary">${{ selectedBooking.amount }}</p>
+                <p class="text-[9px]  tracking-widest text-white/30 uppercase">Total revenue</p>
+                <p class="text-3xl  text-secondary">${{ selectedBooking.amount }}</p>
               </div>
               <div class="text-right">
-                <p class="text-[9px] font-black tracking-widest text-white/30">Timeline</p>
+                <p class="text-[9px]  tracking-widest text-white/30">Timeline</p>
                 <p class="text-sm font-bold">{{ selectedBooking.date }}</p>
               </div>
             </div>
@@ -196,45 +196,45 @@
         <!-- Technical Details Grid -->
         <div class="grid grid-cols-2 gap-8">
           <div class="space-y-2">
-            <p class="text-sm font-black text-neutral/30 tracking-widest">Booking reference</p>
-            <p class="text-sm font-black text-primary-dark font-mono tracking-widest">FB-XM9283-{{ selectedBooking.id }}</p>
+            <p class="text-sm  text-neutral/30 tracking-widest">Booking reference</p>
+            <p class="text-sm  text-primary-dark font-mono tracking-widest">FB-XM9283-{{ selectedBooking.id }}</p>
           </div>
           <div class="space-y-2 text-right">
-            <p class="text-sm font-black text-neutral/30 tracking-widest">Booking source</p>
-            <p class="text-sm font-black text-primary-dark">Online booking</p>
+            <p class="text-sm  text-neutral/30 tracking-widest">Booking source</p>
+            <p class="text-sm  text-primary-dark">Online booking</p>
           </div>
           <div class="space-y-2">
-            <p class="text-sm font-black text-neutral/30 tracking-widest">Customer tier</p>
-            <p class="text-sm font-black text-secondary">Premium</p>
+            <p class="text-sm  text-neutral/30 tracking-widest">Customer tier</p>
+            <p class="text-sm  text-secondary">Premium</p>
           </div>
           <div class="space-y-2 text-right">
-            <p class="text-sm font-black text-neutral/30 tracking-widest">Last updated</p>
-            <p class="text-sm font-black text-primary-dark">{{ new Date().toLocaleTimeString() }}</p>
+            <p class="text-sm  text-neutral/30 tracking-widest">Last updated</p>
+            <p class="text-sm  text-primary-dark">{{ new Date().toLocaleTimeString() }}</p>
           </div>
         </div>
 
         <!-- Action Grid -->
         <div class="space-y-6">
-          <h4 class="text-xs font-black tracking-widest text-primary-dark px-1 border-l-4 border-secondary ml-1">Actions</h4>
+          <h4 class="text-xs  tracking-widest text-primary-dark px-1 border-l-4 border-secondary ml-1">Actions</h4>
           <div class="grid grid-cols-3 gap-4">
             <button class="flex flex-col items-center justify-center p-6 bg-gray-50 hover:bg-primary-dark hover:text-white rounded-[2rem] transition-all duration-300 group">
               <PrinterIcon class="h-6 w-6 mb-3 text-primary group-hover:text-secondary" />
-              <span class="text-[9px] font-black">Print</span>
+              <span class="text-[9px] ">Print</span>
             </button>
             <button class="flex flex-col items-center justify-center p-6 bg-gray-50 hover:bg-primary-dark hover:text-white rounded-[2rem] transition-all duration-300 group">
               <EnvelopeIcon class="h-6 w-6 mb-3 text-blue-500 group-hover:text-white" />
-              <span class="text-[9px] font-black">Share</span>
+              <span class="text-[9px] ">Share</span>
             </button>
             <button class="flex flex-col items-center justify-center p-6 bg-gray-50 hover:bg-red-500 hover:text-white rounded-[2rem] transition-all duration-300 group">
               <XMarkIcon class="h-6 w-6 mb-3 text-red-500 group-hover:text-white" />
-              <span class="text-[9px] font-black">Cancel</span>
+              <span class="text-[9px] ">Cancel</span>
             </button>
           </div>
         </div>
 
         <!-- Agent Commentary -->
         <div class="p-8 bg-secondary/5 border-l-8 border-secondary rounded-r-[2rem]">
-          <p class="text-sm font-black text-secondary tracking-[0.2em] mb-2">Internal note</p>
+          <p class="text-sm  text-secondary tracking-[0.2em] mb-2">Internal note</p>
           <p class="text-sm text-primary-dark font-medium leading-relaxed">
             "Priority client. Traveler requires express check-in and private lounge access for the London leg. Ensure all PNRs are synced with traveler's mobile app."
           </p>

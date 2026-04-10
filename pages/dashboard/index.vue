@@ -6,19 +6,19 @@
           <div class="w-20 h-20 bg-secondary/10 rounded-[2rem] flex items-center justify-center mx-auto mb-6">
              <span class="text-4xl animate-pulse">🔒</span>
           </div>
-          <h2 class="text-3xl font-black text-primary-dark tracking-tighter mb-4">Features Locked</h2>
+          <h2 class="text-3xl  text-primary-dark tracking-tighter mb-4">Features Locked</h2>
           <p class="text-neutral-500 font-medium leading-relaxed">
             Your workspace is being prepared. Once our team approves your application, you'll have full access to global flight rates and luxury stay inventory.
           </p>
           <div class="mt-8 pt-8 border-t border-neutral-100 flex items-center justify-center space-x-6">
              <div class="text-center">
-                <p class="text-[10px] font-black uppercase tracking-widest text-neutral-400 mb-1">Status</p>
-                <p class="text-xs font-black text-secondary uppercase tracking-widest">Under Review</p>
+                <p class="text-[10px]  uppercase tracking-widest text-neutral-400 mb-1">Status</p>
+                <p class="text-xs  text-secondary uppercase tracking-widest">Under Review</p>
              </div>
              <div class="h-8 w-[1px] bg-neutral-100"></div>
              <div class="text-center">
-                <p class="text-[10px] font-black uppercase tracking-widest text-neutral-400 mb-1">Estimated Time</p>
-                <p class="text-xs font-black text-primary-dark uppercase tracking-widest">24-48 Hours</p>
+                <p class="text-[10px]  uppercase tracking-widest text-neutral-400 mb-1">Estimated Time</p>
+                <p class="text-xs  text-primary-dark uppercase tracking-widest">24-48 Hours</p>
              </div>
           </div>
        </div>

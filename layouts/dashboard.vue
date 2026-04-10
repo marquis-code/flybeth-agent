@@ -5,8 +5,8 @@
       <div class="p-8 pb-10 flex items-center space-x-4 relative z-10 border-b border-gray-100">
         <img src="@/assets/img/logo.png" class="h-10 w-auto" alt="Flybeth" />
         <div class="flex flex-col">
-          <span class="text-xl font-black text-primary-dark tracking-tight leading-tight">flybeth</span>
-          <span class="text-sm text-primary font-black tracking-[0.2em]">Agent portal</span>
+          <span class="text-xl  text-primary-dark tracking-tight leading-tight">flybeth</span>
+          <span class="text-sm text-primary  tracking-[0.2em]">Agent portal</span>
         </div>
       </div>
       
@@ -18,7 +18,7 @@
           :to="item.isDisabledIfPending && user?.agentStatus === 'pending' ? undefined : item.href"
           class="flex items-center px-5 py-4 text-xs font-bold tracking-widest rounded-xl transition-all duration-300 group relative"
           :class="[
-            route.path === item.href ? 'bg-primary/5 text-primary font-black' : 'text-neutral-500 hover:text-primary hover:bg-gray-50',
+            route.path === item.href ? 'bg-primary/5 text-primary ' : 'text-neutral-500 hover:text-primary hover:bg-gray-50',
             item.isDisabledIfPending && user?.agentStatus === 'pending' ? 'opacity-40 cursor-not-allowed grayscale' : 'cursor-pointer'
           ]"
         >
@@ -34,7 +34,7 @@
 
       <div class="p-6 border-t border-gray-100 space-y-4 bg-gray-50/50 mt-auto">
         <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary font-black">
+          <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary ">
             {{ user?.firstName?.[0] || 'A' }}{{ user?.lastName?.[0] || '' }}
           </div>
           <div class="flex flex-col min-w-0">
@@ -60,15 +60,15 @@
             <Bars3Icon class="h-6 w-6" />
           </button>
           <div class="space-y-0.5">
-            <h1 class="text-3xl font-black text-primary-dark tracking-tight capitalize">{{ currentPageTitle }}</h1>
-            <p class="text-[10px] text-primary/60 font-black uppercase tracking-[0.2em] hidden sm:block">Flybeth Agent Intelligence Portal</p>
+            <h1 class="text-3xl  text-primary-dark tracking-tight capitalize">{{ currentPageTitle }}</h1>
+            <p class="text-[10px] text-primary/60  uppercase tracking-[0.2em] hidden sm:block">Flybeth Agent Intelligence Portal</p>
           </div>
         </div>
 
         <div class="flex items-center space-x-6">
           <div class="hidden md:flex items-center space-x-8 mr-4">
             <div class="text-right">
-              <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-0.5">System Status</p>
+              <p class="text-[9px]  text-gray-400 uppercase tracking-widest mb-0.5">System Status</p>
               <div class="flex items-center justify-end space-x-2">
                 <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
                 <span class="text-[10px] font-bold text-gray-900">Live API Node Active</span>
@@ -79,7 +79,7 @@
           <button @click="isSearchModalOpen = true" class="hidden sm:flex items-center bg-gray-50 hover:bg-white rounded-2xl px-6 py-3.5 transition-all duration-300 w-48 lg:w-72 text-left border border-gray-200 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/10 group">
             <MagnifyingGlassIcon class="h-4 w-4 text-gray-400 group-hover:text-primary transition-colors mr-4" />
             <span class="text-xs text-gray-400 font-bold flex-grow tracking-wider group-hover:text-gray-900 transition-colors">Global Search...</span>
-            <span class="text-[9px] text-gray-400 font-black px-2 py-1 bg-white rounded-lg shadow-sm border border-gray-100 group-hover:border-primary/20">⌘K</span>
+            <span class="text-[9px] text-gray-400  px-2 py-1 bg-white rounded-lg shadow-sm border border-gray-100 group-hover:border-primary/20">⌘K</span>
           </button>
           
           <button @click="isSearchModalOpen = true" class="sm:hidden p-3 bg-gray-50 rounded-xl text-neutral-500 hover:text-primary transition-all">
@@ -109,11 +109,11 @@
                <span class="text-2xl animate-bounce">⏳</span>
              </div>
              <div>
-               <h3 class="text-lg font-black tracking-tight leading-tight">Account Under Review</h3>
+               <h3 class="text-lg  tracking-tight leading-tight">Account Under Review</h3>
                <p class="text-sm font-medium text-white/80">Our compliance team is currently verifying your documents. Full platform access will be granted shortly.</p>
              </div>
           </div>
-          <div class="hidden md:block px-6 py-2 bg-white/10 border border-white/20 rounded-full text-[10px] font-black uppercase tracking-[0.2em] whitespace-nowrap">
+          <div class="hidden md:block px-6 py-2 bg-white/10 border border-white/20 rounded-full text-[10px]  uppercase tracking-[0.2em] whitespace-nowrap">
              Priority Verification Node: Active
           </div>
         </div>

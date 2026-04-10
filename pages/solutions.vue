@@ -3,7 +3,7 @@
     <!-- Solutions Hero -->
     <section class="py-24 bg-white relative">
       <div class="max-w-4xl mx-auto px-6 text-center space-y-6">
-        <h1 class="text-5xl lg:text-7xl font-black text-primary-dark tracking-tighter leading-tight">
+        <h1 class="text-5xl lg:text-7xl  text-primary-dark tracking-tighter leading-tight">
           Solutions for every <br />
           <span class="text-primary italic">travel business.</span>
         </h1>
@@ -20,10 +20,10 @@
              class="group bg-neutral-50 rounded-[3rem] p-10 lg:p-16 border border-neutral-100 flex flex-col lg:flex-row gap-16 items-center hover:bg-white hover:shadow-2xl transition-all duration-700">
           
           <div class="flex-1 space-y-6" :class="{ 'lg:order-2': idx % 2 !== 0 }">
-             <div class="inline-flex py-1 px-4 bg-primary/10 text-primary text-xs font-black tracking-widest uppercase rounded-full border border-primary/20">
+             <div class="inline-flex py-1 px-4 bg-primary/10 text-primary text-xs  tracking-widest uppercase rounded-full border border-primary/20">
                 {{ solution.tag }}
              </div>
-             <h2 class="text-4xl font-black text-primary-dark tracking-tight">{{ solution.title }}</h2>
+             <h2 class="text-4xl  text-primary-dark tracking-tight">{{ solution.title }}</h2>
              <p class="text-lg text-neutral-500 leading-relaxed font-medium">{{ solution.description }}</p>
              <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <li v-for="item in solution.bullets" :key="item" class="flex items-center space-x-3 text-sm font-bold text-primary-dark/70">
@@ -48,12 +48,12 @@
     <section class="py-24 bg-primary-dark text-white relative overflow-hidden">
         <div class="max-w-4xl mx-auto px-6 text-center space-y-10 relative z-10">
            <QuoteIcon class="h-16 w-16 text-secondary/30 mx-auto" />
-           <p class="text-3xl lg:text-4xl font-black tracking-tight leading-relaxed italic">
+           <p class="text-3xl lg:text-4xl  tracking-tight leading-relaxed italic">
               "We've doubled our booking volume without adding a single administrative staff member. Flybeth's automation is unrivaled."
            </p>
            <div>
               <p class="text-xl font-bold">Musa Haruna</p>
-              <p class="text-sm font-black text-secondary tracking-widest uppercase">CEO, Prestige Travel Group</p>
+              <p class="text-sm  text-secondary tracking-widest uppercase">CEO, Prestige Travel Group</p>
            </div>
         </div>
     </section>
@@ -84,5 +84,5 @@ const solutions = [
 </script>
 
 <style scoped>
-.font-black { font-weight: 900; }
+. { font-weight: 900; }
 </style>

@@ -7,7 +7,7 @@
       <!-- Header Area -->
       <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8 mb-10 pb-8 border-b border-gray-100">
         <div class="space-y-1">
-          <h2 class="text-3xl font-black text-gray-900 tracking-tight italic">Vacation Packages</h2>
+          <h2 class="text-3xl  text-gray-900 tracking-tight italic">Vacation Packages</h2>
           <p class="text-xs font-bold text-gray-400 tracking-widest uppercase">Bundle Flight + Hotel for exclusive savings</p>
         </div>
       </div>
@@ -35,11 +35,11 @@
                       <MapPinIcon class="h-6 w-6" />
                     </div>
                     <div class="text-left">
-                      <p class="text-sm font-black text-gray-900 group-hover:text-primary transition-colors">{{ airport.city }}</p>
+                      <p class="text-sm  text-gray-900 group-hover:text-primary transition-colors">{{ airport.city }}</p>
                       <p class="text-[10px] font-bold text-gray-400">{{ airport.name }}</p>
                     </div>
                   </div>
-                  <span class="px-2 py-1 bg-gray-100 rounded text-[10px] font-black text-gray-500">{{ airport.code }}</span>
+                  <span class="px-2 py-1 bg-gray-100 rounded text-[10px]  text-gray-500">{{ airport.code }}</span>
                 </button>
               </div>
             </Transition>
@@ -65,7 +65,7 @@
                       <BuildingOffice2Icon class="h-6 w-6" />
                     </div>
                     <div class="text-left">
-                      <p class="text-sm font-black text-gray-900 group-hover:text-secondary transition-colors">{{ dest.city }}</p>
+                      <p class="text-sm  text-gray-900 group-hover:text-secondary transition-colors">{{ dest.city }}</p>
                       <p class="text-[10px] font-bold text-gray-400">{{ dest.country }}</p>
                     </div>
                   </div>
@@ -87,7 +87,7 @@
 
       <!-- Bottom Actions -->
       <div class="mt-12 flex flex-col sm:flex-row sm:items-center justify-between gap-8 pt-8 border-t border-gray-100">
-        <div class="flex items-center space-x-4 text-xs font-black tracking-widest text-primary uppercase">
+        <div class="flex items-center space-x-4 text-xs  tracking-widest text-primary uppercase">
           <div class="px-4 py-2 bg-primary/10 rounded-full border border-primary/20 flex items-center space-x-2">
             <SparklesIcon class="h-4 w-4" />
             <span>SAVE UP TO 15% ON BUNDLES</span>
@@ -99,7 +99,7 @@
           :loading="isSearching" 
           variant="primary" 
           size="lg" 
-          class="px-12 h-[58px] rounded-[1.5rem] font-black tracking-[0.2em] text-xs shadow-2xl shadow-primary/20 hover:scale-[1.05] active:scale-95 transition-all uppercase"
+          class="px-12 h-[58px] rounded-[1.5rem]  tracking-[0.2em] text-xs shadow-2xl shadow-primary/20 hover:scale-[1.05] active:scale-95 transition-all uppercase"
         >
           <MagnifyingGlassIcon class="h-5 w-5 mr-3" />
           Search Packages

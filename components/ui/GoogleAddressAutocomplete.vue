@@ -1,6 +1,6 @@
 <template>
   <div class="relative w-full group">
-    <div class="absolute -top-2.5 left-4 px-2 bg-white text-[10px] font-black uppercase tracking-widest text-brand-gray/40 z-10 transition-colors group-focus-within:text-secondary">
+    <div class="absolute -top-2.5 left-4 px-2 bg-white text-[10px]  uppercase tracking-widest text-brand-gray/40 z-10 transition-colors group-focus-within:text-secondary">
       {{ label }}
     </div>
     <div class="relative">

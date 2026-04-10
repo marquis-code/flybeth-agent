@@ -3,8 +3,8 @@
     <section class="py-24 bg-white relative">
       <div class="max-w-4xl mx-auto px-6 lg:px-10 space-y-12">
         <div class="space-y-6">
-          <h2 class="text-xs font-black text-secondary tracking-[0.4em] uppercase">Enterprise security</h2>
-          <h1 class="text-5xl lg:text-7xl font-black text-primary-dark tracking-tighter leading-tight">
+          <h2 class="text-xs  text-secondary tracking-[0.4em] uppercase">Enterprise security</h2>
+          <h1 class="text-5xl lg:text-7xl  text-primary-dark tracking-tighter leading-tight">
             The Flybeth <br />
             <span class="text-primary italic">security matrix.</span>
           </h1>
@@ -18,26 +18,26 @@
             <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-primary shadow-sm">
               <component :is="item.icon" class="h-6 w-6" />
             </div>
-            <h3 class="text-xl font-black text-primary-dark">{{ item.title }}</h3>
+            <h3 class="text-xl  text-primary-dark">{{ item.title }}</h3>
             <p class="text-neutral-500 text-sm font-medium leading-relaxed">{{ item.description }}</p>
           </div>
         </div>
 
         <div class="bg-primary-dark rounded-[3rem] p-10 lg:p-14 text-white space-y-8 relative overflow-hidden">
            <div class="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-           <h3 class="text-3xl font-black">Bank-grade encryption</h3>
+           <h3 class="text-3xl ">Bank-grade encryption</h3>
            <p class="text-white/70 text-lg font-medium leading-relaxed">
              Every API request and database entry is protected by 256-bit AES encryption. Our nodes are hosted in Tier-IV data centers with 24/7 physical and digital monitoring.
            </p>
            <div class="flex items-center space-x-6">
               <div class="flex flex-col">
-                 <span class="text-2xl font-black">99.99%</span>
-                 <span class="text-xs font-black text-secondary uppercase tracking-widest">Uptime SLA</span>
+                 <span class="text-2xl ">99.99%</span>
+                 <span class="text-xs  text-secondary uppercase tracking-widest">Uptime SLA</span>
               </div>
               <div class="w-px h-10 bg-white/20"></div>
               <div class="flex flex-col">
-                 <span class="text-2xl font-black">ISO 27001</span>
-                 <span class="text-xs font-black text-secondary uppercase tracking-widest">Compliance</span>
+                 <span class="text-2xl ">ISO 27001</span>
+                 <span class="text-xs  text-secondary uppercase tracking-widest">Compliance</span>
               </div>
            </div>
         </div>
@@ -79,5 +79,5 @@ const securityFeatures = [
 </script>
 
 <style scoped>
-.font-black { font-weight: 900; }
+. { font-weight: 900; }
 </style>

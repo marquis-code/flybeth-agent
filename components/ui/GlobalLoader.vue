@@ -15,7 +15,7 @@
         </div>
 
         <div class="mt-8 text-center space-y-1">
-          <p class="text-sm font-black uppercase tracking-[0.3em] text-primary-dark">Processing</p>
+          <p class="text-sm  uppercase tracking-[0.3em] text-primary-dark">Processing</p>
           <p class="text-xs font-medium text-neutral-500">Secure connection established...</p>
         </div>
       </div>

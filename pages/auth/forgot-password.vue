@@ -7,14 +7,14 @@
       </div>
 
       <div class="space-y-4 text-center">
-        <h1 class="text-4xl font-black text-primary-dark tracking-tighter">Forgot password?</h1>
+        <h1 class="text-4xl  text-primary-dark tracking-tighter">Forgot password?</h1>
         <p class="text-neutral-400 font-medium">
           Enter your email address and we'll send you a link to reset your password.
         </p>
       </div>
 
       <div v-if="success" class="p-8 bg-secondary/5 border-l-4 border-secondary rounded-r-3xl space-y-4">
-        <p class="text-sm font-black text-secondary tracking-widest uppercase">Email Sent</p>
+        <p class="text-sm  text-secondary tracking-widest uppercase">Email Sent</p>
         <p class="text-sm text-primary-dark font-medium leading-relaxed">
           Check your inbox (and spam folder) for the password reset link sent to <strong>{{ email }}</strong>.
         </p>
@@ -45,7 +45,7 @@
           </BaseButton>
 
           <div class="pt-4 text-center">
-            <NuxtLink to="/auth/login" class="text-xs font-black text-neutral-300 hover:text-primary tracking-[0.2em] transition-colors uppercase">Back to sign in</NuxtLink>
+            <NuxtLink to="/auth/login" class="text-xs  text-neutral-300 hover:text-primary tracking-[0.2em] transition-colors uppercase">Back to sign in</NuxtLink>
           </div>
         </div>
       </form>

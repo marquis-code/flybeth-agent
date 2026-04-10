@@ -7,7 +7,7 @@
       </div>
 
       <div class="space-y-4">
-        <h1 class="text-4xl font-black text-primary-dark tracking-tighter">Verify your email.</h1>
+        <h1 class="text-4xl  text-primary-dark tracking-tighter">Verify your email.</h1>
         <p class="text-neutral-400 font-medium">
           A verification code has been sent to <br />
           <strong class="text-primary-dark">{{ email }}</strong>
@@ -37,7 +37,7 @@
             <button 
               @click="handleResend" 
               :disabled="timer > 0 || resending"
-              class="text-secondary font-black tracking-widest uppercase hover:underline ml-1 disabled:opacity-50 disabled:cursor-not-allowed"
+              class="text-secondary  tracking-widest uppercase hover:underline ml-1 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {{ timer > 0 ? `Resend in ${timer}s` : 'Resend code' }}
             </button>
@@ -45,7 +45,7 @@
         </div>
 
         <div class="pt-8 border-t border-neutral-100">
-           <NuxtLink to="/auth/login" class="text-xs font-black text-neutral-300 hover:text-primary tracking-[0.2em] transition-colors uppercase">Return to sign in</NuxtLink>
+           <NuxtLink to="/auth/login" class="text-xs  text-neutral-300 hover:text-primary tracking-[0.2em] transition-colors uppercase">Return to sign in</NuxtLink>
         </div>
       </div>
     </div>

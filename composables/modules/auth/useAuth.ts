@@ -16,11 +16,22 @@ export const useAuth = () => {
         try {
             const res = await authApiFactory.login(payload);
             if (res.status === 200 || res.status === 201) {
-                showToast({
-                    title: "Verification Sent",
-                    message: "A code has been sent to your email.",
-                    toastType: "info",
-                });
+                if (res.data.tokens) {
+                    setToken(res.data.tokens.accessToken);
+                    setRefreshToken(res.data.tokens.refreshToken);
+                    setUser(res.data.user);
+                    showToast({
+                        title: "Login Successful",
+                        message: "Welcome back!",
+                        toastType: "success",
+                    });
+                } else if (res.data.requiresOtp) {
+                    showToast({
+                        title: "Verification Sent",
+                        message: "A code has been sent to your email.",
+                        toastType: "info",
+                    });
+                }
                 return res.data;
             }
             throw new Error("Login failed");
@@ -44,11 +55,22 @@ export const useAuth = () => {
         try {
             const res = await authApiFactory.register(payload);
             if (res.status === 200 || res.status === 201) {
-                showToast({
-                    title: "Registration Success",
-                    message: "Account created! Please verify your email.",
-                    toastType: "success",
-                });
+                if (res.data.tokens) {
+                    setToken(res.data.tokens.accessToken);
+                    setRefreshToken(res.data.tokens.refreshToken);
+                    setUser(res.data.user);
+                    showToast({
+                        title: "Registration Success",
+                        message: res.data.message || "Account created!",
+                        toastType: "success",
+                    });
+                } else {
+                    showToast({
+                        title: "Registration Success",
+                        message: res.data.message || "Account created! Please verify your email.",
+                        toastType: "success",
+                    });
+                }
                 return res.data;
             }
         } catch (error: any) {

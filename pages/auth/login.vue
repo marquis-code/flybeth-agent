@@ -10,7 +10,7 @@
         </div>
 
         <div class="relative z-10 space-y-8">
-          <h2 class="text-5xl  font-black text-primary-dark leading-tight tracking-tighter">
+          <h2 class="text-5xl   text-primary-dark leading-tight tracking-tighter">
             Manage your <br />
             travel empire <br />
             with <span class="text-secondary">precision.</span>
@@ -22,9 +22,9 @@
 
         <div class="relative z-10 pt-12 border-t border-neutral-200/50">
           <div class="flex items-center space-x-12 opacity-40 grayscale group-hover:opacity-100 transition-all duration-1000">
-             <span class="text-xl font-black tracking-tighter">Trusted</span>
-             <span class="text-xl font-black tracking-tighter">Reliable</span>
-             <span class="text-xl font-black tracking-tighter">v1.0</span>
+             <span class="text-xl  tracking-tighter">Trusted</span>
+             <span class="text-xl  tracking-tighter">Reliable</span>
+             <span class="text-xl  tracking-tighter">v1.0</span>
           </div>
         </div>
       </div>
@@ -33,7 +33,7 @@
       <div class="p-8 lg:p-12 flex flex-col justify-center bg-white">
         <div class="max-w-md w-full mx-auto space-y-12">
           <div class="space-y-4">
-            <h1 class="text-4xl font-black text-primary-dark tracking-tighter">Welcome back.</h1>
+            <h1 class="text-4xl  text-primary-dark tracking-tighter">Welcome back.</h1>
             <p class="text-neutral-400 font-medium">Enter your email and password to sign in.</p>
           </div>
 
@@ -55,7 +55,7 @@
                   :error="errors.password"
                 />
                 <div class="flex justify-end">
-                  <NuxtLink to="/auth/forgot-password" class="text-sm font-black text-neutral-300 hover:text-secondary tracking-[0.2em] transition-colors">Forgot password?</NuxtLink>
+                  <NuxtLink to="/auth/forgot-password" class="text-sm  text-neutral-300 hover:text-secondary tracking-[0.2em] transition-colors">Forgot password?</NuxtLink>
                 </div>
               </div>
             </div>
@@ -76,7 +76,7 @@
                 <div class="absolute inset-0 flex items-center">
                   <div class="w-full border-t border-neutral-100"></div>
                 </div>
-                <div class="relative flex justify-center text-sm font-black tracking-[0.3em]">
+                <div class="relative flex justify-center text-sm  tracking-[0.3em]">
                   <span class="px-4 bg-white text-neutral-200">New agency?</span>
                 </div>
               </div>
@@ -122,11 +122,15 @@ const errors = reactive({
 const handleLogin = async () => {
   try {
     const res = await login(form);
-    localStorage.setItem('verify_email', form.email)
-    navigateTo({
-      path: '/auth/verify',
-      query: { email: form.email }
-    })
+    if (!res.requiresOtp && res.tokens) {
+      navigateTo('/dashboard')
+    } else {
+      localStorage.setItem('verify_email', form.email)
+      navigateTo({
+        path: '/auth/verify',
+        query: { email: form.email }
+      })
+    }
   } catch (error) {
     console.error('Login failed')
   }
@@ -134,5 +138,5 @@ const handleLogin = async () => {
 </script>
 
 <style scoped>
-.font-black { font-weight: 900; }
+. { font-weight: 900; }
 </style>

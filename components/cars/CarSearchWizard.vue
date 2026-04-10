@@ -7,7 +7,7 @@
       <!-- Header Area -->
       <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8 mb-10 pb-8 border-b border-gray-100">
         <div class="space-y-1">
-          <h2 class="text-3xl font-black text-gray-900 tracking-tight italic">Premium Car Rentals</h2>
+          <h2 class="text-3xl  text-gray-900 tracking-tight italic">Premium Car Rentals</h2>
           <p class="text-xs font-bold text-gray-400 tracking-widest uppercase">Drive the best vehicles from global providers</p>
         </div>
         
@@ -17,7 +17,7 @@
               <input type="checkbox" v-model="driverAgeToggle" class="sr-only" />
               <div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform" :class="driverAgeToggle ? 'translate-x-6' : ''"></div>
             </div>
-            <span class="text-xs font-black text-gray-500 tracking-widest uppercase group-hover:text-primary transition-colors">Special Age Requirements</span>
+            <span class="text-xs  text-gray-500 tracking-widest uppercase group-hover:text-primary transition-colors">Special Age Requirements</span>
           </label>
         </div>
       </div>
@@ -46,12 +46,12 @@
                       <MapPinIcon class="h-6 w-6" />
                     </div>
                     <div class="text-left">
-                      <p class="text-sm font-black text-gray-900 group-hover:text-primary transition-colors">{{ loc.city }}</p>
+                      <p class="text-sm  text-gray-900 group-hover:text-primary transition-colors">{{ loc.city }}</p>
                       <p class="text-[10px] font-bold text-gray-400">{{ loc.name }}</p>
                     </div>
                   </div>
                   <div class="text-right">
-                    <span class="px-2 py-1 bg-gray-100 rounded text-[10px] font-black text-gray-500 group-hover:bg-primary group-hover:text-white transition-colors">{{ loc.code }}</span>
+                    <span class="px-2 py-1 bg-gray-100 rounded text-[10px]  text-gray-500 group-hover:bg-primary group-hover:text-white transition-colors">{{ loc.code }}</span>
                   </div>
                 </button>
               </div>
@@ -79,12 +79,12 @@
                       <MapPinIcon class="h-6 w-6" />
                     </div>
                     <div class="text-left">
-                      <p class="text-sm font-black text-gray-900 group-hover:text-secondary transition-colors">{{ loc.city }}</p>
+                      <p class="text-sm  text-gray-900 group-hover:text-secondary transition-colors">{{ loc.city }}</p>
                       <p class="text-[10px] font-bold text-gray-400">{{ loc.name }}</p>
                     </div>
                   </div>
                   <div class="text-right">
-                    <span class="px-2 py-1 bg-gray-100 rounded text-[10px] font-black text-gray-500 group-hover:bg-secondary group-hover:text-white transition-colors">{{ loc.code }}</span>
+                    <span class="px-2 py-1 bg-gray-100 rounded text-[10px]  text-gray-500 group-hover:bg-secondary group-hover:text-white transition-colors">{{ loc.code }}</span>
                   </div>
                 </button>
               </div>
@@ -112,7 +112,7 @@
 
       <!-- Bottom Actions -->
       <div class="mt-12 flex flex-col sm:flex-row sm:items-center justify-between gap-8 pt-8 border-t border-gray-100">
-        <div class="flex items-center space-x-6 text-xs font-black tracking-widest text-gray-500 uppercase">
+        <div class="flex items-center space-x-6 text-xs  tracking-widest text-gray-500 uppercase">
           <div class="flex items-center space-x-2">
             <div class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]"></div>
             <span>Unlimited Mileage</span>
@@ -124,7 +124,7 @@
         </div>
 
         <div class="flex items-center space-x-4">
-           <button @click="discountToggle = !discountToggle" class="text-xs font-black tracking-widest text-primary hover:text-primary-dark transition-all uppercase border-b-2 border-primary/20 hover:border-primary pb-1">
+           <button @click="discountToggle = !discountToggle" class="text-xs  tracking-widest text-primary hover:text-primary-dark transition-all uppercase border-b-2 border-primary/20 hover:border-primary pb-1">
             {{ discountToggle ? 'Hide Promo' : 'Add Discount Code' }}
           </button>
           
@@ -133,7 +133,7 @@
             :loading="isSearching" 
             variant="primary" 
             size="lg" 
-            class="px-12 h-[58px] rounded-[1.5rem] font-black tracking-[0.2em] text-xs shadow-2xl shadow-primary/20 hover:scale-[1.05] active:scale-95 transition-all"
+            class="px-12 h-[58px] rounded-[1.5rem]  tracking-[0.2em] text-xs shadow-2xl shadow-primary/20 hover:scale-[1.05] active:scale-95 transition-all"
           >
             <MagnifyingGlassIcon class="h-5 w-5 mr-3" />
             SEARCH VEHICLES
@@ -145,12 +145,12 @@
       <Transition name="slide-up">
         <div v-if="discountToggle" class="mt-8 p-8 bg-gray-50 rounded-[2rem] border border-gray-100 grid grid-cols-1 md:grid-cols-2 gap-6 animate-in fade-in slide-in-from-bottom-4">
           <div class="space-y-4">
-            <label class="block text-xs font-black tracking-[0.2em] text-gray-400 uppercase">Preferred Provider</label>
+            <label class="block text-xs  tracking-[0.2em] text-gray-400 uppercase">Preferred Provider</label>
             <div class="grid grid-cols-4 gap-2">
               <button 
                 v-for="brand in carBrands.slice(0, 8)" :key="brand"
                 @click="discountBrand = brand"
-                class="px-3 py-2 rounded-xl text-[10px] font-black border border-gray-200 transition-all"
+                class="px-3 py-2 rounded-xl text-[10px]  border border-gray-200 transition-all"
                 :class="discountBrand === brand ? 'bg-primary-dark text-white border-primary-dark' : 'bg-white text-gray-500 hover:border-primary/30'"
               >
                 {{ brand.toUpperCase() }}
@@ -158,12 +158,12 @@
             </div>
           </div>
           <div class="space-y-4">
-            <label class="block text-xs font-black tracking-[0.2em] text-gray-400 uppercase">Discount Type</label>
+            <label class="block text-xs  tracking-[0.2em] text-gray-400 uppercase">Discount Type</label>
             <div class="flex flex-wrap gap-2">
               <button 
                 v-for="type in [{id: 'corporate', label: 'Corporate'}, {id: 'coupon', label: 'Coupon'}, {id: 'promo', label: 'Promo'}]" :key="type.id"
                 @click="discountType = type.id"
-                class="px-4 py-2 rounded-xl text-[10px] font-black border border-gray-200 transition-all"
+                class="px-4 py-2 rounded-xl text-[10px]  border border-gray-200 transition-all"
                 :class="discountType === type.id ? 'bg-secondary text-white border-secondary' : 'bg-white text-gray-500 hover:border-secondary/30'"
               >
                 {{ type.label.toUpperCase() }}
@@ -179,10 +179,10 @@
     <Transition name="fade">
       <div v-if="carResults.length > 0" class="border-t border-gray-200 bg-gray-50/50 p-8 lg:p-12">
         <div class="flex items-center justify-between mb-10">
-          <h3 class="text-xl font-black text-gray-900 tracking-tight italic">Available Fleet</h3>
+          <h3 class="text-xl  text-gray-900 tracking-tight italic">Available Fleet</h3>
           <div class="flex items-center space-x-2 text-xs font-bold text-gray-500">
             <span>Filter by</span>
-            <span class="text-primary font-black uppercase tracking-widest">Luxury Category</span>
+            <span class="text-primary  uppercase tracking-widest">Luxury Category</span>
           </div>
         </div>
         
@@ -200,8 +200,8 @@
               
               <div class="flex-1 space-y-4">
                 <div>
-                  <h4 class="text-2xl font-black text-gray-900 tracking-tight italic group-hover:text-primary transition-colors">{{ car.name }}</h4>
-                  <div class="flex items-center gap-3 mt-1 uppercase tracking-widest text-[10px] font-black">
+                  <h4 class="text-2xl  text-gray-900 tracking-tight italic group-hover:text-primary transition-colors">{{ car.name }}</h4>
+                  <div class="flex items-center gap-3 mt-1 uppercase tracking-widest text-[10px] ">
                     <span class="text-primary">{{ car.vendor }}</span>
                     <span class="text-gray-200">•</span>
                     <span class="text-secondary">{{ car.category }}</span>
@@ -216,7 +216,7 @@
                     {label: `${car.capacity?.luggage} Bags`, icon: '🧳'}
                   ]" :key="spec.label" class="flex items-center space-x-2 px-3 py-1.5 bg-gray-50 rounded-lg border border-gray-100/50">
                     <span class="text-xs">{{ spec.icon }}</span>
-                    <span class="text-[10px] font-black text-gray-500 uppercase tracking-widest">{{ spec.label }}</span>
+                    <span class="text-[10px]  text-gray-500 uppercase tracking-widest">{{ spec.label }}</span>
                   </div>
                 </div>
               </div>
@@ -224,10 +224,10 @@
 
             <div class="flex items-center justify-between lg:flex-col lg:items-end lg:justify-center border-t lg:border-t-0 lg:border-l border-gray-100 pt-8 lg:pt-0 lg:pl-10 shrink-0 space-y-2">
               <div class="text-left lg:text-right">
-                <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Total Price</p>
-                <p class="text-4xl font-black text-primary-dark tracking-tighter">${{ car.pricing?.baseRate }}<span class="text-sm font-bold text-gray-400">/day</span></p>
+                <p class="text-[10px]  text-gray-400 uppercase tracking-widest">Total Price</p>
+                <p class="text-4xl  text-primary-dark tracking-tighter">${{ car.pricing?.baseRate }}<span class="text-sm font-bold text-gray-400">/day</span></p>
               </div>
-              <BaseButton variant="primary" class="rounded-xl px-10 h-12 text-[10px] font-black tracking-widest shadow-lg active:scale-95 transition-all uppercase">RESERVE VEHICLE</BaseButton>
+              <BaseButton variant="primary" class="rounded-xl px-10 h-12 text-[10px]  tracking-widest shadow-lg active:scale-95 transition-all uppercase">RESERVE VEHICLE</BaseButton>
             </div>
           </div>
         </div>

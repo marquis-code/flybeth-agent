@@ -1,46 +1,29 @@
-import { ref } from "vue";
-
-const isBrowser = typeof window !== "undefined";
-
-const safeParseUser = () => {
-    if (!isBrowser) return null;
-    try {
-        const raw = localStorage.getItem("user");
-        if (!raw || raw === "undefined") return null;
-        return JSON.parse(raw);
-    } catch {
-        return null;
-    }
-};
+import { ref, computed } from "vue";
 
 export const useUser = () => {
-    const token = ref(isBrowser ? localStorage.getItem("token") || "" : "");
-    const refreshToken = ref(isBrowser ? localStorage.getItem("refreshToken") || "" : "");
-    const user = ref(safeParseUser());
+    const token = useCookie('token', { path: '/', sameSite: 'lax' });
+    const refreshToken = useCookie('refreshToken', { path: '/', sameSite: 'lax' });
+    const userData = useCookie('user', { path: '/', sameSite: 'lax' });
+
+    const user = computed(() => userData.value);
 
     const setToken = (newToken: string) => {
         token.value = newToken;
-        if (isBrowser) localStorage.setItem("token", newToken);
     };
 
     const setRefreshToken = (newRefreshToken: string) => {
         refreshToken.value = newRefreshToken;
-        if (isBrowser) localStorage.setItem("refreshToken", newRefreshToken);
     };
 
     const setUser = (newUser: any) => {
-        user.value = newUser;
-        if (isBrowser) localStorage.setItem("user", JSON.stringify(newUser));
+        userData.value = newUser;
     };
 
     const logOut = () => {
-        token.value = "";
-        refreshToken.value = "";
-        user.value = null;
-        if (isBrowser) {
-            localStorage.removeItem("token");
-            localStorage.removeItem("refreshToken");
-            localStorage.removeItem("user");
+        token.value = null;
+        refreshToken.value = null;
+        userData.value = null;
+        if (typeof window !== 'undefined') {
             window.location.href = "/";
         }
     };

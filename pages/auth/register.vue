@@ -10,7 +10,7 @@
         </div>
 
         <div class="relative z-10 space-y-8">
-          <h2 class="text-5xl  font-black text-primary-dark leading-tight tracking-tighter">
+          <h2 class="text-5xl   text-primary-dark leading-tight tracking-tighter">
             Scale Your <br />
             Agency Without <br />
             <span class="text-secondary">Limits.</span>
@@ -26,7 +26,7 @@
               <CheckIcon class="w-4 h-4 text-secondary" />
             </div>
             <div>
-              <p class="text-xs font-black text-primary-dark tracking-widest">{{ perk.title }}</p>
+              <p class="text-xs  text-primary-dark tracking-widest">{{ perk.title }}</p>
               <p class="text-[12px] text-neutral-500 mt-1">{{ perk.desc }}</p>
             </div>
           </div>
@@ -38,12 +38,12 @@
         <div class="max-w-xl w-full mx-auto space-y-8">
           <div class="space-y-2">
             <div class="flex items-center justify-between mb-4">
-              <span class="text-[11px] font-black uppercase tracking-widest text-secondary">Step {{ currentStep }} of 7</span>
+              <span class="text-[11px]  uppercase tracking-widest text-secondary">Step {{ currentStep }} of 7</span>
               <div class="flex space-x-1">
                 <div v-for="s in 7" :key="s" :class="['h-1 w-6 rounded-full transition-all duration-500', s <= currentStep ? 'bg-secondary' : 'bg-neutral-100']"></div>
               </div>
             </div>
-            <h1 class="text-3xl font-black text-primary-dark tracking-tighter">{{ stepTitles[currentStep-1] }}</h1>
+            <h1 class="text-3xl  text-primary-dark tracking-tighter">{{ stepTitles[currentStep-1] }}</h1>
             <p class="text-neutral-500 text-sm font-medium">{{ stepDescriptions[currentStep-1] }}</p>
           </div>
 
@@ -51,33 +51,33 @@
             <!-- Step 1: Account Creation -->
             <div v-if="currentStep === 1" class="space-y-6">
               <div class="relative">
-                <AnimatedInput v-model="form.email" label="Email Address" type="email" required />
+                <AnimatedInput v-model="form.email" label="Email Address" type="email" required :errorMessage="formErrors.email" :hasError="!!formErrors.email" />
                 <div class="absolute right-4 top-1/2 -translate-y-1/2">
                   <InfoTooltip text="We'll use this for account security and to send your verification code." />
                 </div>
               </div>
               <div class="grid md:grid-cols-2 gap-6">
-                <AnimatedInput v-model="form.password" label="Password" type="password" required />
-                <AnimatedInput v-model="form.confirmPassword" label="Confirm Password" type="password" required />
+                <AnimatedInput v-model="form.password" label="Password" type="password" required :errorMessage="formErrors.password" :hasError="!!formErrors.password" />
+                <AnimatedInput v-model="form.confirmPassword" label="Confirm Password" type="password" required :errorMessage="formErrors.confirmPassword" :hasError="!!formErrors.confirmPassword" />
               </div>
             </div>
 
             <!-- Step 2: Business Information -->
             <div v-if="currentStep === 2" class="space-y-6">
               <div class="relative">
-                <AnimatedInput v-model="form.agencyName" label="Business Name" required />
+                <AnimatedInput v-model="form.agencyName" label="Business Name" required :errorMessage="formErrors.agencyName" :hasError="!!formErrors.agencyName" />
                 <div class="absolute right-4 top-1/2 -translate-y-1/2">
                   <InfoTooltip text="The legal name of your travel agency as registered with corporate authorities." />
                 </div>
               </div>
               <div class="relative">
-                <AnimatedInput v-model="form.registrationNumber" label="Registration Number" required />
+                <AnimatedInput v-model="form.registrationNumber" label="Registration Number" required :errorMessage="formErrors.registrationNumber" :hasError="!!formErrors.registrationNumber" />
                 <div class="absolute right-4 top-1/2 -translate-y-1/2">
                   <InfoTooltip text="Enter your official business registration number (e.g., RC Number for Nigeria or EIN for US). This is used for verification." />
                 </div>
               </div>
               <div class="grid md:grid-cols-2 gap-6">
-                <SelectInput v-model="form.country" label="Country" :options="countries" required />
+                <SelectInput v-model="form.country" label="Country" :options="countries" required :errorMessage="formErrors.country" :hasError="!!formErrors.country" />
                 <AnimatedInput v-model="form.website" label="Website / Social (Optional)" />
               </div>
               <GoogleAddressAutocomplete 
@@ -86,63 +86,87 @@
                 placeholder="Start typing your address..." 
                 :api-key="(runtimeConfig.public.googleMapsApiKey as string)"
                 @address-selected="handleAddressSelected"
-              />
+               :errorMessage="formErrors.businessAddress" :hasError="!!formErrors.businessAddress" />
             </div>
 
             <!-- Step 3: Contact Information -->
             <div v-if="currentStep === 3" class="space-y-6">
               <div class="grid md:grid-cols-2 gap-6">
-                <AnimatedInput v-model="form.firstName" label="Contact First Name" required />
-                <AnimatedInput v-model="form.lastName" label="Contact Last Name" required />
+                <AnimatedInput v-model="form.firstName" label="Contact First Name" required :errorMessage="formErrors.firstName" :hasError="!!formErrors.firstName" />
+                <AnimatedInput v-model="form.lastName" label="Contact Last Name" required :errorMessage="formErrors.lastName" :hasError="!!formErrors.lastName" />
               </div>
-              <PhoneNumberInput v-model="form.phone" label="Phone Number" required />
+              <PhoneNumberInput v-model="form.phone" label="Phone Number" required :errorMessage="formErrors.phone" :hasError="!!formErrors.phone" />
               <div class="space-y-4">
                 <div class="flex items-center space-x-2">
                   <input type="checkbox" v-model="sameAsPhone" class="rounded border-neutral-200 text-secondary focus:ring-secondary">
                   <span class="text-[13px] text-neutral-500 font-medium">WhatsApp same as phone</span>
                 </div>
-                <PhoneNumberInput v-if="!sameAsPhone" v-model="form.whatsappNumber" label="WhatsApp Number" />
+                <PhoneNumberInput v-if="!sameAsPhone" v-model="form.whatsappNumber" label="WhatsApp Number"  :errorMessage="formErrors.whatsappNumber" :hasError="!!formErrors.whatsappNumber" />
               </div>
             </div>
 
             <!-- Step 4: Identity Verification (KYC) -->
             <div v-if="currentStep === 4" class="space-y-6">
-              <div class="p-8 border-2 border-dashed border-neutral-100 rounded-[2rem] text-center space-y-4 hover:border-secondary/20 transition-all group relative overflow-hidden">
-                <div v-if="form.idCardUrl" class="absolute inset-0 z-0">
-                  <embed v-if="isPdf(form.idCardUrl)" :src="form.idCardUrl + '#toolbar=0&navpanes=0&scrollbar=0'" class="w-full h-full opacity-20 pointer-events-none object-cover" />
-                  <img v-else :src="form.idCardUrl" class="w-full h-full object-cover opacity-20" />
-                </div>
-                <div class="relative z-10">
-                  <div class="w-16 h-16 bg-secondary/5 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <DocumentIcon class="w-8 h-8 text-secondary" />
+              <div class="p-4 border-2 border-dashed border-neutral-200 rounded-[2rem] text-center space-y-4 hover:border-secondary/20 transition-all bg-neutral-50/50">
+                <template v-if="form.idCardUrl">
+                  <div class="relative w-full aspect-video rounded-xl overflow-hidden shadow-sm bg-neutral-900 flex items-center justify-center">
+                    <embed v-if="isPdf(form.idCardUrl)" :src="form.idCardUrl + '#toolbar=0&navpanes=0&scrollbar=0'" class="w-full h-full pointer-events-none bg-white" />
+                    <img v-else :src="form.idCardUrl" class="w-full h-full object-contain" />
                   </div>
-                  <h4 class="text-sm font-black text-primary-dark">Government ID Upload</h4>
-                  <p class="text-xs text-neutral-400">Upload clear, valid document (JPG/PDF)</p>
+                  <div class="flex justify-between items-center px-2">
+                    <div class="text-left">
+                      <h4 class="text-sm  text-primary-dark">Government ID</h4>
+                      <p class="text-[10px] text-green-600 font-bold uppercase tracking-widest flex items-center"><CheckCircleIcon class="w-3 h-3 mr-1" /> Uploaded</p>
+                    </div>
+                    <input type="file" @change="handleFileUpload($event, 'image', 'idCard')" class="hidden" id="idUpload" accept="image/*,application/pdf">
+                    <BaseButton :loading="uploadingFields.idCard" type="button" variant="secondary" size="sm" @click="$el.querySelector('#idUpload').click()">
+                      Replace
+                    </BaseButton>
+                  </div>
+                </template>
+                <template v-else>
+                  <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-4 border border-neutral-100 shadow-sm">
+                    <DocumentIcon class="w-8 h-8 text-neutral-300" />
+                  </div>
+                  <h4 class="text-sm  text-primary-dark">Government ID Upload</h4>
+                  <p class="text-xs text-neutral-500">Upload clear, valid document (JPG/PDF)</p>
                   <input type="file" @change="handleFileUpload($event, 'image', 'idCard')" class="hidden" id="idUpload" accept="image/*,application/pdf">
-                  <BaseButton :loading="uploadingFields.idCard" type="button" variant="secondary" size="sm" @click="$el.querySelector('#idUpload').click()" class="mt-4">
-                    {{ form.idCardUrl ? 'Change File' : 'Choose File' }}
+                  <BaseButton :loading="uploadingFields.idCard" type="button" variant="primary" size="sm" @click="$el.querySelector('#idUpload').click()" class="mt-4">
+                    Choose File
                   </BaseButton>
-                  <p v-if="form.idCardUrl" class="text-xs text-green-600 font-bold mt-2 uppercase tracking-widest">Document Uploaded ✓</p>
-                </div>
+                  <p v-if="formErrors.idCardUrl" class="text-xs text-red-500 font-bold mt-2">{{ formErrors.idCardUrl }}</p>
+                </template>
               </div>
 
-              <div class="p-8 border-2 border-dashed border-neutral-100 rounded-[2rem] text-center space-y-4 hover:border-secondary/20 transition-all group relative overflow-hidden">
-                <div v-if="form.selfieUrl" class="absolute inset-0 z-0">
-                  <embed v-if="isPdf(form.selfieUrl)" :src="form.selfieUrl + '#toolbar=0&navpanes=0&scrollbar=0'" class="w-full h-full opacity-20 pointer-events-none object-cover" />
-                  <img v-else :src="form.selfieUrl" class="w-full h-full object-cover opacity-20" />
-                </div>
-                <div class="relative z-10">
-                  <div class="w-16 h-16 bg-secondary/5 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <CameraIcon class="w-8 h-8 text-secondary" />
+              <div class="p-4 border-2 border-dashed border-neutral-200 rounded-[2rem] text-center space-y-4 hover:border-secondary/20 transition-all bg-neutral-50/50">
+                <template v-if="form.selfieUrl">
+                  <div class="relative w-full aspect-video rounded-xl overflow-hidden shadow-sm bg-neutral-900 flex items-center justify-center">
+                    <embed v-if="isPdf(form.selfieUrl)" :src="form.selfieUrl + '#toolbar=0&navpanes=0&scrollbar=0'" class="w-full h-full pointer-events-none bg-white" />
+                    <img v-else :src="form.selfieUrl" class="w-full h-full object-contain" />
                   </div>
-                  <h4 class="text-sm font-black text-primary-dark">Selfie Verification</h4>
-                  <p class="text-xs text-neutral-400">Capture a clear photo of your face</p>
+                  <div class="flex justify-between items-center px-2">
+                    <div class="text-left">
+                      <h4 class="text-sm  text-primary-dark">Selfie Verification</h4>
+                      <p class="text-[10px] text-green-600 font-bold uppercase tracking-widest flex items-center"><CheckCircleIcon class="w-3 h-3 mr-1" /> Captured</p>
+                    </div>
+                    <input type="file" @change="handleFileUpload($event, 'image', 'selfie')" class="hidden" capture="user" id="selfieUpload" accept="image/*">
+                    <BaseButton :loading="uploadingFields.selfie" type="button" variant="secondary" size="sm" @click="$el.querySelector('#selfieUpload').click()">
+                      Retake
+                    </BaseButton>
+                  </div>
+                </template>
+                <template v-else>
+                  <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-4 border border-neutral-100 shadow-sm">
+                    <CameraIcon class="w-8 h-8 text-neutral-300" />
+                  </div>
+                  <h4 class="text-sm  text-primary-dark">Selfie Verification</h4>
+                  <p class="text-xs text-neutral-500">Capture a clear photo of your face</p>
                   <input type="file" @change="handleFileUpload($event, 'image', 'selfie')" class="hidden" capture="user" id="selfieUpload" accept="image/*">
-                  <BaseButton :loading="uploadingFields.selfie" type="button" variant="secondary" size="sm" @click="$el.querySelector('#selfieUpload').click()" class="mt-4">
-                    {{ form.selfieUrl ? 'Change Photo' : 'Capture Photo' }}
+                  <BaseButton :loading="uploadingFields.selfie" type="button" variant="primary" size="sm" @click="$el.querySelector('#selfieUpload').click()" class="mt-4">
+                    Capture Photo
                   </BaseButton>
-                  <p v-if="form.selfieUrl" class="text-xs text-green-600 font-bold mt-2 uppercase tracking-widest">Selfie Captured ✓</p>
-                </div>
+                  <p v-if="formErrors.selfieUrl" class="text-xs text-red-500 font-bold mt-2">{{ formErrors.selfieUrl }}</p>
+                </template>
               </div>
             </div>
 
@@ -150,65 +174,88 @@
             <div v-if="currentStep === 5" class="space-y-8">
               <div v-if="form.country === 'Nigeria'" class="space-y-6">
                 <div class="flex items-center justify-between">
-                   <h4 class="text-xs font-black text-secondary uppercase tracking-widest">Nigeria Compliance (CAC)</h4>
+                   <h4 class="text-xs  text-secondary uppercase tracking-widest">Nigeria Compliance (CAC)</h4>
                    <InfoTooltip text="Corporate Affairs Commission certificate is required for all Nigerian businesses." />
                 </div>
-                <div class="p-10 border-2 border-dashed border-neutral-100 rounded-[2.5rem] text-center space-y-6 group relative transition-all hover:border-secondary/20 overflow-hidden">
-                  <div v-if="form.cacCertificateUrl" class="absolute inset-0 z-0">
-                    <embed v-if="isPdf(form.cacCertificateUrl)" :src="form.cacCertificateUrl + '#toolbar=0&navpanes=0&scrollbar=0'" class="w-full h-full opacity-20 pointer-events-none object-cover" />
-                    <img v-else :src="form.cacCertificateUrl" class="w-full h-full object-cover opacity-20" />
-                    <div class="absolute inset-0 bg-secondary/10 backdrop-blur-[1px] z-10"></div>
-                  </div>
-                  <div class="relative z-10">
-                    <div class="w-20 h-20 bg-secondary/5 rounded-[2rem] flex items-center justify-center mx-auto mb-4">
-                      <DocumentTextIcon class="w-10 h-10 text-secondary" />
+                <div class="p-6 border-2 border-dashed border-neutral-200 rounded-[2.5rem] text-center space-y-6 transition-all hover:border-secondary/20 bg-neutral-50/50">
+                  <template v-if="form.cacCertificateUrl">
+                    <div class="relative w-full h-[200px] rounded-2xl overflow-hidden shadow-sm bg-neutral-900 flex items-center justify-center">
+                      <embed v-if="isPdf(form.cacCertificateUrl)" :src="form.cacCertificateUrl + '#toolbar=0&navpanes=0&scrollbar=0'" class="w-full h-full bg-white" />
+                      <img v-else :src="form.cacCertificateUrl" class="w-full h-full object-contain" />
                     </div>
-                    <p class="text-sm font-black text-primary-dark tracking-tight">CAC Registration Certificate</p>
-                    <p class="text-xs text-neutral-400 max-w-[200px] mx-auto leading-relaxed">Ensure the document clearly shows the RC Number and Seal.</p>
+                    <div class="flex items-center justify-between">
+                      <div class="text-left">
+                        <p class="text-sm  text-primary-dark tracking-tight">CAC Certificate</p>
+                        <p class="text-[11px]  text-green-600 uppercase tracking-widest flex items-center">
+                          <CheckCircleIcon class="w-4 h-4 mr-1" /> Verified
+                        </p>
+                      </div>
+                      <input type="file" @change="handleFileUpload($event, 'document', 'cacCertificate')" class="hidden" id="cacUpload" accept="application/pdf,image/*">
+                      <BaseButton :loading="uploadingFields.cacCertificate" type="button" variant="secondary" size="sm" @click="$el.querySelector('#cacUpload').click()">
+                        Replace
+                      </BaseButton>
+                    </div>
+                  </template>
+                  <template v-else>
+                    <div class="w-20 h-20 bg-white rounded-[2rem] flex items-center justify-center mx-auto mb-4 border border-neutral-100 shadow-sm">
+                      <DocumentTextIcon class="w-10 h-10 text-neutral-300" />
+                    </div>
+                    <p class="text-sm  text-primary-dark tracking-tight">CAC Registration Certificate</p>
+                    <p class="text-xs text-neutral-500 max-w-[200px] mx-auto leading-relaxed">Ensure the document clearly shows the RC Number and Seal.</p>
                     <input type="file" @change="handleFileUpload($event, 'document', 'cacCertificate')" class="hidden" id="cacUpload" accept="application/pdf,image/*">
-                    <BaseButton :loading="uploadingFields.cacCertificate" type="button" variant="secondary" size="sm" @click="$el.querySelector('#cacUpload').click()" class="mt-4">
-                      {{ form.cacCertificateUrl ? 'Replace Certificate' : 'Choose Certificate' }}
+                    <BaseButton :loading="uploadingFields.cacCertificate" type="button" variant="primary" size="sm" @click="$el.querySelector('#cacUpload').click()" class="mt-4">
+                      Choose Certificate
                     </BaseButton>
-                    <div v-if="form.cacCertificateUrl" class="mt-4 pt-4 border-t border-neutral-100">
-                       <span class="text-[11px] font-black text-green-600 uppercase tracking-widest flex items-center justify-center">
-                         <CheckCircleIcon class="w-4 h-4 mr-1" /> Document Verified locally
-                       </span>
-                    </div>
-                  </div>
+                    <p v-if="formErrors.cacCertificateUrl" class="text-xs text-red-500 font-bold mt-2">{{ formErrors.cacCertificateUrl }}</p>
+                  </template>
                 </div>
               </div>
 
               <div v-else-if="form.country === 'United States'" class="space-y-8">
                 <div class="flex items-center justify-between">
-                   <h4 class="text-xs font-black text-secondary uppercase tracking-widest">USA Compliance (LLC)</h4>
+                   <h4 class="text-xs  text-secondary uppercase tracking-widest">USA Compliance (LLC)</h4>
                    <InfoTooltip text="Provide your LLC formation documents and EIN for tax verification." />
                 </div>
                 
                 <div class="grid gap-6">
                    <div class="relative">
-                      <AnimatedInput v-model="form.ein" label="EIN Number (Tax ID)" required />
+                      <AnimatedInput v-model="form.ein" label="EIN Number (Tax ID)" required :errorMessage="formErrors.ein" :hasError="!!formErrors.ein" />
                       <div class="absolute right-4 top-1/2 -translate-y-1/2">
                         <InfoTooltip text="Employer Identification Number is required for tax compliance in the US." />
                       </div>
                    </div>
 
-                   <div class="p-10 border-2 border-dashed border-neutral-100 rounded-[2.5rem] text-center space-y-6 group relative transition-all hover:border-secondary/20 overflow-hidden">
-                    <div v-if="form.llcDocsUrl" class="absolute inset-0 z-0">
-                      <embed v-if="isPdf(form.llcDocsUrl)" :src="form.llcDocsUrl + '#toolbar=0&navpanes=0&scrollbar=0'" class="w-full h-full opacity-20 pointer-events-none object-cover" />
-                      <img v-else :src="form.llcDocsUrl" class="w-full h-full object-cover opacity-20" />
-                      <div class="absolute inset-0 bg-secondary/10 backdrop-blur-[1px] z-10"></div>
-                    </div>
-                    <div class="relative z-10">
-                      <div class="w-20 h-20 bg-secondary/5 rounded-[2rem] flex items-center justify-center mx-auto mb-4">
-                        <DocumentTextIcon class="w-10 h-10 text-secondary" />
+                   <div class="p-6 border-2 border-dashed border-neutral-200 rounded-[2.5rem] text-center space-y-6 transition-all hover:border-secondary/20 bg-neutral-50/50">
+                    <template v-if="form.llcDocsUrl">
+                      <div class="relative w-full h-[200px] rounded-2xl overflow-hidden shadow-sm bg-neutral-900 flex items-center justify-center">
+                        <embed v-if="isPdf(form.llcDocsUrl)" :src="form.llcDocsUrl + '#toolbar=0&navpanes=0&scrollbar=0'" class="w-full h-full bg-white" />
+                        <img v-else :src="form.llcDocsUrl" class="w-full h-full object-contain" />
                       </div>
-                      <p class="text-sm font-black text-primary-dark tracking-tight">LLC Formation Documents</p>
-                      <p class="text-xs text-neutral-400 max-w-[200px] mx-auto leading-relaxed">Upload your Articles of Organization or Certificate of Formation.</p>
+                      <div class="flex items-center justify-between">
+                        <div class="text-left">
+                          <p class="text-sm  text-primary-dark tracking-tight">LLC Documents</p>
+                          <p class="text-[11px]  text-green-600 uppercase tracking-widest flex items-center">
+                            <CheckCircleIcon class="w-4 h-4 mr-1" /> Verified
+                          </p>
+                        </div>
+                        <input type="file" @change="handleFileUpload($event, 'document', 'llcDocs')" class="hidden" id="llcUpload" accept="application/pdf,image/*">
+                        <BaseButton :loading="uploadingFields.llcDocs" type="button" variant="secondary" size="sm" @click="$el.querySelector('#llcUpload').click()">
+                          Replace
+                        </BaseButton>
+                      </div>
+                    </template>
+                    <template v-else>
+                      <div class="w-20 h-20 bg-white rounded-[2rem] flex items-center justify-center mx-auto mb-4 border border-neutral-100 shadow-sm">
+                        <DocumentTextIcon class="w-10 h-10 text-neutral-300" />
+                      </div>
+                      <p class="text-sm  text-primary-dark tracking-tight">LLC Formation Documents</p>
+                      <p class="text-xs text-neutral-500 max-w-[200px] mx-auto leading-relaxed">Upload your Articles of Organization or Certificate of Formation.</p>
                       <input type="file" @change="handleFileUpload($event, 'document', 'llcDocs')" class="hidden" id="llcUpload" accept="application/pdf,image/*">
-                      <BaseButton :loading="uploadingFields.llcDocs" type="button" variant="secondary" size="sm" @click="$el.querySelector('#llcUpload').click()" class="mt-4">
-                        {{ form.llcDocsUrl ? 'Replace Documents' : 'Choose Documents' }}
+                      <BaseButton :loading="uploadingFields.llcDocs" type="button" variant="primary" size="sm" @click="$el.querySelector('#llcUpload').click()" class="mt-4">
+                        Choose Documents
                       </BaseButton>
-                    </div>
+                      <p v-if="formErrors.llcDocsUrl" class="text-xs text-red-500 font-bold mt-2">{{ formErrors.llcDocsUrl }}</p>
+                    </template>
                   </div>
                 </div>
               </div>
@@ -228,7 +275,7 @@
             <div v-if="currentStep === 6" class="space-y-6">
               <div class="space-y-6">
                 <div class="flex items-center justify-between">
-                   <h4 class="text-[11px] font-black text-secondary tracking-[0.2em] uppercase">Payout Account</h4>
+                   <h4 class="text-[11px]  text-secondary tracking-[0.2em] uppercase">Payout Account</h4>
                    <InfoTooltip text="We'll use this to send your wholesale commissions. Nigerian agents are paid via Paystack." />
                 </div>
                 <div class="grid md:grid-cols-2 gap-6">
@@ -237,7 +284,7 @@
                       v-model="form.bankCode" 
                       label="Select Bank" 
                       :options="bankOptions" 
-                      required 
+                      required :errorMessage="formErrors.bankCode" :hasError="!!formErrors.bankCode" 
                       @update:modelValue="handleBankChange"
                     />
                     <div v-if="loadingBanks" class="absolute right-10 top-1/2 -translate-y-1/2">
@@ -248,7 +295,7 @@
                     <AnimatedInput 
                       v-model="form.accountNumber" 
                       label="Account Number" 
-                      required 
+                      required :errorMessage="formErrors.accountNumber" :hasError="!!formErrors.accountNumber" 
                       type="text"
                       maxlength="10"
                       @update:modelValue="handleAccountNumberInput"
@@ -262,7 +309,7 @@
                   <AnimatedInput 
                     v-model="form.accountHolder" 
                     label="Account Holder Name" 
-                    required 
+                    required :errorMessage="formErrors.accountHolder" :hasError="!!formErrors.accountHolder" 
                     readonly
                     class="bg-neutral-50/50 cursor-not-allowed"
                   />
@@ -276,12 +323,12 @@
                 label="Billing Address" 
                 placeholder="Enter your registered billing address..." 
                 :api-key="(runtimeConfig.public.googleMapsApiKey as string)"
-              />
+               :errorMessage="formErrors.billingAddress" :hasError="!!formErrors.billingAddress" />
             </div>
 
             <!-- Step 7: Terms & Submission -->
             <div v-if="currentStep === 7" class="space-y-4">
-              <div v-for="term in submissionTerms" :key="term.id" class="p-5 bg-neutral-50 rounded-2xl border border-neutral-100 flex items-start space-x-4 group cursor-pointer">
+              <div v-for="term in submissionTerms" :key="term.id" class="p-5 bg-neutral-50 rounded-2xl border flex items-start space-x-4 group cursor-pointer relative" :class="[formErrors[term.id] ? 'border-red-500' : 'border-neutral-100']">
                 <div class="relative flex items-center pt-1">
                   <input :id="term.id" type="checkbox" v-model="form.agreements[term.id]" required class="peer appearance-none w-5 h-5 border-2 border-neutral-200 rounded-lg checked:bg-secondary checked:border-secondary transition-all cursor-pointer">
                   <CheckIcon class="absolute w-3 h-3 text-white left-1 opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" />
@@ -289,6 +336,7 @@
                 <label :for="term.id" class="text-xs text-neutral-500 font-medium leading-relaxed group-hover:text-primary-dark transition-colors">
                   {{ term.label }}
                 </label>
+                <p v-if="formErrors[term.id]" class="text-[10px] text-red-500 absolute -bottom-4 left-9">{{ formErrors[term.id] }}</p>
               </div>
             </div>
 
@@ -307,7 +355,7 @@
             </div>
             
             <div class="text-center pt-4">
-              <NuxtLink to="/auth/login" class="px-8 py-3 bg-neutral-50 hover:bg-neutral-100 text-[11px] font-black tracking-[0.2em] text-neutral-500 hover:text-primary-dark rounded-xl transition-all uppercase">Save & Exit Registration</NuxtLink>
+              <NuxtLink to="/auth/login" class="px-8 py-3 bg-neutral-200 hover:bg-neutral-100 text-[11px] font-medium  tracking-[0.2em] text-neutral-500 hover:text-primary-dark rounded-xl transition-all">Save & Exit Registration</NuxtLink>
             </div>
           </form>
         </div>
@@ -349,6 +397,54 @@ const { banks, loadingBanks, verifyingAccount, fetchBanks, verifyAccount } = use
 const { showToast } = useCustomToast()
 const currentStep = ref(1)
 const sameAsPhone = ref(true)
+const formErrors = ref<Record<string, string>>({})
+
+const validateStep = (step: number) => {
+  formErrors.value = {}
+  let isValid = true
+
+  const setError = (field: string, msg: string) => {
+    formErrors.value[field] = msg
+    isValid = false
+  }
+
+  if (step === 1) {
+    if (!form.value.email) setError('email', 'Email is required')
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.value.email)) setError('email', 'Invalid email format')
+    if (!form.value.password) setError('password', 'Password is required')
+    else if (form.value.password.length < 8) setError('password', 'Password must be at least 8 characters')
+    if (!form.value.confirmPassword) setError('confirmPassword', 'Please confirm your password')
+    else if (form.value.password !== form.value.confirmPassword) setError('confirmPassword', 'Passwords do not match')
+  } else if (step === 2) {
+    if (!form.value.agencyName) setError('agencyName', 'Business Name is required')
+    if (!form.value.registrationNumber) setError('registrationNumber', 'Registration Number is required')
+    if (!form.value.country) setError('country', 'Country is required')
+    if (!form.value.businessAddress) setError('businessAddress', 'Business Address is required')
+  } else if (step === 3) {
+    if (!form.value.firstName) setError('firstName', 'First Name is required')
+    if (!form.value.lastName) setError('lastName', 'Last Name is required')
+    if (!form.value.phone) setError('phone', 'Phone Number is required')
+    if (!sameAsPhone.value && !form.value.whatsappNumber) setError('whatsappNumber', 'WhatsApp Number is required')
+  } else if (step === 4) {
+    if (!form.value.idCardUrl) setError('idCardUrl', 'Government ID is required')
+    if (!form.value.selfieUrl) setError('selfieUrl', 'Selfie Verification is required')
+  } else if (step === 5) {
+    if (form.value.country === 'Nigeria' && !form.value.cacCertificateUrl) {
+      setError('cacCertificateUrl', 'CAC Certificate is required')
+    } else if (form.value.country === 'United States') {
+      if (!form.value.ein) setError('ein', 'EIN is required')
+      if (!form.value.llcDocsUrl) setError('llcDocsUrl', 'LLC Documents are required')
+    }
+  } else if (step === 6) {
+    if (!form.value.bankCode) setError('bankCode', 'Bank selection is required')
+    if (!form.value.accountNumber) setError('accountNumber', 'Account Number is required')
+    if (!form.value.accountHolder) setError('accountHolder', 'Account Holder is required')
+    if (!form.value.billingAddress) setError('billingAddress', 'Billing Address is required')
+  }
+
+  return isValid
+}
+
 
 const isPdf = (url: string | null) => url ? url.toLowerCase().includes('.pdf') : false
 
@@ -416,7 +512,37 @@ const submissionTerms = [
   { id: 'fraud', label: 'I agree to the Flybeth anti-fraud policy and document authenticity rules.' }
 ]
 
-const countries = ['Nigeria', 'United States', 'United Kingdom', 'Ghana', 'Kenya', 'South Africa', 'Canada', 'Australia', 'UAE', 'Tanzania', 'Uganda', 'Rwanda']
+const countries = [
+  "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda",
+  "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain",
+  "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan",
+  "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria",
+  "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada",
+  "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros",
+  "Congo (Congo-Brazzaville)", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czechia",
+  "Democratic Republic of the Congo", "Denmark", "Djibouti", "Dominica", "Dominican Republic",
+  "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini",
+  "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany",
+  "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti",
+  "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland",
+  "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati",
+  "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya",
+  "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives",
+  "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia",
+  "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar",
+  "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria",
+  "North Korea", "North Macedonia", "Norway", "Oman", "Pakistan", "Palau", "Palestine State",
+  "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal",
+  "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia",
+  "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe",
+  "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore",
+  "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea",
+  "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland",
+  "Syria", "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tonga",
+  "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda",
+  "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay",
+  "Uzbekistan", "Vanuatu", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+]
 
 const perks = [
   { title: 'Global Flight Rates', desc: 'Secure net rates not available to the general public.' },
@@ -460,11 +586,10 @@ watch(currentStep, (newStep) => {
 })
 
 const nextStep = () => {
-  if (currentStep.value === 1 && form.value.password !== form.value.confirmPassword) {
-    alert('Passwords do not match')
-    return
+  if (currentStep.value === 7) return
+  if (validateStep(currentStep.value)) {
+    currentStep.value++
   }
-  currentStep.value++
 }
 
 const handleAddressSelected = (data: any) => {
@@ -492,6 +617,19 @@ const handleFileUpload = async (event: any, type: 'image' | 'document', field: s
 }
 
 const handleSubmit = async () => {
+  formErrors.value = {}
+  let hasAgreementsError = false
+  for (const term of submissionTerms) {
+    if (!form.value.agreements[term.id]) {
+      formErrors.value[term.id] = 'Required'
+      hasAgreementsError = true
+    }
+  }
+  if (hasAgreementsError) {
+    showToast({ title: 'Error', message: 'You must agree to all terms and conditions.', toastType: 'error' })
+    return
+  }
+
   try {
     const payload = {
       email: form.value.email,
@@ -535,5 +673,5 @@ const handleSubmit = async () => {
 </script>
 
 <style scoped>
-.font-black { font-weight: 900; }
+. { font-weight: 900; }
 </style>

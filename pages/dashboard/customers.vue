@@ -3,7 +3,7 @@
     <!-- Header -->
     <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-8 pb-4 border-b border-gray-200">
       <div class="space-y-1">
-        <h2 class="text-4xl font-black text-primary-dark tracking-tight">Traveler database</h2>
+        <h2 class="text-4xl  text-primary-dark tracking-tight">Traveler database</h2>
         <p class="text-neutral/40 font-bold tracking-widest text-xs uppercase">Manage your traveler profiles</p>
       </div>
       <BaseButton variant="primary" class="shadow-sm py-4 px-10">
@@ -24,7 +24,7 @@
                 class="w-full pl-14 pr-6 py-4 bg-gray-50 border-none rounded-3xl text-sm font-bold text-primary-dark placeholder:text-neutral/20 focus:ring-4 focus:ring-primary/5 transition-all"
               />
             </div>
-            <BaseButton variant="outline" class="h-[52px] border-gray-200 font-black px-8">
+            <BaseButton variant="outline" class="h-[52px] border-gray-200  px-8">
               Advanced filter
             </BaseButton>
           </div>
@@ -35,8 +35,8 @@
         <div class="absolute -top-10 -right-10 w-24 h-24 bg-secondary/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-1000"></div>
         
         <div class="p-6 text-center relative z-10">
-          <p class="text-[9px] font-black text-white/40 tracking-[0.2em] mb-1">Global network</p>
-          <p class="text-3xl font-black text-secondary tracking-tighter">{{ customers.length }} Travelers</p>
+          <p class="text-[9px]  text-white/40 tracking-[0.2em] mb-1">Global network</p>
+          <p class="text-3xl  text-secondary tracking-tighter">{{ customers.length }} Travelers</p>
         </div>
       </BaseCard>
     </div>
@@ -46,7 +46,7 @@
       <BaseCard v-for="customer in customers" :key="customer.email" hover :padding="false" class="relative overflow-hidden group border border-gray-200 shadow-sm">
         <div class="p-10 flex flex-col items-center relative z-10">
           <div class="relative mb-8">
-            <div class="h-24 w-24 rounded-[2rem] bg-gray-50 flex items-center justify-center text-primary-dark  font-black text-4xl shadow-sm border border-gray-200 transition-all duration-500 group-hover:rotate-6 group-hover:scale-110 group-hover:bg-primary-dark group-hover:text-white">
+            <div class="h-24 w-24 rounded-[2rem] bg-gray-50 flex items-center justify-center text-primary-dark   text-4xl shadow-sm border border-gray-200 transition-all duration-500 group-hover:rotate-6 group-hover:scale-110 group-hover:bg-primary-dark group-hover:text-white">
               {{ customer.name[0] }}
             </div>
             <div class="absolute -bottom-1 -right-1 h-8 w-8 bg-secondary border-4 border-white rounded-2xl flex items-center justify-center">
@@ -54,24 +54,24 @@
             </div>
           </div>
           
-          <h3 class="text-2xl font-black text-primary-dark group-hover:text-primary transition-colors text-center tracking-tight">{{ customer.name }}</h3>
+          <h3 class="text-2xl  text-primary-dark group-hover:text-primary transition-colors text-center tracking-tight">{{ customer.name }}</h3>
           <p class="text-xs text-neutral/30 font-bold tracking-widest mt-1 mb-8">{{ customer.email }}</p>
           
           <div class="w-full grid grid-cols-2 gap-4 mb-10">
             <div class="p-5 bg-gray-50/50 rounded-[1.5rem] border border-gray-200 text-center group-hover:bg-white transition-colors">
-              <p class="text-[9px] text-neutral/30 font-black tracking-widest mb-1">Bookings</p>
-              <p class="text-xl font-black text-primary-dark">{{ customer.bookings }}</p>
+              <p class="text-[9px] text-neutral/30  tracking-widest mb-1">Bookings</p>
+              <p class="text-xl  text-primary-dark">{{ customer.bookings }}</p>
             </div>
             <div class="p-5 bg-gray-50/50 rounded-[1.5rem] border border-gray-200 text-center group-hover:bg-white transition-colors">
-              <p class="text-xl font-black text-secondary">${{ customer.spent }}</p>
+              <p class="text-xl  text-secondary">${{ customer.spent }}</p>
             </div>
           </div>
 
           <div class="w-full space-y-3">
             <BaseButton variant="primary" size="md" block class="shadow-sm">Create booking</BaseButton>
             <div class="grid grid-cols-2 gap-3">
-              <BaseButton variant="outline" size="md" block class="rounded-2xl border-gray-200 text-sm font-black tracking-widest">History</BaseButton>
-              <BaseButton variant="outline" size="md" block class="rounded-2xl border-gray-200 text-sm font-black tracking-widest">Profile</BaseButton>
+              <BaseButton variant="outline" size="md" block class="rounded-2xl border-gray-200 text-sm  tracking-widest">History</BaseButton>
+              <BaseButton variant="outline" size="md" block class="rounded-2xl border-gray-200 text-sm  tracking-widest">Profile</BaseButton>
             </div>
           </div>
         </div>

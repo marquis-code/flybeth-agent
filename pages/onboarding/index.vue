@@ -6,8 +6,8 @@
       <div class="mb-16">
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
            <div class="space-y-2">
-             <h4 class="text-[11px] font-black text-secondary tracking-[0.4em] uppercase">Step {{ currentStep }} of 7</h4>
-             <h1 class="text-4xl lg:text-5xl font-black text-primary-dark tracking-tighter">
+             <h4 class="text-[11px]  text-secondary tracking-[0.4em] uppercase">Step {{ currentStep }} of 7</h4>
+             <h1 class="text-4xl lg:text-5xl  text-primary-dark tracking-tighter">
                {{ steps[currentStep - 1]?.title }}
              </h1>
              <p class="text-neutral-500 font-medium max-w-xl">{{ steps[currentStep - 1]?.description }}</p>
@@ -36,7 +36,7 @@
                       <CheckBadgeIcon class="w-8 h-8" />
                    </div>
                    <div>
-                      <h3 class="text-xl font-black text-primary-dark">Account confirmed</h3>
+                      <h3 class="text-xl  text-primary-dark">Account confirmed</h3>
                       <p class="text-sm font-medium text-neutral-400">Your email has been verified successfully.</p>
                    </div>
                 </div>
@@ -67,7 +67,7 @@
                   <AnimatedInput v-model="form.website" label="Website / Social Media (Optional)" placeholder="https://" />
                </div>
                <div class="space-y-6">
-                 <h4 class="text-[9px] font-black text-secondary tracking-[0.3em] uppercase">Business Address</h4>
+                 <h4 class="text-[9px]  text-secondary tracking-[0.3em] uppercase">Business Address</h4>
                  <AnimatedInput v-model="form.billingAddress" label="Physical Address" required />
                </div>
             </div>
@@ -165,7 +165,7 @@
                <div class="p-6 bg-neutral-50 rounded-2xl border border-neutral-100 flex items-start space-x-4">
                   <BanknotesIcon class="w-6 h-6 text-neutral-400 mt-1" />
                   <div>
-                    <h5 class="text-xs font-black text-primary-dark uppercase tracking-widest mb-1">Payout Policy</h5>
+                    <h5 class="text-xs  text-primary-dark uppercase tracking-widest mb-1">Payout Policy</h5>
                     <p class="text-[10px] text-neutral-500 font-medium leading-relaxed">
                       All agency commissions and refunds are processed to this account. Payouts are reconciled every Tuesday and Thursday.
                     </p>
@@ -183,7 +183,7 @@
                        <CheckIcon v-if="form.termsAgreed" class="w-4 h-4 text-white" />
                     </div>
                     <div>
-                       <p class="text-sm font-black text-primary-dark">Accept Platform Policies</p>
+                       <p class="text-sm  text-primary-dark">Accept Platform Policies</p>
                        <p class="text-xs text-neutral-400 font-medium leading-relaxed pr-4">
                          I agree to Flybeth's Terms & Conditions, Service Fees, Refund Policy, and Fraud Prevention Policy. I confirm that all provided information is accurate.
                        </p>
@@ -195,7 +195,7 @@
                   <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-secondary/20 via-transparent to-transparent"></div>
                   <div class="relative z-10 text-center space-y-6">
                      <SparklesIcon class="w-12 h-12 text-secondary mx-auto mb-4 animate-pulse" />
-                     <h3 class="text-2xl font-black text-white">Ready to join the network?</h3>
+                     <h3 class="text-2xl  text-white">Ready to join the network?</h3>
                      <p class="text-white/60 text-sm max-w-sm mx-auto font-medium">After submission, our team will review your application within 24-48 hours.</p>
                   </div>
                </div>
@@ -206,7 +206,7 @@
           <div class="flex flex-col sm:flex-row items-center justify-between gap-6 pt-8 border-t border-neutral-100">
              <button 
                v-if="currentStep > 1" 
-               class="text-sm font-black text-neutral-400 hover:text-primary-dark tracking-[0.2em] transition-colors flex items-center uppercase"
+               class="text-sm  text-neutral-400 hover:text-primary-dark tracking-[0.2em] transition-colors flex items-center uppercase"
                @click="prevStep"
              >
                <ArrowLeftIcon class="w-4 h-4 mr-3" />
@@ -232,20 +232,20 @@
           <div class="p-10 bg-white rounded-[2.5rem] border border-neutral-100 shadow-sm relative overflow-hidden">
              <div class="absolute top-0 right-0 w-32 h-32 bg-secondary/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2"></div>
              
-             <h4 class="text-[9px] font-black text-secondary tracking-[0.3em] uppercase mb-8">Agent Assistant</h4>
+             <h4 class="text-[9px]  text-secondary tracking-[0.3em] uppercase mb-8">Agent Assistant</h4>
              <div class="space-y-8">
                 <div class="flex items-start space-x-4">
                    <div class="w-10 h-10 bg-primary/5 rounded-2xl flex items-center justify-center text-primary shrink-0">
                       <QuestionMarkCircleIcon class="w-5 h-5" />
                    </div>
                    <div>
-                      <h5 class="text-sm font-black text-primary-dark mb-1">Need help?</h5>
+                      <h5 class="text-sm  text-primary-dark mb-1">Need help?</h5>
                       <p class="text-xs text-neutral-500 font-medium leading-relaxed">{{ assistantTip }}</p>
                    </div>
                 </div>
                 
                 <div class="pt-8 border-t border-neutral-50">
-                   <p class="text-[10px] font-black text-neutral-300 uppercase tracking-widest mb-4">Your Progress</p>
+                   <p class="text-[10px]  text-neutral-300 uppercase tracking-widest mb-4">Your Progress</p>
                    <div class="space-y-4">
                       <div v-for="(s, idx) in steps" :key="idx" class="flex items-center space-x-3">
                          <div class="w-5 h-5 rounded-full flex items-center justify-center border-2 transition-all duration-500"
@@ -269,11 +269,11 @@
              <div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center">
                 <LockClosedIcon class="w-6 h-6 text-secondary" />
              </div>
-             <h4 class="text-xl font-black tracking-tight">Trusted & Secure.</h4>
+             <h4 class="text-xl  tracking-tight">Trusted & Secure.</h4>
              <p class="text-white/50 text-xs font-medium leading-relaxed">
                Flybeth uses advanced encryption to protect your agency's data. We are PCI-DSS compliant and adhere to GDPR standards.
              </p>
-             <button class="text-[11px] font-black text-secondary tracking-widest uppercase hover:underline">View security whitepaper</button>
+             <button class="text-[11px]  text-secondary tracking-widest uppercase hover:underline">View security whitepaper</button>
           </div>
         </div>
       </div>
@@ -449,7 +449,7 @@ const saveProgress = async () => {
 </script>
 
 <style scoped>
-.font-black { font-weight: 900; }
+. { font-weight: 900; }
 
 .animate-float {
   animation: float 6s ease-in-out infinite;

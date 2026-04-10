@@ -1,1 +1,0 @@
-import{e as t,o,c as s,J as n,_ as a}from"./CgV4fwo6.js";const c={class:"min-h-screen bg-white font-sans selection:bg-secondary/20 selection:text-secondary overflow-x-hidden w-full"},r=t({__name:"auth",setup(_){return(e,d)=>(o(),s("div",c,[n(e.$slots,"default",{},void 0,!0)]))}}),i=a(r,[["__scopeId","data-v-5747250a"]]);export{i as default};

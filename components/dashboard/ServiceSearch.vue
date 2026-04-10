@@ -15,7 +15,7 @@
         :class="activeService === service.id ? 'text-white' : 'text-gray-600 hover:text-primary'"
       >
         <component :is="service.icon" class="h-4 w-4 transition-transform group-hover:scale-125" />
-        <span class="text-sm font-black tracking-widest uppercase">{{ service.label }}</span>
+        <span class="text-sm  tracking-widest uppercase">{{ service.label }}</span>
       </button>
     </div>
 

@@ -17,7 +17,7 @@
       
       <div class="max-w-6xl mx-auto px-6">
         <div class="space-y-4 mb-12">
-          <h1 class="text-4xl lg:text-5xl font-black text-primary-dark tracking-tight">Help center</h1>
+          <h1 class="text-4xl lg:text-5xl  text-primary-dark tracking-tight">Help center</h1>
           <p class="text-2xl lg:text-3xl font-bold text-neutral-800">Hi, Traveler</p>
         </div>
 
@@ -43,12 +43,12 @@
     <!-- Content Sections -->
     <section class="pb-32 bg-white">
       <div class="max-w-7xl mx-auto px-6">
-        <h2 class="text-2xl font-black text-primary-dark mb-10 tracking-tight">Explore help articles</h2>
+        <h2 class="text-2xl  text-primary-dark mb-10 tracking-tight">Explore help articles</h2>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           <!-- Support Category -->
           <div class="bg-white border border-neutral-100 rounded-2xl p-8 hover:shadow-xl transition-all duration-500 group">
-            <h3 class="text-2xl font-black text-primary-dark mb-6">Support</h3>
+            <h3 class="text-2xl  text-primary-dark mb-6">Support</h3>
             <div class="space-y-4">
               <NuxtLink v-for="article in supportArticles" :key="article.id" :to="`/help-center/article/${article.id}`" class="flex items-center justify-between group/link">
                 <span class="text-sm font-bold text-primary group-hover/link:text-secondary transition-colors">{{ article.title }}</span>
@@ -58,7 +58,7 @@
               <div class="pt-6 border-t border-neutral-50 mt-4">
                 <NuxtLink to="/help-center/category/support" class="flex items-center space-x-2 group/more">
                   <ListBulletIcon class="h-4 w-4 text-primary" />
-                  <span class="text-sm font-black text-primary-dark group-hover/more:text-secondary transition-colors">More</span>
+                  <span class="text-sm  text-primary-dark group-hover/more:text-secondary transition-colors">More</span>
                   <ChevronRightIcon class="h-4 w-4 text-primary group-hover/more:translate-x-1 transition-transform" />
                 </NuxtLink>
               </div>
@@ -67,7 +67,7 @@
 
           <!-- Registration Category -->
           <div class="bg-white border border-neutral-100 rounded-2xl p-8 hover:shadow-xl transition-all duration-500 group">
-            <h3 class="text-2xl font-black text-primary-dark mb-6">Registration</h3>
+            <h3 class="text-2xl  text-primary-dark mb-6">Registration</h3>
             <div class="space-y-4">
               <NuxtLink v-for="article in registrationArticles" :key="article.id" :to="`/help-center/article/${article.id}`" class="flex items-center justify-between group/link">
                 <span class="text-sm font-bold text-primary group-hover/link:text-secondary transition-colors">{{ article.title }}</span>
@@ -77,7 +77,7 @@
               <div class="pt-6 border-t border-neutral-50 mt-4">
                 <NuxtLink to="/help-center/category/registration" class="flex items-center space-x-2 group/more">
                   <ListBulletIcon class="h-4 w-4 text-primary" />
-                  <span class="text-sm font-black text-primary-dark group-hover/more:text-secondary transition-colors">More</span>
+                  <span class="text-sm  text-primary-dark group-hover/more:text-secondary transition-colors">More</span>
                   <ChevronRightIcon class="h-4 w-4 text-primary group-hover/more:translate-x-1 transition-transform" />
                 </NuxtLink>
               </div>
@@ -86,7 +86,7 @@
 
           <!-- About Category -->
           <div class="bg-white border border-neutral-100 rounded-2xl p-8 hover:shadow-xl transition-all duration-500 group">
-            <h3 class="text-2xl font-black text-primary-dark mb-6">About Flybeth TAAP</h3>
+            <h3 class="text-2xl  text-primary-dark mb-6">About Flybeth TAAP</h3>
             <div class="space-y-4">
               <NuxtLink v-for="article in aboutArticles" :key="article.id" :to="`/help-center/article/${article.id}`" class="flex items-center justify-between group/link">
                 <span class="text-sm font-bold text-primary group-hover/link:text-secondary transition-colors">{{ article.title }}</span>
@@ -96,7 +96,7 @@
               <div class="pt-6 border-t border-neutral-50 mt-4">
                 <NuxtLink to="/help-center/category/about" class="flex items-center space-x-2 group/more">
                   <ListBulletIcon class="h-4 w-4 text-primary" />
-                  <span class="text-sm font-black text-primary-dark group-hover/more:text-secondary transition-colors">More</span>
+                  <span class="text-sm  text-primary-dark group-hover/more:text-secondary transition-colors">More</span>
                   <ChevronRightIcon class="h-4 w-4 text-primary group-hover/more:translate-x-1 transition-transform" />
                 </NuxtLink>
               </div>
@@ -146,5 +146,5 @@ const handleSearch = () => {
 </script>
 
 <style scoped>
-.font-black { font-weight: 900; }
+. { font-weight: 900; }
 </style>

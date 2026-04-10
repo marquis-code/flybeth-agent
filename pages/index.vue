@@ -9,7 +9,7 @@
       
       <div class="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
         <div class="flex flex-col items-center text-center max-w-4xl mx-auto space-y-8 reveal-1">
-          <h1 class="text-6xl md:text-7xl lg:text-[5.5rem] font-black text-primary-dark leading-[1.02] tracking-tighter lg:tracking-[-0.04em]">
+          <h1 class="text-6xl md:text-7xl lg:text-[5.5rem]  text-primary-dark leading-[1.02] tracking-tighter lg:tracking-[-0.04em]">
             Scale your agency.<br />
             <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-dark to-secondary">Without limits.</span>
           </h1>
@@ -40,7 +40,7 @@
                 <CheckIcon class="h-6 w-6 text-green-600" />
               </div>
               <div>
-                <p class="text-sm font-black tracking-wider text-neutral-400">Instant booking</p>
+                <p class="text-sm  tracking-wider text-neutral-400">Instant booking</p>
                 <p class="text-lg font-bold text-gray-900">Confirmed</p>
               </div>
             </div>
@@ -50,7 +50,7 @@
                 <BanknotesIcon class="h-6 w-6 text-secondary" />
               </div>
               <div>
-                <p class="text-sm font-black tracking-wider text-neutral-400">Wholesale margin</p>
+                <p class="text-sm  tracking-wider text-neutral-400">Wholesale margin</p>
                 <p class="text-lg font-bold text-gray-900">+34.5% profit</p>
               </div>
             </div>
@@ -62,13 +62,13 @@
     <!-- Trusted Partners Banner -->
     <section class="py-16 bg-neutral-50 border-y border-neutral-100">
       <div class="max-w-7xl mx-auto px-6 lg:px-10">
-        <p class="text-center text-sm font-black text-neutral-400 tracking-[0.3em] mb-10">Integrating seamlessly with industry leaders</p>
+        <p class="text-center text-sm  text-neutral-400 tracking-[0.3em] mb-10">Integrating seamlessly with industry leaders</p>
         <div class="flex flex-wrap justify-center items-center gap-12 lg:gap-24 opacity-40 grayscale group hover:grayscale-0 hover:opacity-100 transition-all duration-700">
-          <span class="text-2xl font-black tracking-tighter">Amadeus</span>
-          <span class="text-2xl font-black tracking-tighter">Sabre</span>
-          <span class="text-2xl font-black tracking-tighter">Travelport</span>
-          <span class="text-2xl font-black tracking-tighter">HotelBeds</span>
-          <span class="text-2xl font-black tracking-tighter">Expedia TAAP</span>
+          <span class="text-2xl  tracking-tighter">Amadeus</span>
+          <span class="text-2xl  tracking-tighter">Sabre</span>
+          <span class="text-2xl  tracking-tighter">Travelport</span>
+          <span class="text-2xl  tracking-tighter">HotelBeds</span>
+          <span class="text-2xl  tracking-tighter">Expedia TAAP</span>
         </div>
       </div>
     </section>
@@ -77,8 +77,8 @@
     <section id="features" class="py-32 bg-white relative">
       <div class="max-w-7xl mx-auto px-6 lg:px-10">
         <div class="mb-20 text-center max-w-3xl mx-auto observe-me">
-          <h2 class="text-sm font-black text-secondary tracking-[0.4em] mb-4 uppercase">Powerful features</h2>
-          <h3 class="text-5xl lg:text-6xl font-black text-primary-dark tracking-tighter leading-tight">
+          <h2 class="text-sm  text-secondary tracking-[0.4em] mb-4 uppercase">Powerful features</h2>
+          <h3 class="text-5xl lg:text-6xl  text-primary-dark tracking-tighter leading-tight">
             Everything you need to <span class="block text-primary">operate at scale.</span>
           </h3>
         </div>
@@ -90,7 +90,7 @@
               <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-sm text-primary mb-8 group-hover:scale-110 group-hover:-translate-y-2 transition-transform duration-500">
                 <GlobeAltIcon class="h-7 w-7" />
               </div>
-              <h4 class="text-3xl font-black text-primary-dark mb-4 tracking-tight">Global wholesale inventory</h4>
+              <h4 class="text-3xl  text-primary-dark mb-4 tracking-tight">Global wholesale inventory</h4>
               <p class="text-neutral-500 leading-relaxed font-medium">Access millions of properties and full airline NDC feeds. Completely bypass retail markups to secure the absolute lowest industry rates and maximize your agency's margins.</p>
             </div>
             <!-- Decorative Visual -->
@@ -105,7 +105,7 @@
             <div class="relative z-10 text-white h-full flex flex-col justify-between">
               <div>
                 <SparklesIcon class="h-8 w-8 text-secondary mb-6 group-hover:rotate-12 group-hover:scale-110 transition-transform duration-500" />
-                <h4 class="text-2xl font-black mb-3 tracking-tight">Instant ticketing</h4>
+                <h4 class="text-2xl  mb-3 tracking-tight">Instant ticketing</h4>
                 <p class="text-white/70 text-sm leading-relaxed font-medium">Fully automated GDS ticket issuance ensuring your clients receive their itineraries immediately.</p>
               </div>
             </div>
@@ -116,7 +116,7 @@
             <div class="relative z-10 h-full flex flex-col justify-between">
               <div>
                 <ShieldCheckIcon class="h-8 w-8 text-primary mb-6 group-hover:scale-110 transition-transform duration-500" />
-                <h4 class="text-2xl font-black text-gray-900 mb-3 tracking-tight">Bank-grade security</h4>
+                <h4 class="text-2xl  text-gray-900 mb-3 tracking-tight">Bank-grade security</h4>
                 <p class="text-neutral-500 text-sm leading-relaxed font-medium">Multi-tiered encryption validating every transaction, protecting your agency and your clients.</p>
               </div>
             </div>
@@ -126,16 +126,16 @@
           <div class="md:col-span-3 bg-neutral-50 rounded-[2.5rem] p-10 lg:p-14 border border-neutral-100 flex flex-col md:flex-row items-center justify-between gap-12 group hover:shadow-xl transition-all duration-700 observe-me delay-400 overflow-hidden relative">
             <div class="absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-white/60 to-transparent pointer-events-none"></div>
             <div class="relative z-10 max-w-2xl">
-              <h4 class="text-3xl font-black text-primary-dark mb-4 tracking-tight">Advanced agency analytics</h4>
+              <h4 class="text-3xl  text-primary-dark mb-4 tracking-tight">Advanced agency analytics</h4>
               <p class="text-neutral-500 leading-relaxed font-medium">Monitor your booking volume, calculate live profit margins, and analyze regional segment trends with our dedicated agent reporting dashboard.</p>
             </div>
             <div class="relative z-10 grid grid-cols-2 gap-4 w-full md:w-auto shrink-0">
               <div class="bg-white p-6 rounded-2xl border border-neutral-100 shadow-sm group-hover:-translate-y-2 transition-transform duration-500">
-                <p class="text-sm font-black uppercase text-neutral-400 mb-2 tracking-wider">Revenue YTD</p>
+                <p class="text-sm  uppercase text-neutral-400 mb-2 tracking-wider">Revenue YTD</p>
                 <p class="text-2xl font-bold text-gray-900">$2.4M</p>
               </div>
               <div class="bg-white p-6 rounded-2xl border border-neutral-100 shadow-sm group-hover:-translate-y-2 transition-transform duration-700 delay-100">
-                <p class="text-sm font-black uppercase text-neutral-400 mb-2 tracking-wider">Bookings</p>
+                <p class="text-sm  uppercase text-neutral-400 mb-2 tracking-wider">Bookings</p>
                 <p class="text-2xl font-bold text-gray-900">1,204</p>
               </div>
             </div>
@@ -152,10 +152,10 @@
       <div class="absolute top-20 left-0 w-[400px] h-[400px] bg-blue-100/50 rounded-full blur-[100px] pointer-events-none"></div>
 
       <div class="relative z-10 max-w-4xl mx-auto px-6 text-center observe-me">
-        <span class="inline-block py-2.5 px-6 mb-8 rounded-full bg-primary/5 border border-primary/10 text-sm font-black tracking-[0.3em] text-primary">
+        <span class="inline-block py-2.5 px-6 mb-8 rounded-full bg-primary/5 border border-primary/10 text-sm  tracking-[0.3em] text-primary">
           Get started today
         </span>
-        <h2 class="text-5xl lg:text-7xl font-black tracking-tighter leading-tight mb-8 text-primary-dark">
+        <h2 class="text-5xl lg:text-7xl  tracking-tighter leading-tight mb-8 text-primary-dark">
           Ready to grow your <br />
           <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">travel business?</span>
         </h2>
@@ -220,7 +220,7 @@ onUnmounted(() => {
 
 <style scoped>
 /* Base Typography Extensions */
-.font-black { font-weight: 900; }
+. { font-weight: 900; }
 
 /* Reveal Animations */
 .reveal-1 {

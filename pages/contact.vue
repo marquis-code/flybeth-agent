@@ -7,7 +7,7 @@
         <!-- Left: Contact Details -->
         <div class="space-y-12">
           <div class="space-y-6">
-            <h1 class="text-5xl lg:text-7xl font-black text-primary-dark tracking-tighter leading-tight">
+            <h1 class="text-5xl lg:text-7xl  text-primary-dark tracking-tighter leading-tight">
               Let's build your <br />
               <span class="text-primary italic">travel empire.</span>
             </h1>
@@ -22,7 +22,7 @@
                 <EnvelopeIcon class="h-6 w-6" />
               </div>
               <div>
-                <p class="text-sm font-black text-neutral-400 tracking-widest uppercase mb-1">Direct support</p>
+                <p class="text-sm  text-neutral-400 tracking-widest uppercase mb-1">Direct support</p>
                 <a href="mailto:support@flybeth.com" class="text-xl font-bold text-primary-dark hover:text-primary transition-colors">support@flybeth.com</a>
               </div>
             </div>
@@ -32,7 +32,7 @@
                 <MapPinIcon class="h-6 w-6" />
               </div>
               <div>
-                <p class="text-sm font-black text-neutral-400 tracking-widest uppercase mb-1">Global headquarters</p>
+                <p class="text-sm  text-neutral-400 tracking-widest uppercase mb-1">Global headquarters</p>
                 <p class="text-xl font-bold text-primary-dark">Lagos, Nigeria</p>
                 <p class="text-neutral-500 font-medium mt-1">Serving the global agent community across all nodes.</p>
               </div>
@@ -45,27 +45,27 @@
           <form @submit.prevent="handleSubmit" class="space-y-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div class="space-y-2">
-                <label class="text-xs font-black text-neutral-400 tracking-widest uppercase px-1">First name</label>
+                <label class="text-xs  text-neutral-400 tracking-widest uppercase px-1">First name</label>
                 <input v-model="form.firstName" type="text" class="w-full px-6 py-4 bg-white border border-neutral-200 rounded-2xl focus:border-primary focus:ring-4 focus:ring-primary/5 outline-none font-bold transition-all" placeholder="Jane" />
               </div>
               <div class="space-y-2">
-                <label class="text-xs font-black text-neutral-400 tracking-widest uppercase px-1">Last name</label>
+                <label class="text-xs  text-neutral-400 tracking-widest uppercase px-1">Last name</label>
                 <input v-model="form.lastName" type="text" class="w-full px-6 py-4 bg-white border border-neutral-200 rounded-2xl focus:border-primary focus:ring-4 focus:ring-primary/5 outline-none font-bold transition-all" placeholder="Doe" />
               </div>
             </div>
 
             <div class="space-y-2">
-              <label class="text-xs font-black text-neutral-400 tracking-widest uppercase px-1">Email address</label>
+              <label class="text-xs  text-neutral-400 tracking-widest uppercase px-1">Email address</label>
               <input v-model="form.email" type="email" class="w-full px-6 py-4 bg-white border border-neutral-200 rounded-2xl focus:border-primary focus:ring-4 focus:ring-primary/5 outline-none font-bold transition-all" placeholder="jane@agency.com" />
             </div>
 
             <div class="space-y-2">
-              <label class="text-xs font-black text-neutral-400 tracking-widest uppercase px-1">Agency name</label>
+              <label class="text-xs  text-neutral-400 tracking-widest uppercase px-1">Agency name</label>
               <input v-model="form.agency" type="text" class="w-full px-6 py-4 bg-white border border-neutral-200 rounded-2xl focus:border-primary focus:ring-4 focus:ring-primary/5 outline-none font-bold transition-all" placeholder="Travel Elite World" />
             </div>
 
             <div class="space-y-2">
-              <label class="text-xs font-black text-neutral-400 tracking-widest uppercase px-1">Message</label>
+              <label class="text-xs  text-neutral-400 tracking-widest uppercase px-1">Message</label>
               <textarea v-model="form.message" rows="4" class="w-full px-6 py-4 bg-white border border-neutral-200 rounded-2xl focus:border-primary focus:ring-4 focus:ring-primary/5 outline-none font-bold transition-all" placeholder="Tell us how we can support your growth..."></textarea>
             </div>
 
@@ -83,7 +83,7 @@
         <div class="absolute inset-0 flex items-center justify-center">
             <div class="flex flex-col items-center">
                <GlobeAmericasIcon class="h-24 w-24 text-neutral-300 mb-4 animate-pulse" />
-               <p class="text-lg font-black text-neutral-400 tracking-widest">Global distribution network active</p>
+               <p class="text-lg  text-neutral-400 tracking-widest">Global distribution network active</p>
             </div>
         </div>
       </div>
@@ -121,5 +121,5 @@ const handleSubmit = () => {
 </script>
 
 <style scoped>
-.font-black { font-weight: 900; }
+. { font-weight: 900; }
 </style>

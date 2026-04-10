@@ -2,8 +2,8 @@
   <div class="bg-white">
     <section class="relative pt-24 pb-16 lg:pt-32 lg:pb-24 overflow-hidden bg-primary-dark">
       <div class="max-w-4xl mx-auto px-6 text-center space-y-6">
-        <h2 class="text-sm font-black text-secondary tracking-[0.4em] uppercase">Pricing modules</h2>
-        <h1 class="text-5xl lg:text-7xl font-black text-white tracking-tighter leading-tight">
+        <h2 class="text-sm  text-secondary tracking-[0.4em] uppercase">Pricing modules</h2>
+        <h1 class="text-5xl lg:text-7xl  text-white tracking-tighter leading-tight">
           Simple, wholesale <br />
           <span class="text-primary italic">transparency.</span>
         </h1>
@@ -22,12 +22,12 @@
           
           <div class="space-y-8 relative z-10">
             <div class="space-y-2">
-              <h3 class="text-3xl font-black text-primary-dark">Agent partner</h3>
+              <h3 class="text-3xl  text-primary-dark">Agent partner</h3>
               <p class="text-neutral-500 font-medium">For independent advisors and small agencies.</p>
             </div>
             
             <div class="flex items-baseline space-x-2">
-              <span class="text-6xl font-black text-primary-dark">$0</span>
+              <span class="text-6xl  text-primary-dark">$0</span>
               <span class="text-neutral-400 font-bold uppercase tracking-widest text-sm">per month</span>
             </div>
 
@@ -47,17 +47,17 @@
           <div class="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-transparent opacity-50"></div>
           
           <div class="space-y-8 relative z-10">
-            <div class="inline-flex items-center space-x-2 px-4 py-1.5 bg-secondary/20 rounded-full border border-secondary/30 text-secondary text-[10px] font-black tracking-widest uppercase">
+            <div class="inline-flex items-center space-x-2 px-4 py-1.5 bg-secondary/20 rounded-full border border-secondary/30 text-secondary text-[10px]  tracking-widest uppercase">
               Consolidator favorite
             </div>
             
             <div class="space-y-2">
-              <h3 class="text-3xl font-black">Enterprise node</h3>
+              <h3 class="text-3xl ">Enterprise node</h3>
               <p class="text-white/60 font-medium">For large-scale consolidators and franchise networks.</p>
             </div>
             
             <div class="flex items-baseline space-x-2">
-              <span class="text-6xl font-black">Custom</span>
+              <span class="text-6xl ">Custom</span>
             </div>
 
             <ul class="space-y-4">
@@ -99,5 +99,5 @@ const enterpriseFeatures = [
 </script>
 
 <style scoped>
-.font-black { font-weight: 900; }
+. { font-weight: 900; }
 </style>

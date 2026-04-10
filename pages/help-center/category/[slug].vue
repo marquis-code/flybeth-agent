@@ -16,8 +16,8 @@
     <div class="max-w-4xl mx-auto px-6 py-16 lg:py-24">
       <div v-if="category" class="space-y-12">
         <div class="space-y-4">
-          <span class="text-xs font-black text-primary-dark uppercase tracking-[0.2em]">Category</span>
-          <h1 class="text-4xl lg:text-5xl font-black text-primary-dark tracking-tighter">{{ category.name }}</h1>
+          <span class="text-xs  text-primary-dark uppercase tracking-[0.2em]">Category</span>
+          <h1 class="text-4xl lg:text-5xl  text-primary-dark tracking-tighter">{{ category.name }}</h1>
           <p class="text-lg text-neutral-500 font-medium leading-relaxed max-w-2xl">
             {{ category.description }}
           </p>
@@ -31,7 +31,7 @@
             class="group p-8 bg-white border border-neutral-100 rounded-2xl hover:border-primary hover:shadow-xl hover:shadow-primary/5 transition-all duration-500 flex justify-between items-center"
           >
             <div class="space-y-2">
-              <h3 class="text-xl font-black text-primary-dark group-hover:text-primary transition-colors">{{ article.title }}</h3>
+              <h3 class="text-xl  text-primary-dark group-hover:text-primary transition-colors">{{ article.title }}</h3>
               <p class="text-sm text-neutral-400 font-medium">Read more about this topic</p>
             </div>
             <div class="w-12 h-12 rounded-full bg-primary/5 flex items-center justify-center group-hover:bg-primary group-hover:scale-110 transition-all duration-500">
@@ -42,7 +42,7 @@
       </div>
 
       <div v-else class="text-center py-20">
-        <h2 class="text-2xl font-black text-primary-dark mb-4">Category not found</h2>
+        <h2 class="text-2xl  text-primary-dark mb-4">Category not found</h2>
         <BaseButton to="/help-center" variant="outline">Return to Help Center</BaseButton>
       </div>
     </div>
@@ -109,5 +109,5 @@ useHead({
 </script>
 
 <style scoped>
-.font-black { font-weight: 900; }
+. { font-weight: 900; }
 </style>

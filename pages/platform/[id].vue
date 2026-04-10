@@ -5,15 +5,15 @@
         <NuxtLink to="/" class="flex items-center space-x-3">
           <img src="@/assets/img/logo.png" class="w-auto h-10" alt="logo" />
         </NuxtLink>
-        <NuxtLink to="/auth/register" class="text-sm font-black text-primary hover:text-primary-dark transition-colors tracking-widest uppercase">Start booking</NuxtLink>
+        <NuxtLink to="/auth/register" class="text-sm  text-primary hover:text-primary-dark transition-colors tracking-widest uppercase">Start booking</NuxtLink>
       </div>
     </nav>
 
     <section class="py-24 bg-white relative">
       <div class="max-w-4xl mx-auto px-6 lg:px-10 space-y-16">
         <div class="space-y-6">
-          <h2 class="text-xs font-black text-secondary tracking-[0.4em] uppercase">Platform nodes</h2>
-          <h1 class="text-5xl lg:text-7xl font-black text-primary-dark tracking-tighter leading-tight">
+          <h2 class="text-xs  text-secondary tracking-[0.4em] uppercase">Platform nodes</h2>
+          <h1 class="text-5xl lg:text-7xl  text-primary-dark tracking-tighter leading-tight">
              {{ pageContent.title }}
           </h1>
           <p class="text-xl text-neutral-500 font-medium leading-relaxed">
@@ -23,7 +23,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-10">
           <div v-for="item in pageContent.features" :key="item.title" class="bg-neutral-50 rounded-3xl p-8 border border-neutral-100 space-y-4">
-            <h3 class="text-xl font-black text-primary-dark">{{ item.title }}</h3>
+            <h3 class="text-xl  text-primary-dark">{{ item.title }}</h3>
             <p class="text-neutral-500 text-sm font-medium leading-relaxed">{{ item.description }}</p>
           </div>
         </div>
@@ -33,8 +33,8 @@
            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10"></div>
            <img :src="pageContent.image" class="absolute inset-0 w-full h-full object-cover grayscale opacity-50 group-hover:scale-110 transition-transform duration-1000" />
            <div class="absolute bottom-10 left-10 z-20 space-y-2">
-              <p class="text-sm font-black text-secondary tracking-[0.4em] uppercase">Status: Node Active</p>
-              <h3 class="text-3xl font-black text-white tracking-tight">{{ pageContent.ctaTitle }}</h3>
+              <p class="text-sm  text-secondary tracking-[0.4em] uppercase">Status: Node Active</p>
+              <h3 class="text-3xl  text-white tracking-tight">{{ pageContent.ctaTitle }}</h3>
            </div>
         </div>
       </div>
@@ -117,5 +117,5 @@ const pageContent = computed(() => content[path as keyof typeof content] || cont
 </script>
 
 <style scoped>
-.font-black { font-weight: 900; }
+. { font-weight: 900; }
 </style>

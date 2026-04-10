@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-2">
-    <label v-if="label" class="text-xs font-black text-primary-dark tracking-widest uppercase">{{ label }}</label>
+    <label v-if="label" class="text-xs  text-primary-dark tracking-widest uppercase">{{ label }}</label>
     <div 
       class="relative group cursor-pointer"
       @click="triggerFileInput"
@@ -71,7 +71,7 @@
       <div v-if="loading" class="absolute inset-0 bg-white/60 backdrop-blur-[2px] rounded-[2rem] flex items-center justify-center z-20">
          <div class="flex flex-col items-center">
             <div class="w-8 h-8 border-3 border-secondary/20 border-t-secondary rounded-full animate-spin"></div>
-            <p class="text-[10px] font-black text-secondary tracking-widest uppercase mt-3">Uploading...</p>
+            <p class="text-[10px]  text-secondary tracking-widest uppercase mt-3">Uploading...</p>
          </div>
       </div>
     </div>

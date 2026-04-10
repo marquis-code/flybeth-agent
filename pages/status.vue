@@ -3,7 +3,7 @@
     <section class="py-24 bg-white relative">
       <div class="max-w-4xl mx-auto px-6 lg:px-10 space-y-16">
         <div class="text-center space-y-6">
-          <h1 class="text-5xl lg:text-7xl font-black text-primary-dark tracking-tighter leading-tight">
+          <h1 class="text-5xl lg:text-7xl  text-primary-dark tracking-tighter leading-tight">
              System <br />
              <span class="text-secondary italic">vitality.</span>
           </h1>
@@ -16,10 +16,10 @@
         <div class="bg-neutral-50 rounded-[3rem] p-10 border border-neutral-100 shadow-sm relative overflow-hidden group">
            <div class="flex flex-col md:flex-row items-center justify-between gap-8 border-b border-neutral-200 pb-10">
               <div class="space-y-1 text-center md:text-left">
-                 <p class="text-sm font-black text-neutral-400 tracking-widest uppercase">Global Network</p>
-                 <h2 class="text-4xl font-black text-green-600">All systems go</h2>
+                 <p class="text-sm  text-neutral-400 tracking-widest uppercase">Global Network</p>
+                 <h2 class="text-4xl  text-green-600">All systems go</h2>
               </div>
-              <div class="px-6 py-2 bg-green-50 text-green-700 rounded-full text-xs font-black tracking-widest border border-green-200 uppercase">
+              <div class="px-6 py-2 bg-green-50 text-green-700 rounded-full text-xs  tracking-widest border border-green-200 uppercase">
                  Stable
               </div>
            </div>
@@ -30,18 +30,18 @@
                     <div class="w-2 h-2 rounded-full" :class="node.status === 'online' ? 'bg-green-500' : 'bg-yellow-500'"></div>
                     <span class="font-bold text-primary-dark">{{ node.name }}</span>
                  </div>
-                 <span class="text-[10px] font-black text-neutral-400 uppercase tracking-widest">{{ node.latency }}ms</span>
+                 <span class="text-[10px]  text-neutral-400 uppercase tracking-widest">{{ node.latency }}ms</span>
               </div>
            </div>
         </div>
 
         <!-- Historical Uptime -->
         <div class="space-y-6">
-           <h3 class="text-2xl font-black text-primary-dark tracking-tight">Node health history</h3>
+           <h3 class="text-2xl  text-primary-dark tracking-tight">Node health history</h3>
            <div class="space-y-4">
               <div v-for="service in services" :key="service" class="space-y-3">
                  <div class="flex justify-between items-end">
-                    <span class="text-sm font-black text-neutral-500 uppercase tracking-widest">{{ service }}</span>
+                    <span class="text-sm  text-neutral-500 uppercase tracking-widest">{{ service }}</span>
                     <span class="text-xs font-bold text-primary">99.98%</span>
                  </div>
                  <div class="flex gap-1">
@@ -69,5 +69,5 @@ const services = ['Flight Search Engine', 'Hotel Booking Matrix', 'API Gateway',
 </script>
 
 <style scoped>
-.font-black { font-weight: 900; }
+. { font-weight: 900; }
 </style>

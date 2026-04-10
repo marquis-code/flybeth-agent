@@ -4,7 +4,7 @@
          :class="[disabled ? 'opacity-50 cursor-not-allowed' : '', errorClass]">
       
       <!-- Always show top floating label -->
-      <label class="absolute transition-all duration-300 ease-in-out pointer-events-none z-10 text-[9px] font-black uppercase tracking-[0.15em] text-primary left-5 top-2.5">
+      <label class="absolute transition-all duration-300 ease-in-out pointer-events-none z-10 text-[9px]  uppercase tracking-[0.15em] text-primary left-5 top-2.5">
         {{ label }}
       </label>
 

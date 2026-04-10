@@ -20,7 +20,7 @@
             v-for="item in navItems" 
             :key="item.path" 
             :to="item.path"
-            class="text-[15px] font-black tracking-tight text-primary-dark hover:text-secondary transition-all duration-300 relative group"
+            class="text-[15px] font-medium  tracking-tight hover:text-secondary transition-all duration-300 relative group"
           >
             {{ item.name }}
             <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary transition-all duration-300 group-hover:w-full"></span>
@@ -29,10 +29,10 @@
 
         <!-- Desktop Actions -->
         <div class="hidden lg:flex items-center space-x-6">
-          <NuxtLink to="/auth/login" class="text-[15px] font-black py-3 px-6 text-primary-dark hover:text-secondary transition-all duration-300">
+          <NuxtLink to="/auth/login" class="text-sm  py-3 px-6 font-medium hover:text-secondary transition-all duration-300">
             Sign In
           </NuxtLink>
-          <BaseButton to="/auth/register" variant="primary" size="md" class="px-8 py-3.5 shadow-xl shadow-primary/20 hover:scale-105 active:scale-95 transition-all">
+          <BaseButton to="/auth/register" variant="primary" size="sm" class="px-8 py-3.5 shadow-xl shadow-primary/20 hover:scale-105 active:scale-95 transition-all">
             Signup
           </BaseButton>
         </div>
@@ -64,7 +64,7 @@
             :key="item.path" 
             :to="item.path"
             @click="isMobileMenuOpen = false"
-            class="text-lg font-black text-primary-dark border-b border-neutral-50 pb-4"
+            class="text-lg  text-primary-dark border-b border-neutral-50 pb-4"
           >
             {{ item.name }}
           </NuxtLink>
@@ -106,6 +106,6 @@ onUnmounted(() => {
 })
 </script>
 
-<style scoped>
-.font-black { font-weight: 900; }
-</style>
+<!-- <style scoped>
+. { font-weight: 900; }
+</style> -->

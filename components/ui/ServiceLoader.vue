@@ -18,7 +18,7 @@
 
         <!-- Service Info -->
         <div class="text-center space-y-4">
-          <h3 class="text-2xl font-black text-primary-dark tracking-widest animate-pulse">
+          <h3 class="text-2xl  text-primary-dark tracking-widest animate-pulse">
             {{ serviceTitle }}
           </h3>
           <p class="text-neutral/60 font-medium">
@@ -38,7 +38,7 @@
               <InformationCircleIcon class="h-6 w-6 text-primary" />
             </div>
             <div>
-              <p class="text-sm font-black text-primary tracking-[0.2em] mb-1">Traveler tip</p>
+              <p class="text-sm  text-primary tracking-[0.2em] mb-1">Traveler tip</p>
               <p class="text-xs text-neutral/80 font-medium leading-relaxed">
                 {{ currentTip }}
               </p>

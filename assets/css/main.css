@@ -11,7 +11,7 @@
   box-shadow: none !important;
 }
 
-@layer base {
+/* @layer base {
   body {
     @apply antialiased text-neutral bg-gray-50 font-sans;
   }
@@ -28,7 +28,7 @@
   .brand-glass {
     @apply bg-white/70 backdrop-blur-md border border-white/20;
   }
-}
+} */
 
 html,
 body {

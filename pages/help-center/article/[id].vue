@@ -15,8 +15,8 @@
     <article class="max-w-3xl mx-auto px-6 py-20">
       <div v-if="article" class="space-y-10">
         <div class="space-y-4">
-          <p class="text-sm font-black text-secondary tracking-widest">{{ article.category }}</p>
-          <h1 class="text-4xl lg:text-5xl font-black text-primary-dark tracking-tight leading-tight">
+          <p class="text-sm  text-secondary tracking-widest">{{ article.category }}</p>
+          <h1 class="text-4xl lg:text-5xl  text-primary-dark tracking-tight leading-tight">
             {{ article.title }}
           </h1>
         </div>
@@ -100,5 +100,5 @@ const handleFeedback = (type: 'yes' | 'no') => {
 </script>
 
 <style scoped>
-.font-black { font-weight: 900; }
+. { font-weight: 900; }
 </style>

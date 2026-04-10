@@ -11,7 +11,7 @@
       v-model="digits[index]"
       @input="onInput(index, $event)"
       @keydown="onKeyDown(index, $event)"
-      class="w-12 h-16 sm:w-16 sm:h-20 text-center text-2xl sm:text-3xl font-black text-primary-dark bg-white border-2 border-gray-100 focus:border-secondary focus:ring-8 focus:ring-secondary/5 rounded-2xl sm:rounded-3xl outline-none transition-all shadow-sm"
+      class="w-12 h-16 sm:w-16 sm:h-20 text-center text-2xl sm:text-3xl  text-primary-dark bg-white border-2 border-gray-100 focus:border-secondary focus:ring-8 focus:ring-secondary/5 rounded-2xl sm:rounded-3xl outline-none transition-all shadow-sm"
       :class="{ 'border-secondary ring-4 ring-secondary/5': digits[index] }"
     />
   </div>

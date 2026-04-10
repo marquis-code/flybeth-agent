@@ -9,7 +9,7 @@
       <div class="flex items-center space-x-3 flex-1">
         <CalendarIcon class="h-5 w-5 text-gray-400 group-hover:text-primary transition-colors" />
         <div class="flex flex-col">
-          <span class="text-[9px] font-black uppercase tracking-widest text-primary/60">Check-in — Check-out</span>
+          <span class="text-[9px]  uppercase tracking-widest text-primary/60">Check-in — Check-out</span>
           <span class="text-sm font-bold text-gray-900">
             {{ displayRange || 'Select dates' }}
           </span>
@@ -27,7 +27,7 @@
         <div class="px-8 pt-8 flex items-center justify-between border-b border-gray-100 pb-4">
           <div class="flex items-center space-x-2">
             <CalendarIcon class="h-5 w-5 text-primary" />
-            <span class="text-xs font-black tracking-widest uppercase text-gray-900">Select Travel Dates</span>
+            <span class="text-xs  tracking-widest uppercase text-gray-900">Select Travel Dates</span>
           </div>
           <button @click="isOpen = false" class="p-2 hover:bg-gray-50 rounded-full transition-all text-gray-400 hover:text-gray-900">
             <XMarkIcon class="h-5 w-5" />
@@ -37,8 +37,8 @@
         <div class="p-8 lg:p-10 space-y-10">
           <!-- Calendar Header -->
           <div class="flex items-center justify-between px-4">
-            <h3 class="text-lg font-black text-gray-900 tracking-tight">{{ formatMonthYear(currentLeftMonth) }}</h3>
-            <h3 class="text-lg font-black text-gray-900 tracking-tight">{{ formatMonthYear(currentRightMonth) }}</h3>
+            <h3 class="text-lg  text-gray-900 tracking-tight">{{ formatMonthYear(currentLeftMonth) }}</h3>
+            <h3 class="text-lg  text-gray-900 tracking-tight">{{ formatMonthYear(currentRightMonth) }}</h3>
             <div class="flex items-center space-x-2">
               <button @click="prevMonth" class="p-2 hover:bg-gray-50 rounded-xl transition-all"><ChevronLeftIcon class="h-5 w-5 text-gray-600" /></button>
               <button @click="nextMonth" class="p-2 hover:bg-gray-50 rounded-xl transition-all"><ChevronRightIcon class="h-5 w-5 text-gray-600" /></button>
@@ -50,7 +50,7 @@
             <!-- Left Month -->
             <div class="space-y-4">
               <div class="grid grid-cols-7 text-center">
-                <span v-for="d in days" :key="d" class="text-[10px] font-black text-gray-400 uppercase">{{ d }}</span>
+                <span v-for="d in days" :key="d" class="text-[10px]  text-gray-400 uppercase">{{ d }}</span>
               </div>
               <div class="grid grid-cols-7 gap-y-1">
                 <div v-for="empty in leftMonthData.padding" :key="'empty-'+empty" class="h-12"></div>
@@ -70,7 +70,7 @@
             <!-- Right Month -->
             <div class="space-y-4">
               <div class="grid grid-cols-7 text-center">
-                <span v-for="d in days" :key="d" class="text-[10px] font-black text-gray-400 uppercase">{{ d }}</span>
+                <span v-for="d in days" :key="d" class="text-[10px]  text-gray-400 uppercase">{{ d }}</span>
               </div>
               <div class="grid grid-cols-7 gap-y-1">
                 <div v-for="empty in rightMonthData.padding" :key="'empty-r-'+empty" class="h-12"></div>
@@ -93,7 +93,7 @@
             <div class="flex items-center gap-3">
               <button 
                 v-for="opt in dateOptions" :key="opt.label"
-                class="px-5 py-2.5 rounded-full border border-gray-200 text-xs font-black tracking-widest uppercase transition-all hover:border-primary hover:text-primary"
+                class="px-5 py-2.5 rounded-full border border-gray-200 text-xs  tracking-widest uppercase transition-all hover:border-primary hover:text-primary"
                 :class="opt.active ? 'bg-primary/5 border-primary text-primary' : 'text-gray-500'"
               >
                 {{ opt.label }}
@@ -101,7 +101,7 @@
             </div>
             
             <div class="flex items-center space-x-4">
-              <button @click="clearRange" class="text-xs font-black text-gray-400 uppercase tracking-widest hover:text-gray-900 transition-colors">Clear</button>
+              <button @click="clearRange" class="text-xs  text-gray-400 uppercase tracking-widest hover:text-gray-900 transition-colors">Clear</button>
               <BaseButton variant="primary" size="sm" class="rounded-xl px-8" @click="isOpen = false">Apply Dates</BaseButton>
             </div>
           </div>

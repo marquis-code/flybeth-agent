@@ -13,13 +13,16 @@
           <div class="col-span-2 lg:col-span-2 space-y-8">
             <img src="@/assets/img/logo.png" class="h-10 w-auto brightness-0 invert" alt="Flybeth" />
             <p class="text-neutral-400 font-medium max-w-sm leading-relaxed">
-              Empowering the next generation of travel businesses with premium inventory and cutting-edge booking technology.
+              <strong>FLYBETH LLC</strong><br>
+              1880 S Dairy Ashford Rd, Suite 207, Houston, TX 77077 United States.<br>
+              <span class="block mt-2 font-bold text-white">+1 844 FLYBETH (359-2384)</span>
+              <span class="block text-brand-orange font-medium">Hello@flybeth.com</span>
             </p>
           </div>
 
           <!-- Links -->
           <div v-for="(group, title) in footerLinks" :key="title" class="space-y-6">
-            <h4 class="text-xs font-black text-white uppercase tracking-[0.2em]">{{ title }}</h4>
+            <h4 class="text-xs  text-white uppercase tracking-[0.2em]">{{ title }}</h4>
             <ul class="space-y-4">
               <li v-for="link in group" :key="link.name">
                 <NuxtLink :to="link.path" class="text-[14px] text-neutral-500 hover:text-white transition-colors font-bold">{{ link.name }}</NuxtLink>
@@ -29,7 +32,7 @@
         </div>
 
         <div class="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p class="text-xs font-bold text-neutral-600 tracking-wider uppercase">© 2026 Flybeth B2B. All rights reserved.</p>
+          <p class="text-xs font-bold text-neutral-600 tracking-wider uppercase">© 2026 FLYBETH LLC. All rights reserved.</p>
           <div class="flex items-center space-x-8">
             <NuxtLink to="/terms" class="text-xs font-bold text-neutral-500 hover:text-white transition-colors uppercase tracking-widest">Terms</NuxtLink>
             <NuxtLink to="/privacy" class="text-xs font-bold text-neutral-500 hover:text-white transition-colors uppercase tracking-widest">Privacy</NuxtLink>
@@ -70,5 +73,5 @@ const footerLinks = {
 html {
   scroll-behavior: smooth;
 }
-.font-black { font-weight: 900; }
+. { font-weight: 900; }
 </style>

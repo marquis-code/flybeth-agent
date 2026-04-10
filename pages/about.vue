@@ -6,7 +6,7 @@
       <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
       
       <div class="max-w-4xl mx-auto px-6 text-center space-y-8">
-        <h1 class="text-6xl lg:text-7xl font-black text-primary-dark tracking-tighter leading-tight">
+        <h1 class="text-6xl lg:text-7xl  text-primary-dark tracking-tighter leading-tight">
           Empowering the world's <br />
           <span class="text-secondary italic">elite travel advisors.</span>
         </h1>
@@ -20,17 +20,17 @@
     <section class="py-24 bg-neutral-50 border-y border-neutral-100">
       <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
         <div class="space-y-8">
-          <h2 class="text-4xl font-black text-primary-dark tracking-tight">Our mission</h2>
+          <h2 class="text-4xl  text-primary-dark tracking-tight">Our mission</h2>
           <p class="text-lg text-neutral-600 leading-relaxed font-medium">
             We provide a high-performance B2B travel framework that connects regional agents directly to global GDS and NDC pools. By bypassing traditional retail layers, we enable our partners to secure market-leading wholesale rates and maximize their operational profitability.
           </p>
           <div class="grid grid-cols-2 gap-8 pt-4">
             <div>
-              <p class="text-3xl font-black text-primary mb-1">2018</p>
+              <p class="text-3xl  text-primary mb-1">2018</p>
               <p class="text-sm font-bold text-neutral-400 tracking-widest uppercase">Established</p>
             </div>
             <div>
-              <p class="text-3xl font-black text-secondary mb-1">45+</p>
+              <p class="text-3xl  text-secondary mb-1">45+</p>
               <p class="text-sm font-bold text-neutral-400 tracking-widest uppercase">Global nodes</p>
             </div>
           </div>
@@ -46,8 +46,8 @@
     <section class="py-32 bg-white">
       <div class="max-w-7xl mx-auto px-6">
         <div class="text-center mb-20 space-y-4">
-          <h2 class="text-sm font-black text-secondary tracking-[0.4em]">The Flybeth edge</h2>
-          <h3 class="text-5xl font-black text-primary-dark tracking-tighter">Why partners choose us.</h3>
+          <h2 class="text-sm  text-secondary tracking-[0.4em]">The Flybeth edge</h2>
+          <h3 class="text-5xl  text-primary-dark tracking-tighter">Why partners choose us.</h3>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
@@ -55,7 +55,7 @@
             <div class="w-16 h-16 bg-neutral-50 rounded-2xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-sm border border-neutral-100">
               <component :is="feature.icon" class="h-8 w-8" />
             </div>
-            <h4 class="text-2xl font-black text-primary-dark tracking-tight">{{ feature.title }}</h4>
+            <h4 class="text-2xl  text-primary-dark tracking-tight">{{ feature.title }}</h4>
             <p class="text-neutral-500 font-medium leading-relaxed">{{ feature.description }}</p>
           </div>
         </div>
@@ -65,7 +65,7 @@
     <!-- CTA Section -->
     <footer class="bg-primary-dark py-24 text-center">
       <div class="max-w-4xl mx-auto px-6 space-y-10">
-        <h2 class="text-5xl font-black text-white tracking-tighter">Ready to join the network?</h2>
+        <h2 class="text-5xl  text-white tracking-tighter">Ready to join the network?</h2>
         <div class="flex items-center justify-center space-x-6">
           <BaseButton to="/auth/register" variant="primary" size="lg" class="px-12 shadow-2xl shadow-primary/20">Get started now</BaseButton>
           <NuxtLink to="/contact" class="text-sm font-bold text-white hover:text-secondary transition-colors underline underline-offset-8 decoration-white/30">Speak to an advisor</NuxtLink>
@@ -98,5 +98,5 @@ const whyChooseUs = [
 </script>
 
 <style scoped>
-.font-black { font-weight: 900; }
+. { font-weight: 900; }
 </style>
