@@ -110,8 +110,8 @@ definePageMeta({
 
 const { login, loading } = useAuth()
 const form = reactive({
-  email: 'abahkauzy3@gmail.com',
-  password: 'Miles1999@'
+  email: '',
+  password: ''
 })
 
 const errors = reactive({
