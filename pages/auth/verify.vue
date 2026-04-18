@@ -7,7 +7,7 @@
       </div>
 
       <div class="space-y-4">
-        <h1 class="text-4xl  text-primary-dark tracking-tighter">Verify your email.</h1>
+        <h1 class="text-4xl  text-primary-dark er">Verify your email.</h1>
         <p class="text-neutral-400 font-medium">
           A verification code has been sent to <br />
           <strong class="text-primary-dark">{{ email }}</strong>
@@ -37,7 +37,7 @@
             <button 
               @click="handleResend" 
               :disabled="timer > 0 || resending"
-              class="text-secondary  tracking-widest uppercase hover:underline ml-1 disabled:opacity-50 disabled:cursor-not-allowed"
+              class="text-secondary    hover:underline ml-1 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {{ timer > 0 ? `Resend in ${timer}s` : 'Resend code' }}
             </button>
@@ -45,7 +45,7 @@
         </div>
 
         <div class="pt-8 border-t border-neutral-100">
-           <NuxtLink to="/auth/login" class="text-xs  text-neutral-300 hover:text-primary tracking-[0.2em] transition-colors uppercase">Return to sign in</NuxtLink>
+           <NuxtLink to="/auth/login" class="text-xs  text-neutral-300 hover:text-primary  transition-colors ">Return to sign in</NuxtLink>
         </div>
       </div>
     </div>
@@ -99,12 +99,31 @@ const handleVerify = async () => {
   if (otp.value.length !== 6) return
   
   try {
-    await verifyOtp({
+    const res = await verifyOtp({
       email: email.value,
       otp: otp.value
     })
+    
     localStorage.removeItem('verify_email')
-    await navigateTo('/auth/login', { replace: true })
+    
+    // Auth-related localStorage state is already handled by useAuth.verifyOtp
+    
+    // Nuclear cookie cleanup (just in case)
+    if (import.meta.client) {
+      const cookieNames = ['accessToken', 'refreshToken', 'user_profile'];
+      cookieNames.forEach(name => {
+        document.cookie = `${name}=; path=/; max-age=0`;
+        document.cookie = `${name}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
+      });
+    }
+
+    if (res?.user?.status === 'pending') {
+      window.location.replace('/auth/success')
+    } else {
+      // Use location.replace for a hard redirect to ensure
+      // middleware picks up the new localStorage state.
+      window.location.replace('/dashboard')
+    }
   } catch (error) {
     // Error handled in useAuth
   }
@@ -116,6 +135,7 @@ const handleResend = async () => {
   resending.value = true
   try {
     await resendOtp({ email: email.value })
+    otp.value = ''
     startTimer()
   } catch (error) {
     // Error handled in useAuth

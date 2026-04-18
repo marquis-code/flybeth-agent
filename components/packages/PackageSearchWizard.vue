@@ -7,8 +7,8 @@
       <!-- Header Area -->
       <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8 mb-10 pb-8 border-b border-gray-100">
         <div class="space-y-1">
-          <h2 class="text-3xl  text-gray-900 tracking-tight italic">Vacation Packages</h2>
-          <p class="text-xs font-bold text-gray-400 tracking-widest uppercase">Bundle Flight + Hotel for exclusive savings</p>
+          <h2 class="text-3xl  text-gray-900  ">Vacation Packages</h2>
+          <p class="text-xs font-bold text-gray-400  ">Bundle Flight + Hotel for exclusive savings</p>
         </div>
       </div>
 
@@ -87,7 +87,7 @@
 
       <!-- Bottom Actions -->
       <div class="mt-12 flex flex-col sm:flex-row sm:items-center justify-between gap-8 pt-8 border-t border-gray-100">
-        <div class="flex items-center space-x-4 text-xs  tracking-widest text-primary uppercase">
+        <div class="flex items-center space-x-4 text-xs   text-primary ">
           <div class="px-4 py-2 bg-primary/10 rounded-full border border-primary/20 flex items-center space-x-2">
             <SparklesIcon class="h-4 w-4" />
             <span>SAVE UP TO 15% ON BUNDLES</span>
@@ -99,7 +99,7 @@
           :loading="isSearching" 
           variant="primary" 
           size="lg" 
-          class="px-12 h-[58px] rounded-[1.5rem]  tracking-[0.2em] text-xs shadow-2xl shadow-primary/20 hover:scale-[1.05] active:scale-95 transition-all uppercase"
+          class="px-12 h-[58px] rounded-[1.5rem]   text-xs shadow-2xl shadow-primary/20 hover:scale-[1.05] active:scale-95 transition-all "
         >
           <MagnifyingGlassIcon class="h-5 w-5 mr-3" />
           Search Packages
@@ -121,6 +121,9 @@ import {
   SparklesIcon,
   MagnifyingGlassIcon 
 } from '@heroicons/vue/24/outline'
+import { useConfirmation } from '@/composables/core/useConfirmation'
+
+const { confirm } = useConfirmation()
 
 // Mock data (replace with composables if available)
 const majorAirports = [
@@ -179,12 +182,17 @@ const selectDest = (dest: any) => {
   destOpen.value = false
 }
 
-const handleSearch = () => {
+const handleSearch = async () => {
   if (!selectedOrigin.value || !selectedDest.value || !packageRange.value.start) return
   isSearching.value = true
-  setTimeout(() => {
+  setTimeout(async () => {
     isSearching.value = false
-    alert('Package search is being integrated with the live provider network.')
+    await confirm({
+      title: 'Package Engine Syncing',
+      message: 'We are currently integrating bundled vacation packages with the live provider network. You will be able to bundle Flight + Hotel for exclusive savings soon.',
+      confirmText: 'Excellent',
+      cancelText: ''
+    })
   }, 1000)
 }
 </script>

@@ -1,0 +1,212 @@
+<template>
+  <div class="relative w-full" ref="pickerRef">
+    <!-- Trigger Field -->
+    <div
+      @click="openPicker"
+      class="w-full px-4 pt-3 pb-2 cursor-pointer min-h-[68px] flex flex-col justify-center group select-none"
+    >
+      <p class="text-[11px]  text-neutral-400   mb-0.5 group-hover:text-gray-900 transition-colors">
+        {{ label }}
+      </p>
+      <div class="flex items-center gap-2">
+        <UserGroupIcon class="h-5 w-5 text-gray-400 shrink-0" />
+        <span class="text-base  text-gray-900">{{ summary }}</span>
+      </div>
+    </div>
+
+    <!-- Dark Backdrop -->
+    <Teleport to="body">
+      <Transition name="fade-overlay">
+        <div
+          v-if="showPicker"
+          class="fixed inset-0 bg-black/50 z-[10010]"
+          @click="closePicker"
+        />
+      </Transition>
+    </Teleport>
+
+    <!-- Picker Panel -->
+    <Teleport to="body">
+      <Transition name="picker-pop">
+        <div
+          v-if="showPicker"
+          :style="panelStyle"
+          class="fixed z-[10011] bg-white rounded-2xl shadow-[0_8px_48px_rgba(0,0,0,0.2)] border border-gray-100 overflow-hidden"
+          :class="[
+            isMobile ? 'inset-x-4 top-1/2 -translate-y-1/2 w-auto' : 'w-[360px]'
+          ]"
+          @click.stop
+        >
+          <div class="px-6 py-5 space-y-5">
+            <!-- Rows -->
+            <div
+              v-for="row in rows"
+              :key="row.key"
+              class="flex items-center justify-between"
+            >
+              <div>
+                <p class="text-base font-bold text-gray-800">{{ row.label }}</p>
+                <p v-if="row.note" class="text-xs text-neutral-400">{{ row.note }}</p>
+              </div>
+              <div class="flex items-center gap-4">
+                <button
+                  @click="decrement(row.key)"
+                  :disabled="local[row.key as keyof typeof local] <= row.min"
+                  class="h-9 w-9 rounded-full border-2 flex items-center justify-center text-lg font-bold transition-all"
+                  :class="local[row.key as keyof typeof local] <= row.min
+                    ? 'border-gray-200 text-gray-300 cursor-not-allowed'
+                    : 'border-secondary text-secondary hover:bg-secondary/5'"
+                >
+                  −
+                </button>
+                <span class="w-5 text-center text-base font-bold text-gray-800">{{ (local as any)[row.key] }}</span>
+                <button
+                  @click="increment(row.key)"
+                  :disabled="local[row.key as keyof typeof local] >= row.max"
+                  class="h-9 w-9 rounded-full border-2 flex items-center justify-center text-lg font-bold transition-all"
+                  :class="local[row.key as keyof typeof local] >= row.max
+                    ? 'border-gray-200 text-gray-300 cursor-not-allowed'
+                    : 'border-primary-dark text-primary-dark hover:bg-gray-100'"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <p v-if="showChildNote" class="text-xs text-neutral-400 leading-relaxed -mt-2">
+              Add your child's age at check-in for the best deals and assistance.
+            </p>
+
+            <!-- Done Button -->
+            <button
+              @click="done"
+              class="w-full bg-primary-dark text-white py-3 rounded-xl font-bold   text-xs hover:bg-black transition-colors"
+            >
+              Confirm
+            </button>
+          </div>
+        </div>
+      </Transition>
+    </Teleport>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, computed, watch, onMounted, onUnmounted, reactive } from 'vue'
+import { UserGroupIcon } from '@heroicons/vue/24/outline'
+
+const props = defineProps({
+  label:    { type: String,  default: 'Guests & Rooms' },
+  rooms:    { type: Number,  default: 1 },
+  adults:   { type: Number,  default: 2 },
+  children: { type: Number,  default: 0 },
+  variant:  { type: String,  default: 'hotel' },
+  infantsOnLap:  { type: Number, default: 0 },
+  infantsInSeat: { type: Number, default: 0 },
+})
+
+const emit = defineEmits([
+  'update:rooms', 'update:adults', 'update:children',
+  'update:infantsOnLap', 'update:infantsInSeat',
+  'focus', 'close'
+])
+
+const local = reactive({
+  rooms:         props.rooms,
+  adults:        props.adults,
+  children:      props.children,
+  infantsOnLap:  props.infantsOnLap,
+  infantsInSeat: props.infantsInSeat,
+})
+
+const rows = computed(() => {
+  if (props.variant === 'flight') {
+    return [
+      { key: 'adults',        label: 'Adults',            note: 'Ages 18+',      min: 1, max: 9 },
+      { key: 'children',      label: 'Children',          note: 'Ages 2–17',     min: 0, max: 8 },
+      { key: 'infantsOnLap',  label: 'Infants on Lap',    note: 'Under 2',       min: 0, max: 4 },
+      { key: 'infantsInSeat', label: 'Infants in Seat',   note: 'Under 2',       min: 0, max: 4 },
+    ]
+  }
+  return [
+    { key: 'rooms',    label: 'Rooms',    note: '',          min: 1, max: 8 },
+    { key: 'adults',   label: 'Adults',   note: '',          min: 1, max: 8 },
+    { key: 'children', label: 'Children', note: 'Ages 0–17', min: 0, max: 8 },
+  ]
+})
+
+const showChildNote = computed(() => props.variant === 'hotel' && local.children > 0)
+
+const summary = computed(() => {
+  if (props.variant === 'flight') {
+    const total = local.adults + local.children + local.infantsOnLap + local.infantsInSeat
+    return `${total} Passenger${total > 1 ? 's' : ''}`
+  }
+  const guests = local.adults + local.children
+  return `${local.adults} Adult${local.adults > 1 ? 's' : ''}${local.rooms > 1 ? `, ${local.rooms} Rooms` : ', 1 Room'}`
+})
+
+const increment = (key: string) => {
+  const row = rows.value.find(r => r.key === key)
+  if (row && (local as any)[key] < row.max) (local as any)[key]++
+}
+
+const decrement = (key: string) => {
+  const row = rows.value.find(r => r.key === key)
+  if (row && (local as any)[key] > row.min) (local as any)[key]--
+}
+
+const pickerRef  = ref<HTMLElement | null>(null)
+const showPicker = ref(false)
+const panelStyle = ref<Record<string, string>>({})
+const isMobile   = ref(false)
+
+const checkMobile = () => { if (typeof window !== 'undefined') isMobile.value = window.innerWidth < 768 }
+const updatePosition = () => {
+  if (isMobile.value) return
+  const el = pickerRef.value
+  if (!el) return
+  const rect = el.getBoundingClientRect()
+  let left = rect.right - 360
+  if (left < 8) left = 8
+  panelStyle.value = { top: `${rect.bottom + 8}px`, left: `${left}px` }
+}
+
+const openPicker = () => { checkMobile(); updatePosition(); showPicker.value = true; emit('focus') }
+const closePicker = () => { showPicker.value = false; emit('close') }
+const done = () => {
+  emit('update:rooms',    local.rooms)
+  emit('update:adults',   local.adults)
+  emit('update:children', local.children)
+  if (props.variant === 'flight') {
+    emit('update:infantsOnLap',  local.infantsOnLap)
+    emit('update:infantsInSeat', local.infantsInSeat)
+  }
+  closePicker()
+}
+
+watch(() => props.rooms,         v => { local.rooms         = v })
+watch(() => props.adults,        v => { local.adults        = v })
+watch(() => props.children,      v => { local.children      = v })
+watch(() => props.infantsOnLap,  v => { local.infantsOnLap  = v })
+watch(() => props.infantsInSeat, v => { local.infantsInSeat = v })
+
+onMounted(() => {
+  checkMobile()
+  window.addEventListener('resize', checkMobile)
+  window.addEventListener('scroll', updatePosition, true)
+})
+onUnmounted(() => {
+  window.removeEventListener('resize', checkMobile)
+  window.removeEventListener('scroll', updatePosition, true)
+})
+</script>
+
+<style scoped>
+.fade-overlay-enter-active, .fade-overlay-leave-active { transition: opacity 0.2s ease; }
+.fade-overlay-enter-from, .fade-overlay-leave-to { opacity: 0; }
+.picker-pop-enter-active { transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1); }
+.picker-pop-leave-active { transition: all 0.15s ease; }
+.picker-pop-enter-from { opacity: 0; transform: translateY(-6px) scale(0.97); }
+.picker-pop-leave-to   { opacity: 0; transform: translateY(-4px) scale(0.99); }
+</style>

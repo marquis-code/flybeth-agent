@@ -20,24 +20,32 @@
           <div 
             v-if="show"
             :class="[
-              'bg-white rounded-2xl shadow-2xl w-full overflow-hidden transform transition-all',
+              'bg-white rounded-[32px] shadow-2xl w-full overflow-hidden transform transition-all border border-white/20',
               sizeClasses
             ]"
           >
-            <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between bg-white">
+            <!-- Custom Header -->
+            <div v-if="!hideHeader" class="px-8 py-5 border-b border-gray-100 flex items-center justify-between bg-white">
               <h3 class="text-xl font-bold text-primary-dark">{{ title }}</h3>
-              <button @click="$emit('close')" class="p-2 rounded-full hover:bg-gray-100 transition-colors text-neutral/50 hover:text-primary">
+              <button @click="$emit('close')" class="p-2.5 bg-neutral-50 rounded-full hover:bg-gray-100 transition-all text-neutral/50 hover:text-primary active:scale-90">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
             </div>
             
-            <div class="px-6 py-6 max-h-[70vh] overflow-y-auto">
+            <!-- Body -->
+            <div class="px-8 py-8 max-h-[80vh] overflow-y-auto relative">
+              <button v-if="hideHeader" @click="$emit('close')" class="absolute top-6 right-6 p-2.5 bg-neutral-50 rounded-full hover:bg-gray-100 transition-all text-neutral/50 hover:text-primary active:scale-90 z-10">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
               <slot />
             </div>
             
-            <div v-if="$slots.footer" class="px-6 py-4 bg-gray-50 border-t border-gray-100 flex items-center justify-end space-x-3">
+            <!-- Footer -->
+            <div v-if="$slots.footer && !hideFooter" class="px-8 py-6 bg-neutral-50/50 border-t border-gray-100 flex items-center justify-end space-x-3">
               <slot name="footer" />
             </div>
           </div>
@@ -53,6 +61,14 @@ import { computed } from 'vue'
 const props = defineProps({
   show: Boolean,
   title: String,
+  hideHeader: {
+    type: Boolean,
+    default: false
+  },
+  hideFooter: {
+    type: Boolean,
+    default: false
+  },
   size: {
     type: String,
     default: 'md',

@@ -16,8 +16,8 @@
     <div class="max-w-4xl mx-auto px-6 py-16 lg:py-24">
       <div v-if="category" class="space-y-12">
         <div class="space-y-4">
-          <span class="text-xs  text-primary-dark uppercase tracking-[0.2em]">Category</span>
-          <h1 class="text-4xl lg:text-5xl  text-primary-dark tracking-tighter">{{ category.name }}</h1>
+          <span class="text-xs  text-primary-dark  ">Category</span>
+          <h1 class="text-4xl lg:text-5xl  text-primary-dark er">{{ category.name }}</h1>
           <p class="text-lg text-neutral-500 font-medium leading-relaxed max-w-2xl">
             {{ category.description }}
           </p>

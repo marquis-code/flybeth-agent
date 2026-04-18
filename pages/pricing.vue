@@ -1,11 +1,40 @@
+<script setup lang="ts">
+import { onMounted } from 'vue'
+import { CheckIcon } from '@heroicons/vue/24/solid'
+import { useTracking } from '@/composables/core/useTracking'
+
+const { trackAction } = useTracking()
+
+onMounted(() => trackAction('navigated_to_pricing'))
+
+const agentFeatures = [
+  'Direct wholesale inventory access',
+  'Instant GDS ticketing',
+  'Unlimited passenger records',
+  'Standard agent dashboard',
+  'Email support (24h response)',
+  'Base commission mapping'
+]
+
+const enterpriseFeatures = [
+  'Unlimited agent sub-accounts',
+  'Priority GDS API clusters',
+  'Custom white-label options',
+  'Real-time revenue sharing',
+  'Dedicated account manager',
+  'Advanced analytics suite',
+  'Multi-currency settlement'
+]
+</script>
+
 <template>
   <div class="bg-white">
     <section class="relative pt-24 pb-16 lg:pt-32 lg:pb-24 overflow-hidden bg-primary-dark">
       <div class="max-w-4xl mx-auto px-6 text-center space-y-6">
-        <h2 class="text-sm  text-secondary tracking-[0.4em] uppercase">Pricing modules</h2>
-        <h1 class="text-5xl lg:text-7xl  text-white tracking-tighter leading-tight">
+        <h2 class="text-sm  text-secondary  ">Pricing modules</h2>
+        <h1 class="text-5xl lg:text-7xl  text-white er leading-tight">
           Simple, wholesale <br />
-          <span class="text-primary italic">transparency.</span>
+          <span class="text-primary ">transparency.</span>
         </h1>
         <p class="text-xl text-white/70 font-medium leading-relaxed max-w-2xl mx-auto">
           Flybeth was built to put profits back in the hands of agents. No hidden fees, no complicated tiers—just direct access to wholesale inventory.
@@ -28,7 +57,7 @@
             
             <div class="flex items-baseline space-x-2">
               <span class="text-6xl  text-primary-dark">$0</span>
-              <span class="text-neutral-400 font-bold uppercase tracking-widest text-sm">per month</span>
+              <span class="text-neutral-400 font-bold   text-sm">per month</span>
             </div>
 
             <ul class="space-y-4">
@@ -47,7 +76,7 @@
           <div class="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-transparent opacity-50"></div>
           
           <div class="space-y-8 relative z-10">
-            <div class="inline-flex items-center space-x-2 px-4 py-1.5 bg-secondary/20 rounded-full border border-secondary/30 text-secondary text-[10px]  tracking-widest uppercase">
+            <div class="inline-flex items-center space-x-2 px-4 py-1.5 bg-secondary/20 rounded-full border border-secondary/30 text-secondary text-[10px]   ">
               Consolidator favorite
             </div>
             
@@ -75,28 +104,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { CheckIcon } from '@heroicons/vue/24/solid'
 
-const agentFeatures = [
-  'Direct wholesale inventory access',
-  'Instant GDS ticketing',
-  'Unlimited passenger records',
-  'Standard agent dashboard',
-  'Email support (24h response)',
-  'Base commission mapping'
-]
-
-const enterpriseFeatures = [
-  'Unlimited agent sub-accounts',
-  'Priority GDS API clusters',
-  'Custom white-label options',
-  'Real-time revenue sharing',
-  'Dedicated account manager',
-  'Advanced analytics suite',
-  'Multi-currency settlement'
-]
-</script>
 
 <style scoped>
 . { font-weight: 900; }

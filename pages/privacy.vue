@@ -3,7 +3,7 @@
     <div class="max-w-4xl mx-auto space-y-12">
       <!-- Header -->
       <div class="space-y-4">
-        <h1 class="text-5xl lg:text-7xl  text-primary-dark tracking-tighter leading-tight">
+        <h1 class="text-5xl lg:text-7xl  text-primary-dark er leading-tight">
           Privacy statement.
         </h1>
         <p class="text-lg text-neutral-500 font-medium">Last updated: March 2026</p>
@@ -12,14 +12,14 @@
       <!-- Content -->
       <div class="prose prose-neutral max-w-none space-y-10">
         <section class="space-y-4">
-          <h2 class="text-2xl  text-primary-dark tracking-tight">1. Introduction</h2>
+          <h2 class="text-2xl  text-primary-dark ">1. Introduction</h2>
           <p class="text-neutral-600 leading-relaxed">
             At Flybeth, we value the trust you place in us as an agent partner. This privacy statement explains how we collect, use, and protect your information and the data of your clients when you use the Flybeth Agent Portal. Our goal is to provide a secure and transparent experience that empowers your travel business.
           </p>
         </section>
 
         <section class="space-y-4">
-          <h2 class="text-2xl  text-primary-dark tracking-tight">2. Information collection</h2>
+          <h2 class="text-2xl  text-primary-dark ">2. Information collection</h2>
           <p class="text-neutral-600 leading-relaxed">
             We collect information necessary to maintain your agency profile and facilitate bookings. This includes:
           </p>
@@ -32,7 +32,7 @@
         </section>
 
         <section class="space-y-4">
-          <h2 class="text-2xl  text-primary-dark tracking-tight">3. Data usage</h2>
+          <h2 class="text-2xl  text-primary-dark ">3. Data usage</h2>
           <p class="text-neutral-600 leading-relaxed">
             Your data is used to optimize our service delivery:
           </p>
@@ -45,21 +45,21 @@
         </section>
 
         <section class="space-y-4">
-          <h2 class="text-2xl  text-primary-dark tracking-tight">4. Data security</h2>
+          <h2 class="text-2xl  text-primary-dark ">4. Data security</h2>
           <p class="text-neutral-600 leading-relaxed">
             We employ bank-grade encryption and multi-tiered security protocols to safeguard all information transmitted through our network. Access to sensitive data is strictly controlled and audited to ensure compliance with global data protection standards (such as GDPR and NDPR).
           </p>
         </section>
 
         <section class="space-y-4">
-          <h2 class="text-2xl  text-primary-dark tracking-tight">5. Third-party sharing</h2>
+          <h2 class="text-2xl  text-primary-dark ">5. Third-party sharing</h2>
           <p class="text-neutral-600 leading-relaxed">
             Flybeth only shares data with verified third-party providers (such as airlines, hotel systems, and GDS networks) to the extent necessary to complete a requested booking or transaction. We do not sell your data to marketers.
           </p>
         </section>
 
         <section class="space-y-4">
-          <h2 class="text-2xl  text-primary-dark tracking-tight">6. Contact us</h2>
+          <h2 class="text-2xl  text-primary-dark ">6. Contact us</h2>
           <p class="text-neutral-600 leading-relaxed">
             If you have any questions regarding this privacy statement, please reach out to your regional node manager or contact our compliance team at <a href="mailto:privacy@flybeth.com" class="text-secondary font-bold hover:underline">privacy@flybeth.com</a>.
           </p>

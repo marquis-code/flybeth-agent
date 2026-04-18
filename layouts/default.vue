@@ -22,7 +22,7 @@
 
           <!-- Links -->
           <div v-for="(group, title) in footerLinks" :key="title" class="space-y-6">
-            <h4 class="text-xs  text-white uppercase tracking-[0.2em]">{{ title }}</h4>
+            <h4 class="text-xs  text-white  ">{{ title }}</h4>
             <ul class="space-y-4">
               <li v-for="link in group" :key="link.name">
                 <NuxtLink :to="link.path" class="text-[14px] text-neutral-500 hover:text-white transition-colors font-bold">{{ link.name }}</NuxtLink>
@@ -32,19 +32,74 @@
         </div>
 
         <div class="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p class="text-xs font-bold text-neutral-600 tracking-wider uppercase">© 2026 FLYBETH LLC. All rights reserved.</p>
+          <p class="text-xs font-bold text-neutral-600  ">© 2026 FLYBETH LLC. All rights reserved.</p>
           <div class="flex items-center space-x-8">
-            <NuxtLink to="/terms" class="text-xs font-bold text-neutral-500 hover:text-white transition-colors uppercase tracking-widest">Terms</NuxtLink>
-            <NuxtLink to="/privacy" class="text-xs font-bold text-neutral-500 hover:text-white transition-colors uppercase tracking-widest">Privacy</NuxtLink>
+            <NuxtLink to="/terms" class="text-xs font-bold text-neutral-500 hover:text-white transition-colors  ">Terms</NuxtLink>
+            <NuxtLink to="/privacy" class="text-xs font-bold text-neutral-500 hover:text-white transition-colors  ">Privacy</NuxtLink>
           </div>
         </div>
       </div>
     </footer>
+
+    <!-- Global Confirmation Modal -->
+    <BaseModal 
+      :show="isVisible" 
+      :title="options.title" 
+      :size="'sm'"
+      hideHeader
+      @close="handleCancel"
+    >
+      <div class="text-center space-y-6 pt-4">
+        <!-- Cute Icon Context -->
+        <div class="flex justify-center">
+          <div class="w-20 h-20 bg-secondary/10 rounded-full flex items-center justify-center relative">
+             <div class="absolute inset-0 bg-secondary/5 rounded-full animate-ping opacity-20"></div>
+             <component 
+               :is="options.title === 'Leaving so soon?' ? ArrowRightOnRectangleIcon : ExclamationTriangleIcon" 
+               class="h-10 w-10 text-secondary" 
+             />
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <h3 class="text-2xl font-black text-primary-dark ">{{ options.title }}</h3>
+          <p class="text-[15px] font-medium text-neutral-500 leading-relaxed px-4">
+            {{ options.message }}
+          </p>
+        </div>
+      </div>
+
+      <template #footer>
+        <div class="grid grid-cols-2 gap-3 w-full">
+          <BaseButton 
+            v-if="options.cancelText"
+            variant="ghost" 
+            class="!rounded-2xl py-4 font-bold text-sm bg-neutral-100/50 hover:bg-neutral-100"
+            @click="handleCancel"
+          >
+            {{ options.cancelText }}
+          </BaseButton>
+          <BaseButton 
+            variant="secondary" 
+            class="!rounded-2xl py-4 font-bold text-sm shadow-lg shadow-secondary/20 hover:scale-105 transition-all"
+            @click="handleConfirm"
+          >
+            {{ options.confirmText }}
+          </BaseButton>
+        </div>
+      </template>
+    </BaseModal>
   </div>
 </template>
 
 <script setup lang="ts">
 import SiteHeader from '~/components/ui/SiteHeader.vue'
+import { useConfirmation } from '@/composables/core/useConfirmation'
+import BaseModal from '@/components/ui/BaseModal.vue'
+import BaseButton from '@/components/ui/BaseButton.vue'
+import { ArrowRightOnRectangleIcon, ExclamationTriangleIcon } from '@heroicons/vue/24/outline'
+
+const { isVisible, options, handleConfirm, handleCancel } = useConfirmation()
 
 const footerLinks = {
   'Platform': [

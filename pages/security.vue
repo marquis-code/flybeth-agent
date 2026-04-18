@@ -3,10 +3,10 @@
     <section class="py-24 bg-white relative">
       <div class="max-w-4xl mx-auto px-6 lg:px-10 space-y-12">
         <div class="space-y-6">
-          <h2 class="text-xs  text-secondary tracking-[0.4em] uppercase">Enterprise security</h2>
-          <h1 class="text-5xl lg:text-7xl  text-primary-dark tracking-tighter leading-tight">
+          <h2 class="text-xs  text-secondary  ">Enterprise security</h2>
+          <h1 class="text-5xl lg:text-7xl  text-primary-dark er leading-tight">
             The Flybeth <br />
-            <span class="text-primary italic">security matrix.</span>
+            <span class="text-primary ">security matrix.</span>
           </h1>
           <p class="text-xl text-neutral-500 font-medium leading-relaxed">
             Our platform is engineered for the highest level of institutional trust. We employ a multi-layered security architecture to protect agency data and traveler privacy.
@@ -32,12 +32,12 @@
            <div class="flex items-center space-x-6">
               <div class="flex flex-col">
                  <span class="text-2xl ">99.99%</span>
-                 <span class="text-xs  text-secondary uppercase tracking-widest">Uptime SLA</span>
+                 <span class="text-xs  text-secondary  ">Uptime SLA</span>
               </div>
               <div class="w-px h-10 bg-white/20"></div>
               <div class="flex flex-col">
                  <span class="text-2xl ">ISO 27001</span>
-                 <span class="text-xs  text-secondary uppercase tracking-widest">Compliance</span>
+                 <span class="text-xs  text-secondary  ">Compliance</span>
               </div>
            </div>
         </div>

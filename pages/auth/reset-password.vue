@@ -7,7 +7,7 @@
       </div>
 
       <div class="space-y-4">
-        <h1 class="text-4xl  text-primary-dark tracking-tighter">Reset password.</h1>
+        <h1 class="text-4xl  text-primary-dark er">Reset password.</h1>
         <p class="text-neutral-400 font-medium">
           Enter your new password below.
         </p>
@@ -44,7 +44,7 @@
           </BaseButton>
 
           <div class="pt-4 text-center">
-            <NuxtLink to="/auth/login" class="text-xs  text-neutral-300 hover:text-primary tracking-[0.2em] transition-colors uppercase">Return to sign in</NuxtLink>
+            <NuxtLink to="/auth/login" class="text-xs  text-neutral-300 hover:text-primary  transition-colors ">Return to sign in</NuxtLink>
           </div>
         </div>
       </form>

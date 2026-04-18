@@ -6,5 +6,11 @@ export const usersApiFactory = {
     },
     updateProfile(payload: any) {
         return GATEWAY_ENDPOINT_WITH_AUTH.patch("/users/me", payload);
+    },
+    getTenantUsers(params?: any) {
+        return GATEWAY_ENDPOINT_WITH_AUTH.get("/users", { params });
+    },
+    createUser(payload: any) {
+        return GATEWAY_ENDPOINT_WITH_AUTH.post("/users", payload);
     }
 };

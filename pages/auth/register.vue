@@ -1,8 +1,8 @@
 <template>
-  <div class="min-h-screen bg-white flex items-center justify-center p-6 lg:p-10 font-sans">
-    <div class="max-w-7xl w-full grid lg:grid-cols-2 gap-12 bg-white rounded-[3rem] border border-neutral-100 shadow-2xl shadow-neutral-100 min-h-[85vh]">
+  <div class="min-h-screen bg-white flex flex-col sm:items-center sm:justify-center p-0 sm:p-6 lg:p-10 font-sans">
+    <div class="max-w-7xl w-full flex-1 grid lg:grid-cols-2 sm:gap-12 bg-white rounded-none sm:rounded-[3rem] sm:border border-neutral-100 sm:shadow-2xl shadow-neutral-100 min-h-screen sm:min-h-[85vh]">
       <!-- Agency Advantage Section -->
-      <div class="hidden lg:flex flex-col justify-between p-10 bg-neutral-50 relative group">
+      <div class="hidden lg:flex flex-col justify-between p-10 bg-neutral-50 relative group h-full">
         <div class="absolute inset-0 bg-white/20 backdrop-blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
         
         <div class="relative z-10 flex items-center space-x-3 cursor-pointer" @click="navigateTo('/')">
@@ -10,7 +10,7 @@
         </div>
 
         <div class="relative z-10 space-y-8">
-          <h2 class="text-5xl   text-primary-dark leading-tight tracking-tighter">
+          <h2 class="text-5xl font-black text-primary-dark leading-tight">
             Scale Your <br />
             Agency Without <br />
             <span class="text-secondary">Limits.</span>
@@ -26,7 +26,7 @@
               <CheckIcon class="w-4 h-4 text-secondary" />
             </div>
             <div>
-              <p class="text-xs  text-primary-dark tracking-widest">{{ perk.title }}</p>
+              <p class="text-xs font-black text-primary-dark">{{ perk.title }}</p>
               <p class="text-[12px] text-neutral-500 mt-1">{{ perk.desc }}</p>
             </div>
           </div>
@@ -34,16 +34,16 @@
       </div>
 
       <!-- Registration Form Section -->
-      <div class="p-8 lg:p-12 flex flex-col justify-center bg-white overflow-y-auto max-h-screen">
+      <div class="px-6 py-10 sm:p-8 lg:p-12 flex flex-col justify-center bg-white overflow-y-auto w-full">
         <div class="max-w-xl w-full mx-auto space-y-8">
           <div class="space-y-2">
             <div class="flex items-center justify-between mb-4">
-              <span class="text-[11px]  uppercase tracking-widest text-secondary">Step {{ currentStep }} of 7</span>
+              <span class="text-[11px]    text-secondary">Step {{ currentStep }} of 7</span>
               <div class="flex space-x-1">
                 <div v-for="s in 7" :key="s" :class="['h-1 w-6 rounded-full transition-all duration-500', s <= currentStep ? 'bg-secondary' : 'bg-neutral-100']"></div>
               </div>
             </div>
-            <h1 class="text-3xl  text-primary-dark tracking-tighter">{{ stepTitles[currentStep-1] }}</h1>
+            <h1 class="text-3xl  text-primary-dark er">{{ stepTitles[currentStep-1] }}</h1>
             <p class="text-neutral-500 text-sm font-medium">{{ stepDescriptions[currentStep-1] }}</p>
           </div>
 
@@ -116,7 +116,7 @@
                   <div class="flex justify-between items-center px-2">
                     <div class="text-left">
                       <h4 class="text-sm  text-primary-dark">Government ID</h4>
-                      <p class="text-[10px] text-green-600 font-bold uppercase tracking-widest flex items-center"><CheckCircleIcon class="w-3 h-3 mr-1" /> Uploaded</p>
+                      <p class="text-[10px] text-green-600 font-bold   flex items-center"><CheckCircleIcon class="w-3 h-3 mr-1" /> Uploaded</p>
                     </div>
                     <input type="file" @change="handleFileUpload($event, 'image', 'idCard')" class="hidden" id="idUpload" accept="image/*,application/pdf">
                     <BaseButton :loading="uploadingFields.idCard" type="button" variant="secondary" size="sm" @click="$el.querySelector('#idUpload').click()">
@@ -147,7 +147,7 @@
                   <div class="flex justify-between items-center px-2">
                     <div class="text-left">
                       <h4 class="text-sm  text-primary-dark">Selfie Verification</h4>
-                      <p class="text-[10px] text-green-600 font-bold uppercase tracking-widest flex items-center"><CheckCircleIcon class="w-3 h-3 mr-1" /> Captured</p>
+                      <p class="text-[10px] text-green-600 font-bold   flex items-center"><CheckCircleIcon class="w-3 h-3 mr-1" /> Captured</p>
                     </div>
                     <input type="file" @change="handleFileUpload($event, 'image', 'selfie')" class="hidden" capture="user" id="selfieUpload" accept="image/*">
                     <BaseButton :loading="uploadingFields.selfie" type="button" variant="secondary" size="sm" @click="$el.querySelector('#selfieUpload').click()">
@@ -174,7 +174,7 @@
             <div v-if="currentStep === 5" class="space-y-8">
               <div v-if="form.country === 'Nigeria'" class="space-y-6">
                 <div class="flex items-center justify-between">
-                   <h4 class="text-xs  text-secondary uppercase tracking-widest">Nigeria Compliance (CAC)</h4>
+                   <h4 class="text-xs  text-secondary  ">Nigeria Compliance (CAC)</h4>
                    <InfoTooltip text="Corporate Affairs Commission certificate is required for all Nigerian businesses." />
                 </div>
                 <div class="p-6 border-2 border-dashed border-neutral-200 rounded-[2.5rem] text-center space-y-6 transition-all hover:border-secondary/20 bg-neutral-50/50">
@@ -185,8 +185,8 @@
                     </div>
                     <div class="flex items-center justify-between">
                       <div class="text-left">
-                        <p class="text-sm  text-primary-dark tracking-tight">CAC Certificate</p>
-                        <p class="text-[11px]  text-green-600 uppercase tracking-widest flex items-center">
+                        <p class="text-sm  text-primary-dark ">CAC Certificate</p>
+                        <p class="text-[11px]  text-green-600   flex items-center">
                           <CheckCircleIcon class="w-4 h-4 mr-1" /> Verified
                         </p>
                       </div>
@@ -200,7 +200,7 @@
                     <div class="w-20 h-20 bg-white rounded-[2rem] flex items-center justify-center mx-auto mb-4 border border-neutral-100 shadow-sm">
                       <DocumentTextIcon class="w-10 h-10 text-neutral-300" />
                     </div>
-                    <p class="text-sm  text-primary-dark tracking-tight">CAC Registration Certificate</p>
+                    <p class="text-sm  text-primary-dark ">CAC Registration Certificate</p>
                     <p class="text-xs text-neutral-500 max-w-[200px] mx-auto leading-relaxed">Ensure the document clearly shows the RC Number and Seal.</p>
                     <input type="file" @change="handleFileUpload($event, 'document', 'cacCertificate')" class="hidden" id="cacUpload" accept="application/pdf,image/*">
                     <BaseButton :loading="uploadingFields.cacCertificate" type="button" variant="primary" size="sm" @click="$el.querySelector('#cacUpload').click()" class="mt-4">
@@ -213,7 +213,7 @@
 
               <div v-else-if="form.country === 'United States'" class="space-y-8">
                 <div class="flex items-center justify-between">
-                   <h4 class="text-xs  text-secondary uppercase tracking-widest">USA Compliance (LLC)</h4>
+                   <h4 class="text-xs  text-secondary  ">USA Compliance (LLC)</h4>
                    <InfoTooltip text="Provide your LLC formation documents and EIN for tax verification." />
                 </div>
                 
@@ -233,8 +233,8 @@
                       </div>
                       <div class="flex items-center justify-between">
                         <div class="text-left">
-                          <p class="text-sm  text-primary-dark tracking-tight">LLC Documents</p>
-                          <p class="text-[11px]  text-green-600 uppercase tracking-widest flex items-center">
+                          <p class="text-sm  text-primary-dark ">LLC Documents</p>
+                          <p class="text-[11px]  text-green-600   flex items-center">
                             <CheckCircleIcon class="w-4 h-4 mr-1" /> Verified
                           </p>
                         </div>
@@ -248,7 +248,7 @@
                       <div class="w-20 h-20 bg-white rounded-[2rem] flex items-center justify-center mx-auto mb-4 border border-neutral-100 shadow-sm">
                         <DocumentTextIcon class="w-10 h-10 text-neutral-300" />
                       </div>
-                      <p class="text-sm  text-primary-dark tracking-tight">LLC Formation Documents</p>
+                      <p class="text-sm  text-primary-dark ">LLC Formation Documents</p>
                       <p class="text-xs text-neutral-500 max-w-[200px] mx-auto leading-relaxed">Upload your Articles of Organization or Certificate of Formation.</p>
                       <input type="file" @change="handleFileUpload($event, 'document', 'llcDocs')" class="hidden" id="llcUpload" accept="application/pdf,image/*">
                       <BaseButton :loading="uploadingFields.llcDocs" type="button" variant="primary" size="sm" @click="$el.querySelector('#llcUpload').click()" class="mt-4">
@@ -265,7 +265,7 @@
                   <ShieldCheckIcon class="w-8 h-8 text-neutral-200" />
                 </div>
                 <div>
-                  <p class="text-sm font-bold text-primary-dark tracking-tight">No regional documents required</p>
+                  <p class="text-sm font-bold text-primary-dark ">No regional documents required</p>
                   <p class="text-xs text-neutral-400 mt-1 max-w-[240px] mx-auto font-medium leading-relaxed">Based on your selection of {{ form.country || 'International' }}, no additional local compliance is needed.</p>
                 </div>
               </div>
@@ -275,7 +275,7 @@
             <div v-if="currentStep === 6" class="space-y-6">
               <div class="space-y-6">
                 <div class="flex items-center justify-between">
-                   <h4 class="text-[11px]  text-secondary tracking-[0.2em] uppercase">Payout Account</h4>
+                   <h4 class="text-[11px]  text-secondary  ">Payout Account</h4>
                    <InfoTooltip text="We'll use this to send your wholesale commissions. Nigerian agents are paid via Paystack." />
                 </div>
                 <div class="grid md:grid-cols-2 gap-6">
@@ -355,7 +355,7 @@
             </div>
             
             <div class="text-center pt-4">
-              <NuxtLink to="/auth/login" class="px-8 py-3 bg-neutral-200 hover:bg-neutral-100 text-[11px] font-medium  tracking-[0.2em] text-neutral-500 hover:text-primary-dark rounded-xl transition-all">Save & Exit Registration</NuxtLink>
+              <NuxtLink to="/auth/login" class="px-8 py-3 bg-neutral-200 hover:bg-neutral-100 text-[11px] font-medium   text-neutral-500 hover:text-primary-dark rounded-xl transition-all">Save & Exit Registration</NuxtLink>
             </div>
           </form>
         </div>
@@ -383,10 +383,12 @@ import { useAuth } from '@/composables/modules/auth/useAuth'
 import { useUpload } from '@/composables/core/useUpload'
 import { useBank } from '@/composables/modules/payments/useBank'
 import { useCustomToast } from '@/composables/core/useCustomToast'
+import { useTracking } from '@/composables/core/useTracking'
 
 const runtimeConfig = useRuntimeConfig()
 const { register, loading } = useAuth()
 const { uploadFile } = useUpload()
+const { trackAction } = useTracking()
 const uploadingFields = ref<Record<string, boolean>>({
   idCard: false,
   selfie: false,
@@ -580,6 +582,20 @@ const handleAccountNumberInput = async () => {
 }
 
 watch(currentStep, (newStep) => {
+  const stepsMap: Record<number, string> = {
+    1: 'onboarding_started',
+    2: 'onboarding_business',
+    3: 'onboarding_contact',
+    4: 'onboarding_kyc',
+    5: 'onboarding_compliance',
+    6: 'onboarding_payout',
+    7: 'onboarding_final'
+  }
+  trackAction(stepsMap[newStep] || `onboarding_step_${newStep}`, { 
+    email: form.value.email,
+    agency: form.value.agencyName
+  })
+
   if (newStep === 6 && banks.value.length === 0) {
     fetchBanks()
   }
@@ -658,7 +674,16 @@ const handleSubmit = async () => {
       role: 'agent'
     }
     
-    await register(payload)
+    const res = await register(payload)
+    if (res?.requiresOtp || !res?.tokens) {
+      localStorage.setItem('verify_email', form.value.email)
+      navigateTo({
+        path: '/auth/verify',
+        query: { email: form.value.email }
+      })
+      return
+    }
+    
     localStorage.setItem('verify_email', form.value.email)
     navigateTo({
       path: '/auth/success',

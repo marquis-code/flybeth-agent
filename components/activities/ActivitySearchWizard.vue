@@ -7,8 +7,8 @@
       <!-- Header Area -->
       <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8 mb-10 pb-8 border-b border-gray-100">
         <div class="space-y-1">
-          <h2 class="text-3xl  text-gray-900 tracking-tight italic">Global Experiences</h2>
-          <p class="text-xs font-bold text-gray-400 tracking-widest uppercase">Curated tours, attractions & local secrets</p>
+          <h2 class="text-3xl  text-gray-900  ">Global Experiences</h2>
+          <p class="text-xs font-bold text-gray-400  ">Curated tours, attractions & local secrets</p>
         </div>
       </div>
 
@@ -65,7 +65,7 @@
           :loading="isSearching" 
           variant="primary" 
           size="lg" 
-          class="px-12 h-[58px] rounded-[1.5rem]  tracking-[0.2em] text-xs shadow-2xl shadow-primary/20 hover:scale-[1.05] active:scale-95 transition-all"
+          class="px-12 h-[58px] rounded-[1.5rem]   text-xs shadow-2xl shadow-primary/20 hover:scale-[1.05] active:scale-95 transition-all"
         >
           <MagnifyingGlassIcon class="h-5 w-5 mr-3" />
           DISCOVER ACTIVITIES
@@ -77,9 +77,9 @@
     <Transition name="fade">
       <div v-if="activityResults.length > 0" class="border-t border-gray-200 bg-gray-50/50 p-8 lg:p-12">
         <div class="flex items-center justify-between mb-10">
-          <h3 class="text-xl  text-gray-900 tracking-tight italic">Top Recommended</h3>
+          <h3 class="text-xl  text-gray-900  ">Top Recommended</h3>
           <div class="flex items-center space-x-4">
-             <span class="text-[10px]  text-gray-400 uppercase tracking-widest">Sort by Popularity</span>
+             <span class="text-[10px]  text-gray-400  ">Sort by Popularity</span>
           </div>
         </div>
         
@@ -90,7 +90,7 @@
             class="bg-white border border-gray-200 rounded-[2.5rem] overflow-hidden hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 group relative flex flex-col h-full"
           >
             <!-- Badge -->
-            <div class="absolute top-4 left-4 z-10 px-3 py-1 bg-white/90 backdrop-blur-md text-[9px]  text-primary uppercase tracking-widest rounded-full shadow-sm">{{ act.category }}</div>
+            <div class="absolute top-4 left-4 z-10 px-3 py-1 bg-white/90 backdrop-blur-md text-[9px]  text-primary   rounded-full shadow-sm">{{ act.category }}</div>
             
             <div class="h-56 bg-gray-100 relative overflow-hidden group-hover:h-48 transition-all duration-700">
               <img v-if="act.image" :src="act.image" :alt="act.name" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" />
@@ -108,17 +108,17 @@
                     <span class="text-[10px]  text-gray-900">{{ act.rating }}</span>
                     <span class="text-[9px] font-bold text-gray-400">({{ act.reviews }} reviews)</span>
                   </div>
-                  <span class="text-[10px]  text-gray-400 uppercase tracking-widest">{{ act.duration }}</span>
+                  <span class="text-[10px]  text-gray-400  ">{{ act.duration }}</span>
                 </div>
-                <h4 class="text-lg  text-gray-900 tracking-tight group-hover:text-primary transition-colors leading-tight italic">{{ act.name }}</h4>
+                <h4 class="text-lg  text-gray-900  group-hover:text-primary transition-colors leading-tight ">{{ act.name }}</h4>
               </div>
 
               <div class="pt-6 border-t border-gray-100 flex items-end justify-between mt-auto">
                 <div class="space-y-0.5">
-                  <p class="text-[10px]  text-gray-400 uppercase tracking-widest">From</p>
+                  <p class="text-[10px]  text-gray-400  ">From</p>
                   <p class="text-2xl  text-primary-dark">${{ act.price }}<span class="text-[10px] font-bold text-gray-400 ml-1">/pp</span></p>
                 </div>
-                <BaseButton variant="primary" class="rounded-xl px-6 h-10 text-[9px]  tracking-widest active:scale-95 transition-all">VIEW PLAN</BaseButton>
+                <BaseButton variant="primary" class="rounded-xl px-6 h-10 text-[9px]   active:scale-95 transition-all">VIEW PLAN</BaseButton>
               </div>
             </div>
           </div>

@@ -18,18 +18,33 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, onMounted, nextTick, watch } from 'vue'
 
 const props = defineProps({
   length: {
     type: Number,
     default: 6
+  },
+  modelValue: {
+    type: String,
+    default: ''
   }
 })
 
 const emit = defineEmits(['update:modelValue', 'complete'])
 
 const digits = ref(new Array(props.length).fill(''))
+
+// Watch for external reset (like after resend)
+watch(() => props.modelValue, (newVal) => {
+  if (!newVal) {
+    digits.value = new Array(props.length).fill('')
+    // Focus first input on clear
+    nextTick(() => {
+      inputs.value[0]?.focus()
+    })
+  }
+})
 const inputs = ref<HTMLInputElement[]>([])
 
 onMounted(() => {

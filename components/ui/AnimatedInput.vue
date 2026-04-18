@@ -16,7 +16,7 @@
         :class="[
           'absolute transition-all duration-300 ease-in-out pointer-events-none z-10',
           isFocused || modelValue ? 
-            'text-[9px] tracking-[0.15em] text-primary left-5 top-2.5' : 
+            'text-[9px]  text-primary left-5 top-2.5' : 
             `text-sm font-medium text-gray-400 ${type === 'textarea' ? 'top-5' : 'top-1/2 transform -translate-y-1/2'} ${icon ? 'left-12' : 'left-5'}`
         ]"
       >
@@ -528,6 +528,8 @@ interface Props {
   showError?: boolean
   position?: 'top' | 'middle' | 'bottom' | 'standalone'
   hasError?: boolean
+  required?: boolean
+  error?: string
   rows?: number
   icon?: any
 }
@@ -543,6 +545,8 @@ const props = withDefaults(defineProps<Props>(), {
   showError: true,
   position: 'standalone',
   hasError: false,
+  required: false,
+  error: '',
   rows: 4
 })
 

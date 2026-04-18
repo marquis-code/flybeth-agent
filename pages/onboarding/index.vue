@@ -6,8 +6,8 @@
       <div class="mb-16">
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
            <div class="space-y-2">
-             <h4 class="text-[11px]  text-secondary tracking-[0.4em] uppercase">Step {{ currentStep }} of 7</h4>
-             <h1 class="text-4xl lg:text-5xl  text-primary-dark tracking-tighter">
+             <h4 class="text-[11px]  text-secondary  ">Step {{ currentStep }} of 7</h4>
+             <h1 class="text-4xl lg:text-5xl  text-primary-dark er">
                {{ steps[currentStep - 1]?.title }}
              </h1>
              <p class="text-neutral-500 font-medium max-w-xl">{{ steps[currentStep - 1]?.description }}</p>
@@ -67,7 +67,7 @@
                   <AnimatedInput v-model="form.website" label="Website / Social Media (Optional)" placeholder="https://" />
                </div>
                <div class="space-y-6">
-                 <h4 class="text-[9px]  text-secondary tracking-[0.3em] uppercase">Business Address</h4>
+                 <h4 class="text-[9px]  text-secondary  ">Business Address</h4>
                  <AnimatedInput v-model="form.billingAddress" label="Physical Address" required />
                </div>
             </div>
@@ -165,7 +165,7 @@
                <div class="p-6 bg-neutral-50 rounded-2xl border border-neutral-100 flex items-start space-x-4">
                   <BanknotesIcon class="w-6 h-6 text-neutral-400 mt-1" />
                   <div>
-                    <h5 class="text-xs  text-primary-dark uppercase tracking-widest mb-1">Payout Policy</h5>
+                    <h5 class="text-xs  text-primary-dark   mb-1">Payout Policy</h5>
                     <p class="text-[10px] text-neutral-500 font-medium leading-relaxed">
                       All agency commissions and refunds are processed to this account. Payouts are reconciled every Tuesday and Thursday.
                     </p>
@@ -206,7 +206,7 @@
           <div class="flex flex-col sm:flex-row items-center justify-between gap-6 pt-8 border-t border-neutral-100">
              <button 
                v-if="currentStep > 1" 
-               class="text-sm  text-neutral-400 hover:text-primary-dark tracking-[0.2em] transition-colors flex items-center uppercase"
+               class="text-sm  text-neutral-400 hover:text-primary-dark  transition-colors flex items-center "
                @click="prevStep"
              >
                <ArrowLeftIcon class="w-4 h-4 mr-3" />
@@ -232,7 +232,7 @@
           <div class="p-10 bg-white rounded-[2.5rem] border border-neutral-100 shadow-sm relative overflow-hidden">
              <div class="absolute top-0 right-0 w-32 h-32 bg-secondary/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2"></div>
              
-             <h4 class="text-[9px]  text-secondary tracking-[0.3em] uppercase mb-8">Agent Assistant</h4>
+             <h4 class="text-[9px]  text-secondary   mb-8">Agent Assistant</h4>
              <div class="space-y-8">
                 <div class="flex items-start space-x-4">
                    <div class="w-10 h-10 bg-primary/5 rounded-2xl flex items-center justify-center text-primary shrink-0">
@@ -245,7 +245,7 @@
                 </div>
                 
                 <div class="pt-8 border-t border-neutral-50">
-                   <p class="text-[10px]  text-neutral-300 uppercase tracking-widest mb-4">Your Progress</p>
+                   <p class="text-[10px]  text-neutral-300   mb-4">Your Progress</p>
                    <div class="space-y-4">
                       <div v-for="(s, idx) in steps" :key="idx" class="flex items-center space-x-3">
                          <div class="w-5 h-5 rounded-full flex items-center justify-center border-2 transition-all duration-500"
@@ -269,11 +269,11 @@
              <div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center">
                 <LockClosedIcon class="w-6 h-6 text-secondary" />
              </div>
-             <h4 class="text-xl  tracking-tight">Trusted & Secure.</h4>
+             <h4 class="text-xl  ">Trusted & Secure.</h4>
              <p class="text-white/50 text-xs font-medium leading-relaxed">
                Flybeth uses advanced encryption to protect your agency's data. We are PCI-DSS compliant and adhere to GDPR standards.
              </p>
-             <button class="text-[11px]  text-secondary tracking-widest uppercase hover:underline">View security whitepaper</button>
+             <button class="text-[11px]  text-secondary   hover:underline">View security whitepaper</button>
           </div>
         </div>
       </div>

@@ -15,8 +15,8 @@
     <article class="max-w-3xl mx-auto px-6 py-20">
       <div v-if="article" class="space-y-10">
         <div class="space-y-4">
-          <p class="text-sm  text-secondary tracking-widest">{{ article.category }}</p>
-          <h1 class="text-4xl lg:text-5xl  text-primary-dark tracking-tight leading-tight">
+          <p class="text-sm  text-secondary ">{{ article.category }}</p>
+          <h1 class="text-4xl lg:text-5xl  text-primary-dark  leading-tight">
             {{ article.title }}
           </h1>
         </div>
@@ -54,7 +54,9 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { ChevronLeftIcon } from '@heroicons/vue/24/outline'
+import { useConfirmation } from '@/composables/core/useConfirmation'
 
+const { confirm } = useConfirmation()
 const route = useRoute()
 const articleId = route.params.id as string
 
@@ -95,7 +97,12 @@ const articles = {
 const article = computed(() => articles[articleId as keyof typeof articles])
 
 const handleFeedback = (type: 'yes' | 'no') => {
-  alert(type === 'yes' ? 'Thank you for your feedback!' : 'We are sorry to hear that. Please contact support for more help.')
+  confirm({
+    title: type === 'yes' ? 'Feedback Received' : 'We are Here to Help',
+    message: type === 'yes' ? 'Thank you for your feedback! We are constantly working to improve our documentation.' : 'We are sorry to hear that. A support ticket has been noted for this article. Please reach out to our team if you need immediate assistance.',
+    confirmText: 'Done',
+    cancelText: ''
+  })
 }
 </script>
 

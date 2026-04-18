@@ -7,6 +7,7 @@
     <NuxtLayout class="z-10">
       <NuxtPage class="z-10" />
     </NuxtLayout>
+    <ChatWidget />
   </main>
 </template>
 

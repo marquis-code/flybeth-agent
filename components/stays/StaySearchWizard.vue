@@ -10,8 +10,8 @@
       <!-- Header Area -->
       <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8 mb-10 pb-8 border-b border-white/10">
         <div class="space-y-1">
-          <h2 class="text-3xl  text-white tracking-tight italic">Premium Properties</h2>
-          <p class="text-xs font-bold text-white/40 tracking-widest uppercase">Curated stays from global hospitality networks</p>
+          <h2 class="text-3xl  text-white  ">Premium Properties</h2>
+          <p class="text-xs font-bold text-white/40  ">Curated stays from global hospitality networks</p>
         </div>
         
         <div class="flex items-center space-x-6">
@@ -20,7 +20,7 @@
               <input type="checkbox" v-model="isLuxury" class="sr-only" />
               <div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform" :class="isLuxury ? 'translate-x-6' : ''"></div>
             </div>
-            <span class="text-xs  text-white/60 tracking-widest uppercase group-hover:text-white transition-colors">Luxury Only</span>
+            <span class="text-xs  text-white/60   group-hover:text-white transition-colors">Luxury Only</span>
           </label>
         </div>
       </div>
@@ -68,7 +68,7 @@
               <div class="flex items-center space-x-3">
                 <UsersIcon class="h-5 w-5 text-gray-400 group-hover:text-primary" />
                 <div class="text-left">
-                  <p class="text-[10px]  text-primary uppercase tracking-[0.2em] mb-0.5" v-if="totalGuests > 0">Travelers</p>
+                  <p class="text-[10px]  text-primary   mb-0.5" v-if="totalGuests > 0">Travelers</p>
                   <p class="text-sm font-bold text-gray-900">{{ guests.adults + guests.children }} Guests, {{ guests.rooms }} Room</p>
                 </div>
               </div>
@@ -101,7 +101,7 @@
 
       <!-- Bottom Actions -->
       <div class="mt-12 flex flex-col sm:flex-row sm:items-center justify-between gap-8 pt-8 border-t border-gray-100">
-        <div class="flex items-center space-x-6 text-xs  tracking-widest text-gray-500 uppercase">
+        <div class="flex items-center space-x-6 text-xs   text-gray-500 ">
           <div class="flex items-center space-x-2">
             <div class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_10px_rgba(var(--secondary-rgb),0.5)]"></div>
             <span>Best Price Guaranteed</span>
@@ -117,7 +117,7 @@
           :loading="isSearching" 
           variant="primary" 
           size="lg" 
-          class="px-12 h-[58px] rounded-[1.5rem]  tracking-[0.2em] text-xs shadow-2xl shadow-primary/20 hover:scale-[1.05] active:scale-95 transition-all"
+          class="px-12 h-[58px] rounded-[1.5rem]   text-xs shadow-2xl shadow-primary/20 hover:scale-[1.05] active:scale-95 transition-all"
         >
           <MagnifyingGlassIcon class="h-5 w-5 mr-3" />
           FIND PROPERTIES
@@ -129,7 +129,7 @@
     <Transition name="fade">
       <div v-if="stayResults.length > 0" class="border-t border-gray-200 bg-gray-50/50 p-8 lg:p-12">
         <div class="flex items-center justify-between mb-10">
-          <h3 class="text-xl  text-gray-900 tracking-tight italic">Luxury Results</h3>
+          <h3 class="text-xl  text-gray-900  ">Luxury Results</h3>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -140,7 +140,7 @@
           >
             <div class="h-60 bg-gray-100 relative overflow-hidden">
               <img :src="`https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80&sig=${stay.id}`" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" />
-              <div class="absolute top-4 right-4 z-10 px-3 py-1 bg-white/90 backdrop-blur-md text-[9px]  text-secondary uppercase tracking-widest rounded-full shadow-sm">Special Offer</div>
+              <div class="absolute top-4 right-4 z-10 px-3 py-1 bg-white/90 backdrop-blur-md text-[9px]  text-secondary   rounded-full shadow-sm">Special Offer</div>
               <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
               <div class="absolute bottom-4 left-6 text-white">
                 <div class="flex items-center space-x-1">
@@ -152,8 +152,8 @@
 
             <div class="p-8 space-y-4 flex-1 flex flex-col">
               <div class="space-y-2">
-                <h4 class="text-xl  text-gray-900 tracking-tight group-hover:text-primary transition-colors leading-tight italic">{{ stay.name }}</h4>
-                <p class="text-[10px]  text-gray-400 uppercase tracking-widest flex items-center space-x-1">
+                <h4 class="text-xl  text-gray-900  group-hover:text-primary transition-colors leading-tight ">{{ stay.name }}</h4>
+                <p class="text-[10px]  text-gray-400   flex items-center space-x-1">
                   <MapPinIcon class="h-3 w-3" />
                   <span>{{ stay.address }}</span>
                 </p>
@@ -161,10 +161,10 @@
 
               <div class="pt-6 border-t border-gray-100 flex items-end justify-between mt-auto">
                 <div class="space-y-0.5">
-                  <p class="text-[10px]  text-gray-400 uppercase tracking-widest">Starting at</p>
-                  <p class="text-3xl  text-primary-dark tracking-tighter">${{ stay.price }}<span class="text-xs font-bold text-gray-400 ml-1">/night</span></p>
+                  <p class="text-[10px]  text-gray-400  ">Starting at</p>
+                  <p class="text-3xl  text-primary-dark er">${{ stay.price }}<span class="text-xs font-bold text-gray-400 ml-1">/night</span></p>
                 </div>
-                <BaseButton variant="primary" class="rounded-xl px-6 h-12 text-[10px]  tracking-widest active:scale-95 transition-all uppercase shadow-lg shadow-primary/10">Reserve</BaseButton>
+                <BaseButton variant="primary" class="rounded-xl px-6 h-12 text-[10px]   active:scale-95 transition-all  shadow-lg shadow-primary/10">Reserve</BaseButton>
               </div>
             </div>
           </div>

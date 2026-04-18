@@ -7,8 +7,8 @@
       <!-- Header Area -->
       <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8 mb-10 pb-8 border-b border-gray-100">
         <div class="space-y-1">
-          <h2 class="text-3xl  text-gray-900 tracking-tight italic">Travel Protection</h2>
-          <p class="text-xs font-bold text-gray-400 tracking-widest uppercase">Secure your journey with global coverage</p>
+          <h2 class="text-3xl  text-gray-900  ">Travel Protection</h2>
+          <p class="text-xs font-bold text-gray-400  ">Secure your journey with global coverage</p>
         </div>
       </div>
 
@@ -32,7 +32,7 @@
 
       <!-- Bottom Actions -->
       <div class="mt-12 flex flex-col sm:flex-row sm:items-center justify-between gap-8 pt-8 border-t border-gray-100">
-        <div class="flex items-center space-x-6 text-xs  tracking-widest text-gray-500 uppercase">
+        <div class="flex items-center space-x-6 text-xs   text-gray-500 ">
           <div class="flex items-center space-x-2">
             <div class="w-2 h-2 rounded-full bg-blue-500"></div>
             <span>Medical Coverage</span>
@@ -48,7 +48,7 @@
           :loading="isSearching" 
           variant="primary" 
           size="lg" 
-          class="px-12 h-[58px] rounded-[1.5rem]  tracking-[0.2em] text-xs shadow-2xl shadow-primary/20 hover:scale-[1.05] active:scale-95 transition-all uppercase"
+          class="px-12 h-[58px] rounded-[1.5rem]   text-xs shadow-2xl shadow-primary/20 hover:scale-[1.05] active:scale-95 transition-all "
         >
           <MagnifyingGlassIcon class="h-5 w-5 mr-3" />
           Get Quote
@@ -59,26 +59,33 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import AnimatedInput from '@/components/ui/AnimatedInput.vue'
 import { 
   ShieldCheckIcon, 
   MagnifyingGlassIcon 
 } from '@heroicons/vue/24/outline'
 import DateRangePicker from '@/components/ui/DateRangePicker.vue'
+import { useConfirmation } from '@/composables/core/useConfirmation'
 
+const { confirm } = useConfirmation()
 const destination = ref('')
 const insuranceRange = ref({ start: '', end: '' })
 const startDate = computed(() => insuranceRange.value.start)
 const endDate = computed(() => insuranceRange.value.end)
 const isSearching = ref(false)
 
-const handleSearch = () => {
+const handleSearch = async () => {
   if (!destination.value || !startDate.value) return
   isSearching.value = true
-  setTimeout(() => {
+  setTimeout(async () => {
     isSearching.value = false
-    alert('Insurance search feature is coming soon to the live provider network.')
+    await confirm({
+      title: 'Global Insurance Network',
+      message: 'The insurance search feature is being wired to our live global provider network. Policies from AIG, Allianz, and others will be available here soon.',
+      confirmText: 'Keep me posted',
+      cancelText: ''
+    })
   }, 1000)
 }
 </script>

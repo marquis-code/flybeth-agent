@@ -24,7 +24,7 @@
            </div>
         </div>
 
-        <h1 class="text-3xl md:text-4xl  text-primary-dark tracking-tighter mb-4">
+        <h1 class="text-3xl md:text-4xl  text-primary-dark er mb-4">
           Welcome to the family!
         </h1>
         
@@ -50,7 +50,7 @@
           <BaseButton type="button" variant="primary" size="lg" class="w-full !rounded-2xl" @click="navigateTo('/')">
              Return to Homepage
           </BaseButton>
-          <a href="mailto:support@flybeth.com" class="block text-xs font-bold text-neutral-400 hover:text-secondary transition-colors uppercase tracking-widest mt-6">
+          <a href="mailto:support@flybeth.com" class="block text-xs font-bold text-neutral-400 hover:text-secondary transition-colors   mt-6">
             Contact Support
           </a>
         </div>

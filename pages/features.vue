@@ -6,16 +6,16 @@
       
       <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <div class="space-y-8">
-          <h1 class="text-6xl  text-primary-dark tracking-tighter leading-tight">
+          <h1 class="text-6xl  text-primary-dark er leading-tight">
             Intelligent <br />
-            <span class="text-primary italic">infrastructure.</span>
+            <span class="text-primary ">infrastructure.</span>
           </h1>
           <p class="text-xl text-neutral-500 font-medium leading-relaxed max-w-xl">
              Flybeth provides a robust suite of B2B tools designed to modernize every aspect of your travel agency's workflow, from inventory sourcing to revenue management.
           </p>
           <div class="flex items-center space-x-6">
              <BaseButton to="/auth/register" variant="primary" size="lg" class="px-10">Get started</BaseButton>
-             <NuxtLink to="/help-center" class="text-sm  text-secondary tracking-widest hover:text-primary transition-colors uppercase">View documentation</NuxtLink>
+             <NuxtLink to="/help-center" class="text-sm  text-secondary  hover:text-primary transition-colors ">View documentation</NuxtLink>
           </div>
         </div>
         <div class="relative">
@@ -34,7 +34,7 @@
             <div class="w-16 h-16 bg-neutral-50 rounded-2xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-sm border border-neutral-100">
               <component :is="feature.icon" class="h-8 w-8" />
             </div>
-            <h4 class="text-2xl  text-primary-dark tracking-tight">{{ feature.title }}</h4>
+            <h4 class="text-2xl  text-primary-dark ">{{ feature.title }}</h4>
             <p class="text-neutral-500 font-medium leading-relaxed">{{ feature.description }}</p>
           </div>
         </div>
@@ -45,7 +45,7 @@
     <section class="py-24 bg-neutral-50 border-y border-neutral-100">
        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-20">
           <div class="flex-1 space-y-8 order-2 md:order-1">
-             <h2 class="text-4xl  text-primary-dark tracking-tight leading-tight">Millions of properties. <br />At your fingertips.</h2>
+             <h2 class="text-4xl  text-primary-dark  leading-tight">Millions of properties. <br />At your fingertips.</h2>
              <p class="text-lg text-neutral-600 leading-relaxed font-medium">
                 Our global property node aggregates feeds from HotelBeds, Expedia TAAP, and direct-contracted hotel chains. Manage thousands of room nights across every continent with real-time availability and instant confirmation.
              </p>

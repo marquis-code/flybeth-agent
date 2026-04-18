@@ -7,9 +7,9 @@
         <!-- Left: Contact Details -->
         <div class="space-y-12">
           <div class="space-y-6">
-            <h1 class="text-5xl lg:text-7xl  text-primary-dark tracking-tighter leading-tight">
+            <h1 class="text-5xl lg:text-7xl  text-primary-dark er leading-tight">
               Let's build your <br />
-              <span class="text-primary italic">travel empire.</span>
+              <span class="text-primary ">travel empire.</span>
             </h1>
             <p class="text-xl text-neutral-500 font-medium leading-relaxed max-w-lg">
               Our expert support team and node managers are available 24/7 to assist with onboardings, API integrations, and complex bookings.
@@ -22,7 +22,7 @@
                 <EnvelopeIcon class="h-6 w-6" />
               </div>
               <div>
-                <p class="text-sm  text-neutral-400 tracking-widest uppercase mb-1">Direct support</p>
+                <p class="text-sm  text-neutral-400   mb-1">Direct support</p>
                 <a href="mailto:support@flybeth.com" class="text-xl font-bold text-primary-dark hover:text-primary transition-colors">support@flybeth.com</a>
               </div>
             </div>
@@ -32,7 +32,7 @@
                 <MapPinIcon class="h-6 w-6" />
               </div>
               <div>
-                <p class="text-sm  text-neutral-400 tracking-widest uppercase mb-1">Global headquarters</p>
+                <p class="text-sm  text-neutral-400   mb-1">Global headquarters</p>
                 <p class="text-xl font-bold text-primary-dark">Lagos, Nigeria</p>
                 <p class="text-neutral-500 font-medium mt-1">Serving the global agent community across all nodes.</p>
               </div>
@@ -45,27 +45,27 @@
           <form @submit.prevent="handleSubmit" class="space-y-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div class="space-y-2">
-                <label class="text-xs  text-neutral-400 tracking-widest uppercase px-1">First name</label>
+                <label class="text-xs  text-neutral-400   px-1">First name</label>
                 <input v-model="form.firstName" type="text" class="w-full px-6 py-4 bg-white border border-neutral-200 rounded-2xl focus:border-primary focus:ring-4 focus:ring-primary/5 outline-none font-bold transition-all" placeholder="Jane" />
               </div>
               <div class="space-y-2">
-                <label class="text-xs  text-neutral-400 tracking-widest uppercase px-1">Last name</label>
+                <label class="text-xs  text-neutral-400   px-1">Last name</label>
                 <input v-model="form.lastName" type="text" class="w-full px-6 py-4 bg-white border border-neutral-200 rounded-2xl focus:border-primary focus:ring-4 focus:ring-primary/5 outline-none font-bold transition-all" placeholder="Doe" />
               </div>
             </div>
 
             <div class="space-y-2">
-              <label class="text-xs  text-neutral-400 tracking-widest uppercase px-1">Email address</label>
+              <label class="text-xs  text-neutral-400   px-1">Email address</label>
               <input v-model="form.email" type="email" class="w-full px-6 py-4 bg-white border border-neutral-200 rounded-2xl focus:border-primary focus:ring-4 focus:ring-primary/5 outline-none font-bold transition-all" placeholder="jane@agency.com" />
             </div>
 
             <div class="space-y-2">
-              <label class="text-xs  text-neutral-400 tracking-widest uppercase px-1">Agency name</label>
+              <label class="text-xs  text-neutral-400   px-1">Agency name</label>
               <input v-model="form.agency" type="text" class="w-full px-6 py-4 bg-white border border-neutral-200 rounded-2xl focus:border-primary focus:ring-4 focus:ring-primary/5 outline-none font-bold transition-all" placeholder="Travel Elite World" />
             </div>
 
             <div class="space-y-2">
-              <label class="text-xs  text-neutral-400 tracking-widest uppercase px-1">Message</label>
+              <label class="text-xs  text-neutral-400   px-1">Message</label>
               <textarea v-model="form.message" rows="4" class="w-full px-6 py-4 bg-white border border-neutral-200 rounded-2xl focus:border-primary focus:ring-4 focus:ring-primary/5 outline-none font-bold transition-all" placeholder="Tell us how we can support your growth..."></textarea>
             </div>
 
@@ -83,7 +83,7 @@
         <div class="absolute inset-0 flex items-center justify-center">
             <div class="flex flex-col items-center">
                <GlobeAmericasIcon class="h-24 w-24 text-neutral-300 mb-4 animate-pulse" />
-               <p class="text-lg  text-neutral-400 tracking-widest">Global distribution network active</p>
+               <p class="text-lg  text-neutral-400 ">Global distribution network active</p>
             </div>
         </div>
       </div>
@@ -94,9 +94,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { EnvelopeIcon, MapPinIcon, GlobeAmericasIcon } from '@heroicons/vue/24/outline'
+import { useConfirmation } from '@/composables/core/useConfirmation'
+import { useTracking } from '@/composables/core/useTracking'
 
+const { confirm } = useConfirmation()
+const { trackAction } = useTracking()
+
+onMounted(() => trackAction('navigated_to_contact'))
 const loading = ref(false)
 const form = reactive({
   firstName: '',
@@ -106,11 +112,16 @@ const form = reactive({
   message: ''
 })
 
-const handleSubmit = () => {
+const handleSubmit = async () => {
   loading.value = true
-  setTimeout(() => {
+  setTimeout(async () => {
     loading.value = false
-    alert('Thank you! Your inquiry has been received. A node manager will contact you within 4 hours.')
+    await confirm({
+      title: 'Transmission Received',
+      message: 'Thank you! Your inquiry has been logged in our system. A node manager will contact you within 4 hours to discuss your growth strategy.',
+      confirmText: 'Great!',
+      cancelText: ''
+    })
     form.firstName = ''
     form.lastName = ''
     form.email = ''
