@@ -6,5 +6,8 @@ export const bookingsApiFactory = {
     },
     getStats(tenantId: string) {
         return GATEWAY_ENDPOINT_WITH_AUTH.get("/bookings/stats", { params: { tenantId } });
+    },
+    createBooking(payload: any) {
+        return GATEWAY_ENDPOINT_WITH_AUTH.post("/bookings", payload);
     }
 };

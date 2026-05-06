@@ -1,48 +1,38 @@
 <template>
   <div 
-    class="bg-white/95 backdrop-blur-xl shadow-xl shadow-primary/8 border border-gray-100 font-body relative z-10 transition-all duration-700 ease-in-out rounded-[2rem]"
+    class="bg-white border border-gray-100 shadow-[0_8px_60px_rgb(0,0,0,0.05)] font-sans relative z-10 rounded-[2rem]"
   >
-    <!-- Redesigned Tabs — Desktop Horizontal / Mobile Grid -->
-    <div class="bg-white border-b border-gray-50 overflow-hidden">
-      <!-- Mobile Grid Selector (Hidden on Desktop) -->
-      <div class="md:hidden grid grid-cols-4 gap-2 p-3 bg-gray-50/50">
+    <!-- ─── Tab Bar ─── -->
+    <div class="border-b border-gray-50 bg-white sticky top-0 z-20 rounded-t-[2rem]">
+      <!-- Mobile Tabs -->
+      <div class="md:hidden flex items-center gap-2 px-4 py-3 overflow-x-auto no-scrollbar">
         <button
           v-for="tab in tabs"
           :key="tab.name"
           @click="currentTab = tab.name"
-          :class="[
-            currentTab === tab.name
-              ? 'bg-primary-dark text-white shadow-lg scale-95'
-              : 'bg-white text-gray-400 hover:text-gray-900 border-gray-100',
-            'flex flex-col items-center justify-center gap-1.5 py-3 rounded-2xl transition-all duration-300 border shadow-sm',
-          ]"
+          class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold whitespace-nowrap transition-all shrink-0 border"
+          :class="currentTab === tab.name
+            ? 'bg-primary text-white border-primary shadow-lg shadow-primary/20'
+            : 'bg-white text-gray-800 border-gray-100 hover:border-gray-200'"
         >
-          <div class="flex items-center justify-center h-5">
-            <img v-if="tab.customIcon" :src="tab.customIcon" class="h-4 w-4 object-contain transition-all" :class="currentTab === tab.name ? 'brightness-0 invert' : 'opacity-60'" />
-            <component v-else :is="tab.icon" class="h-4 w-4 stroke-[2.5]" />
-          </div>
-          <span class="text-[9px] font-bold  ">{{ tab.label || tab.name }}</span>
+          <component :is="tab.icon" class="h-3.5 w-3.5" />
+          {{ tab.label }}
         </button>
       </div>
-
-      <!-- Desktop Nav (Hidden on Mobile) -->
-      <nav class="hidden md:flex justify-center px-6 gap-3 min-w-max w-full mx-auto" aria-label="Tabs">
+ 
+      <!-- Desktop Tabs -->
+      <nav class="hidden md:flex items-center px-10 gap-2 overflow-x-auto no-scrollbar" aria-label="Search tabs">
         <button
           v-for="tab in tabs"
           :key="tab.name"
           @click="currentTab = tab.name"
-          :class="[
-            currentTab === tab.name
-              ? 'text-primary-dark border-primary-dark'
-              : 'text-gray-400 hover:text-gray-900 border-transparent',
-            'flex flex-col items-center justify-center gap-1 transition-all border-b-[3px] pt-3 pb-2.5 relative z-10 whitespace-nowrap px-4',
-          ]"
+          class="flex items-center gap-2 px-6 py-5 text-sm font-bold tracking-tight transition-all border-b-2 whitespace-nowrap group translate-y-[1px]"
+          :class="currentTab === tab.name
+            ? 'text-primary border-primary'
+            : 'text-gray-800 border-transparent hover:text-gray-800'"
         >
-          <div class="flex items-center justify-center h-8">
-            <img v-if="tab.customIcon" :src="tab.customIcon" class="h-5 w-5 object-contain transition-all" :class="currentTab === tab.name ? 'opacity-100' : 'opacity-40 grayscale'" />
-            <component v-else :is="tab.icon" class="h-5 w-5 stroke-[2]" />
-          </div>
-          <span class="text-[11px]  font-bold ">{{ tab.label || tab.name }}</span>
+          <component :is="tab.icon" class="h-4 w-4" :class="currentTab === tab.name ? 'text-primary' : 'text-gray-800 group-hover:text-gray-800'" />
+          {{ tab.label }}
         </button>
       </nav>
     </div>
@@ -50,631 +40,347 @@
     <!-- Backdrop Overlay -->
     <Teleport to="body">
       <Transition name="fade">
-        <div v-if="isFocused" class="fixed inset-0 bg-black/5 backdrop-blur-[2px] z-[9]" @click="isFocused = false"></div>
+        <div v-if="isFocused" class="fixed inset-0 bg-black/10 backdrop-blur-[4px] z-[9]" @click="isFocused = false"></div>
       </Transition>
     </Teleport>
 
-    <!-- Content Area -->
-    <div 
-      class="bg-white p-4 md:p-6 space-y-4 relative z-[10000]"
-    >
-       <!-- Stays (Hotels) Panel -->
-       <div v-if="currentTab === 'Hotels'" class="space-y-6">
-         <!-- Stay Mode Toggle -->
-         <div class="flex items-center space-x-8 pb-2">
-           <label 
-             v-for="mode in [{label: 'Single Hotel', value: 'single'}, {label: 'Multi Hotel', value: 'multi'}]" 
-             :key="mode.value"
-             class="flex items-center space-x-3 cursor-pointer group"
-           >
-             <div class="relative flex items-center">
-               <input type="radio" :value="mode.value" v-model="stayMode" class="sr-only" />
-               <div 
-                 class="w-5 h-5 rounded-full border-2 transition-all duration-300 flex items-center justify-center"
-                 :class="stayMode === mode.value ? 'border-primary-dark' : 'border-gray-200 group-hover:border-gray-400'"
-               >
-                 <div 
-                   class="w-2.5 h-2.5 rounded-full bg-primary-dark transition-all duration-300"
-                   :class="stayMode === mode.value ? 'scale-100 opacity-100' : 'scale-0 opacity-0'"
-                 ></div>
-               </div>
-             </div>
-             <span class="text-[10px] font-bold   text-gray-500 transition-colors" :class="stayMode === mode.value ? 'text-primary-dark' : 'opacity-60 group-hover:opacity-100'">{{ mode.label }}</span>
-           </label>
-         </div>
- 
-         <!-- Single Hotel Layout -->
-         <div v-if="stayMode === 'single'" class="space-y-6">
-           <div 
-             class="flex flex-col md:flex-row items-stretch bg-white border border-gray-200 rounded-2xl shadow-sm overflow-visible transition-all duration-300"
-             :class="isFocused ? 'ring-4 ring-primary-dark/5 border-primary-dark' : ''"
-           >
-             <div class="flex-[1.5] relative border-b md:border-b-0 md:border-r border-gray-100">
-               <LocationPicker 
-                 v-model="searchState.location" 
-                 label="Going to"
-                 placeholder="Where are you going?"
-                 @focus="isFocused = true"
-                 @close="isFocused = false"
-               />
-             </div>
-             <div class="flex-[1.8] border-b md:border-b-0 md:border-r border-gray-100">
-               <FlightDateRangePicker
-                 v-model:departure="searchState.checkIn"
-                 v-model:return="searchState.checkOut"
-                 mode="roundtrip"
-                 @focus="isFocused = true"
-                 @close="isFocused = false"
-               />
-             </div>
-             <div class="flex-1 relative border-gray-100">
-                <Occupancypicker
-                  v-model:rooms="occupancy.rooms"
-                  v-model:adults="occupancy.adults"
-                  v-model:children="occupancy.children"
-                  @focus="isFocused = true"
-                  @close="isFocused = false"
-                />
-             </div>
-           </div>
-           <div class="pt-4 flex flex-col md:flex-row md:items-center justify-between gap-6 border-t border-gray-50">
-             <div class="flex items-center gap-6">
-               <div class="flex items-center bg-gray-50 px-4 py-2 rounded-xl border border-gray-100">
-                 <span class="text-[10px] font-bold text-gray-400   mr-4">Bundle + Save</span>
-                 <label class="flex items-center text-[11px] font-bold text-gray-900 cursor-pointer mr-4  er">
-                   <input type="checkbox" v-model="bundles.bundleFlight" class="mr-2 custom-checkbox" />
-                   + Flight
-                 </label>
-                 <label class="flex items-center text-[11px] font-bold text-gray-900 cursor-pointer  er">
-                   <input type="checkbox" v-model="bundles.bundleCar" class="mr-2 custom-checkbox" />
-                   + Car
-                 </label>
-               </div>
-             </div>
-             <button @click="handleSearch" class="w-full md:w-auto bg-primary-dark text-white px-6 py-2.5 text-[11px] rounded-xl font-bold text-[11px]   shadow-lg hover:bg-black transition-all flex items-center justify-center gap-2">
-               <span>Find Your Hotel</span>
-               <ArrowRightIcon class="h-4 w-4" />
-             </button>
-           </div>
-         </div>
+    <!-- ─── Content Area ─── -->
+    <div class="p-6 md:p-8 space-y-6">
+      
+      <!-- Stays Panel -->
+      <div v-if="currentTab === 'Hotels'" class="space-y-6">
+        <div class="flex items-center gap-8">
+          <label v-for="mode in stayModes" :key="mode.value" class="radio-label group">
+            <input type="radio" :value="mode.value" v-model="stayMode" class="sr-only" />
+            <span class="radio-dot" :class="stayMode === mode.value ? 'radio-dot--active' : ''" />
+            <span class="radio-text" :class="stayMode === mode.value ? '!text-gray-900 font-bold' : ''">{{ mode.label }}</span>
+          </label>
+        </div>
 
-        <!-- Multi Hotel Layout -->
-        <div v-else class="space-y-6">
-          <div v-for="(hotel, index) in multiHotelLegs" :key="index" class="space-y-2">
-            <p class="text-[11px] font-bold text-primary-dark ">Hotel {{ index + 1 }}</p>
-            <div class="flex flex-col md:flex-row items-stretch bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
-              <div class="flex-1 border-b md:border-b-0 md:border-r border-gray-100">
-                <LocationPicker v-model="hotel.location" label="Where to?" />
-              </div>
-              <div class="flex-1 border-b md:border-b-0 border-gray-100">
-                <FlightDateRangePicker v-model:departure="hotel.checkIn" v-model:return="hotel.checkOut" mode="roundtrip" />
-              </div>
+        <div class="space-y-4">
+          <div class="modern-grid bg-white border border-gray-100 rounded-[2rem] shadow-sm flex flex-col lg:flex-row divide-y lg:divide-y-0 lg:divide-x divide-gray-100 overflow-visible">
+            <div class="flex-[1.5] cell-padding hover:bg-gray-50/50 transition-all">
+              <p class="cell-label">Where to?</p>
+              <LocationPicker v-model="searchState.location" label="" placeholder="City, hotel or area" variant="minimal" @focus="isFocused = true" @close="isFocused = false" />
+            </div>
+            <div class="flex-1 cell-padding hover:bg-gray-50/50 transition-all">
+              <p class="cell-label">Dates</p>
+              <FlightDateRangePicker v-model:departure="searchState.checkIn" v-model:return="searchState.checkOut" mode="roundtrip" variant="minimal" @focus="isFocused = true" @close="isFocused = false" />
+            </div>
+            <div class="flex-1 cell-padding hover:bg-gray-50/50 transition-all">
+              <p class="cell-label">Travelers</p>
+              <Occupancypicker v-model:rooms="occupancy.rooms" v-model:adults="occupancy.adults" v-model:children="occupancy.children" label="" displayVariant="minimal" @focus="isFocused = true" @close="isFocused = false" />
             </div>
           </div>
-          <div class="flex items-center justify-between pt-4 border-t border-gray-50">
-            <button @click="addHotelLeg" v-if="multiHotelLegs.length < 5" class="bg-gray-50 text-gray-900 px-6 py-2.5 rounded-xl text-[11px] font-bold   transition-all border border-gray-100">Add Another Hotel</button>
-            <button @click="handleSearch" class="bg-primary-dark text-white px-6 py-2.5 text-[11px] rounded-xl font-bold text-[11px]   shadow-lg flex items-center justify-center gap-2">
-              <span>Find Your Hotels</span>
-              <ArrowRightIcon class="h-4 w-4" />
+
+          <div class="flex items-center justify-between pt-4">
+            <div class="flex items-center gap-6">
+              <div class="flex items-center gap-2">
+                <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="text-sm font-medium text-gray-800 uppercase tracking-widest">Confidential Agent Pricing</span>
+              </div>
+              <button @click="showHotelAdvancedSearch = !showHotelAdvancedSearch" class="flex items-center gap-2 text-gray-800 hover:text-primary transition-all">
+                <span class="text-sm font-bold uppercase tracking-widest">Advanced Search</span>
+                <ChevronDown class="h-3 w-3 transition-transform" :class="{ 'rotate-180': showHotelAdvancedSearch }" />
+              </button>
+            </div>
+            <button @click="handleSearch" class="h-10 px-8 bg-neutral-900 text-white rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-black transition-all shadow-lg flex items-center gap-2">
+              <Search class="h-3.5 w-3.5" />
+              Search Hotels
             </button>
           </div>
         </div>
       </div>
 
       <!-- Flights Panel -->
-      <div v-if="currentTab === 'Flights'" class="space-y-4">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-2">
-           <div class="flex items-center space-x-6">
-              <label v-for="mode in ['oneway', 'roundtrip', 'multicity']" :key="mode" class="flex items-center space-x-2 cursor-pointer group">
-                <input type="radio" :value="mode" v-model="flightMode" class="sr-only" />
-                <div class="w-4 h-4 rounded-full border-2 transition-all flex items-center justify-center" :class="flightMode === mode ? 'border-primary-dark' : 'border-gray-300'">
-                   <div v-if="flightMode === mode" class="w-2 h-2 rounded-full bg-primary-dark"></div>
-                </div>
-                <span class="text-[11px]  " :class="flightMode === mode ? 'text-primary-dark' : 'text-gray-500/60'">{{ mode.replace('multicity', 'Multi City').replace('oneway', 'One Way').replace('roundtrip', 'Round Trip') }}</span>
-              </label>
-           </div>
-        </div>
-        <div class="flex flex-col gap-4">
-           <div 
-             v-for="(leg, index) in flightMode === 'multicity' ? multiFlightLegs : [flightSearchState]" 
-             :key="index"
-             class="flex flex-col lg:flex-row w-full bg-white border border-gray-200 rounded-xl shadow-sm relative transition-all duration-300 hover:border-primary/20"
-           >
-              <div class="flex flex-col md:flex-row w-full lg:w-[60%]">
-                <div class="w-full md:w-1/2 border-b md:border-b-0 md:border-r border-gray-100">
-                   <LocationPicker v-model="leg.origin" label="From" />
-                </div>
-                <div class="w-full md:w-1/2 border-b lg:border-b-0 lg:border-r border-gray-100">
-                   <LocationPicker v-model="leg.destination" label="To" />
-                </div>
-              </div>
-              <div class="flex flex-col md:flex-row w-full lg:w-[42%]">
-                <div class="flex-1 border-b md:border-b-0 md:border-r border-gray-100 min-w-max">
-                  <FlightDateRangePicker :mode="flightMode === 'multicity' ? 'oneway' : (flightMode as any)" v-model:departure="leg.departureDate" v-model:return="leg.returnDate" />
-                </div>
-                <div v-if="index === 0" class="w-full md:w-[220px] shrink-0">
-                  <Occupancypicker label="Passengers" variant="flight" v-model:adults="flightTravelers.adults" v-model:children="flightTravelers.children" />
-                </div>
-              </div>
-           </div>
-        </div>
-        <div class="pt-4 flex flex-col md:flex-row md:items-center justify-between gap-6 border-t border-gray-50">
-              <div class="flex items-center gap-6">
-                <div class="flex items-center bg-gray-50 px-4 py-2 rounded-xl border border-gray-100">
-                  <span class="text-[10px] font-bold text-gray-400   mr-4">Bundle + Save</span>
-                  <label class="flex items-center text-[11px] font-bold text-gray-900 cursor-pointer mr-4  er">
-                    <input type="checkbox" v-model="bundles.bundleHotel" class="mr-2 custom-checkbox" />
-                    + Hotel
-                  </label>
-                  <label class="flex items-center text-[11px] font-bold text-gray-900 cursor-pointer  er">
-                    <input type="checkbox" v-model="bundles.bundleCar" class="mr-2 custom-checkbox" />
-                    + Car
-                  </label>
-                </div>
-                <p class="text-[10px] font-bold text-primary    hidden lg:block">Agent Wholesale Pricing Active</p>
-              </div>
-              <button @click="handleSearch" class="w-full md:w-auto bg-primary-dark text-white px-6 py-2.5 text-[11px] rounded-xl font-bold text-[11px]   shadow-lg flex items-center justify-center gap-2">
-                <span>Find Your Flight</span>
-                <ArrowRightIcon class="h-4 w-4" />
-              </button>
-        </div>
-      </div>
-
-      <!-- Packages Panel -->
-      <div v-if="currentTab === 'Packages'" class="space-y-6">
-        <div class="flex flex-wrap items-center gap-6 pb-2">
-          <label 
-            v-for="mode in [
-              {label: 'Hotel + Flight', value: 'Hotel+Flight'}, 
-              {label: 'Hotel + Flight + Car', value: 'Hotel+Flight+Car'},
-              {label: 'Flight + Car', value: 'Flight+Car'},
-              {label: 'Hotel + Car', value: 'Hotel+Car'}
-            ]" 
-            :key="mode.value"
-            class="flex items-center space-x-2 cursor-pointer group"
-          >
-            <input type="radio" :value="mode.value" v-model="packageType" class="sr-only" />
-            <div class="w-4 h-4 rounded-full border-2 transition-all flex items-center justify-center" :class="packageType === mode.value ? 'border-primary-dark' : 'border-gray-200'">
-              <div v-if="packageType === mode.value" class="w-2 h-2 rounded-full bg-primary-dark"></div>
-            </div>
-            <span class="text-[11px] font-bold  " :class="packageType === mode.value ? 'text-primary-dark' : 'text-gray-500/60'">{{ mode.label }}</span>
+      <div v-if="currentTab === 'Flights'" class="space-y-6">
+        <div class="flex items-center gap-8">
+          <label v-for="mode in flightModeOptions" :key="mode.value" class="radio-label group">
+            <input type="radio" :value="mode.value" v-model="flightMode" class="sr-only" />
+            <span class="radio-dot" :class="flightMode === mode.value ? 'radio-dot--active' : ''" />
+            <span class="radio-text" :class="flightMode === mode.value ? '!text-gray-900 font-bold' : ''">{{ mode.label }}</span>
           </label>
         </div>
 
-        <div class="flex flex-col gap-4">
-          <div class="flex flex-col md:flex-row bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden min-h-[72px]">
-            <div class="flex-1 border-b md:border-b-0 md:border-r border-gray-100">
-               <LocationPicker v-model="packageSearchState.origin" label="From" />
+        <div class="space-y-4">
+          <div 
+            v-for="(leg, idx) in flightMode === 'multicity' ? multiFlightLegs : [flightSearchState]" 
+            :key="idx" 
+            class="relative"
+          >
+            <div class="modern-grid bg-white border border-gray-100 rounded-[2rem] shadow-sm flex flex-col lg:flex-row divide-y lg:divide-y-0 lg:divide-x divide-gray-100 !overflow-visible relative">
+              <div class="flex-1 cell-padding hover:bg-gray-50/50 transition-all">
+                <p class="cell-label">From</p>
+                <LocationPicker v-model="leg.origin" label="" placeholder="Origin" variant="minimal" @focus="isFocused = true" @close="isFocused = false" />
+              </div>
+              <div class="flex-1 cell-padding hover:bg-gray-50/50 transition-all">
+                <p class="cell-label">To</p>
+                <LocationPicker v-model="leg.destination" label="" placeholder="Destination" variant="minimal" @focus="isFocused = true" @close="isFocused = false" />
+              </div>
+              <div class="flex-1 cell-padding hover:bg-gray-50/50 transition-all">
+                <p class="cell-label">Departing</p>
+                <FlightDateRangePicker :mode="flightMode === 'roundtrip' ? 'roundtrip' : 'oneway'" v-model:departure="leg.departureDate" v-model:return="leg.returnDate" variant="minimal" @focus="isFocused = true" @close="isFocused = false" />
+              </div>
             </div>
-            <div class="flex-1 border-b md:border-b-0 md:border-r border-gray-100">
-               <LocationPicker v-model="packageSearchState.destination" label="To" />
-            </div>
-            <div class="flex-1 border-b md:border-b-0 md:border-r border-gray-100">
-               <FlightDateRangePicker v-model:departure="packageSearchState.departureDate" v-model:return="packageSearchState.returnDate" mode="roundtrip" />
-            </div>
-            <div class="flex-1">
-               <Occupancypicker v-model:rooms="packageOccupancy.rooms" v-model:adults="packageOccupancy.adults" />
-            </div>
-          </div>
-          
-          <div class="flex flex-wrap items-center gap-6 pt-2">
-            <label v-if="packageType.toLowerCase().includes('hotel') && packageType.toLowerCase().includes('flight')" class="flex items-center text-[11px] font-bold text-gray-900 cursor-pointer  er">
-              <input type="checkbox" v-model="onlyPartialHotel" class="mr-2 custom-checkbox" />
-              I only need a hotel for part of my stay
-            </label>
+            <button v-if="flightMode === 'multicity' && multiFlightLegs.length > 1" @click="multiFlightLegs.splice(idx, 1)" class="absolute -right-8 top-1/2 -translate-y-1/2 p-2 text-gray-600 hover:text-rose-500 transition-colors">
+              <X class="h-4 w-4" />
+            </button>
           </div>
 
-          <Transition name="fade">
-            <div v-if="onlyPartialHotel" class="bg-gray-50/50 p-4 rounded-xl border border-gray-100 mt-2 w-full">
-              <p class="text-[10px] font-bold  text-gray-900  mb-3">Hotel Stay Dates</p>
-              <div class="max-w-md bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden h-[68px]">
-                 <FlightDateRangePicker v-model:departure="packageSearchState.hotelCheckIn" v-model:return="packageSearchState.hotelCheckOut" mode="roundtrip" />
+          <!-- Advanced Toggle -->
+          <div class="flex items-center justify-between pt-2">
+            <button 
+              @click="showFlightAdvancedSearch = !showFlightAdvancedSearch" 
+              class="flex items-center gap-2 text-sm  uppercase  text-gray-800 hover:text-primary transition-all group"
+            >
+              <div class="w-6 h-6 rounded-lg bg-gray-50 flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+                <ChevronDown class="h-3 w-3 transition-transform duration-500" :class="{ 'rotate-180': showFlightAdvancedSearch }" />
+              </div>
+              Advanced Search
+            </button>
+            <button @click="handleSearch" class="hidden md:flex h-12 px-10 bg-neutral-900 text-white rounded-2xl  text-sm uppercase  hover:bg-black transition-all shadow-xl items-center gap-3">
+              <Search class="h-4 w-4" />
+              Find Flights
+            </button>
+          </div>
+
+          <!-- Advanced Panel -->
+          <Transition name="fade-slide">
+            <div v-if="showFlightAdvancedSearch" class="pt-6 border-t border-gray-50 grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
+              <div class="space-y-2">
+                <label class="text-sm font-semibold text-gray-800 uppercase tracking-widest pl-1">Adults</label>
+                <SelectInput v-model="flightTravelers.adults" label="" :options="[1,2,3,4,5,6,7,8]" variant="minimal" />
+              </div>
+              <div class="space-y-2">
+                <label class="text-sm font-semibold text-gray-800 uppercase tracking-widest pl-1">Children</label>
+                <SelectInput v-model="flightTravelers.children" label="" :options="[0,1,2,3,4,5,6]" variant="minimal" />
+              </div>
+              <div class="space-y-2">
+                <label class="text-sm font-semibold text-gray-800 uppercase tracking-widest pl-1">Infants</label>
+                <SelectInput v-model="flightTravelers.infants" label="" :options="[0,1,2,3,4]" variant="minimal" />
+              </div>
+              <div class="space-y-2">
+                <label class="text-sm font-semibold text-gray-800 uppercase tracking-widest pl-1">Cabin Class</label>
+                <SelectInput v-model="flightClass" label="" :options="flightClasses" variant="minimal" />
               </div>
             </div>
           </Transition>
 
-          <div class="flex items-center justify-between pt-4 border-t border-gray-50">
-             <div class="flex items-center gap-4">
-                <span class="text-[10px] font-bold text-gray-400   ">Agent Exclusive Bundles</span>
-             </div>
-              <button @click="handleSearch" class="bg-primary-dark text-white px-6 py-2.5 text-[11px] rounded-xl font-bold text-[11px]   shadow-lg flex items-center justify-center gap-2">
-                <span>Find Your Trip</span>
-                <ArrowRightIcon class="h-4 w-4" />
-              </button>
+          <!-- Mobile Only Search Button -->
+          <div class="md:hidden pt-4">
+            <button @click="handleSearch" class="w-full h-14 bg-neutral-900 text-white rounded-[1.5rem]  text-sm uppercase  hover:bg-black transition-all shadow-xl flex items-center justify-center gap-3">
+              <Search class="h-5 w-5" />
+              Find Flights
+            </button>
           </div>
         </div>
       </div>
 
-      <!-- Cars Panel -->
-      <div v-if="currentTab === 'Cars'" class="space-y-6">
-        <div class="flex rounded-xl overflow-hidden border border-gray-200 p-1 bg-gray-50">
-          <button @click="carMode = 'pickup'" class="flex-1 py-1 text-[11px] font-bold   rounded-lg transition-all" :class="carMode === 'pickup' ? 'bg-primary-dark text-white shadow-md' : 'bg-transparent text-gray-500 hover:text-gray-900'">Airport Pick-up</button>
-          <button @click="carMode = 'dropoff'" class="flex-1 py-1 text-[11px] font-bold   rounded-lg transition-all" :class="carMode === 'dropoff' ? 'bg-primary-dark text-white shadow-md' : 'bg-transparent text-gray-500 hover:text-gray-900'">Airport Drop-off</button>
-        </div>
-        <div class="flex flex-col md:flex-row bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
-          <div class="flex-1 border-r border-gray-100">
-            <LocationPicker v-model="carSearchState.origin" label="From" />
-          </div>
-          <div class="flex-1 border-r border-gray-100">
-            <LocationPicker v-model="carSearchState.destination" label="To" />
-          </div>
-          <div class="flex-1">
-             <FlightDateRangePicker v-model:departure="carSearchState.pickUpDate" mode="oneway" />
-          </div>
-        </div>
-        <div class="flex justify-between pt-4 border-t border-gray-50">
-           <label class="flex items-center text-[11px] font-bold text-gray-900 cursor-pointer  er">
-             <input type="checkbox" v-model="differentCarDropoff" class="mr-2 custom-checkbox" />
-             Drop-off at different location
-           </label>
-           <button @click="handleSearch" class="bg-primary-dark text-white px-6 py-2.5 text-[11px] rounded-xl font-bold text-[11px]   shadow-lg">Find Your Car</button>
-        </div>
-      </div>
+      <!-- Other Panels -->
+      <div v-if="['Transfers', 'Activities', 'Cars', 'Packages', 'Cruises'].includes(currentTab)" class="space-y-6">
+        <div class="modern-grid bg-white border border-gray-100 rounded-[2rem] shadow-sm flex flex-col lg:flex-row divide-y lg:divide-y-0 lg:divide-x divide-gray-100 overflow-visible">
+          <template v-if="currentTab === 'Transfers'">
+            <div class="flex-1 cell-padding"><p class="cell-label uppercase">From</p><LocationPicker v-model="transferSearchState.origin" variant="minimal" /></div>
+            <div class="flex-[1.2] cell-padding"><p class="cell-label uppercase">To</p><LocationPicker v-model="transferSearchState.destination" variant="minimal" /></div>
+            <div class="flex-1 cell-padding"><p class="cell-label uppercase">Date</p><FlightDateRangePicker v-model:departure="transferSearchState.date" mode="oneway" variant="minimal" /></div>
+          </template>
 
-      <!-- Cruises Panel -->
-      <div v-if="currentTab === 'Cruises'" class="space-y-4">
-        
-        <!-- Global Dropdown Close Watcher -->
-        <div v-if="activeCruiseField" class="fixed inset-0 z-40" @click="activeCruiseField = null"></div>
+          <template v-if="currentTab === 'Activities'">
+            <div class="flex-[1.5] cell-padding"><p class="cell-label uppercase">Destination</p><CityPicker v-model="activitiesSearchState.destination" label="" placeholder="Search any city" variant="minimal" /></div>
+            <div class="flex-1 cell-padding"><p class="cell-label uppercase">When?</p><FlightDateRangePicker v-model:departure="activitiesSearchState.date" mode="oneway" variant="minimal" /></div>
+          </template>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-50">
-          <!-- Destination Dropdown -->
-          <div class="relative w-full">
-            <button 
-              @click="activeCruiseField = activeCruiseField === 'destination' ? null : 'destination'"
-              class="w-full h-16 pl-14 pr-10 bg-white border border-gray-200 rounded-2xl flex items-center text-left hover:border-primary focus-within:border-primary transition-all relative z-50"
-              :class="{ 'ring-4 ring-primary/5 border-primary': activeCruiseField === 'destination' }"
-            >
-              <div class="absolute left-5 top-1/2 -translate-y-1/2 text-primary-dark">
-                <MagnifyingGlassIcon class="h-5 w-5" />
-              </div>
-              <span class="text-sm font-bold" :class="cruiseSearchState.destinationLabel ? 'text-gray-900' : 'text-gray-400'">{{ cruiseSearchState.destinationLabel || 'Destination (Any)' }}</span>
-              <ChevronDownIcon class="absolute right-5 h-4 w-4 text-gray-400" />
-            </button>
+          <template v-if="currentTab === 'Cars'">
+            <div class="flex-1 cell-padding"><p class="cell-label uppercase">Location</p><LocationPicker v-model="carSearchState.origin" variant="minimal" /></div>
+            <div class="flex-1 cell-padding"><p class="cell-label uppercase">Pick-up</p><FlightDateRangePicker v-model:departure="carSearchState.pickUpDate" mode="oneway" variant="minimal" /></div>
+          </template>
 
-            <Transition name="fade">
-              <div v-if="activeCruiseField === 'destination'" class="absolute left-0 top-full mt-2 w-full max-h-[300px] overflow-y-auto bg-white border border-gray-100 rounded-2xl shadow-xl z-[60] p-3 custom-scrollbar">
-                <div v-for="opt in cruiseDestinations" :key="opt.value" 
-                  @click="cruiseSearchState.destination = opt.value; cruiseSearchState.destinationLabel = opt.label; activeCruiseField = null"
-                  class="px-4 py-3 hover:bg-gray-50 rounded-xl transition-all cursor-pointer group flex items-center justify-between"
-                  :class="{ 'bg-primary/5 text-primary-dark': cruiseSearchState.destination === opt.value }"
-                >
-                  <span class="text-xs font-bold text-gray-900 group-hover:text-primary-dark">{{ opt.label }}</span>
-                  <CheckIcon v-if="cruiseSearchState.destination === opt.value" class="h-4 w-4 text-primary-dark" />
-                </div>
-              </div>
-            </Transition>
-          </div>
+          <template v-if="currentTab === 'Packages'">
+            <div class="flex-1 cell-padding"><p class="cell-label uppercase">From</p><LocationPicker v-model="packageSearchState.origin" variant="minimal" /></div>
+            <div class="flex-1 cell-padding"><p class="cell-label uppercase">To</p><LocationPicker v-model="packageSearchState.destination" variant="minimal" /></div>
+            <div class="flex-1 cell-padding"><p class="cell-label uppercase">Dates</p><FlightDateRangePicker v-model:departure="packageSearchState.departureDate" v-model:return="packageSearchState.returnDate" mode="roundtrip" variant="minimal" /></div>
+          </template>
 
-          <!-- Departing Dropdown -->
-          <div class="relative w-full">
-            <button 
-              @click="activeCruiseField = activeCruiseField === 'departing' ? null : 'departing'"
-              class="w-full h-16 pl-14 pr-10 bg-white border border-gray-200 rounded-2xl flex items-center text-left hover:border-primary focus-within:border-primary transition-all relative z-50"
-              :class="{ 'ring-4 ring-primary/5 border-primary': activeCruiseField === 'departing' }"
-            >
-              <div class="absolute left-5 top-1/2 -translate-y-1/2 text-primary-dark">
-                <CalendarIcon class="h-5 w-5" />
-              </div>
-              <span class="text-sm font-bold" :class="cruiseSearchState.departingLabel ? 'text-gray-900' : 'text-gray-400'">{{ cruiseSearchState.departingLabel || 'Departing Month' }}</span>
-              <ChevronDownIcon class="absolute right-5 h-4 w-4 text-gray-400" />
-            </button>
-
-            <Transition name="fade">
-              <div v-if="activeCruiseField === 'departing'" class="absolute left-0 top-full mt-2 w-full max-h-[300px] overflow-y-auto bg-white border border-gray-100 rounded-2xl shadow-xl z-[60] p-3 custom-scrollbar">
-                <div v-for="month in cruiseMonths" :key="month.value" 
-                  @click="cruiseSearchState.departingMonth = month.value; cruiseSearchState.departingLabel = month.label; activeCruiseField = null"
-                  class="px-4 py-3 hover:bg-gray-50 rounded-xl transition-all cursor-pointer group flex items-center justify-between"
-                  :class="{ 'bg-primary/5 text-primary-dark': cruiseSearchState.departingMonth === month.value }"
-                >
-                  <span class="text-xs font-bold text-gray-900 group-hover:text-primary-dark">{{ month.label }}</span>
-                  <CheckIcon v-if="cruiseSearchState.departingMonth === month.value" class="h-4 w-4 text-primary-dark" />
-                </div>
-              </div>
-            </Transition>
-          </div>
-
-          <!-- Length Dropdown -->
-          <div class="relative w-full">
-            <button 
-              @click="activeCruiseField = activeCruiseField === 'length' ? null : 'length'"
-              class="w-full h-16 pl-14 pr-10 bg-white border border-gray-200 rounded-2xl flex items-center text-left hover:border-primary focus-within:border-primary transition-all relative z-50"
-              :class="{ 'ring-4 ring-primary/5 border-primary': activeCruiseField === 'length' }"
-            >
-              <div class="absolute left-5 top-1/2 -translate-y-1/2 text-primary-dark">
-                <ClockIcon class="h-5 w-5" />
-              </div>
-              <span class="text-sm font-bold" :class="cruiseSearchState.lengthLabel ? 'text-gray-900' : 'text-gray-400'">{{ cruiseSearchState.lengthLabel || 'Cruise Length (Any)' }}</span>
-              <ChevronDownIcon class="absolute right-5 h-4 w-4 text-gray-400" />
-            </button>
-
-            <Transition name="fade">
-              <div v-if="activeCruiseField === 'length'" class="absolute left-0 top-full mt-2 w-full max-h-[300px] overflow-y-auto bg-white border border-gray-100 rounded-2xl shadow-xl z-[60] p-3 custom-scrollbar">
-                <div v-for="len in cruiseLengths" :key="len.value" 
-                  @click="cruiseSearchState.length = len.value; cruiseSearchState.lengthLabel = len.label; activeCruiseField = null"
-                  class="px-4 py-3 hover:bg-gray-50 rounded-xl transition-all cursor-pointer group flex items-center justify-between"
-                  :class="{ 'bg-primary/5 text-primary-dark': cruiseSearchState.length === len.value }"
-                >
-                  <span class="text-xs font-bold text-gray-900 group-hover:text-primary-dark">{{ len.label }}</span>
-                  <CheckIcon v-if="cruiseSearchState.length === len.value" class="h-4 w-4 text-primary-dark" />
-                </div>
-              </div>
-            </Transition>
-          </div>
-
-          <!-- Cruise Line Dropdown -->
-          <div class="relative w-full">
-            <button 
-              @click="activeCruiseField = activeCruiseField === 'line' ? null : 'line'"
-              class="w-full h-16 pl-14 pr-10 bg-white border border-gray-200 rounded-2xl flex items-center text-left hover:border-primary focus-within:border-primary transition-all relative z-50"
-              :class="{ 'ring-4 ring-primary/5 border-primary': activeCruiseField === 'line' }"
-            >
-              <div class="absolute left-5 top-1/2 -translate-y-1/2 text-primary-dark">
-                <SparklesIcon class="h-5 w-5" />
-              </div>
-              <span class="text-sm font-bold" :class="cruiseSearchState.lineLabel ? 'text-gray-900' : 'text-gray-400'">{{ cruiseSearchState.lineLabel || 'Cruise Line (Any)' }}</span>
-              <ChevronDownIcon class="absolute right-5 h-4 w-4 text-gray-400" />
-            </button>
-
-            <Transition name="fade">
-              <div v-if="activeCruiseField === 'line'" class="absolute left-0 top-full mt-2 w-full max-h-[300px] overflow-y-auto bg-white border border-gray-100 rounded-2xl shadow-xl z-[60] p-3 custom-scrollbar">
-                <div v-for="line in cruiseLines" :key="line.value" 
-                  @click="cruiseSearchState.line = line.value; cruiseSearchState.lineLabel = line.label; activeCruiseField = null"
-                  class="px-4 py-3 hover:bg-gray-50 rounded-xl transition-all cursor-pointer group flex items-center justify-between"
-                  :class="{ 'bg-primary/5 text-primary-dark': cruiseSearchState.line === line.value }"
-                >
-                  <span class="text-xs font-bold text-gray-900 group-hover:text-primary-dark">{{ line.label }}</span>
-                  <CheckIcon v-if="cruiseSearchState.line === line.value" class="h-4 w-4 text-primary-dark" />
-                </div>
-              </div>
-            </Transition>
-          </div>
+          <template v-if="currentTab === 'Cruises'">
+            <div class="flex-1 cell-padding"><SelectInput v-model="cruiseSearchState.destination" label="Destination" :options="cruiseDestinations" variant="minimal" /></div>
+            <div class="flex-1 cell-padding"><SelectInput v-model="cruiseSearchState.departingMonth" label="Month" :options="cruiseMonths" variant="minimal" /></div>
+          </template>
         </div>
 
-        <div class="flex justify-end pt-4 border-t border-gray-50 mt-4 relative z-40">
-           <button @click="handleSearch" class="w-full md:w-auto bg-primary-dark text-white px-8 py-3 text-[11px] rounded-xl font-bold text-sm shadow-lg hover:bg-black transition-colors flex items-center justify-center gap-2">
-             <span>Find Cruises</span>
-             <ArrowRightIcon class="h-4 w-4 text-white" />
+        <div class="flex justify-end pt-4">
+           <button @click="handleSearch" class="h-10 px-10 bg-neutral-900 text-white rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-black transition-all shadow-lg flex items-center gap-2">
+             <Search class="h-3.5 w-3.5" />
+             Search {{ currentTab }}
            </button>
         </div>
       </div>
-
-      <!-- Transfers Panel -->
-      <div v-if="currentTab === 'Transfers'" class="space-y-6">
-        <div class="flex rounded-xl overflow-hidden border border-gray-200 p-1 bg-gray-50">
-          <button @click="transferMode = 'pickup'" class="flex-1 py-1 text-[11px] font-bold   rounded-lg transition-all" :class="transferMode === 'pickup' ? 'bg-primary-dark text-white shadow-md' : 'bg-transparent text-gray-500 hover:text-gray-900'">Airport Pick-up</button>
-          <button @click="transferMode = 'dropoff'" class="flex-1 py-1 text-[11px] font-bold   rounded-lg transition-all" :class="transferMode === 'dropoff' ? 'bg-primary-dark text-white shadow-md' : 'bg-transparent text-gray-500 hover:text-gray-900'">Airport Drop-off</button>
-        </div>
-        <div class="flex flex-col xl:flex-row bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden min-h-[72px]">
-          <div class="flex-1 border-b xl:border-b-0 xl:border-r border-gray-100">
-             <LocationPicker v-model="transferSearchState.origin" label="From" />
-          </div>
-          <div class="flex-1 border-b xl:border-b-0 xl:border-r border-gray-100">
-             <LocationPicker v-model="transferSearchState.destination" label="To" />
-          </div>
-          <div class="flex-1 border-b xl:border-b-0 xl:border-r border-gray-100">
-             <FlightDateRangePicker v-model:departure="transferSearchState.date" mode="oneway" />
-          </div>
-          
-          <div class="flex-[0.5] border-b xl:border-b-0 xl:border-r border-gray-100 relative group cursor-pointer px-4 pt-3 pb-2 flex flex-col justify-center min-h-[68px]">
-            <p class="text-[11px] font-bold  text-gray-400 group-hover:text-primary-dark mb-0.5 transition-colors ">Time</p>
-            <div class="flex items-center gap-2">
-              <ClockIcon class="h-5 w-5 text-gray-300 shrink-0" />
-              <input type="time" v-model="transferSearchState.time" class="bg-transparent text-base  text-gray-900 outline-none w-full cursor-pointer" />
-            </div>
-          </div>
-
-          <div class="flex-[0.8]">
-             <Occupancypicker v-model:adults="transferOccupancy.adults" v-model:children="transferOccupancy.children" label="Passengers" variant="flight" />
-          </div>
-        </div>
-        
-        <div class="flex justify-end pt-4 border-t border-gray-50">
-           <button @click="handleSearch" class="w-full md:w-auto bg-primary-dark text-white px-6 py-2.5 text-[11px] rounded-xl font-bold text-[11px]   shadow-lg hover:bg-black transition-colors">Find Transfer</button>
-        </div>
-      </div>
-
-      <!-- Activities Panel -->
-      <div v-if="currentTab === 'Activities'" class="space-y-6">
-        <div class="flex flex-col md:flex-row bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden min-h-[72px]">
-          <div class="flex-[1.5] border-b md:border-b-0 md:border-r border-gray-100">
-             <CityPicker v-model="activitiesSearchState.destination" label="Destination" placeholder="Search a city..." />
-          </div>
-          <div class="flex-1 border-b md:border-b-0 md:border-r border-gray-100">
-             <FlightDateRangePicker v-model:departure="activitiesSearchState.date" mode="oneway" />
-          </div>
-          <div class="flex-[0.8] px-4 pt-3 pb-2 flex flex-col justify-center min-h-[68px]">
-            <p class="text-[11px] font-bold  text-gray-400 mb-0.5 ">Type</p>
-            <p class="text-base  text-gray-900 truncate">All Activities</p>
-          </div>
-        </div>
-        
-        <div class="flex justify-end pt-4 border-t border-gray-50">
-           <button @click="handleSearch" class="w-full md:w-auto bg-primary-dark text-white px-6 py-2.5 text-[11px] rounded-xl font-bold text-[11px]   shadow-lg hover:bg-black transition-colors">Find Things to Do</button>
-        </div>
-      </div>
     </div>
+
+
+    <!-- ─── Flight Results Modal ─── -->
+    <FlightResultsModal
+      :is-open="showResultsModal"
+      :results="flightResults"
+      :query="currentSearchQuery"
+      @close="showResultsModal = false"
+      @select="selectFlight"
+    />
+
   </div>
+
+  <!-- ─── Booking Flow Overlay ─── -->
+  <Teleport to="body">
+    <FlightBookingWizard 
+      v-if="activeStep === 'booking'" 
+      :selected-flight="selectedFlight" 
+      :travelers="flightTravelers"
+      @close="activeStep = 'search'" 
+    />
+  </Teleport>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, watch, computed } from 'vue'
 import { 
-  ArrowRightIcon,
-  TruckIcon, 
-  BuildingOfficeIcon,
-  SparklesIcon,
-  MagnifyingGlassIcon,
-  PaperAirplaneIcon,
-  CalendarIcon,
-  ClockIcon,
-  GiftIcon,
-  GlobeAltIcon,
-  CheckIcon,
-  ChevronDownIcon
-} from '@heroicons/vue/24/outline'
+  Plane, Bed, Car, Package, Anchor, Ticket, Truck,
+  Search, ChevronDown, Plus, X, Check, Clock, Sparkles
+} from 'lucide-vue-next'
 
 import { useTracking } from '@/composables/core/useTracking'
+import { useFlights } from '~/composables/modules/flights/useFlights'
+import FlightOfferCard from '@/components/flights/FlightOfferCard.vue'
+import FlightBookingWizard from '@/components/flights/FlightBookingWizard.vue'
+import FlightResultsModal from '@/components/flights/FlightResultsModal.vue'
 
 const props = defineProps({
   defaultTab: { type: String, default: 'Flights' }
 })
 
 const { trackAction } = useTracking()
+const { searchFlights, flightResults, isSearching } = useFlights()
 const isFocused = ref(false)
-const activeCruiseField = ref<string | null>(null)
+const activeStep = ref('search')
+const selectedFlight = ref<any>(null)
+const showResultsModal = ref(false)
+const currentSearchQuery = ref<any>({})
 
-// Icons ported from user app
-import flightIcon from '@/assets/icons/light__flight.svg'
-import hotelIcon from '@/assets/icons/light__bed.svg'
-import carIcon from '@/assets/icons/light__car.svg'
-import packageIcon from '@/assets/icons/light__package.svg'
-import cruiseIcon from '@/assets/icons/light__cruise.svg'
-import activityIcon from '@/assets/icons/light__ticket.svg'
+const selectFlight = (offer: any) => {
+  selectedFlight.value = offer
+  activeStep.value = 'booking'
+}
 
 const tabs = [
-  { name: 'Flights', label: 'Flights', customIcon: flightIcon },
-  { name: 'Hotels', label: 'Hotels', customIcon: hotelIcon },
-  { name: 'Transfers', label: 'Transfers', icon: TruckIcon },
-  { name: 'Activities', label: 'Activities', customIcon: activityIcon },
-  { name: 'Cars', label: 'Car Rentals', customIcon: carIcon },
-  { name: 'Packages', label: 'Packages', customIcon: packageIcon },
-  { name: 'Cruises', label: 'Cruises', customIcon: cruiseIcon }
+  { name: 'Flights',    label: 'Flights',     icon: Plane },
+  { name: 'Hotels',     label: 'Hotels',      icon: Bed },
+  { name: 'Transfers',  label: 'Transfers',   icon: Truck },
+  { name: 'Activities', label: 'Activities',  icon: Ticket },
+  { name: 'Cars',       label: 'Car Rentals', icon: Car },
+  { name: 'Packages',   label: 'Packages',    icon: Package },
+  { name: 'Cruises',    label: 'Cruises',     icon: Anchor }
 ]
 
 const currentTab = ref(props.defaultTab)
 const stayMode   = ref('single')
 const flightMode = ref('roundtrip')
 const carMode    = ref('pickup')
+const transferMode = ref('pickup')
 const packageType = ref('Hotel+Flight')
-const onlyPartialHotel = ref(false)
 
-const multiHotelLegs = ref([{ location: '', checkIn: '', checkOut: '' }])
-const addHotelLeg = () => { if (multiHotelLegs.value.length < 5) multiHotelLegs.value.push({ location: '', checkIn: '', checkOut: '' }) }
+const stayModes = [{ label: 'Single Set', value: 'single' }, { label: 'Multi Property', value: 'multi' }]
+const flightModeOptions = [{ label: 'One Way', value: 'oneway' }, { label: 'Round Trip', value: 'roundtrip' }, { label: 'Multi-City', value: 'multicity' }]
 
 const occupancy = reactive({ rooms: 1, adults: 2, children: 0 })
 const searchState = reactive({ location: '', checkIn: '', checkOut: '' })
-const bundles = reactive({ bundleFlight: false, bundleHotel: false, bundleCar: false })
+const showHotelAdvancedSearch = ref(false)
 
-const flightTravelers = reactive({ adults: 1, children: 0 })
+const flightTravelers = reactive({ adults: 1, children: 0, infants: 0 })
 const flightSearchState = reactive({ origin: '', destination: '', departureDate: '', returnDate: '' })
 const multiFlightLegs = ref([{ origin: '', destination: '', departureDate: '', returnDate: '' }])
 
+const flightClass = ref('economy')
+const flightClasses = [ 
+  { label: 'economy', value: 'economy' }, 
+  { label: 'premium', value: 'premium_economy' }, 
+  { label: 'business', value: 'business' }, 
+  { label: 'first', value: 'first' } 
+]
+const showFlightAdvancedSearch = ref(false)
+
 const carSearchState = reactive({ origin: '', destination: '', pickUpDate: '' })
-const differentCarDropoff = ref(false)
-
-const transferMode = ref('pickup')
 const transferSearchState = reactive({ origin: '', destination: '', date: '', time: '10:00' })
-const transferOccupancy = reactive({ adults: 1, children: 0 })
-
 const activitiesSearchState = reactive({ destination: '', date: '' })
+const packageSearchState = reactive({ origin: '', destination: '', departureDate: '', returnDate: '' })
 
-const packageOccupancy = reactive({ rooms: 1, adults: 2, children: 0 })
-const packageSearchState = reactive({ 
-  origin: '', destination: '', departureDate: '', returnDate: '', hotelCheckIn: '', hotelCheckOut: ''
-})
-
-const cruiseMonths = [
-  { value: 'ANY', label: 'Any Month' },
-  { value: '05/1/2026', label: 'May 2026' },
-  { value: '06/1/2026', label: 'June 2026' },
-  { value: '07/1/2026', label: 'July 2026' },
-  { value: '08/1/2026', label: 'August 2026' },
-  { value: '09/1/2026', label: 'September 2026' },
-  { value: '10/1/2026', label: 'October 2026' },
-  { value: '11/1/2026', label: 'November 2026' },
-  { value: '12/1/2026', label: 'December 2026' },
-]
-
-const cruiseDestinations = [
-  { value: 'ANY', label: 'Any Destination' },
-  { value: 'C', label: 'Caribbean' },
-  { value: 'M', label: 'Mexico' },
-  { value: 'A', label: 'Alaska' },
-  { value: 'EU', label: 'Europe & Mediterranean' },
-  { value: 'HAW', label: 'Hawaii' },
-  { value: 'BAH', label: 'Bahamas' },
-  { value: 'BER', label: 'Bermuda' },
-  { value: 'PAC', label: 'South Pacific' },
-]
-
-const cruiseLengths = [
-  { value: 'ALL', label: 'Any Length' },
-  { value: '1', label: '1-2 Nights' },
-  { value: '2', label: '3-5 Nights' },
-  { value: '3', label: '6-9 Nights' },
-  { value: '4', label: '10-14 Nights' },
-  { value: '5', label: '15+ Nights' },
-]
-
-const cruiseLines = [
-  { value: 'ALL', label: 'Any Cruise Line' },
-  { value: '44', label: 'Royal Caribbean' },
-  { value: '1', label: 'Carnival' },
-  { value: 'NCL', label: 'Norwegian Cruise Line' },
-  { value: 'MSC', label: 'MSC Cruises' },
-  { value: 'CEL', label: 'Celebrity Cruises' },
-  { value: 'VIR', label: 'Virgin Voyages' },
-  { value: 'DIS', label: 'Disney Cruise Line' },
-  { value: 'PRI', label: 'Princess Cruises' },
-]
-
-const cruiseSearchState = reactive({ 
-  destination: '', 
-  destinationLabel: '',
-  departingMonth: '03/1/2026',
-  departingLabel: 'March 2026',
-  length: '',
-  lengthLabel: '',
-  line: '',
-  lineLabel: ''
-})
-
-import { useFlights } from '~/composables/modules/flights/useFlights'
-import LocationPicker from './LocationPicker.vue'
-import FlightDateRangePicker from './FlightDateRangePicker.vue'
-import Occupancypicker from './Occupancypicker.vue'
-import CityPicker from './CityPicker.vue'
-
-const { searchFlights } = useFlights()
+const cruiseDestinations = [ { value: '', label: 'Any Destination' }, { value: 'C', label: 'Caribbean' } ]
+const cruiseMonths = [ { value: 'ANY', label: 'Any Month' } ]
+const cruiseSearchState = reactive({ destination: '', departingMonth: 'ANY', line: '' })
 
 const handleSearch = () => {
   isFocused.value = false
-  const query: any = { tab: currentTab.value }
-  
   if (currentTab.value === 'Flights') {
-    const leg = flightSearchState
-    if (!leg.origin || !leg.destination || !leg.departureDate) return
-
-    searchFlights({
-      origin: leg.origin,
-      destination: leg.destination,
-      departureDate: leg.departureDate,
-      returnDate: flightMode.value === 'roundtrip' ? leg.returnDate : undefined,
+    const mainLeg = flightSearchState
+    currentSearchQuery.value = {
+      origin: mainLeg.origin,
+      destination: mainLeg.destination,
+      departureDate: mainLeg.departureDate,
       adults: flightTravelers.adults,
-      children: flightTravelers.children,
-      infants: 0,
-    })
+      cabinClass: flightClass.value
+    }
+    searchFlights(currentSearchQuery.value)
+    showResultsModal.value = true
+    return
   }
-
-  // Determine path based on category - B2B portal usually keeps them under /dashboard
-  // but if the user app uses root paths like /stays, we can use /dashboard/stays
-  const categoryMap: any = {
-    'Flights': 'flights',
-    'Hotels': 'stays',
-    'Cars': 'cars',
-    'Cruises': 'cruises',
-    'Packages': 'packages',
-    'Transfers': 'transfers',
-    'Activities': 'things-to-do'
-  }
-  
-  const path = `/dashboard/${categoryMap[currentTab.value] || ''}`
-  navigateTo({ path, query })
+  // For other services, stay on the same page for now.
+  console.log('Search triggered for:', currentTab.value)
 }
+
+// Inline filters removed, logic moved to FlightResultsModal.vue
 </script>
 
 <style scoped>
-.fade-enter-active, .fade-leave-active { transition: opacity 0.3s ease; }
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap');
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+.cell-padding {
+  padding: 0.85rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 70px;
+}
+.cell-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #030712;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.5rem;
+}
+
+.radio-label { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+.radio-dot {
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 2px solid #d1d5db;
+  transition: all 0.3s;
+}
+.radio-dot--active { border-color: #111; background: #111; box-shadow: 0 0 0 4px rgba(0,0,0,0.05); }
+.radio-text { font-size: 15px; font-weight: 500; color: #030712; }
+
+.fade-enter-active, .fade-leave-active { transition: opacity 0.4s ease; }
 .fade-enter-from, .fade-leave-to { opacity: 0; }
+
+.fade-slide-enter-active, .fade-slide-leave-active {
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fade-slide-enter-from {
+  opacity: 0;
+  transform: translateY(40px);
+}
+.fade-slide-leave-to {
+  opacity: 0;
+  transform: translateY(-40px);
+}
 </style>

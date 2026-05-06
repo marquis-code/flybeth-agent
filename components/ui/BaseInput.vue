@@ -18,7 +18,7 @@
         v-bind="$attrs"
       />
     </div>
-    <p v-if="error" class="mt-1 text-xs text-red-600 font-medium">{{ error }}</p>
+    <p v-if="error" class="mt-1 text-sm text-red-600 font-medium">{{ error }}</p>
   </div>
 </template>
 

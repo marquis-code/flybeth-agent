@@ -18,11 +18,11 @@
 
         <!-- Service Info -->
         <div class="text-center space-y-4">
-          <h3 class="text-2xl  text-primary-dark  animate-pulse">
-            {{ serviceTitle }}
+          <h3 class="text-sm  text-primary-dark  animate-pulse">
+            {{ displayTitle }}
           </h3>
           <p class="text-neutral/60 font-medium">
-            {{ serviceDetail }}
+            {{ displayDetail }}
           </p>
         </div>
 
@@ -39,7 +39,7 @@
             </div>
             <div>
               <p class="text-sm  text-primary  mb-1">Traveler tip</p>
-              <p class="text-xs text-neutral/80 font-medium leading-relaxed">
+              <p class="text-sm text-neutral/80 font-medium leading-relaxed">
                 {{ currentTip }}
               </p>
             </div>
@@ -49,9 +49,8 @@
     </div>
   </Transition>
 </template>
-
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { InformationCircleIcon } from '@heroicons/vue/24/outline'
 
 const props = defineProps({
@@ -62,6 +61,14 @@ const props = defineProps({
   service: {
     type: String,
     default: 'General'
+  },
+  serviceTitle: {
+    type: String,
+    default: ''
+  },
+  serviceDetail: {
+    type: String,
+    default: ''
   }
 })
 
@@ -74,7 +81,8 @@ const tips = [
 
 const currentTip = ref(tips[Math.floor(Math.random() * tips.length)])
 
-const serviceTitle = computed(() => {
+const displayTitle = computed(() => {
+  if (props.serviceTitle) return props.serviceTitle
   switch (props.service) {
     case 'Flights': return 'Searching best fares'
     case 'Hotels': return 'Finding premium stays'
@@ -83,7 +91,8 @@ const serviceTitle = computed(() => {
   }
 })
 
-const serviceDetail = computed(() => {
+const displayDetail = computed(() => {
+  if (props.serviceDetail) return props.serviceDetail
   switch (props.service) {
     case 'Flights': return 'Aggregating results from 400+ airlines worldwide...'
     case 'Hotels': return 'Verifying special agent rates at 1M+ properties...'

@@ -6,46 +6,35 @@
         <h2 class="text-2xl font-bold text-gray-900 ">
           Welcome, <span class="text-primary">{{ user?.firstName || 'Agent' }}</span>
         </h2>
-        <p class="text-xs text-gray-500 font-medium">
+        <p class="text-sm text-gray-500 font-medium">
           See your bookings, customers, and how much you have earned today.
         </p>
       </div>
       <div class="flex items-center space-x-3">
-        <button class="px-4 py-2 text-xs font-bold border border-gray-200 rounded-lg bg-white text-gray-600 hover:bg-gray-50 transition-colors" @click="navigateTo('/dashboard/reports')">
+        <button class="px-4 py-2 text-sm font-bold border border-gray-200 rounded-lg bg-white text-gray-600 hover:bg-gray-50 transition-colors" @click="navigateTo('/dashboard/reports')">
           View Reports
         </button>
-        <button class="px-4 py-2 text-xs font-bold rounded-lg bg-primary-dark text-white hover:bg-black transition-colors" @click="navigateTo('/dashboard/customers')">
+        <button class="px-4 py-2 text-sm font-bold rounded-lg bg-primary-dark text-white hover:bg-black transition-colors" @click="navigateTo('/dashboard/customers')">
           Add Traveler
         </button>
       </div>
     </div>
 
-    <!-- Booking Links -->
-    <div class="grid grid-cols-4 md:grid-cols-7 lg:grid-cols-7 gap-3">
-      <div 
-        v-for="service in serviceWidgets" 
-        :key="service.name"
-        @click="navigateTo(service.href)"
-        class="bg-white border border-gray-200 rounded-xl p-3 flex flex-col items-center justify-center text-center cursor-pointer hover:border-primary transition-all group"
-      >
-        <div class="w-10 h-10 bg-gray-50 rounded-lg flex items-center justify-center mb-2 group-hover:bg-primary/5 transition-colors">
-          <component :is="service.icon" class="h-5 w-5 text-gray-400 group-hover:text-primary" />
-        </div>
-        <p class="text-[9px] font-bold   text-gray-600 group-hover:text-gray-900">{{ service.name }}</p>
-      </div>
-    </div>
-
     <!-- Earnings & Bookings Stats -->
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-      <div v-for="stat in stats" :key="stat.name" class="p-4 rounded-xl border border-gray-100 bg-white">
-        <div class="flex items-center justify-between mb-3">
-          <div class="p-2 rounded-lg bg-gray-50 text-gray-400">
-            <component :is="stat.icon" class="h-5 w-5" />
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+      <div v-for="stat in stats" :key="stat.name" class="p-6 rounded-[1.5rem] border border-gray-100 bg-white shadow-[0_4px_20px_rgb(0,0,0,0.02)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all group">
+        <div class="flex items-center justify-between mb-4">
+          <div class="p-3 rounded-2xl bg-gray-50 text-gray-400 group-hover:bg-primary/10 group-hover:text-primary transition-all">
+            <component :is="stat.icon" class="h-6 w-6" />
+          </div>
+          <div v-if="stat.increase" class="flex items-center space-x-1 text-emerald-500 bg-emerald-50 px-2 py-0.5 rounded-full text-xs  uppercase tracking-widest">
+            <ArrowUpIcon class="h-3 w-3" />
+            <span>{{ stat.increase }}</span>
           </div>
         </div>
         <div>
-          <h3 class="text-[10px] font-bold text-gray-400   mb-1">{{ stat.name }}</h3>
-          <p class="text-xl font-bold text-gray-900">{{ stat.value }}</p>
+          <h3 class="text-xs  text-gray-400 uppercase tracking-widest mb-1">{{ stat.name }}</h3>
+          <p class="text-2xl  text-gray-900 tracking-tight group-hover:text-primary transition-colors">{{ stat.value }}</p>
         </div>
       </div>
     </div>
@@ -55,7 +44,7 @@
       <div class="lg:col-span-8 space-y-4">
         <div class="flex items-center justify-between">
           <h3 class="text-sm font-bold text-gray-900  ">Recent Bookings</h3>
-          <NuxtLink to="/dashboard/bookings" class="text-xs font-bold text-primary hover:underline">See All</NuxtLink>
+          <NuxtLink to="/dashboard/bookings" class="text-sm font-bold text-primary hover:underline">See All</NuxtLink>
         </div>
         
         <div class="bg-white border border-gray-100 rounded-xl overflow-hidden">
@@ -63,7 +52,7 @@
             <table class="w-full text-left border-collapse">
               <thead>
                 <tr class="bg-gray-50/50 border-b border-gray-100">
-                  <th v-for="header in bookingHeaders" :key="header.key" class="px-4 py-3 text-[10px] font-bold   text-gray-400">
+                  <th v-for="header in bookingHeaders" :key="header.key" class="px-4 py-3 text-sm font-bold   text-gray-400">
                     {{ header.label }}
                   </th>
                 </tr>
@@ -74,29 +63,29 @@
                 </tr>
                 <tr v-else-if="!bookings.length" class="text-center py-12">
                    <td colspan="5" class="py-12 text-center">
-                      <p class="text-xs font-bold text-gray-400  ">No bookings yet</p>
+                      <p class="text-sm font-bold text-gray-400  ">No bookings yet</p>
                    </td>
                 </tr>
                 <tr v-for="item in bookings.slice(0, 8)" :key="item._id" class="hover:bg-gray-50 transition-colors group cursor-pointer" @click="handleBookingClick(item)">
                   <td class="px-4 py-3">
                     <div class="flex flex-col">
-                      <span class="text-xs font-bold text-gray-900 group-hover:text-primary transition-colors">{{ getServiceDescription(item) }}</span>
-                      <span class="text-[9px] text-gray-400 font-bold  ">{{ item.pnr }}</span>
+                      <span class="text-sm font-bold text-gray-900 group-hover:text-primary transition-colors">{{ getServiceDescription(item) }}</span>
+                      <span class="text-sm text-gray-400 font-bold  ">{{ item.pnr }}</span>
                     </div>
                   </td>
                   <td class="px-4 py-3">
-                    <span class="text-xs font-medium text-gray-700">{{ item.contactDetails.name || 'No Name' }}</span>
+                    <span class="text-sm font-medium text-gray-700">{{ item.contactDetails.name || 'No Name' }}</span>
                   </td>
                   <td class="px-4 py-3">
-                    <span class="px-2 py-0.5 rounded-full text-[9px] font-bold   border" :class="statusClass(item.status)">
+                    <span class="px-2 py-0.5 rounded-full text-sm font-bold   border" :class="statusClass(item.status)">
                       {{ item.status }}
                     </span>
                   </td>
                   <td class="px-4 py-3">
-                    <span class="text-xs font-bold text-gray-900">${{ item.pricing?.totalAmount?.toLocaleString() }}</span>
+                    <span class="text-sm font-bold text-gray-900">{{ formatPrice(item.pricing?.totalAmount) }}</span>
                   </td>
                   <td class="px-4 py-3">
-                    <span class="text-[10px] font-medium text-gray-400">{{ formatDate(item.createdAt) }}</span>
+                    <span class="text-sm font-medium text-gray-400">{{ formatDate(item.createdAt) }}</span>
                   </td>
                 </tr>
               </tbody>
@@ -111,20 +100,20 @@
            <div class="absolute -right-8 -bottom-8 opacity-10">
               <CurrencyDollarIcon class="h-32 w-32" />
            </div>
-           <p class="text-[10px] font-bold   text-white/50 mb-4">Total Money Earned</p>
-           <h4 class="text-3xl font-bold mb-1">${{ totalEarnings.toLocaleString() }}</h4>
-           <div class="flex items-center space-x-2 text-[10px] font-bold text-white/50">
+           <p class="text-sm font-bold   text-white/50 mb-4">Total Money Earned</p>
+           <h4 class="text-3xl font-bold mb-1">{{ formatPrice(totalEarnings) }}</h4>
+           <div class="flex items-center space-x-2 text-sm font-bold text-white/50">
               <span class="text-emerald-400">+12%</span>
               <span>more than last month</span>
            </div>
-           <button class="mt-6 w-full py-2 bg-white text-primary-dark text-xs font-bold rounded-lg hover:bg-gray-100 transition-colors" @click="navigateTo('/dashboard/reports')">
+           <button class="mt-6 w-full py-2 bg-white text-primary-dark text-sm font-bold rounded-lg hover:bg-gray-100 transition-colors" @click="navigateTo('/dashboard/reports')">
               See Reports
            </button>
         </div>
 
         <!-- Quick Links -->
         <div class="bg-white border border-gray-100 p-6 rounded-xl space-y-4">
-           <h3 class="text-[10px] font-bold text-gray-400 uppercase tracking-widest ">Quick Actions</h3>
+           <h3 class="text-sm font-bold text-gray-400 uppercase tracking-widest ">Quick Actions</h3>
            <div class="grid grid-cols-2 gap-3">
               <button 
                 v-for="action in quickActions" 
@@ -133,7 +122,7 @@
                 class="flex flex-col items-center justify-center p-3 border border-gray-100 rounded-lg hover:border-primary transition-all group"
               >
                  <component :is="action.icon" class="h-5 w-5 text-gray-400 group-hover:text-primary mb-1.5" />
-                 <span class="text-[9px] font-bold text-gray-600 group-hover:text-gray-900  ">{{ action.name }}</span>
+                 <span class="text-sm font-bold text-gray-600 group-hover:text-gray-900  ">{{ action.name }}</span>
               </button>
            </div>
         </div>
@@ -141,26 +130,26 @@
         <!-- Notifications -->
         <div class="bg-white border border-gray-100 rounded-xl overflow-hidden">
            <div class="p-4 border-b border-gray-50 bg-gray-50/50 flex items-center justify-between">
-              <h3 class="text-[10px] font-bold text-gray-400 uppercase tracking-widest ">Recent Alerts</h3>
-              <div v-if="unreadCount > 0" class="px-1.5 py-0.5 bg-rose-500 text-white text-[8px] font-black rounded">{{ unreadCount }}</div>
+              <h3 class="text-sm font-bold text-gray-400 uppercase tracking-widest ">Recent Alerts</h3>
+              <div v-if="unreadCount > 0" class="px-1.5 py-0.5 bg-rose-500 text-white text-sm  rounded">{{ unreadCount }}</div>
            </div>
            <div class="divide-y divide-gray-50 max-h-[400px] overflow-y-auto no-scrollbar">
               <div v-if="!notifications.length" class="p-8 text-center text-gray-400">
-                 <p class="text-[10px] font-bold uppercase tracking-widest ">No alerts</p>
+                 <p class="text-sm font-bold uppercase tracking-widest ">No alerts</p>
               </div>
               <div v-for="n in notifications.slice(0, 5)" :key="n._id" class="p-4 hover:bg-gray-50 transition-colors cursor-pointer group">
                  <div class="flex items-start space-x-3">
                     <div class="h-2 w-2 rounded-full mt-1.5" :class="n.isRead ? 'bg-transparent' : 'bg-primary'"></div>
                     <div class="flex-grow">
-                       <p class="text-[11px] font-bold text-gray-800">{{ n.title }}</p>
-                       <p class="text-[9px] text-gray-500 line-clamp-2 mt-0.5">{{ n.message }}</p>
-                       <span class="text-[8px] text-gray-400 font-bold uppercase mt-2 block">{{ formatDate(n.createdAt) }}</span>
+                       <p class="text-sm font-bold text-gray-800">{{ n.title }}</p>
+                       <p class="text-sm text-gray-500 line-clamp-2 mt-0.5">{{ n.message }}</p>
+                       <span class="text-sm text-gray-400 font-bold uppercase mt-2 block">{{ formatDate(n.createdAt) }}</span>
                     </div>
                  </div>
               </div>
            </div>
            <div class="p-3 bg-gray-50/50 text-center border-t border-gray-100">
-              <button class="text-[9px] font-bold text-primary hover:underline uppercase tracking-widest" @click="navigateTo('/dashboard/notifications')">View All Notifications</button>
+              <button class="text-sm font-bold text-primary hover:underline uppercase tracking-widest" @click="navigateTo('/dashboard/notifications')">View All Notifications</button>
            </div>
         </div>
       </div>
@@ -175,6 +164,9 @@ import { useUser } from '@/composables/modules/auth/user'
 import { useConfirmation } from '@/composables/core/useConfirmation'
 import { useNotifications } from '@/composables/core/useNotifications'
 import { useAgentStats } from '@/composables/modules/analytics/useAgentStats'
+import { useSettings } from '@/composables/useSettings'
+
+const { formatPrice } = useSettings()
 import { 
   CurrencyDollarIcon, 
   TicketIcon, 
@@ -192,7 +184,8 @@ import {
   GlobeAltIcon,
   ArrowUpRightIcon,
   PlusIcon,
-  CheckCircleIcon
+  CheckCircleIcon,
+  ArrowUpIcon
 } from '@heroicons/vue/24/outline'
 
 definePageMeta({
@@ -216,15 +209,7 @@ watch(() => user.value?.tenantId, (newId) => {
   }
 }, { immediate: true })
 
-const serviceWidgets = [
-  { name: 'Hotels', href: '/dashboard/stays', icon: BuildingOfficeIcon },
-  { name: 'Flights', href: '/dashboard/flights', icon: PaperAirplaneIcon },
-  { name: 'Transfers', href: '/dashboard/transfers', icon: TruckIcon },
-  { name: 'Activities', href: '/dashboard/things-to-do', icon: TicketIcon },
-  { name: 'Cars', href: '/dashboard/cars', icon: KeyIcon },
-  { name: 'Packages', href: '/dashboard/packages', icon: GiftIcon },
-  { name: 'Cruises', href: '/dashboard/cruises', icon: GlobeAltIcon },
-]
+
 
 const quickActions = [
   { name: 'New Booking', icon: PlusCircleIcon, handler: () => navigateTo('/dashboard/bookings') },
@@ -236,18 +221,21 @@ const quickActions = [
 const stats = computed(() => [
   {
     name: 'Money Earned',
-    value: statsData.value ? `$${statsData.value.totalRevenue.toLocaleString()}` : '$0',
-    icon: CurrencyDollarIcon
+    value: statsData.value ? formatPrice(statsData.value.totalRevenue) : formatPrice(0),
+    icon: CurrencyDollarIcon,
+    increase: '+12.5%'
   },
   {
     name: 'Active Bookings',
     value: statsData.value?.activeBookings.toLocaleString() || '0',
-    icon: TicketIcon
+    icon: TicketIcon,
+    increase: '+3.2%'
   },
   {
     name: 'Total Bookings',
     value: statsData.value?.totalBookings.toLocaleString() || '0',
-    icon: GiftIcon
+    icon: GiftIcon,
+    increase: '+8.1%'
   },
   {
     name: 'Your Status',

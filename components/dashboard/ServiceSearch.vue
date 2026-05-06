@@ -12,7 +12,7 @@
         :ref="el => serviceRefs[service.id] = el"
         @click="activeService = service.id"
         class="relative flex items-center space-x-2 px-6 py-3 rounded-full transition-all duration-500 whitespace-nowrap group z-10"
-        :class="activeService === service.id ? 'text-white' : 'text-gray-600 hover:text-primary'"
+        :class="activeService === service.id ? 'text-white' : 'text-gray-800 hover:text-primary'"
       >
         <component :is="service.icon" class="h-4 w-4 transition-transform group-hover:scale-125" />
         <span class="text-sm   ">{{ service.label }}</span>

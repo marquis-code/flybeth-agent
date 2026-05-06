@@ -4,26 +4,27 @@
     <!-- ── Trigger ─────────────────────────────────────────────────────────── -->
     <div
       @click="openCalendar"
-      class="w-full px-4 pt-3 pb-2 cursor-pointer min-h-[68px] flex flex-col justify-center group select-none whitespace-nowrap"
+      class="w-full cursor-pointer flex flex-col justify-center select-none whitespace-nowrap"
+      :class="variant === 'minimal' ? 'min-h-0 px-0 pt-0 pb-0' : 'px-4 pt-3 pb-2 min-h-[68px]'"
     >
-      <p class="text-[11px] font-bold text-neutral-400  mb-0.5 group-hover:text-gray-900 transition-colors ">
-        {{ mode === 'oneway' ? 'Departure date' : 'Check-in – Check-out' }}
+      <p v-if="variant !== 'minimal'" class="text-sm font-bold text-neutral-400 mb-0.5 group-hover:text-gray-900 transition-colors uppercase tracking-widest leading-none">
+        {{ mode === 'oneway' ? 'Departure' : 'Trip Dates' }}
       </p>
       <div class="flex items-center gap-2">
-        <CalendarDaysIcon class="h-4 w-4 text-primary shrink-0" />
-        <span class="text-sm font-semibold ">
+        <Calendar class="h-3.5 w-3.5 text-primary shrink-0" />
+        <span class="text-sm font-bold tracking-tight">
           <template v-if="mode === 'oneway'">
-            <span :class="startDate ? 'text-gray-900' : 'text-gray-300'">
+            <span :class="startDate ? 'text-gray-900' : 'text-gray-800'">
               {{ startDate ? formatDisplay(startDate) : 'Select date' }}
             </span>
           </template>
           <template v-else>
-            <span :class="startDate ? 'text-gray-900' : 'text-gray-300'">
-              {{ startDate ? formatDisplay(startDate) : 'Check-in' }}
+            <span :class="startDate ? 'text-gray-900' : 'text-gray-800'">
+              {{ startDate ? formatDisplay(startDate) : 'Depart' }}
             </span>
-            <span class="text-gray-300 mx-1.5">–</span>
-            <span :class="endDate ? 'text-gray-900' : 'text-gray-300'">
-              {{ endDate ? formatDisplay(endDate) : 'Check-out' }}
+            <span class="text-gray-600 mx-1.5 font-normal">/</span>
+            <span :class="endDate ? 'text-gray-900' : 'text-gray-800'">
+              {{ endDate ? formatDisplay(endDate) : 'Return' }}
             </span>
           </template>
         </span>
@@ -45,7 +46,7 @@
             :style="panelStyle"
             class="fixed z-[10011] bg-white rounded-2xl overflow-hidden select-none transition-all duration-300 shadow-2xl"
             :class="[
-              isMobile ? 'inset-x-4 top-1/2 -translate-y-1/2 w-auto' : 'w-[660px]'
+              isMobile ? 'inset-x-4 top-1/2 -translate-y-1/2 w-auto' : 'w-[580px]'
             ]"
             @click.stop
           >
@@ -58,19 +59,19 @@
                 class="h-9 w-9 rounded-full border border-gray-200 flex items-center justify-center transition-colors"
                 :class="isAtMinMonth ? 'opacity-30 cursor-not-allowed' : 'hover:bg-gray-50'"
               >
-                <ChevronLeftIcon class="h-4 w-4 text-gray-500" />
+                <ChevronLeft class="h-4 w-4 text-gray-800" />
               </button>
 
               <div class="flex-1 grid gap-4 text-center" :class="isMobile ? 'grid-cols-1' : 'grid-cols-2'">
-                <p class="text-base font-bold text-gray-900">{{ monthName(currentYear, currentMonth) }}</p>
-                <p v-if="!isMobile" class="text-base font-bold text-gray-900">{{ monthName(nextMonthYear, nextMonthIndex) }}</p>
+                <p class="text-sm  text-gray-900 uppercase tracking-widest">{{ monthName(currentYear, currentMonth) }}</p>
+                <p v-if="!isMobile" class="text-sm  text-gray-900 uppercase tracking-widest">{{ monthName(nextMonthYear, nextMonthIndex) }}</p>
               </div>
 
               <button
                 @click="nextMonth"
                 class="h-9 w-9 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors"
               >
-                <ChevronRightIcon class="h-4 w-4 text-gray-500" />
+                <ChevronRight class="h-4 w-4 text-gray-800" />
               </button>
             </div>
 
@@ -80,7 +81,7 @@
                 <div class="grid grid-cols-7 mb-2">
                   <div
                     v-for="d in dayHeaders" :key="`lh-${d}`"
-                    class="text-center text-[11px] font-bold text-neutral-400 py-1"
+                    class="text-center text-sm font-bold text-neutral-400 py-1"
                   >{{ d }}</div>
                 </div>
                 <div class="grid grid-cols-7">
@@ -95,7 +96,7 @@
                       @click="selectDate(cell)"
                     >
                       <span
-                        class="h-9 w-9 sm:h-10 sm:w-10 flex items-center justify-center rounded-full text-sm font-semibold transition-all duration-100"
+                        class="h-8 w-8 sm:h-9 sm:w-9 flex items-center justify-center rounded-full text-[13px] font-bold transition-all duration-100"
                         :class="dayClass(cell)"
                       >{{ cellDay(cell) }}</span>
                     </div>
@@ -108,7 +109,7 @@
                 <div class="grid grid-cols-7 mb-2">
                   <div
                     v-for="d in dayHeaders" :key="`rh-${d}`"
-                    class="text-center text-[11px] font-bold text-neutral-400 py-1"
+                    class="text-center text-sm font-bold text-neutral-400 py-1"
                   >{{ d }}</div>
                 </div>
                 <div class="grid grid-cols-7">
@@ -135,10 +136,10 @@
             <!-- Footer -->
             <div class="flex flex-col sm:flex-row items-center justify-between gap-4 px-6 py-4 border-t border-gray-100 bg-gray-50/60">
               <div class="flex items-center gap-2 text-sm text-neutral-400 font-medium text-center sm:text-left">
-                <InformationCircleIcon class="h-4 w-4 shrink-0 hidden sm:block" />
+                <Info class="h-4 w-4 shrink-0 hidden sm:block" />
                 <span v-if="!startDate">Select {{ mode === 'oneway' ? 'departure' : 'check-in' }}</span>
                 <span v-else-if="mode !== 'oneway' && !endDate">Select check-out</span>
-                <span v-else class="text-gray-900 text-xs sm:text-sm">
+                <span v-else class="text-gray-900 text-sm sm:text-sm">
                   {{ mode === 'oneway' ? formatDisplay(startDate) : `${formatDisplay(startDate)} – ${formatDisplay(endDate!)}` }}
                 </span>
               </div>
@@ -147,12 +148,12 @@
                 <button
                   v-if="startDate"
                   @click="clearDates"
-                  class="flex-1 sm:flex-none text-xs sm:text-sm font-bold text-neutral-400 hover:text-gray-700 px-3 py-2.5 rounded-xl hover:bg-gray-100 transition-colors"
+                  class="flex-1 sm:flex-none text-sm sm:text-sm font-bold text-neutral-400 hover:text-gray-800 px-3 py-2.5 rounded-xl hover:bg-gray-100 transition-colors"
                 >Clear</button>
                 <button
                   @click="done"
                   :disabled="!startDate || (mode !== 'oneway' && !endDate)"
-                  class="flex-1 sm:flex-none px-6 sm:px-8 py-2.5 bg-primary-dark text-white rounded-xl text-xs sm:text-sm font-bold disabled:opacity-40 disabled:cursor-not-allowed hover:bg-black transition-colors active:scale-95 shadow-sm"
+                  class="flex-1 sm:flex-none px-6 sm:px-8 py-2.5 bg-primary-dark text-white rounded-xl text-sm sm:text-sm font-bold disabled:opacity-40 disabled:cursor-not-allowed hover:bg-black transition-colors active:scale-95 shadow-sm"
                 >Confirm</button>
               </div>
             </div>
@@ -168,16 +169,17 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import {
-  CalendarDaysIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  InformationCircleIcon,
-} from '@heroicons/vue/24/outline'
+  Calendar,
+  ChevronLeft,
+  ChevronRight,
+  Info,
+} from 'lucide-vue-next'
 
 const props = defineProps({
   departure: { type: String, default: '' },
   return:    { type: String, default: '' },
   mode:      { type: String as () => 'oneway' | 'roundtrip', default: 'roundtrip' },
+  variant:   { type: String, default: '' },
 })
 
 const emit = defineEmits<{
@@ -291,11 +293,11 @@ function rangeWrapClass(iso: string): string {
 }
 
 function dayClass(iso: string): string {
-  if (isPast(iso)) return 'text-gray-200 cursor-not-allowed'
+  if (isPast(iso)) return 'text-gray-500 cursor-not-allowed'
   if (isStartDay(iso) || isEndDay(iso)) return 'bg-primary-dark text-white'
   if (inRange(iso)) return 'text-gray-900 font-semibold'
   if (iso === todayStr) return 'text-primary border-2 border-primary/20 hover:bg-primary-dark hover:text-white'
-  return 'text-gray-700 font-semibold hover:bg-gray-100'
+  return 'text-gray-800 font-semibold hover:bg-gray-100'
 }
 
 function selectDate(iso: string) {

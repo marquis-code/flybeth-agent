@@ -7,12 +7,13 @@
         <!-- Left: Contact Details -->
         <div class="space-y-12">
           <div class="space-y-6">
-            <h1 class="text-5xl lg:text-7xl  text-primary-dark er leading-tight">
-              Let's build your <br />
-              <span class="text-primary ">travel empire.</span>
+            <span class="text-xs font-bold text-primary uppercase tracking-widest">Contact Us</span>
+            <h1 class="text-4xl lg:text-5xl font-bold text-neutral-900 leading-tight">
+              Ready to grow your <br />
+              <span class="text-primary">travel agency?</span>
             </h1>
-            <p class="text-xl text-neutral-500 font-medium leading-relaxed max-w-lg">
-              Our expert support team and node managers are available 24/7 to assist with onboardings, API integrations, and complex bookings.
+            <p class="text-lg text-neutral-500 font-medium leading-relaxed max-w-lg">
+              Our support team is here for you 24/7 to help you get started, integrate our tools, and manage your bookings.
             </p>
           </div>
 
@@ -45,32 +46,32 @@
           <form @submit.prevent="handleSubmit" class="space-y-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div class="space-y-2">
-                <label class="text-xs  text-neutral-400   px-1">First name</label>
+                <label class="text-sm  text-neutral-400   px-1">First name</label>
                 <input v-model="form.firstName" type="text" class="w-full px-6 py-4 bg-white border border-neutral-200 rounded-2xl focus:border-primary focus:ring-4 focus:ring-primary/5 outline-none font-bold transition-all" placeholder="Jane" />
               </div>
               <div class="space-y-2">
-                <label class="text-xs  text-neutral-400   px-1">Last name</label>
+                <label class="text-sm  text-neutral-400   px-1">Last name</label>
                 <input v-model="form.lastName" type="text" class="w-full px-6 py-4 bg-white border border-neutral-200 rounded-2xl focus:border-primary focus:ring-4 focus:ring-primary/5 outline-none font-bold transition-all" placeholder="Doe" />
               </div>
             </div>
 
             <div class="space-y-2">
-              <label class="text-xs  text-neutral-400   px-1">Email address</label>
+              <label class="text-sm  text-neutral-400   px-1">Email address</label>
               <input v-model="form.email" type="email" class="w-full px-6 py-4 bg-white border border-neutral-200 rounded-2xl focus:border-primary focus:ring-4 focus:ring-primary/5 outline-none font-bold transition-all" placeholder="jane@agency.com" />
             </div>
 
             <div class="space-y-2">
-              <label class="text-xs  text-neutral-400   px-1">Agency name</label>
+              <label class="text-sm  text-neutral-400   px-1">Agency name</label>
               <input v-model="form.agency" type="text" class="w-full px-6 py-4 bg-white border border-neutral-200 rounded-2xl focus:border-primary focus:ring-4 focus:ring-primary/5 outline-none font-bold transition-all" placeholder="Travel Elite World" />
             </div>
 
             <div class="space-y-2">
-              <label class="text-xs  text-neutral-400   px-1">Message</label>
+              <label class="text-sm  text-neutral-400   px-1">Message</label>
               <textarea v-model="form.message" rows="4" class="w-full px-6 py-4 bg-white border border-neutral-200 rounded-2xl focus:border-primary focus:ring-4 focus:ring-primary/5 outline-none font-bold transition-all" placeholder="Tell us how we can support your growth..."></textarea>
             </div>
 
-            <BaseButton type="submit" variant="primary" size="lg" block class="py-5 shadow-xl shadow-primary/20 hover:scale-[1.02] transition-transform" :loading="loading">
-              Send transmission
+            <BaseButton type="submit" variant="primary" size="md" block class="py-4 shadow-xl shadow-primary/20 transition-transform" :loading="loading">
+              Send Message
             </BaseButton>
           </form>
         </div>
@@ -78,7 +79,7 @@
     </section>
 
     <!-- Map/Secondary View -->
-    <section class="pb-32 px-6">
+    <!-- <section class="pb-32 px-6">
       <div class="max-w-7xl mx-auto h-[400px] bg-neutral-100 rounded-[3rem] overflow-hidden grayscale relative border border-neutral-200 shadow-inner">
         <div class="absolute inset-0 flex items-center justify-center">
             <div class="flex flex-col items-center">
@@ -87,7 +88,7 @@
             </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
     
   </div>
@@ -117,9 +118,9 @@ const handleSubmit = async () => {
   setTimeout(async () => {
     loading.value = false
     await confirm({
-      title: 'Transmission Received',
-      message: 'Thank you! Your inquiry has been logged in our system. A node manager will contact you within 4 hours to discuss your growth strategy.',
-      confirmText: 'Great!',
+      title: 'Message Received',
+      message: 'Thank you for reaching out! We\'ve received your message and an account manager will get back to you shortly.',
+      confirmText: 'Okay',
       cancelText: ''
     })
     form.firstName = ''

@@ -1,7 +1,7 @@
 import { ref } from 'vue'
-import { GATEWAY_ENDPOINT } from '@/api_factory/axios.config'
 import { useGlobalLoader } from '@/composables/core/useGlobalLoader'
 import { useCustomToast } from '@/composables/core/useCustomToast'
+import { flightsApi } from '@/api_factory/modules/flights'
 
 export const majorAirports = [
   { city: 'London', name: 'Heathrow Airport', code: 'LHR' },
@@ -32,7 +32,7 @@ export const useFlights = () => {
     }
     isSearchingAirports.value = true
     try {
-      const res = await GATEWAY_ENDPOINT.get('/flights/locations', { params: { keyword } })
+      const res = await flightsApi.searchAirports(keyword)
       if (res.data?.success) {
         airportResults.value = res.data.data
       }
@@ -60,7 +60,7 @@ export const useFlights = () => {
     try {
       showToast({ title: 'Searching', message: 'Fetching live flight offers...', toastType: 'info' })
       
-      const res = await GATEWAY_ENDPOINT.post('/flights/search/live', {
+      const res = await flightsApi.searchLive({
         origin: payload.origin,
         destination: payload.destination,
         departureDate: payload.departureDate,
@@ -71,19 +71,11 @@ export const useFlights = () => {
         cabinClass: payload.cabinClass || 'ECONOMY'
       })
 
-      if (res.data?.data && res.data.data.length > 0) {
-        flightResults.value = res.data.data
-        showToast({ title: 'Success', message: `Found ${res.data.data.length} flights.`, toastType: 'success' })
+      if (res.data?.data?.results && res.data.data.results.length > 0) {
+        flightResults.value = res.data.data.results
+        showToast({ title: 'Success', message: `Found ${res.data.data.results.length} flights.`, toastType: 'success' })
       } else {
-        // Subtle fallback for demonstration if flight inventory is empty in dev
-        setTimeout(() => {
-          if (flightResults.value.length === 0) {
-             flightResults.value = [
-              { id: 'FL-100', airline: 'Emirates', flightNumber: 'EK 215', origin: payload.origin, destination: payload.destination, departureTime: '08:45 AM', arrivalTime: '14:20 PM', price: 1250.00, provider: 'Amadeus' },
-              { id: 'FL-101', airline: 'British Airways', flightNumber: 'BA 045', origin: payload.origin, destination: payload.destination, departureTime: '11:15 AM', arrivalTime: '16:45 PM', price: 950.00, provider: 'Duffel' }
-            ]
-          }
-        }, 500)
+        showToast({ title: 'No Results', message: 'No flight offers found for this route and date.', toastType: 'warning' })
       }
 
     } catch (error: any) {

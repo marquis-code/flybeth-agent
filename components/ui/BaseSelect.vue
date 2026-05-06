@@ -1,17 +1,17 @@
 <template>
   <div class="relative w-full" ref="target">
-    <label v-if="label" class="text-[10px] font-bold text-gray-400 px-1 mb-1.5 block">{{ label }}</label>
+    <label v-if="label" class="text-sm font-medium text-gray-800 px-1 mb-1.5 block">{{ label }}</label>
     
     <button
       type="button"
       @click="isOpen = !isOpen"
-      class="w-full flex items-center justify-between px-4 py-2.5 bg-white border border-gray-100 rounded-lg text-xs font-bold text-gray-900 transition-all hover:bg-gray-50 focus:border-primary text-left"
+      class="w-full flex items-center justify-between px-4 py-2.5 bg-white border border-gray-100 rounded-lg text-sm font-bold text-gray-900 transition-all hover:bg-gray-50 focus:border-primary text-left"
     >
       <span v-if="selectedOption" class="truncate">{{ selectedOption.label }}</span>
-      <span v-else class="text-gray-400">{{ placeholder || 'Select option' }}</span>
+      <span v-else class="text-gray-800">{{ placeholder || 'Select option' }}</span>
       
       <ChevronDownIcon 
-        class="h-4 w-4 text-gray-400 transition-transform duration-200" 
+        class="h-4 w-4 text-gray-800 transition-transform duration-200" 
         :class="{ 'rotate-180': isOpen }"
       />
     </button>
@@ -24,7 +24,7 @@
         v-for="option in options"
         :key="option.value"
         @click="selectOption(option)"
-        class="px-4 py-2 text-xs font-bold text-gray-600 hover:bg-primary/5 hover:text-primary rounded-lg cursor-pointer transition-colors flex items-center justify-between group"
+        class="px-4 py-2 text-sm font-bold text-gray-800 hover:bg-primary/5 hover:text-primary rounded-lg cursor-pointer transition-colors flex items-center justify-between group"
       >
         <span>{{ option.label }}</span>
         <CheckIcon 

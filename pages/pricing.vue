@@ -1,111 +1,275 @@
-<script setup lang="ts">
-import { onMounted } from 'vue'
-import { CheckIcon } from '@heroicons/vue/24/solid'
-import { useTracking } from '@/composables/core/useTracking'
-
-const { trackAction } = useTracking()
-
-onMounted(() => trackAction('navigated_to_pricing'))
-
-const agentFeatures = [
-  'Direct wholesale inventory access',
-  'Instant GDS ticketing',
-  'Unlimited passenger records',
-  'Standard agent dashboard',
-  'Email support (24h response)',
-  'Base commission mapping'
-]
-
-const enterpriseFeatures = [
-  'Unlimited agent sub-accounts',
-  'Priority GDS API clusters',
-  'Custom white-label options',
-  'Real-time revenue sharing',
-  'Dedicated account manager',
-  'Advanced analytics suite',
-  'Multi-currency settlement'
-]
-</script>
-
 <template>
-  <div class="bg-white">
-    <section class="relative pt-24 pb-16 lg:pt-32 lg:pb-24 overflow-hidden bg-primary-dark">
-      <div class="max-w-4xl mx-auto px-6 text-center space-y-6">
-        <h2 class="text-sm  text-secondary  ">Pricing modules</h2>
-        <h1 class="text-5xl lg:text-7xl  text-white er leading-tight">
-          Simple, wholesale <br />
-          <span class="text-primary ">transparency.</span>
-        </h1>
-        <p class="text-xl text-white/70 font-medium leading-relaxed max-w-2xl mx-auto">
-          Flybeth was built to put profits back in the hands of agents. No hidden fees, no complicated tiers—just direct access to wholesale inventory.
-        </p>
+  <div class="ap-root">
+    <!-- Orbital Hero -->
+    <section class="ap-hero">
+      <div class="ap-orb ap-orb--1"></div>
+      <div class="ap-orb ap-orb--2"></div>
+      
+      <div class="ap-wrap">
+        <div class="ap-hero-cnt">
+          <div class="ap-badge">Pricing Architecture</div>
+          <h1 class="ap-h">Empowering travel agents with <span class="ap-grad">elite infrastructure.</span></h1>
+          <p class="ap-p">Scale your agency with direct inventory access and automated workflows. Choose the foundation that fits your growth.</p>
+        </div>
       </div>
     </section>
 
-    <!-- Pricing Cards -->
-    <section class="pb-32 px-6">
-      <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
-        <!-- Agent Partner (Free) -->
-        <div class="bg-white border-2 border-neutral-100 rounded-[3rem] p-10 lg:p-16 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-700 relative overflow-hidden group">
-          <div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-1000"></div>
+    <!-- Pricing Grid -->
+    <section class="ap-main">
+      <div class="ap-wrap">
+        <div class="ap-grid">
           
-          <div class="space-y-8 relative z-10">
-            <div class="space-y-2">
-              <h3 class="text-3xl  text-primary-dark">Agent partner</h3>
-              <p class="text-neutral-500 font-medium">For independent advisors and small agencies.</p>
+          <!-- Startup -->
+          <div class="ap-card animate-in" style="animation-delay: 0.1s">
+            <div class="ap-card-hd">
+              <span class="ap-card-tag">Foundation</span>
+              <h3 class="ap-card-h">Startup</h3>
+              <div class="ap-card-price">
+                <span class="ap-card-cur">$</span>
+                <span class="ap-card-val">0</span>
+                <span class="ap-card-sub">/mo</span>
+              </div>
+              <p class="ap-card-desc">Perfect for independent advisors starting their journey.</p>
             </div>
-            
-            <div class="flex items-baseline space-x-2">
-              <span class="text-6xl  text-primary-dark">$0</span>
-              <span class="text-neutral-400 font-bold   text-sm">per month</span>
+            <div class="ap-card-body">
+              <ul class="ap-feats">
+                <li v-for="f in startupFeatures" :key="f" class="ap-feat">
+                  <Check class="ap-feat-ico" />
+                  <span>{{ f }}</span>
+                </li>
+              </ul>
             </div>
-
-            <ul class="space-y-4">
-              <li v-for="feature in agentFeatures" :key="feature" class="flex items-center space-x-3 text-neutral-600 font-medium">
-                <CheckIcon class="h-5 w-5 text-secondary flex-shrink-0" />
-                <span>{{ feature }}</span>
-              </li>
-            </ul>
-
-            <BaseButton to="/auth/register" variant="outline" size="lg" block class="py-5 border-gray-200 text-gray-700 group-hover:border-primary group-hover:text-primary transition-all">Create free account</BaseButton>
+            <div class="ap-card-ft">
+              <NuxtLink to="/auth/register" class="ap-btn ap-btn--outline">Free Onboarding</NuxtLink>
+            </div>
           </div>
+
+          <!-- Professional -->
+          <div class="ap-card ap-card--high animate-in" style="animation-delay: 0.2s">
+            <div class="ap-card-pop">Recommended for scale</div>
+            <div class="ap-card-hd">
+              <span class="ap-card-tag ap-card-tag--blue">Growth</span>
+              <h3 class="ap-card-h">Professional</h3>
+              <div class="ap-card-price">
+                <span class="ap-card-cur">$</span>
+                <span class="ap-card-val">49</span>
+                <span class="ap-card-sub">/mo</span>
+              </div>
+              <p class="ap-card-desc">Advanced tools for established teams and sub-agents.</p>
+            </div>
+            <div class="ap-card-body">
+              <ul class="ap-feats">
+                <li v-for="f in proFeatures" :key="f" class="ap-feat">
+                  <Check class="ap-feat-ico ap-feat-ico--blue" />
+                  <span>{{ f }}</span>
+                </li>
+              </ul>
+            </div>
+            <div class="ap-card-ft">
+              <NuxtLink to="/auth/register" class="ap-btn ap-btn--primary">Scale Now</NuxtLink>
+            </div>
+          </div>
+
+          <!-- Enterprise -->
+          <div class="ap-card ap-card--dark animate-in" style="animation-delay: 0.3s">
+            <div class="ap-card-hd">
+              <span class="ap-card-tag ap-card-tag--white">Consolidator</span>
+              <h3 class="ap-card-h">Enterprise</h3>
+              <div class="ap-card-price">
+                <span class="ap-card-val">Custom</span>
+              </div>
+              <p class="ap-card-desc">White-label solutions for large-scale operations.</p>
+            </div>
+            <div class="ap-card-body">
+              <ul class="ap-feats">
+                <li v-for="f in enterpriseFeatures" :key="f" class="ap-feat">
+                  <Check class="ap-feat-ico ap-feat-ico--primary" />
+                  <span>{{ f }}</span>
+                </li>
+              </ul>
+            </div>
+            <div class="ap-card-ft">
+              <NuxtLink to="/contact" class="ap-btn ap-btn--white">Contact Architects</NuxtLink>
+            </div>
+          </div>
+
         </div>
+      </div>
+    </section>
 
-        <!-- Enterprise Node (Custom) -->
-        <div class="bg-primary-dark text-white rounded-[3rem] p-10 lg:p-16 hover:shadow-2xl hover:shadow-primary-dark/20 transition-all duration-700 relative overflow-hidden group">
-          <div class="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-transparent opacity-50"></div>
-          
-          <div class="space-y-8 relative z-10">
-            <div class="inline-flex items-center space-x-2 px-4 py-1.5 bg-secondary/20 rounded-full border border-secondary/30 text-secondary text-[10px]   ">
-              Consolidator favorite
-            </div>
-            
-            <div class="space-y-2">
-              <h3 class="text-3xl ">Enterprise node</h3>
-              <p class="text-white/60 font-medium">For large-scale consolidators and franchise networks.</p>
-            </div>
-            
-            <div class="flex items-baseline space-x-2">
-              <span class="text-6xl ">Custom</span>
-            </div>
-
-            <ul class="space-y-4">
-              <li v-for="feature in enterpriseFeatures" :key="feature" class="flex items-center space-x-3 text-white/80 font-medium">
-                <CheckIcon class="h-5 w-5 text-secondary flex-shrink-0" />
-                <span>{{ feature }}</span>
-              </li>
-            </ul>
-
-            <BaseButton to="/contact" variant="primary" size="lg" block class="py-5 shadow-2xl shadow-primary/20">Talk to enterprise sales</BaseButton>
-          </div>
+    <!-- Trust Footer -->
+    <section class="ap-trust">
+      <div class="ap-wrap">
+        <div class="ap-trust-inner">
+           <p>All plans include access to 400+ airlines and 600,000+ properties worldwide.</p>
         </div>
       </div>
     </section>
   </div>
 </template>
 
+<script setup lang="ts">
+import { onMounted } from 'vue'
+import { Check } from 'lucide-vue-next'
+import { useTracking } from '@/composables/core/useTracking'
 
+const { trackAction } = useTracking()
+
+onMounted(() => trackAction('navigated_to_pricing'))
+
+const startupFeatures = [
+  'Direct access to best prices',
+  'Global inventory access',
+  'Unlimited client records',
+  'Standard dashboard',
+  'Email support'
+]
+
+const proFeatures = [
+  'Faster ticketing priority',
+  'Branded client receipts',
+  'Commission automation',
+  'Priority WhatsApp support',
+  'Up to 5 Sub-agents'
+]
+
+const enterpriseFeatures = [
+  'Unlimited sub-agents',
+  'White-label portal',
+  'Automated payouts',
+  'Dedicated manager',
+  'API integration access'
+]
+</script>
 
 <style scoped>
-. { font-weight: 900; }
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap');
+
+.ap-root {
+  min-height: 100vh;
+  background: #09090b;
+  color: #fff;
+  font-family: 'Sora', sans-serif;
+  overflow-x: hidden;
+}
+
+.ap-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── Hero ─────────────────────────────────────────────────────────── */
+.ap-hero {
+  position: relative;
+  padding: 120px 0 160px;
+  text-align: center;
+}
+
+.ap-orb {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
+}
+.ap-orb--1 { top: -200px; right: -100px; background: rgba(0, 102, 255, 0.15); }
+.ap-orb--2 { bottom: -100px; left: -100px; background: rgba(0, 255, 204, 0.05); }
+
+.ap-hero-cnt { position: relative; z-index: 10; max-width: 800px; margin: 0 auto; }
+
+.ap-badge {
+  display: inline-block; font-size: 10px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 0.2em; color: #0066ff; background: rgba(0, 102, 255, 0.1);
+  padding: 6px 16px; border-radius: 100px; margin-bottom: 24px; border: 1px solid rgba(0, 102, 255, 0.2);
+}
+
+.ap-h { font-size: 56px; font-weight: 800; line-height: 1.1; margin-bottom: 24px; letter-spacing: -0.04em; }
+.ap-grad { background: linear-gradient(to right, #0066ff, #00ffcc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.ap-p { font-size: 18px; color: #a1a1aa; line-height: 1.6; max-width: 600px; margin: 0 auto; }
+
+/* ── Pricing ──────────────────────────────────────────────────────── */
+.ap-main { margin-top: -80px; position: relative; z-index: 20; padding-bottom: 100px; }
+.ap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; align-items: stretch; }
+
+.ap-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 32px;
+  padding: 48px 40px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ap-card:hover { transform: translateY(-8px); border-color: rgba(255, 255, 255, 0.15); background: rgba(255, 255, 255, 0.05); }
+
+.ap-card--high {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid #0066ff;
+  position: relative;
+  transform: scale(1.05);
+  box-shadow: 0 20px 60px rgba(0, 102, 255, 0.15);
+}
+.ap-card--high:hover { transform: scale(1.05) translateY(-8px); }
+
+.ap-card--dark {
+  background: linear-gradient(145deg, #111, #000);
+  border-color: #222;
+}
+
+.ap-card-pop {
+  position: absolute; top: -16px; left: 50%; transform: translateX(-50%);
+  background: #0066ff; color: #fff; font-size: 10px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.1em; padding: 6px 16px; border-radius: 100px;
+}
+
+.ap-card-hd { margin-bottom: 32px; flex-grow: 0; }
+.ap-card-tag { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.15em; color: #71717a; margin-bottom: 12px; display: block; }
+.ap-card-tag--blue { color: #0066ff; }
+.ap-card-tag--white { color: #fff; }
+
+.ap-card-h { font-size: 28px; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.02em; }
+.ap-card-price { display: flex; align-items: baseline; gap: 4px; margin-bottom: 16px; }
+.ap-card-cur { font-size: 20px; font-weight: 700; color: #71717a; }
+.ap-card-val { font-size: 48px; font-weight: 800; letter-spacing: -0.03em; }
+.ap-card-sub { font-size: 14px; font-weight: 600; color: #71717a; }
+.ap-card-desc { font-size: 14px; color: #71717a; line-height: 1.5; }
+
+.ap-card-body { flex-grow: 1; margin-bottom: 40px; }
+.ap-feats { display: flex; flex-direction: column; gap: 16px; }
+.ap-feat { display: flex; items-start: center; gap: 12px; font-size: 14px; font-weight: 500; color: #d1d1db; }
+.ap-feat-ico { width: 16px; height: 16px; flex-shrink: 0; color: #71717a; margin-top: 2px; }
+.ap-feat-ico--blue { color: #0066ff; }
+.ap-feat-ico--primary { color: #00ffcc; }
+
+.ap-card-ft { mt: auto; }
+.ap-btn {
+  display: flex; align-items: center; justify-content: center; height: 56px; border-radius: 16px;
+  font-size: 15px; font-weight: 700; text-decoration: none; transition: all 0.3s;
+}
+.ap-btn--primary { background: #0066ff; color: #fff; }
+.ap-btn--primary:hover { background: #0052cc; box-shadow: 0 8px 24px rgba(0, 102, 255, 0.3); }
+.ap-btn--outline { border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; }
+.ap-btn--outline:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.2); }
+.ap-btn--white { background: #fff; color: #000; }
+.ap-btn--white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2); }
+
+/* ── Trust ────────────────────────────────────────────────────────── */
+.ap-trust { padding-bottom: 120px; text-align: center; }
+.ap-trust-inner { padding: 40px; background: rgba(255, 255, 255, 0.02); border-radius: 40px; border: 1px solid rgba(255, 255, 255, 0.05); }
+.ap-trust-inner p { font-size: 14px; color: #71717a; font-weight: 500; }
+
+/* ── Anim ─────────────────────────────────────────────────────────── */
+.animate-in { animation: apIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
+@keyframes apIn { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 1024px) {
+  .ap-grid { grid-template-columns: 1fr; gap: 24px; padding: 0 20px; }
+  .ap-card--high { transform: none; }
+  .ap-card--high:hover { transform: translateY(-8px); }
+  .ap-h { font-size: 40px; }
+}
 </style>

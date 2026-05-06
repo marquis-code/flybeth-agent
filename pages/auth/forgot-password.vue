@@ -45,7 +45,7 @@
           </BaseButton>
 
           <div class="pt-4 text-center">
-            <NuxtLink to="/auth/login" class="text-xs  text-neutral-300 hover:text-primary  transition-colors ">Back to sign in</NuxtLink>
+            <NuxtLink to="/auth/login" class="text-sm  text-neutral-300 hover:text-primary  transition-colors ">Back to sign in</NuxtLink>
           </div>
         </div>
       </form>

@@ -26,7 +26,10 @@ GATEWAY_ENDPOINT_WITH_AUTH.interceptors.request.use((config) => {
   return config;
 });
 
-// ✅ 401 Response Handler - Logs errors but avoids auto-logout to prevent loops
+// ✅ Global 401 event bus — triggers the in-app AuthModal instead of redirecting
+export const authEventTarget = new EventTarget();
+
+// ✅ 401 Response Handler - Emits a custom event so the AuthModal can react
 const instances = [GATEWAY_ENDPOINT, GATEWAY_ENDPOINT_WITH_AUTH];
 
 instances.forEach((instance) => {
@@ -34,7 +37,11 @@ instances.forEach((instance) => {
     (response) => response,
     (err) => {
       if (err.response && err.response.status === 401) {
-        console.warn(`[Axios] 401 Unauthorized at ${err.config?.url}. Session may have expired.`);
+        console.warn(`[Axios] 401 Unauthorized at ${err.config?.url}. Showing auth modal.`);
+        // Dispatch a global event for the AuthModal to catch
+        if (import.meta.client) {
+          authEventTarget.dispatchEvent(new CustomEvent('auth:required'));
+        }
       }
       return Promise.reject(err);
     }

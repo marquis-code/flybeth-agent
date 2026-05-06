@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-2">
-    <label v-if="label" class="text-xs  text-primary-dark  ">{{ label }}</label>
+    <label v-if="label" class="text-sm  text-primary-dark  ">{{ label }}</label>
     <div 
       class="relative group cursor-pointer"
       @click="triggerFileInput"
@@ -28,7 +28,7 @@
             <CloudArrowUpIcon class="w-6 h-6" />
           </div>
           <p class="text-sm font-bold text-neutral-600">Click to upload or drag and drop</p>
-          <p class="text-[10px] text-neutral-400 mt-1 font-medium  ">{{ helpText }}</p>
+          <p class="text-sm text-neutral-400 mt-1 font-medium  ">{{ helpText }}</p>
         </template>
         
         <template v-else>
@@ -41,7 +41,7 @@
                 <div class="flex-grow min-w-0">
                    <p class="text-sm font-bold text-primary-dark truncate">{{ fileName || 'Document' }}</p>
                    <div class="flex items-center space-x-3 mt-1">
-                      <a :href="modelValue" target="_blank" class="text-[10px] text-secondary font-bold hover:underline  ">Preview</a>
+                      <a :href="modelValue" target="_blank" class="text-sm text-secondary font-bold hover:underline  ">Preview</a>
                    </div>
                 </div>
                 <button 
@@ -71,11 +71,11 @@
       <div v-if="loading" class="absolute inset-0 bg-white/60 backdrop-blur-[2px] rounded-[2rem] flex items-center justify-center z-20">
          <div class="flex flex-col items-center">
             <div class="w-8 h-8 border-3 border-secondary/20 border-t-secondary rounded-full animate-spin"></div>
-            <p class="text-[10px]  text-secondary   mt-3">Uploading...</p>
+            <p class="text-sm  text-secondary   mt-3">Uploading...</p>
          </div>
       </div>
     </div>
-    <p v-if="error" class="text-[10px] font-bold text-red-500   pl-2">{{ error }}</p>
+    <p v-if="error" class="text-sm font-bold text-red-500   pl-2">{{ error }}</p>
   </div>
 </template>
 

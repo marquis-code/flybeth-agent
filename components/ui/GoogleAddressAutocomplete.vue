@@ -1,6 +1,6 @@
 <template>
   <div class="relative w-full group">
-    <div class="absolute -top-2.5 left-4 px-2 bg-white text-[10px]    text-brand-gray/40 z-10 transition-colors group-focus-within:text-secondary">
+    <div class="absolute -top-2.5 left-4 px-2 bg-white text-sm    text-brand-gray/40 z-10 transition-colors group-focus-within:text-secondary">
       {{ label }}
     </div>
     <div class="relative">
@@ -28,7 +28,7 @@
         </div>
         <div class="flex flex-col">
           <span class="text-sm font-bold text-primary-dark">{{ suggestion.structured_formatting.main_text }}</span>
-          <span class="text-[11px] text-neutral-400 font-medium">{{ suggestion.structured_formatting.secondary_text }}</span>
+          <span class="text-sm text-neutral-400 font-medium">{{ suggestion.structured_formatting.secondary_text }}</span>
         </div>
       </button>
     </div>

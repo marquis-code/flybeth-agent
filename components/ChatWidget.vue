@@ -238,7 +238,7 @@ watch(messages, () => scrollToBottom(), { deep: true })
         <XMarkIcon v-if="isOpen" class="h-6 w-6" />
         <ChatBubbleLeftRightIcon v-else class="h-6 w-6" />
       </Transition>
-      <div v-if="!isOpen && unreadCount > 0" class="absolute -top-1 -right-1 h-5 w-5 bg-red-500 rounded-full border-2 border-white flex items-center justify-center text-[9px] font-black text-white animate-bounce">
+      <div v-if="!isOpen && unreadCount > 0" class="absolute -top-1 -right-1 h-5 w-5 bg-red-500 rounded-full border-2 border-white flex items-center justify-center text-sm  text-white animate-bounce">
         {{ unreadCount > 9 ? '9+' : unreadCount }}
       </div>
       <div v-if="!isOpen && unreadCount === 0" class="absolute -top-0.5 -right-0.5 h-3.5 w-3.5 bg-secondary rounded-full border-2 border-white">
@@ -257,10 +257,10 @@ watch(messages, () => scrollToBottom(), { deep: true })
                    <SparklesIcon class="h-6 w-6 text-white" />
                 </div>
                 <div>
-                   <h3 class="font-bold text-base leading-tight">Flybeth Support</h3>
+                   <h3 class="font-bold text-sm leading-tight">Flybeth Support</h3>
                    <div class="flex items-center space-x-2">
                       <div class="h-2 w-2 rounded-full" :class="isConnected ? 'bg-secondary animate-pulse' : 'bg-gray-400'"></div>
-                      <span class="text-[10px] font-semibold   opacity-80">{{ isConnected ? 'Online' : 'Connecting...' }}</span>
+                      <span class="text-sm font-semibold   opacity-80">{{ isConnected ? 'Online' : 'Connecting...' }}</span>
                    </div>
                 </div>
              </div>
@@ -268,7 +268,7 @@ watch(messages, () => scrollToBottom(), { deep: true })
                 <XMarkIcon class="h-5 w-5" />
              </button>
           </div>
-          <p class="text-[11px] font-medium opacity-60">Agent Support • AI + Live Help</p>
+          <p class="text-sm font-medium opacity-60">Agent Support • AI + Live Help</p>
         </div>
 
         <!-- Identification Form -->
@@ -277,16 +277,16 @@ watch(messages, () => scrollToBottom(), { deep: true })
               <div class="h-16 w-16 mx-auto bg-gradient-to-br from-primary/10 to-primary/20 rounded-2xl flex items-center justify-center mb-4">
                 <UserIcon class="h-8 w-8 text-primary" />
               </div>
-              <h4 class="text-xl font-bold text-gray-900">Welcome!</h4>
-              <p class="text-sm text-gray-400">Please introduce yourself to begin.</p>
+              <h4 class="text-sm font-bold text-gray-900">Welcome!</h4>
+              <p class="text-sm text-gray-800">Please introduce yourself to begin.</p>
            </div>
            <div class="space-y-3">
               <div class="relative group">
-                 <IdentificationIcon class="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-300 group-focus-within:text-primary transition-colors" />
+                 <IdentificationIcon class="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-800 group-focus-within:text-primary transition-colors" />
                  <input v-model="guestInfo.name" type="text" placeholder="Your full name" class="w-full pl-11 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none text-sm font-medium transition-all" />
               </div>
               <div class="relative group">
-                 <EnvelopeIcon class="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-300 group-focus-within:text-primary transition-colors" />
+                 <EnvelopeIcon class="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-800 group-focus-within:text-primary transition-colors" />
                  <input v-model="guestInfo.email" type="email" placeholder="Your email address" class="w-full pl-11 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none text-sm font-medium transition-all" @keyup.enter="submitIdentification" />
               </div>
            </div>
@@ -297,15 +297,15 @@ watch(messages, () => scrollToBottom(), { deep: true })
         <div v-else ref="scrollContainer" class="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50/80">
           <div v-if="loading && messages.length === 0" class="flex flex-col items-center justify-center h-full space-y-3 opacity-40">
              <div class="h-8 w-8 border-3 border-primary border-t-transparent rounded-full animate-spin"></div>
-             <p class="text-[10px] font-bold  ">Connecting to support...</p>
+             <p class="text-sm font-bold  ">Connecting to support...</p>
           </div>
           <div v-else-if="messages.length === 0 && !loading" class="flex flex-col items-center justify-center h-full space-y-4">
              <div class="h-14 w-14 bg-gradient-to-br from-primary/10 to-primary/20 rounded-2xl flex items-center justify-center">
                <SparklesIcon class="h-7 w-7 text-primary" />
              </div>
-             <p class="text-sm font-semibold text-gray-700">How can we help?</p>
+             <p class="text-sm font-semibold text-gray-800">How can we help?</p>
              <div class="flex flex-wrap gap-2 justify-center px-2">
-               <button v-for="q in quickQuestions" :key="q" @click="sendQuickQuestion(q)" class="px-3 py-2 bg-white border border-gray-200 rounded-full text-xs font-semibold text-gray-600 hover:bg-primary/5 hover:border-primary/20 hover:text-primary transition-all">{{ q }}</button>
+               <button v-for="q in quickQuestions" :key="q" @click="sendQuickQuestion(q)" class="px-3 py-2 bg-white border border-gray-200 rounded-full text-sm font-semibold text-gray-800 hover:bg-primary/5 hover:border-primary/20 hover:text-primary transition-all">{{ q }}</button>
              </div>
           </div>
           <template v-else>
@@ -313,19 +313,19 @@ watch(messages, () => scrollToBottom(), { deep: true })
                <div v-if="isBotMessage(msg)" class="max-w-[90%] flex items-start space-x-2">
                  <div class="h-7 w-7 bg-gradient-to-br from-primary to-primary-dark rounded-lg flex items-center justify-center shrink-0 mt-1"><SparklesIcon class="h-3.5 w-3.5 text-white" /></div>
                  <div>
-                   <div class="bg-white text-gray-700 p-3.5 rounded-2xl rounded-tl-sm text-sm leading-relaxed shadow-sm border border-gray-100 whitespace-pre-line">{{ msg.content }}</div>
-                   <span class="text-[9px] font-semibold text-gray-400 mt-1 ml-1 block">Flybeth Bot • {{ formatTime(msg.createdAt) }}</span>
+                   <div class="bg-white text-gray-800 p-3.5 rounded-2xl rounded-tl-sm text-sm leading-relaxed shadow-sm border border-gray-100 whitespace-pre-line">{{ msg.content }}</div>
+                   <span class="text-sm font-semibold text-gray-800 mt-1 ml-1 block">Flybeth Bot • {{ formatTime(msg.createdAt) }}</span>
                  </div>
                </div>
                <div v-else-if="isMyMessage(msg)" class="max-w-[85%]">
                  <div class="bg-gradient-to-r from-primary to-primary-dark text-white p-3.5 rounded-2xl rounded-br-sm text-sm leading-relaxed shadow-sm">{{ msg.content }}</div>
-                 <span class="text-[9px] font-semibold text-gray-400 mt-1 text-right block mr-1">You • {{ formatTime(msg.createdAt) }}</span>
+                 <span class="text-sm font-semibold text-gray-800 mt-1 text-right block mr-1">You • {{ formatTime(msg.createdAt) }}</span>
                </div>
                <div v-else class="max-w-[85%] flex items-start space-x-2">
                  <div class="h-7 w-7 bg-white rounded-lg flex items-center justify-center shrink-0 mt-1 shadow-sm border border-gray-100"><UserIcon class="h-3.5 w-3.5 text-primary" /></div>
                  <div>
-                   <div class="bg-white text-gray-700 p-3.5 rounded-2xl rounded-tl-sm text-sm leading-relaxed shadow-sm border border-gray-100">{{ msg.content }}</div>
-                   <span class="text-[9px] font-semibold text-gray-400 mt-1 ml-1 block">{{ getSenderLabel(msg) }} • {{ formatTime(msg.createdAt) }}</span>
+                   <div class="bg-white text-gray-800 p-3.5 rounded-2xl rounded-tl-sm text-sm leading-relaxed shadow-sm border border-gray-100">{{ msg.content }}</div>
+                   <span class="text-sm font-semibold text-gray-800 mt-1 ml-1 block">{{ getSenderLabel(msg) }} • {{ formatTime(msg.createdAt) }}</span>
                  </div>
                </div>
             </div>
@@ -335,7 +335,7 @@ watch(messages, () => scrollToBottom(), { deep: true })
         <!-- Input Area -->
         <div v-if="!isIdentifying" class="p-3 bg-white border-t border-gray-100 shrink-0">
            <div class="flex items-end bg-gray-50 rounded-xl p-1.5 border border-gray-200 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/10 transition-all">
-              <textarea v-model="messageText" rows="1" placeholder="Type your message..." class="flex-1 bg-transparent border-0 focus:ring-0 text-sm font-medium p-2.5 resize-none outline-none placeholder:text-gray-300 max-h-20" @keydown="handleKeyDown"></textarea>
+              <textarea v-model="messageText" rows="1" placeholder="Type your message..." class="flex-1 bg-transparent border-0 focus:ring-0 text-sm font-medium p-2.5 resize-none outline-none placeholder:text-gray-800 max-h-20" @keydown="handleKeyDown"></textarea>
               <button @click="handleSendMessage" :disabled="!messageText.trim() || !activeRoom" class="p-2.5 bg-gradient-to-r from-primary to-primary-dark text-white rounded-lg shadow-md shadow-primary/20 disabled:opacity-20 disabled:shadow-none transition-all active:scale-90 shrink-0">
                  <PaperAirplaneIcon class="h-4 w-4" />
               </button>

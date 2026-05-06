@@ -26,7 +26,7 @@
           >
             <!-- Custom Header -->
             <div v-if="!hideHeader" class="px-8 py-5 border-b border-gray-100 flex items-center justify-between bg-white">
-              <h3 class="text-xl font-bold text-primary-dark">{{ title }}</h3>
+              <h3 class="text-sm font-bold text-primary-dark">{{ title }}</h3>
               <button @click="$emit('close')" class="p-2.5 bg-neutral-50 rounded-full hover:bg-gray-100 transition-all text-neutral/50 hover:text-primary active:scale-90">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />

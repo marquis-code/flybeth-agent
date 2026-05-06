@@ -3,11 +3,11 @@
     <div class="flex items-center justify-between">
       <div class="space-y-1">
         <h2 class="text-2xl font-bold text-gray-900 tracking-tight">Traveler List</h2>
-        <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Manage your customers, their documents and booking history</p>
+        <p class="text-sm text-gray-400 font-bold uppercase tracking-widest">Manage your customers, their documents and booking history</p>
       </div>
       <button 
         @click="openAddDrawer"
-        class="px-5 py-2.5 bg-primary text-white text-[11px] font-bold rounded-xl hover:bg-black transition-all flex items-center shadow-lg shadow-primary/10"
+        class="px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-xl hover:bg-black transition-all flex items-center shadow-lg shadow-primary/10"
       >
         <PlusIcon class="h-4 w-4 mr-2" />
         Add New Traveler
@@ -21,7 +21,7 @@
            <component :is="stat.icon" class="h-6 w-6" :class="stat.color" />
         </div>
         <div class="space-y-0.5">
-          <p class="text-[9px] font-bold text-gray-400 uppercase tracking-widest">{{ stat.label }}</p>
+          <p class="text-sm font-bold text-gray-400 uppercase tracking-widest">{{ stat.label }}</p>
           <p class="text-xl font-bold text-gray-900">{{ stat.value }}</p>
         </div>
       </div>
@@ -33,11 +33,11 @@
         <table class="w-full text-left">
           <thead>
             <tr class="bg-gray-50/50 border-b border-gray-100">
-               <th class="px-6 py-4 text-[9px] font-black uppercase tracking-widest text-gray-400">FullName</th>
-               <th class="px-6 py-4 text-[9px] font-black uppercase tracking-widest text-gray-400">Contact Details</th>
-               <th class="px-6 py-4 text-[9px] font-black uppercase tracking-widest text-gray-400">Gender & DOB</th>
-               <th class="px-6 py-4 text-[9px] font-black uppercase tracking-widest text-gray-400">Documents</th>
-               <th class="px-6 py-4 text-[9px] font-black uppercase tracking-widest text-gray-400 text-right">Actions</th>
+               <th class="px-6 py-4 text-sm  uppercase tracking-widest text-gray-400">FullName</th>
+               <th class="px-6 py-4 text-sm  uppercase tracking-widest text-gray-400">Contact Details</th>
+               <th class="px-6 py-4 text-sm  uppercase tracking-widest text-gray-400">Gender & DOB</th>
+               <th class="px-6 py-4 text-sm  uppercase tracking-widest text-gray-400">Documents</th>
+               <th class="px-6 py-4 text-sm  uppercase tracking-widest text-gray-400 text-right">Actions</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-50">
@@ -51,23 +51,23 @@
                 <td class="px-6 py-4">
                   <div class="flex items-center space-x-4">
                     <img v-if="traveler.profilePicture" :src="traveler.profilePicture" class="h-10 w-10 rounded-xl object-cover border border-gray-100" />
-                    <div v-else class="h-10 w-10 rounded-xl bg-primary/5 flex items-center justify-center text-primary text-xs font-black uppercase border border-primary/10">
+                    <div v-else class="h-10 w-10 rounded-xl bg-primary/5 flex items-center justify-center text-primary text-sm  uppercase border border-primary/10">
                       {{ traveler.firstName[0] }}{{ traveler.lastName[0] }}
                     </div>
                     <div>
-                      <p class="text-xs font-black text-gray-900 uppercase tracking-tight">{{ traveler.firstName }} {{ traveler.lastName }}</p>
-                      <span class="text-[8px] px-1.5 py-0.5 bg-gray-50 text-gray-500 font-bold uppercase tracking-tighter rounded border border-gray-100">{{ traveler.type }}</span>
+                      <p class="text-sm  text-gray-900 uppercase tracking-tight">{{ traveler.firstName }} {{ traveler.lastName }}</p>
+                      <span class="text-sm px-1.5 py-0.5 bg-gray-50 text-gray-500 font-bold uppercase tracking-tighter rounded border border-gray-100">{{ traveler.type }}</span>
                     </div>
                   </div>
                 </td>
                 <td class="px-6 py-4">
                   <div class="flex flex-col">
-                    <span class="text-xs font-bold text-gray-700 leading-none">{{ traveler.email }}</span>
-                    <span class="text-[10px] text-gray-400 font-medium mt-1">{{ traveler.phone || '--' }}</span>
+                    <span class="text-sm font-bold text-gray-700 leading-none">{{ traveler.email }}</span>
+                    <span class="text-sm text-gray-400 font-medium mt-1">{{ traveler.phone || '--' }}</span>
                   </div>
                 </td>
                 <td class="px-6 py-4">
-                  <div class="flex items-center text-[10px] font-bold text-gray-500 uppercase tracking-widest">
+                  <div class="flex items-center text-sm font-bold text-gray-500 uppercase tracking-widest">
                     <span class="px-2 py-0.5 bg-gray-50 rounded">{{ traveler.gender }}</span>
                     <span class="mx-2 opacity-20">/</span>
                     <span>{{ formatDate(traveler.dateOfBirth) }}</span>
@@ -76,7 +76,7 @@
                 <td class="px-6 py-4">
                    <div class="flex items-center space-x-2">
                       <div :class="traveler.documents?.length ? 'bg-emerald-500' : 'bg-amber-400'" class="h-1.5 w-1.5 rounded-full"></div>
-                      <span class="text-[9px] font-black text-gray-500 uppercase tracking-tighter">{{ traveler.documents?.length ? traveler.documents.length + ' Docs Saved' : 'No Docs' }}</span>
+                      <span class="text-sm  text-gray-500 uppercase tracking-tighter">{{ traveler.documents?.length ? traveler.documents.length + ' Docs Saved' : 'No Docs' }}</span>
                    </div>
                 </td>
                 <td class="px-6 py-4 text-right">
@@ -97,9 +97,9 @@
                     <div class="h-16 w-16 bg-gray-50 rounded-full flex items-center justify-center mb-6">
                        <UsersIcon class="h-8 w-8 text-gray-200" />
                     </div>
-                    <h3 class="text-xs font-black text-gray-400 uppercase tracking-[0.2em]">No Travelers Found</h3>
-                    <p class="text-[10px] text-gray-400 mt-2 font-medium">Click the button below to add your first traveler.</p>
-                    <button @click="openAddDrawer" class="mt-6 px-6 py-2.5 bg-gray-50 text-primary text-[10px] font-black uppercase rounded-xl border border-gray-100 hover:bg-primary hover:text-white hover:border-primary transition-all">Add First Traveler</button>
+                    <h3 class="text-sm  text-gray-400 uppercase ">No Travelers Found</h3>
+                    <p class="text-sm text-gray-400 mt-2 font-medium">Click the button below to add your first traveler.</p>
+                    <button @click="openAddDrawer" class="mt-6 px-6 py-2.5 bg-gray-50 text-primary text-sm  uppercase rounded-xl border border-gray-100 hover:bg-primary hover:text-white hover:border-primary transition-all">Add First Traveler</button>
                   </div>
                </td>
             </tr>
@@ -115,11 +115,11 @@
         <div class="flex items-center space-x-10 p-6 bg-gray-50/50 rounded-3xl border border-gray-100">
            <div class="relative group cursor-pointer" @click="triggerUpload('pic')">
               <img v-if="form.profilePicture" :src="form.profilePicture" class="h-28 w-28 rounded-[2rem] object-cover border-4 border-white shadow-xl" />
-              <div v-else class="h-28 w-28 rounded-[2rem] bg-white border-2 border-dashed border-gray-100 flex flex-col items-center justify-center text-gray-300 hover:text-primary transition-all">
+              <div v-else class="h-28 w-28 rounded-[2rem] bg-white border-2 border-dashed border-gray-100 flex flex-col items-center justify-center text-gray-500 hover:text-primary transition-all">
                   <div v-if="uploadingPic" class="h-8 w-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
                   <template v-else>
                      <CameraIcon class="h-7 w-7 mb-1" />
-                     <span class="text-[8px] font-black uppercase tracking-widest text-center px-4">Upload Photo</span>
+                     <span class="text-sm  uppercase tracking-widest text-center px-4">Upload Photo</span>
                   </template>
                </div>
                <div v-if="uploadingPic" class="absolute inset-0 bg-white/60 flex items-center justify-center rounded-[2rem]">
@@ -127,23 +127,23 @@
                </div>
            </div>
            <div class="flex-1 space-y-2 text-left">
-              <h4 class="text-xs font-black text-gray-900 uppercase tracking-tight">Traveler Details</h4>
-              <p class="text-[10px] text-gray-400 font-medium leading-relaxed">Please make sure the names match the traveler's passport exactly to avoid issues during travel.</p>
+              <h4 class="text-sm  text-gray-900 uppercase tracking-tight">Traveler Details</h4>
+              <p class="text-sm text-gray-400 font-medium leading-relaxed">Please make sure the names match the traveler's passport exactly to avoid issues during travel.</p>
            </div>
         </div>
 
         <div class="grid grid-cols-3 gap-6">
            <div class="space-y-2 text-left">
-              <label class="text-[9px] font-black text-gray-400 uppercase tracking-widest px-1">First Name</label>
-              <input v-model="form.firstName" type="text" required class="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-2xl text-[11px] font-bold outline-none focus:bg-white focus:border-primary transition-all shadow-sm shadow-black/5" />
+              <label class="text-sm  text-gray-400 uppercase tracking-widest px-1">First Name</label>
+              <input v-model="form.firstName" type="text" required class="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-2xl text-sm font-bold outline-none focus:bg-white focus:border-primary transition-all shadow-sm shadow-black/5" />
            </div>
            <div class="space-y-2 text-left">
-              <label class="text-[9px] font-black text-gray-400 uppercase tracking-widest px-1">Last Name</label>
-              <input v-model="form.lastName" type="text" required class="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-2xl text-[11px] font-bold outline-none focus:bg-white focus:border-primary transition-all shadow-sm shadow-black/5" />
+              <label class="text-sm  text-gray-400 uppercase tracking-widest px-1">Last Name</label>
+              <input v-model="form.lastName" type="text" required class="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-2xl text-sm font-bold outline-none focus:bg-white focus:border-primary transition-all shadow-sm shadow-black/5" />
            </div>
            <div class="space-y-2 text-left">
-              <label class="text-[9px] font-black text-gray-400 uppercase tracking-widest px-1">Gender</label>
-              <select v-model="form.gender" class="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-2xl text-[11px] font-bold outline-none focus:bg-white focus:border-primary transition-all uppercase shadow-sm shadow-black/5">
+              <label class="text-sm  text-gray-400 uppercase tracking-widest px-1">Gender</label>
+              <select v-model="form.gender" class="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-2xl text-sm font-bold outline-none focus:bg-white focus:border-primary transition-all uppercase shadow-sm shadow-black/5">
                  <option value="male">MALE</option>
                  <option value="female">FEMALE</option>
                  <option value="other">OTHER</option>
@@ -153,42 +153,42 @@
 
         <div class="grid grid-cols-2 gap-6">
            <div class="space-y-2 text-left">
-              <label class="text-[9px] font-black text-gray-400 uppercase tracking-widest px-1">Email Address</label>
-              <input v-model="form.email" type="email" required class="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-2xl text-[11px] font-bold outline-none focus:bg-white focus:border-primary transition-all shadow-sm shadow-black/5" />
+              <label class="text-sm  text-gray-400 uppercase tracking-widest px-1">Email Address</label>
+              <input v-model="form.email" type="email" required class="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-2xl text-sm font-bold outline-none focus:bg-white focus:border-primary transition-all shadow-sm shadow-black/5" />
            </div>
            <div class="space-y-2 text-left">
-              <label class="text-[9px] font-black text-gray-400 uppercase tracking-widest px-1">Phone Number</label>
-              <input v-model="form.phone" type="tel" class="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-2xl text-[11px] font-bold outline-none focus:bg-white focus:border-primary transition-all shadow-sm shadow-black/5" />
+              <label class="text-sm  text-gray-400 uppercase tracking-widest px-1">Phone Number</label>
+              <input v-model="form.phone" type="tel" class="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-2xl text-sm font-bold outline-none focus:bg-white focus:border-primary transition-all shadow-sm shadow-black/5" />
            </div>
         </div>
 
         <div class="grid grid-cols-3 gap-6">
            <div class="space-y-2 col-span-1 text-left">
-              <label class="text-[9px] font-black text-gray-400 uppercase tracking-widest px-1">Date of Birth</label>
-              <input v-model="form.dateOfBirth" type="date" required class="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-2xl text-[11px] font-bold outline-none focus:bg-white focus:border-primary transition-all shadow-sm shadow-black/5" />
+              <label class="text-sm  text-gray-400 uppercase tracking-widest px-1">Date of Birth</label>
+              <input v-model="form.dateOfBirth" type="date" required class="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-2xl text-sm font-bold outline-none focus:bg-white focus:border-primary transition-all shadow-sm shadow-black/5" />
            </div>
            <div class="space-y-2 col-span-2 text-left">
-              <label class="text-[9px] font-black text-gray-400 uppercase tracking-widest px-1">Passport Number</label>
-              <input v-model="form.passportNumber" type="text" placeholder="Enter Passport Number" class="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-2xl text-[11px] font-bold outline-none focus:bg-white focus:border-primary transition-all uppercase shadow-sm shadow-black/5" />
+              <label class="text-sm  text-gray-400 uppercase tracking-widest px-1">Passport Number</label>
+              <input v-model="form.passportNumber" type="text" placeholder="Enter Passport Number" class="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-2xl text-sm font-bold outline-none focus:bg-white focus:border-primary transition-all uppercase shadow-sm shadow-black/5" />
            </div>
         </div>
 
         <!-- Documents -->
         <div class="space-y-6 pt-4 text-left">
            <div class="flex items-center justify-between border-b border-gray-50 pb-4">
-              <h4 class="text-[10px] font-black text-gray-900 uppercase tracking-[0.2em]">Travel Documents</h4>
-              <p class="text-[9px] text-gray-400 font-bold uppercase">Upload IDs, Visas or Certificates</p>
+              <h4 class="text-sm  text-gray-900 uppercase ">Travel Documents</h4>
+              <p class="text-sm text-gray-400 font-bold uppercase">Upload IDs, Visas or Certificates</p>
            </div>
            
            <div class="grid grid-cols-2 gap-4">
               <div v-for="(doc, idx) in form.documents" :key="idx" class="relative group p-4 bg-white border border-gray-100 rounded-3xl flex items-center space-x-4 hover:border-primary transition-all shadow-sm">
                  <div class="h-12 w-12 bg-gray-50 rounded-2xl overflow-hidden flex items-center justify-center">
                     <img v-if="doc.type?.includes('image')" :src="doc.url" class="w-full h-full object-cover" />
-                    <DocumentIcon v-else class="h-6 w-6 text-gray-300" />
+                    <DocumentIcon v-else class="h-6 w-6 text-gray-500" />
                  </div>
                  <div class="flex-1 min-w-0">
-                    <p class="text-[10px] font-black text-gray-900 truncate uppercase tracking-tighter">{{ doc.name }}</p>
-                    <p class="text-[8px] text-gray-400 uppercase font-black">Saved File</p>
+                    <p class="text-sm  text-gray-900 truncate uppercase tracking-tighter">{{ doc.name }}</p>
+                    <p class="text-sm text-gray-400 uppercase ">Saved File</p>
                  </div>
                  <button type="button" @click="form.documents.splice(idx, 1)" class="p-2 text-rose-500 hover:bg-rose-50 rounded-xl transition-all"><XMarkIcon class="h-4 w-4" /></button>
               </div>
@@ -198,7 +198,7 @@
                   <div v-if="uploadingDoc" class="h-6 w-6 border-2 border-primary border-t-transparent rounded-full animate-spin mb-2"></div>
                   <template v-else>
                      <CloudArrowUpIcon class="h-6 w-6 mb-2" />
-                     <span class="text-[9px] font-black uppercase tracking-widest text-center">Upload New Document</span>
+                     <span class="text-sm  uppercase tracking-widest text-center">Upload New Document</span>
                   </template>
                </div>
            </div>
@@ -207,7 +207,7 @@
         <!-- Document Selection Modal -->
         <div v-if="isDocModalOpen" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 text-left">
             <div class="bg-white rounded-[2.5rem] p-10 max-w-md w-full shadow-2xl">
-                <h3 class="text-xs font-black text-gray-900 uppercase tracking-widest mb-6">Select Document Type</h3>
+                <h3 class="text-sm  text-gray-900 uppercase tracking-widest mb-6">Select Document Type</h3>
                 <div class="space-y-3">
                     <button v-for="type in [
                         'Passport', 
@@ -216,11 +216,11 @@
                         'Yellow Fever Certificate', 
                         'Identity Card'
                     ]" :key="type" @click="confirmDocUpload(type)" class="w-full text-left p-4 rounded-2xl border border-gray-100 hover:bg-primary hover:text-white hover:border-primary transition-all flex items-center justify-between group">
-                        <span class="text-[11px] font-bold uppercase tracking-tight">{{ type }}</span>
+                        <span class="text-sm font-bold uppercase tracking-tight">{{ type }}</span>
                         <ArrowRightIcon class="h-4 w-4 text-gray-200 group-hover:text-white" />
                     </button>
                 </div>
-                <button @click="isDocModalOpen = false" class="mt-8 w-full py-4 text-[10px] font-black uppercase text-gray-400 hover:text-gray-900 transition-colors">Cancel</button>
+                <button @click="isDocModalOpen = false" class="mt-8 w-full py-4 text-sm  uppercase text-gray-400 hover:text-gray-900 transition-colors">Cancel</button>
             </div>
         </div>
 
@@ -230,11 +230,11 @@
       
       <template #footer>
          <div class="flex items-center justify-end space-x-6 w-full px-6 py-2">
-            <button type="button" @click="closeAddDrawer" class="px-10 py-4 bg-white text-gray-400 text-[10px] font-black uppercase rounded-2xl hover:bg-gray-50 transition-all border border-gray-100">Cancel</button>
+            <button type="button" @click="closeAddDrawer" class="px-10 py-4 bg-white text-gray-400 text-sm  uppercase rounded-2xl hover:bg-gray-50 transition-all border border-gray-100">Cancel</button>
             <button 
               @click="handleSubmit" 
               :disabled="creating || updating"
-              class="flex-grow max-w-[350px] py-5 bg-primary text-white text-[10px] font-black uppercase rounded-2xl hover:bg-black transition-all shadow-2xl shadow-primary/20 disabled:opacity-50"
+              class="flex-grow max-w-[350px] py-5 bg-primary text-white text-sm  uppercase rounded-2xl hover:bg-black transition-all shadow-2xl shadow-primary/20 disabled:opacity-50"
             >
               {{ creating || updating ? 'Saving...' : (editMode ? 'Save Changes' : 'Add Traveler') }}
             </button>

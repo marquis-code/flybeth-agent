@@ -24,7 +24,7 @@
               </div>
 
               <!-- Title -->
-              <h3 class="text-2xl  text-gray-900  mb-3 animate-text-up font-bold">
+              <h3 class="text-sm  text-gray-900  mb-3 animate-text-up font-bold">
                 {{ title }}
               </h3>
 
@@ -38,13 +38,13 @@
                 <button 
                   v-if="cancelText !== ''"
                   @click="onCancel" 
-                  class="flex-1 py-4 px-6 rounded-2xl border-2 border-gray-100 text-gray-900 text-xs   font-bold hover:bg-gray-50 hover:border-gray-200 active:scale-95 transition-all duration-300"
+                  class="flex-1 py-4 px-6 rounded-2xl border-2 border-gray-100 text-gray-900 text-sm   font-bold hover:bg-gray-50 hover:border-gray-200 active:scale-95 transition-all duration-300"
                 >
                   {{ cancelText || 'Cancel' }}
                 </button>
                 <button 
                   @click="onConfirm" 
-                  class="flex-1 py-4 px-6 rounded-2xl text-white text-xs   font-bold active:scale-95 transition-all duration-300 shadow-lg hover:scale-[1.02]"
+                  class="flex-1 py-4 px-6 rounded-2xl text-white text-sm   font-bold active:scale-95 transition-all duration-300 shadow-lg hover:scale-[1.02]"
                   :class="confirmBtnClass"
                 >
                   {{ confirmText || 'Confirm' }}

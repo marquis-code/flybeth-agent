@@ -1,38 +1,100 @@
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
+import { GATEWAY_ENDPOINT } from '@/api_factory/axios.config'
 
 export interface Currency {
     code: string
     symbol: string
     name: string
     flag: string
+    rate: number
 }
 
-export const currencies: Currency[] = [
-    { code: 'USD', symbol: '$', name: 'US Dollar', flag: 'https://flagcdn.com/us.svg' },
-    { code: 'EUR', symbol: '€', name: 'Euro', flag: 'https://flagcdn.com/eu.svg' },
-    { code: 'GBP', symbol: '£', name: 'British Pound', flag: 'https://flagcdn.com/gb.svg' },
-    { code: 'NGN', symbol: '₦', name: 'Nigerian Naira', flag: 'https://flagcdn.com/ng.svg' },
-    { code: 'CAD', symbol: 'C$', name: 'Canadian Dollar', flag: 'https://flagcdn.com/ca.svg' },
-    { code: 'AED', symbol: 'AED', name: 'UAE Dirham', flag: 'https://flagcdn.com/ae.svg' },
-    { code: 'INR', symbol: '₹', name: 'Indian Rupee', flag: 'https://flagcdn.com/in.svg' },
-    { code: 'AUD', symbol: 'A$', name: 'Australian Dollar', flag: 'https://flagcdn.com/au.svg' },
-    { code: 'CNY', symbol: '¥', name: 'Chinese Yuan', flag: 'https://flagcdn.com/cn.svg' },
-    { code: 'JPY', symbol: '¥', name: 'Japanese Yen', flag: 'https://flagcdn.com/jp.svg' },
-    { code: 'TRY', symbol: '₺', name: 'Turkish Lira', flag: 'https://flagcdn.com/tr.svg' },
-    { code: 'KRW', symbol: '₩', name: 'South Korean Won', flag: 'https://flagcdn.com/kr.svg' },
-    { code: 'SAR', symbol: 'SR', name: 'Saudi Riyal', flag: 'https://flagcdn.com/sa.svg' },
-    { code: 'BRL', symbol: 'R$', name: 'Brazilian Real', flag: 'https://flagcdn.com/br.svg' },
-]
-
-export const localeToCurrency: Record<string, string> = {
-    'en': 'USD', 'es': 'EUR', 'fr': 'EUR', 'de': 'EUR', 'it': 'EUR', 'ar': 'SAR', 'zh': 'CNY', 'ja': 'JPY', 'pt': 'BRL', 'ko': 'KRW', 'tr': 'TRY', 'hi': 'INR'
+interface AncillaryPrices {
+    bags: number
+    seats: number
+    insurance: number
 }
 
-const currentCurrency = ref<Currency>(currencies[0]!)
+const currencies = ref<Currency[]>([])
+const currentCurrency = ref<Currency>({ 
+    code: 'USD', 
+    symbol: '$', 
+    name: 'US Dollar', 
+    flag: 'https://flagcdn.com/us.svg',
+    rate: 1
+})
+const ancillaryPrices = ref<AncillaryPrices>({ bags: 25, seats: 15, insurance: 12 })
+const isLoading = ref(false)
+
+const flagMap: Record<string, string> = {
+    'USD': 'us', 'EUR': 'eu', 'GBP': 'gb', 'NGN': 'ng', 'CAD': 'ca',
+    'AUD': 'au', 'JPY': 'jp', 'CNY': 'cn', 'INR': 'in', 'ZAR': 'za',
+    'KES': 'ke', 'GHS': 'gh', 'AED': 'ae', 'BRL': 'br', 'MXN': 'mx',
+    'CHF': 'ch', 'SEK': 'se', 'NOK': 'no', 'DKK': 'dk', 'PLN': 'pl',
+    'SGD': 'sg', 'HKD': 'hk', 'THB': 'th', 'MYR': 'my', 'PHP': 'ph',
+    'KRW': 'kr', 'TWD': 'tw', 'TRY': 'tr', 'EGP': 'eg', 'SAR': 'sa',
+    'QAR': 'qa', 'KWD': 'kw', 'BHD': 'bh', 'OMR': 'om', 'JOD': 'jo',
+    'COP': 'co', 'ARS': 'ar', 'CLP': 'cl', 'PEN': 'pe', 'RUB': 'ru',
+    'UAH': 'ua', 'CZK': 'cz', 'HUF': 'hu', 'RON': 'ro', 'BGN': 'bg',
+    'HRK': 'hr', 'ISK': 'is', 'NZD': 'nz', 'FJD': 'fj', 'XOF': 'sn',
+    'XAF': 'cm', 'MAD': 'ma', 'TND': 'tn', 'DZD': 'dz', 'LYD': 'ly',
+    'TZS': 'tz', 'UGX': 'ug', 'RWF': 'rw', 'ETB': 'et', 'BWP': 'bw',
+    'MUR': 'mu', 'SCR': 'sc',
+}
 
 export function useSettings() {
+    const fetchSettings = async () => {
+        isLoading.value = true
+        try {
+            const configRes = await GATEWAY_ENDPOINT.get('/system-config/public')
+            const configData = configRes.data?.data || configRes.data
+
+            if (configData?.exchangeRates?.length) {
+                currencies.value = configData.exchangeRates.map((c: any) => {
+                    const code = c.currency || ''
+                    const countryCode = flagMap[code] || code.slice(0, 2).toLowerCase()
+                    return {
+                        code,
+                        name: c.name || code,
+                        symbol: c.symbol || code,
+                        rate: c.rate ?? 1,
+                        flag: `https://flagcdn.com/${countryCode}.svg`
+                    }
+                })
+            }
+
+            try {
+                const curRes = await GATEWAY_ENDPOINT.get('/currency/supported')
+                const supported = curRes.data?.data || curRes.data
+                if (Array.isArray(supported) && supported.length > 0) {
+                    const nameMap = new Map(supported.map((s: any) => [s.code || s.currency, s.name]))
+                    currencies.value.forEach(c => {
+                        const name = nameMap.get(c.code)
+                        if (name && name !== c.code) c.name = name
+                    })
+                }
+            } catch { /* fall through */ }
+
+            const saved = typeof window !== 'undefined' ? localStorage.getItem('flybeth_currency') : null
+            const found = currencies.value.find(c => c.code === (saved || 'USD'))
+            if (found) currentCurrency.value = found
+
+            if (configData?.ancillaryPrices) {
+                ancillaryPrices.value = {
+                    bags: configData.ancillaryPrices.bags ?? 25,
+                    seats: configData.ancillaryPrices.seats ?? 15,
+                    insurance: configData.ancillaryPrices.insurance ?? 12
+                }
+            }
+        } catch (error) {
+            console.error('[useSettings] Failed to load platform settings:', error)
+        } finally {
+            isLoading.value = false
+        }
+    }
+
     const setCurrency = (code: string) => {
-        const found = currencies.find(c => c.code === code)
+        const found = currencies.value.find(c => c.code === code)
         if (found) {
             currentCurrency.value = found
             if (typeof window !== 'undefined') {
@@ -42,23 +104,24 @@ export function useSettings() {
     }
 
     const formatPrice = (amount: number | string) => {
-        const num = typeof amount === 'string' ? parseFloat(amount.replace(/[^0-9.]/g, '')) : amount
-        return `${currentCurrency.value.symbol}${num.toLocaleString()}`
+        if (!amount && amount !== 0) return ''
+        const num = typeof amount === 'string' ? parseFloat(amount.replace(/[^0-9.-]/g, '')) : amount
+        if (isNaN(num)) return amount.toString()
+        const converted = num * (currentCurrency.value.rate || 1)
+        return `${currentCurrency.value.symbol}${converted.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
     }
 
-    // Initialize from localStorage
-    if (typeof window !== 'undefined') {
-        const saved = localStorage.getItem('flybeth_currency')
-        if (saved) {
-            const found = currencies.find(c => c.code === saved)
-            if (found) currentCurrency.value = found
-        }
+    if (typeof window !== 'undefined' && currencies.value.length === 0) {
+        fetchSettings()
     }
 
     return {
         currentCurrency,
         currencies,
+        ancillaryPrices,
+        isLoading,
         setCurrency,
-        formatPrice
+        formatPrice,
+        fetchSettings
     }
 }

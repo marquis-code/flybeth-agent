@@ -3,7 +3,7 @@
     <div class="flex items-center justify-between">
       <div class="space-y-1">
         <h2 class="text-2xl font-bold text-gray-900 ">Activities & Tours</h2>
-        <p class="text-[10px] text-gray-400 font-bold  ">Access global destination services and local experiences</p>
+        <p class="text-sm text-gray-400 font-bold  ">Access global destination services and local experiences</p>
       </div>
     </div>
     <div class="bg-white border border-gray-100 rounded-xl overflow-visible p-1">

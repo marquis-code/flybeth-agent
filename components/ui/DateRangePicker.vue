@@ -7,15 +7,15 @@
       :class="isOpen ? 'ring-4 ring-primary/10 border-primary' : ''"
     >
       <div class="flex items-center space-x-3 flex-1">
-        <CalendarIcon class="h-5 w-5 text-gray-400 group-hover:text-primary transition-colors" />
+        <CalendarIcon class="h-5 w-5 text-gray-800 group-hover:text-primary transition-colors" />
         <div class="flex flex-col">
-          <span class="text-[9px]    text-primary/60">Check-in — Check-out</span>
+          <span class="text-sm    text-primary/60">Check-in — Check-out</span>
           <span class="text-sm font-bold text-gray-900">
             {{ displayRange || 'Select dates' }}
           </span>
         </div>
       </div>
-      <ChevronDownIcon class="h-4 w-4 text-gray-400 transition-transform duration-300" :class="isOpen ? 'rotate-180' : ''" />
+      <ChevronDownIcon class="h-4 w-4 text-gray-800 transition-transform duration-300" :class="isOpen ? 'rotate-180' : ''" />
     </div>
 
     <Transition name="picker">
@@ -27,9 +27,9 @@
         <div class="px-8 pt-8 flex items-center justify-between border-b border-gray-100 pb-4">
           <div class="flex items-center space-x-2">
             <CalendarIcon class="h-5 w-5 text-primary" />
-            <span class="text-xs    text-gray-900">Select Travel Dates</span>
+            <span class="text-sm    text-gray-900">Select Travel Dates</span>
           </div>
-          <button @click="isOpen = false" class="p-2 hover:bg-gray-50 rounded-full transition-all text-gray-400 hover:text-gray-900">
+          <button @click="isOpen = false" class="p-2 hover:bg-gray-50 rounded-full transition-all text-gray-800 hover:text-gray-900">
             <XMarkIcon class="h-5 w-5" />
           </button>
         </div>
@@ -37,11 +37,11 @@
         <div class="p-8 lg:p-10 space-y-10">
           <!-- Calendar Header -->
           <div class="flex items-center justify-between px-4">
-            <h3 class="text-lg  text-gray-900 ">{{ formatMonthYear(currentLeftMonth) }}</h3>
-            <h3 class="text-lg  text-gray-900 ">{{ formatMonthYear(currentRightMonth) }}</h3>
+            <h3 class="text-sm  text-gray-900 ">{{ formatMonthYear(currentLeftMonth) }}</h3>
+            <h3 class="text-sm  text-gray-900 ">{{ formatMonthYear(currentRightMonth) }}</h3>
             <div class="flex items-center space-x-2">
-              <button @click="prevMonth" class="p-2 hover:bg-gray-50 rounded-xl transition-all"><ChevronLeftIcon class="h-5 w-5 text-gray-600" /></button>
-              <button @click="nextMonth" class="p-2 hover:bg-gray-50 rounded-xl transition-all"><ChevronRightIcon class="h-5 w-5 text-gray-600" /></button>
+              <button @click="prevMonth" class="p-2 hover:bg-gray-50 rounded-xl transition-all"><ChevronLeftIcon class="h-5 w-5 text-gray-800" /></button>
+              <button @click="nextMonth" class="p-2 hover:bg-gray-50 rounded-xl transition-all"><ChevronRightIcon class="h-5 w-5 text-gray-800" /></button>
             </div>
           </div>
 
@@ -50,7 +50,7 @@
             <!-- Left Month -->
             <div class="space-y-4">
               <div class="grid grid-cols-7 text-center">
-                <span v-for="d in days" :key="d" class="text-[10px]  text-gray-400 ">{{ d }}</span>
+                <span v-for="d in days" :key="d" class="text-sm  text-gray-800 ">{{ d }}</span>
               </div>
               <div class="grid grid-cols-7 gap-y-1">
                 <div v-for="empty in leftMonthData.padding" :key="'empty-'+empty" class="h-12"></div>
@@ -70,7 +70,7 @@
             <!-- Right Month -->
             <div class="space-y-4">
               <div class="grid grid-cols-7 text-center">
-                <span v-for="d in days" :key="d" class="text-[10px]  text-gray-400 ">{{ d }}</span>
+                <span v-for="d in days" :key="d" class="text-sm  text-gray-800 ">{{ d }}</span>
               </div>
               <div class="grid grid-cols-7 gap-y-1">
                 <div v-for="empty in rightMonthData.padding" :key="'empty-r-'+empty" class="h-12"></div>
@@ -93,15 +93,15 @@
             <div class="flex items-center gap-3">
               <button 
                 v-for="opt in dateOptions" :key="opt.label"
-                class="px-5 py-2.5 rounded-full border border-gray-200 text-xs    transition-all hover:border-primary hover:text-primary"
-                :class="opt.active ? 'bg-primary/5 border-primary text-primary' : 'text-gray-500'"
+                class="px-5 py-2.5 rounded-full border border-gray-200 text-sm    transition-all hover:border-primary hover:text-primary"
+                :class="opt.active ? 'bg-primary/5 border-primary text-primary' : 'text-gray-800'"
               >
                 {{ opt.label }}
               </button>
             </div>
             
             <div class="flex items-center space-x-4">
-              <button @click="clearRange" class="text-xs  text-gray-400   hover:text-gray-900 transition-colors">Clear</button>
+              <button @click="clearRange" class="text-sm  text-gray-800   hover:text-gray-900 transition-colors">Clear</button>
               <BaseButton variant="primary" size="sm" class="rounded-xl px-8" @click="isOpen = false">Apply Dates</BaseButton>
             </div>
           </div>

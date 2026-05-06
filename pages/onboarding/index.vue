@@ -6,7 +6,7 @@
       <div class="mb-16">
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
            <div class="space-y-2">
-             <h4 class="text-[11px]  text-secondary  ">Step {{ currentStep }} of 7</h4>
+             <h4 class="text-sm  text-secondary  ">Step {{ currentStep }} of 7</h4>
              <h1 class="text-4xl lg:text-5xl  text-primary-dark er">
                {{ steps[currentStep - 1]?.title }}
              </h1>
@@ -48,7 +48,7 @@
                 
                 <div class="p-6 bg-blue-50/50 rounded-2xl border border-blue-100/50 flex items-start space-x-4">
                    <InformationCircleIcon class="w-5 h-5 text-blue-500 mt-0.5" />
-                   <p class="text-xs font-medium text-blue-700 leading-relaxed">
+                   <p class="text-sm font-medium text-blue-700 leading-relaxed">
                      Your account is now ready for onboarding. Please provide the remaining details to gain full booking access.
                    </p>
                 </div>
@@ -67,7 +67,7 @@
                   <AnimatedInput v-model="form.website" label="Website / Social Media (Optional)" placeholder="https://" />
                </div>
                <div class="space-y-6">
-                 <h4 class="text-[9px]  text-secondary  ">Business Address</h4>
+                 <h4 class="text-sm  text-secondary  ">Business Address</h4>
                  <AnimatedInput v-model="form.billingAddress" label="Physical Address" required />
                </div>
             </div>
@@ -84,7 +84,7 @@
                   <div class="w-5 h-5 rounded-md border-2 border-neutral-200 flex items-center justify-center transition-colors" :class="form.whatsappNumber === form.phone ? 'bg-secondary border-secondary' : ''">
                      <CheckIcon v-if="form.whatsappNumber === form.phone" class="w-3 h-3 text-white" />
                   </div>
-                  <span class="text-xs font-bold text-neutral-500">My WhatsApp number is the same as my phone number</span>
+                  <span class="text-sm font-bold text-neutral-500">My WhatsApp number is the same as my phone number</span>
                </div>
             </div>
           </div>
@@ -165,8 +165,8 @@
                <div class="p-6 bg-neutral-50 rounded-2xl border border-neutral-100 flex items-start space-x-4">
                   <BanknotesIcon class="w-6 h-6 text-neutral-400 mt-1" />
                   <div>
-                    <h5 class="text-xs  text-primary-dark   mb-1">Payout Policy</h5>
-                    <p class="text-[10px] text-neutral-500 font-medium leading-relaxed">
+                    <h5 class="text-sm  text-primary-dark   mb-1">Payout Policy</h5>
+                    <p class="text-sm text-neutral-500 font-medium leading-relaxed">
                       All agency commissions and refunds are processed to this account. Payouts are reconciled every Tuesday and Thursday.
                     </p>
                   </div>
@@ -184,7 +184,7 @@
                     </div>
                     <div>
                        <p class="text-sm  text-primary-dark">Accept Platform Policies</p>
-                       <p class="text-xs text-neutral-400 font-medium leading-relaxed pr-4">
+                       <p class="text-sm text-neutral-400 font-medium leading-relaxed pr-4">
                          I agree to Flybeth's Terms & Conditions, Service Fees, Refund Policy, and Fraud Prevention Policy. I confirm that all provided information is accurate.
                        </p>
                     </div>
@@ -232,7 +232,7 @@
           <div class="p-10 bg-white rounded-[2.5rem] border border-neutral-100 shadow-sm relative overflow-hidden">
              <div class="absolute top-0 right-0 w-32 h-32 bg-secondary/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2"></div>
              
-             <h4 class="text-[9px]  text-secondary   mb-8">Agent Assistant</h4>
+             <h4 class="text-sm  text-secondary   mb-8">Agent Assistant</h4>
              <div class="space-y-8">
                 <div class="flex items-start space-x-4">
                    <div class="w-10 h-10 bg-primary/5 rounded-2xl flex items-center justify-center text-primary shrink-0">
@@ -240,12 +240,12 @@
                    </div>
                    <div>
                       <h5 class="text-sm  text-primary-dark mb-1">Need help?</h5>
-                      <p class="text-xs text-neutral-500 font-medium leading-relaxed">{{ assistantTip }}</p>
+                      <p class="text-sm text-neutral-500 font-medium leading-relaxed">{{ assistantTip }}</p>
                    </div>
                 </div>
                 
                 <div class="pt-8 border-t border-neutral-50">
-                   <p class="text-[10px]  text-neutral-300   mb-4">Your Progress</p>
+                   <p class="text-sm  text-neutral-300   mb-4">Your Progress</p>
                    <div class="space-y-4">
                       <div v-for="(s, idx) in steps" :key="idx" class="flex items-center space-x-3">
                          <div class="w-5 h-5 rounded-full flex items-center justify-center border-2 transition-all duration-500"
@@ -255,7 +255,7 @@
                            ]">
                             <CheckIcon v-if="idx + 1 < currentStep" class="w-3 h-3 text-white" />
                          </div>
-                         <span class="text-[11px] font-bold transition-colors"
+                         <span class="text-sm font-bold transition-colors"
                            :class="idx + 1 === currentStep ? 'text-primary-dark' : 'text-neutral-300'">
                            {{ s.title }}
                          </span>
@@ -270,10 +270,10 @@
                 <LockClosedIcon class="w-6 h-6 text-secondary" />
              </div>
              <h4 class="text-xl  ">Trusted & Secure.</h4>
-             <p class="text-white/50 text-xs font-medium leading-relaxed">
+             <p class="text-white/50 text-sm font-medium leading-relaxed">
                Flybeth uses advanced encryption to protect your agency's data. We are PCI-DSS compliant and adhere to GDPR standards.
              </p>
-             <button class="text-[11px]  text-secondary   hover:underline">View security whitepaper</button>
+             <button class="text-sm  text-secondary   hover:underline">View security whitepaper</button>
           </div>
         </div>
       </div>

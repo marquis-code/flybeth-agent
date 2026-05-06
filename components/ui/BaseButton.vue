@@ -51,15 +51,15 @@ const props = defineProps({
 const variantClasses = computed(() => {
   switch (props.variant) {
     case 'primary':
-      return 'bg-primary-dark text-white hover:bg-neutral-800 focus:ring-primary-dark/20'
+      return 'bg-primary text-white hover:bg-primary-dark shadow-xl shadow-primary/10'
     case 'secondary':
-      return 'bg-secondary text-white hover:brightness-110 focus:ring-secondary/20'
+      return 'bg-secondary text-white hover:bg-secondary-dark shadow-xl shadow-secondary/10'
     case 'outline':
-      return 'border border-neutral-200 text-primary-dark bg-white hover:border-primary-dark hover:bg-neutral-50 focus:ring-primary-dark/10'
+      return 'border border-neutral-200 text-neutral-600 bg-white hover:border-primary hover:text-primary'
     case 'ghost':
-      return 'text-neutral-600 hover:bg-neutral-50 focus:ring-neutral-100'
+      return 'text-neutral-500 hover:bg-neutral-50'
     case 'danger':
-      return 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-600/20'
+      return 'bg-red-500 text-white hover:bg-red-600 shadow-xl shadow-red-500/10'
     default:
       return ''
   }
@@ -70,15 +70,15 @@ const sizeClasses = computed(() => {
     case 'sm':
       return 'px-4 py-2 text-sm'
     case 'lg':
-      return 'px-8 py-3.5 text-xs'
+      return 'px-10 py-3.5 text-sm'
     default:
-      return 'px-6 py-2.5 text-[11px]'
+      return 'px-8 py-2.5 text-sm'
   }
 })
 
 const buttonClasses = computed(() => {
   return [
-    'inline-flex items-center justify-center font-bold rounded-xl transition-all duration-300 transform active:scale-[0.98] outline-none focus:outline-none focus:ring-2 disabled:opacity-50 disabled:cursor-not-allowed',
+    'inline-flex items-center justify-center  uppercase tracking-widest rounded-2xl transition-all duration-500 transform active:scale-[0.95] outline-none focus:outline-none focus:ring-0 disabled:opacity-50 disabled:cursor-not-allowed',
     variantClasses.value,
     sizeClasses.value,
     props.block ? 'w-full flex' : ''

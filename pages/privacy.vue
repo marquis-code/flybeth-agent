@@ -3,31 +3,31 @@
     <div class="max-w-4xl mx-auto space-y-12">
       <!-- Header -->
       <div class="space-y-4">
-        <h1 class="text-5xl lg:text-7xl  text-primary-dark er leading-tight">
+        <h1 class="text-4xl lg:text-5xl font-bold text-neutral-900 leading-tight">
           Privacy statement.
         </h1>
-        <p class="text-lg text-neutral-500 font-medium">Last updated: March 2026</p>
+        <p class="text-base text-neutral-500 font-medium">Last updated: March 2026</p>
       </div>
 
       <!-- Content -->
       <div class="prose prose-neutral max-w-none space-y-10">
         <section class="space-y-4">
-          <h2 class="text-2xl  text-primary-dark ">1. Introduction</h2>
-          <p class="text-neutral-600 leading-relaxed">
-            At Flybeth, we value the trust you place in us as an agent partner. This privacy statement explains how we collect, use, and protect your information and the data of your clients when you use the Flybeth Agent Portal. Our goal is to provide a secure and transparent experience that empowers your travel business.
+          <h2 class="text-2xl font-bold text-neutral-900">1. Introduction</h2>
+          <p class="text-neutral-600 leading-relaxed font-medium">
+            At Flybeth, we value the trust you put in us. This policy explains how we collect and protect your information and the information of your clients when you use our platform. We want to be clear and honest about how we handle your data.
           </p>
         </section>
 
         <section class="space-y-4">
-          <h2 class="text-2xl  text-primary-dark ">2. Information collection</h2>
-          <p class="text-neutral-600 leading-relaxed">
-            We collect information necessary to maintain your agency profile and facilitate bookings. This includes:
+          <h2 class="text-2xl font-bold text-neutral-900">2. Information we collect</h2>
+          <p class="text-neutral-600 leading-relaxed font-medium">
+            We only collect the information we need to manage your account and book travel. This includes:
           </p>
-          <ul class="list-disc pl-6 space-y-2 text-neutral-600">
-            <li><strong>Agency details</strong>: Name, registration numbers, and classification.</li>
-            <li><strong>Contact information</strong>: Names, email addresses, and phone numbers of agents.</li>
-            <li><strong>Transactional data</strong>: Booking records, payment history, and commission data.</li>
-            <li><strong>Client information</strong>: Names and travel preferences strictly for fulfillment purposes.</li>
+          <ul class="list-disc pl-6 space-y-2 text-neutral-600 font-medium">
+            <li><strong>Agency info</strong>: Name and registration details.</li>
+            <li><strong>Contact info</strong>: Names, emails, and phone numbers.</li>
+            <li><strong>Booking info</strong>: Records of what you booked and your payments.</li>
+            <li><strong>Client info</strong>: Travel details purely for making bookings.</li>
           </ul>
         </section>
 
@@ -45,9 +45,9 @@
         </section>
 
         <section class="space-y-4">
-          <h2 class="text-2xl  text-primary-dark ">4. Data security</h2>
-          <p class="text-neutral-600 leading-relaxed">
-            We employ bank-grade encryption and multi-tiered security protocols to safeguard all information transmitted through our network. Access to sensitive data is strictly controlled and audited to ensure compliance with global data protection standards (such as GDPR and NDPR).
+          <h2 class="text-2xl font-bold text-neutral-900">4. Data security</h2>
+          <p class="text-neutral-600 leading-relaxed font-medium">
+            We use high-level encryption and security measures to keep all your information safe. Access to important data is strictly controlled to ensure we follow international privacy standards.
           </p>
         </section>
 
@@ -59,9 +59,9 @@
         </section>
 
         <section class="space-y-4">
-          <h2 class="text-2xl  text-primary-dark ">6. Contact us</h2>
-          <p class="text-neutral-600 leading-relaxed">
-            If you have any questions regarding this privacy statement, please reach out to your regional node manager or contact our compliance team at <a href="mailto:privacy@flybeth.com" class="text-secondary font-bold hover:underline">privacy@flybeth.com</a>.
+          <h2 class="text-2xl font-bold text-neutral-900">6. Contact us</h2>
+          <p class="text-neutral-600 leading-relaxed font-medium">
+            If you have any questions about this policy, please reach out to us at <a href="mailto:privacy@flybeth.com" class="text-primary font-bold hover:underline">privacy@flybeth.com</a>.
           </p>
         </section>
       </div>

@@ -4,17 +4,17 @@
          :class="[disabled ? 'opacity-50 cursor-not-allowed' : '', errorClass]">
       
       <!-- Always show top floating label -->
-      <label class="absolute transition-all duration-300 ease-in-out pointer-events-none z-10 text-[9px]    text-primary left-5 top-2.5">
+      <label class="absolute transition-all duration-300 ease-in-out pointer-events-none z-10 text-sm    text-primary left-5 top-2.5">
         {{ label }}
       </label>
 
       <!-- Country Selector Dropdown -->
       <div class="relative h-full flex items-center border-r border-gray-100 mt-5 mb-1 pl-4 pr-2 cursor-pointer group hover:bg-neutral-50 transition-colors rounded-l-xl" @click="showDropdown = !showDropdown">
-        <span class="text-sm font-bold text-gray-700 mr-2 flex items-center space-x-2">
-            <span class="text-base">{{ selectedCountry?.flag || '🇳🇬' }}</span> 
+        <span class="text-sm font-bold text-gray-800 mr-2 flex items-center space-x-2">
+            <span class="text-sm">{{ selectedCountry?.flag || '🇳🇬' }}</span> 
             <span>{{ selectedCountry?.dialCode || '+234' }}</span>
         </span>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 text-gray-400 group-hover:text-primary transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 text-gray-800 group-hover:text-primary transition-colors">
           <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
         </svg>
       </div>
@@ -29,9 +29,9 @@
             :class="selectedCountry?.code === country.code ? 'bg-secondary/5 border-l-2 border-secondary' : 'border-l-2 border-transparent'"
             @click="selectCountry(country)"
           >
-            <span class="text-xl shrink-0">{{ country.flag }}</span>
+            <span class="text-sm shrink-0">{{ country.flag }}</span>
             <span class="text-sm font-bold text-primary-dark w-12">{{ country.dialCode }}</span>
-            <span class="text-xs text-gray-500 font-medium truncate">{{ country.name }}</span>
+            <span class="text-sm text-gray-800 font-medium truncate">{{ country.name }}</span>
           </div>
         </div>
       </Transition>
@@ -50,7 +50,7 @@
       />
     </div>
     
-    <p v-if="hasError && errorMessage" class="text-xs text-red-500 mt-1 ml-3 font-bold">
+    <p v-if="hasError && errorMessage" class="text-sm text-red-500 mt-1 ml-3 font-bold">
       {{ errorMessage }}
     </p>
   </div>
@@ -172,8 +172,24 @@ const handleClickOutside = (e: MouseEvent) => {
   }
 }
 
-onMounted(() => {
+onMounted(async () => {
   document.addEventListener('click', handleClickOutside)
+
+  // Auto-detect location if no value set
+  if (!props.modelValue) {
+    try {
+      const { data } = await axios.get('https://ipapi.co/json/')
+      if (data && data.country_code) {
+        const match = countries.find(c => c.code === data.country_code)
+        if (match) {
+           selectedCountry.value = match
+           emitUpdate()
+        }
+      }
+    } catch (e) {
+      console.warn('Geolocation failed', e)
+    }
+  }
 })
 
 onUnmounted(() => {

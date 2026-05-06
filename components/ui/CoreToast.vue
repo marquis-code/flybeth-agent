@@ -1,6 +1,6 @@
 <template>
   <Teleport to="body">
-    <div class="fixed bottom-32 left-1/2 transform -translate-x-1/2 z-[9999] flex flex-col-reverse gap-3 max-w-sm w-full items-center px-4">
+    <div class="fixed top-24 right-6 z-[99999999] flex flex-col gap-3 max-w-sm w-full items-end px-4">
       <TransitionGroup name="toast">
         <div
           v-for="toast in toasts"
@@ -120,12 +120,12 @@ defineExpose({
 }
 
 .toast-enter-from {
-  transform: translateY(100%);
+  transform: translateX(100%);
   opacity: 0;
 }
 
 .toast-leave-to {
-  transform: translateY(100%);
+  transform: translateX(100%);
   opacity: 0;
 }
 

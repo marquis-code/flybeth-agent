@@ -3,14 +3,15 @@
     <!-- Trigger Field -->
     <div
       @click="openPicker"
-      class="w-full px-4 pt-3 pb-2 cursor-pointer min-h-[68px] flex flex-col justify-center group select-none"
+      class="w-full cursor-pointer flex flex-col justify-center select-none"
+      :class="displayVariant === 'minimal' ? 'min-h-0 px-0 pt-0 pb-0' : 'px-4 pt-3 pb-2 min-h-[68px]'"
     >
-      <p class="text-[11px]  text-neutral-400   mb-0.5 group-hover:text-gray-900 transition-colors">
+      <p v-if="label && displayVariant !== 'minimal'" class="text-sm font-bold text-neutral-400 mb-0.5 group-hover:text-gray-900 transition-colors uppercase tracking-widest leading-none">
         {{ label }}
       </p>
       <div class="flex items-center gap-2">
-        <UserGroupIcon class="h-5 w-5 text-gray-400 shrink-0" />
-        <span class="text-base  text-gray-900">{{ summary }}</span>
+        <Users v-if="displayVariant !== 'minimal'" class="h-3.5 w-3.5 text-gray-800 shrink-0" />
+        <span class="text-sm font-bold text-gray-900 tracking-tight">{{ summary }}</span>
       </div>
     </div>
 
@@ -33,7 +34,7 @@
           :style="panelStyle"
           class="fixed z-[10011] bg-white rounded-2xl shadow-[0_8px_48px_rgba(0,0,0,0.2)] border border-gray-100 overflow-hidden"
           :class="[
-            isMobile ? 'inset-x-4 top-1/2 -translate-y-1/2 w-auto' : 'w-[360px]'
+            isMobile ? 'inset-x-4 top-1/2 -translate-y-1/2 w-auto' : 'w-[320px]'
           ]"
           @click.stop
         >
@@ -45,42 +46,42 @@
               class="flex items-center justify-between"
             >
               <div>
-                <p class="text-base font-bold text-gray-800">{{ row.label }}</p>
-                <p v-if="row.note" class="text-xs text-neutral-400">{{ row.note }}</p>
+                <p class="text-[13px]  text-gray-900 uppercase tracking-widest">{{ row.label }}</p>
+                <p v-if="row.note" class="text-sm text-neutral-400 font-bold uppercase">{{ row.note }}</p>
               </div>
-              <div class="flex items-center gap-4">
-                <button
+              <div class="flex items-center gap-3">
+                 <button
                   @click="decrement(row.key)"
                   :disabled="local[row.key as keyof typeof local] <= row.min"
-                  class="h-9 w-9 rounded-full border-2 flex items-center justify-center text-lg font-bold transition-all"
+                  class="h-8 w-8 rounded-lg border flex items-center justify-center text-sm font-bold transition-all"
                   :class="local[row.key as keyof typeof local] <= row.min
-                    ? 'border-gray-200 text-gray-300 cursor-not-allowed'
-                    : 'border-secondary text-secondary hover:bg-secondary/5'"
+                    ? 'border-gray-100 text-gray-600 cursor-not-allowed'
+                    : 'border-gray-200 text-gray-900 hover:bg-gray-50 active:scale-95'"
                 >
                   −
                 </button>
-                <span class="w-5 text-center text-base font-bold text-gray-800">{{ (local as any)[row.key] }}</span>
+                <span class="w-4 text-center text-sm  text-gray-900">{{ (local as any)[row.key] }}</span>
                 <button
                   @click="increment(row.key)"
                   :disabled="local[row.key as keyof typeof local] >= row.max"
-                  class="h-9 w-9 rounded-full border-2 flex items-center justify-center text-lg font-bold transition-all"
+                  class="h-8 w-8 rounded-lg border flex items-center justify-center text-sm font-bold transition-all"
                   :class="local[row.key as keyof typeof local] >= row.max
-                    ? 'border-gray-200 text-gray-300 cursor-not-allowed'
-                    : 'border-primary-dark text-primary-dark hover:bg-gray-100'"
+                    ? 'border-gray-100 text-gray-600 cursor-not-allowed'
+                    : 'border-gray-200 text-gray-900 hover:bg-gray-50 active:scale-95'"
                 >
                   +
                 </button>
               </div>
             </div>
 
-            <p v-if="showChildNote" class="text-xs text-neutral-400 leading-relaxed -mt-2">
+            <p v-if="showChildNote" class="text-sm text-neutral-400 leading-relaxed -mt-2">
               Add your child's age at check-in for the best deals and assistance.
             </p>
 
             <!-- Done Button -->
             <button
               @click="done"
-              class="w-full bg-primary-dark text-white py-3 rounded-xl font-bold   text-xs hover:bg-black transition-colors"
+              class="w-full bg-primary-dark text-white py-3 rounded-xl font-bold   text-sm hover:bg-black transition-colors"
             >
               Confirm
             </button>
@@ -93,7 +94,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, onUnmounted, reactive } from 'vue'
-import { UserGroupIcon } from '@heroicons/vue/24/outline'
+import { Users } from 'lucide-vue-next'
 
 const props = defineProps({
   label:    { type: String,  default: 'Guests & Rooms' },
@@ -103,6 +104,7 @@ const props = defineProps({
   variant:  { type: String,  default: 'hotel' },
   infantsOnLap:  { type: Number, default: 0 },
   infantsInSeat: { type: Number, default: 0 },
+  displayVariant: { type: String, default: '' },
 })
 
 const emit = defineEmits([

@@ -3,14 +3,16 @@
     <section class="py-24 bg-white relative">
       <div class="max-w-4xl mx-auto px-6 lg:px-10 space-y-12">
         <div class="space-y-6">
-          <h2 class="text-xs  text-secondary  ">Enterprise security</h2>
-          <h1 class="text-5xl lg:text-7xl  text-primary-dark er leading-tight">
-            The Flybeth <br />
-            <span class="text-primary ">security matrix.</span>
+        <div class="space-y-6">
+          <span class="text-xs font-bold text-primary uppercase tracking-widest">Enterprise Protection</span>
+          <h1 class="text-4xl lg:text-5xl font-bold text-neutral-900 leading-tight">
+            Our commitment to <br />
+            <span class="text-primary">your security.</span>
           </h1>
-          <p class="text-xl text-neutral-500 font-medium leading-relaxed">
-            Our platform is engineered for the highest level of institutional trust. We employ a multi-layered security architecture to protect agency data and traveler privacy.
+          <p class="text-lg text-neutral-500 font-medium leading-relaxed max-w-2xl">
+            Flybeth is built with your safety in mind. We use multiple layers of protection to keep your agency data and your travelers' information safe.
           </p>
+        </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-10">
@@ -23,21 +25,21 @@
           </div>
         </div>
 
-        <div class="bg-primary-dark rounded-[3rem] p-10 lg:p-14 text-white space-y-8 relative overflow-hidden">
+        <div class="bg-neutral-900 rounded-3xl p-10 lg:p-14 text-white space-y-8 relative overflow-hidden">
            <div class="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-           <h3 class="text-3xl ">Bank-grade encryption</h3>
+           <h3 class="text-3xl font-bold">Bank-grade protection</h3>
            <p class="text-white/70 text-lg font-medium leading-relaxed">
-             Every API request and database entry is protected by 256-bit AES encryption. Our nodes are hosted in Tier-IV data centers with 24/7 physical and digital monitoring.
+             Every request and piece of data is protected by the same encryption used by major banks. Our systems are monitored 24/7 to ensure everything runs smoothly and safely.
            </p>
            <div class="flex items-center space-x-6">
               <div class="flex flex-col">
                  <span class="text-2xl ">99.99%</span>
-                 <span class="text-xs  text-secondary  ">Uptime SLA</span>
+                 <span class="text-sm  text-secondary  ">Uptime SLA</span>
               </div>
               <div class="w-px h-10 bg-white/20"></div>
               <div class="flex flex-col">
                  <span class="text-2xl ">ISO 27001</span>
-                 <span class="text-xs  text-secondary  ">Compliance</span>
+                 <span class="text-sm  text-secondary  ">Compliance</span>
               </div>
            </div>
         </div>
@@ -56,23 +58,23 @@ import {
 
 const securityFeatures = [
   {
-    title: 'Multi-factor node access',
-    description: 'Every agent login is validated through biometric or hardware-token multi-factor authentication.',
+    title: 'Two-Layer Login',
+    description: 'Every account is protected by two-factor authentication to ensure only you can access your dashboard.',
     icon: LockClosedIcon
   },
   {
-    title: 'Fraud detection matrix',
-    description: 'Real-time AI monitoring of booking patterns to identify and neutralize fraudulent transactions.',
+    title: 'Smart Fraud Filter',
+    description: 'Our system constantly monitors bookings to catch and stop any suspicious or fraudulent activity immediately.',
     icon: ShieldCheckIcon
   },
   {
-    title: 'Data sovereignty',
-    description: 'Complete control over your agency data with regional hosting options and strict data residency compliance.',
+    title: 'Data Privacy',
+    description: 'You have full control over your data. We follow strict international rules to ensure your information stays private.',
     icon: KeyIcon
   },
   {
-    title: 'Encrypted GDS streams',
-    description: 'Direct, isolated TLS-encrypted tunnels for all communication with Amadeus and Sabre clusters.',
+    title: 'Secure Connections',
+    description: 'All communication between your computer and our systems is encrypted, keeping your information private.',
     icon: SignalIcon
   }
 ]

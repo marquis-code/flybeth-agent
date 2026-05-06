@@ -10,7 +10,7 @@
         </div>
 
         <div class="relative z-10 space-y-8">
-          <h2 class="text-5xl font-black text-primary-dark leading-tight">
+          <h2 class="text-5xl  text-primary-dark leading-tight">
             Manage your <br />
             travel empire <br />
             with <span class="text-secondary">precision.</span>
@@ -22,9 +22,9 @@
 
         <div class="relative z-10 pt-12 border-t border-neutral-200/50">
           <div class="flex flex-wrap items-center gap-6 opacity-40 grayscale group-hover:opacity-100 transition-all duration-1000">
-             <span class="text-xl font-black">Trusted</span>
-             <span class="text-xl font-black">Reliable</span>
-             <span class="text-xl font-black">v1.0</span>
+             <span class="text-xl ">Trusted</span>
+             <span class="text-xl ">Reliable</span>
+             <span class="text-xl ">v1.0</span>
           </div>
         </div>
       </div>
@@ -74,10 +74,10 @@
 
               <div class="relative py-4">
                 <div class="absolute inset-0 flex items-center">
-                  <div class="w-full border-t border-neutral-100"></div>
+                  <div class="w-full border-t border-neutral-200"></div>
                 </div>
                 <div class="relative flex justify-center text-sm  ">
-                  <span class="px-4 bg-white text-neutral-200">New agency?</span>
+                  <span class="px-4 bg-white text-neutral-500">New agency?</span>
                 </div>
               </div>
 

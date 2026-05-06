@@ -62,12 +62,12 @@
             <div class="flex-1 border-b border-[#f2f2f2] pb-3 pt-1">
                <div class="flex justify-between items-center mb-0.5">
                  <h3 class="text-[17px] font-normal text-[#111b21] truncate">{{ room.name || 'Client' }}</h3>
-                 <span class="text-[12px] text-[#667781] whitespace-nowrap">{{ formatRoomTime(room.updatedAt || room.createdAt) }}</span>
+                 <span class="text-sm text-[#667781] whitespace-nowrap">{{ formatRoomTime(room.updatedAt || room.createdAt) }}</span>
                </div>
                <div class="flex justify-between items-center">
                  <p class="text-[14px] text-[#667781] truncate pr-4 max-w-[200px]">{{ parseLastMessage(room.lastMessage) }}</p>
                  <!-- Unread indicator example -->
-                 <div v-if="room.unread" class="h-5 min-w-[20px] rounded-full bg-[#25d366] flex items-center justify-center text-white text-[11px] font-bold px-1.5">
+                 <div v-if="room.unread" class="h-5 min-w-[20px] rounded-full bg-[#25d366] flex items-center justify-center text-white text-sm font-bold px-1.5">
                    {{ room.unread }}
                  </div>
                </div>
@@ -97,7 +97,7 @@
             </div>
             <div>
               <h2 class="text-[16px] text-[#111b21] mb-0.5">{{ activeRoom.name || 'Client' }}</h2>
-              <p class="text-[13px] text-[#667781] leading-none">online</p>
+              <p class="text-sm text-[#667781] leading-none">online</p>
             </div>
           </div>
           <div class="flex items-center space-x-2 text-[#54656f]">
@@ -132,7 +132,7 @@
                >
                  <span class="block pr-12">{{ msg.content }}</span>
                  <div class="absolute bottom-1 right-1.5 flex items-center space-x-1">
-                   <span class="text-[11px] text-[#667781]">{{ formatTime(msg.createdAt || msg.time) }}</span>
+                   <span class="text-sm text-[#667781]">{{ formatTime(msg.createdAt || msg.time) }}</span>
                    <CheckIcon v-if="isMyMessage(msg)" class="h-3.5 w-3.5 text-[#53bdeb]" stroke-width="3" />
                  </div>
                </div>
@@ -174,7 +174,7 @@
            Send and receive messages without keeping your phone online.<br/>
            Use this terminal on multiple devices to support travelers effortlessly.
          </p>
-         <div class="mt-8 flex items-center justify-center text-[12px] text-[#8696a0] space-x-1">
+         <div class="mt-8 flex items-center justify-center text-sm text-[#8696a0] space-x-1">
             <LockClosedIcon class="h-3 w-3" />
             <span>End-to-end encrypted support line</span>
          </div>

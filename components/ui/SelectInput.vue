@@ -6,7 +6,7 @@
           :for="inputId"
           :class="[
             'absolute transition-all duration-300 ease-in-out pointer-events-none z-10',
-            isFocused || modelValue ? 'text-xs text-gray-500 left-3 top-2' : 'text-base text-gray-500 left-3 top-1/2 transform -translate-y-1/2'
+            isFocused || modelValue ? 'text-sm uppercase font-semibold text-gray-800 left-3 top-2 tracking-widest' : 'text-sm font-bold text-gray-800 left-3 top-[1.1rem]'
           ]"
         >
           {{ label }}
@@ -16,14 +16,14 @@
         <div
           @click="toggleDropdown"
           :class="[
-            'w-full py-4 pt-6 px-3 bg-gray-50 border border-gray-200 flex justify-between items-center cursor-pointer',
-            'focus:outline-none focus:ring-1 focus:ring-[#033958] focus:border-[#033958] transition-all duration-300',
+            'w-full py-2.5 pt-5 px-3 bg-gray-50 border border-gray-300 flex justify-between items-center cursor-pointer',
+            'focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all duration-300',
             roundedClasses,
             disabled ? 'opacity-50 cursor-not-allowed' : '',
-            (hasError || (errorMessage && showError)) ? 'ring-1 ring-red-500 border-red-500' : ''
+            (hasError || (errorMessage && showError)) ? 'ring-1 ring-red-500 border-red-500' : 'hover:bg-gray-100/50'
           ]"
         >
-          <span class="text-gray-900">
+          <span class="text-sm font-bold text-gray-900 truncate">
             <!-- Custom selected label slot -->
             <slot 
               v-if="slots['selected-label'] && selectedOption" 
@@ -35,32 +35,18 @@
               {{ selectedLabel }}
             </template>
           </span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-4 h-4 transition-transform duration-200"
-            :class="{ 'transform rotate-180': showDropdown }"
-            fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path d="M6 9l6 6 6-6"/>
-          </svg>
+          <ChevronDown class="w-4 h-4 transition-transform duration-200" :class="{ 'transform rotate-180': showDropdown }" />
         </div>
   
         <!-- Dropdown -->
         <div
           v-if="showDropdown"
-          class="absolute z-20 mt-1 w-full bg-white shadow-xl rounded-md overflow-hidden"
+          class="absolute z-[100] mt-1 w-full bg-white shadow-xl rounded-md overflow-hidden min-w-[200px]"
         >
           <!-- Search Input -->
           <div class="p-2 border-b-[0.5px] border-gray-50 sticky top-0 bg-white">
             <div class="relative">
-              <svg 
-                class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-              >
-                <circle cx="11" cy="11" r="8"/>
-                <path d="m21 21-4.35-4.35"/>
-              </svg>
+              <Search class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-800" />
               <input
                 ref="searchInputRef"
                 v-model="searchQuery"
@@ -78,7 +64,7 @@
               v-for="(option, index) in filteredOptions"
               :key="index"
               @click="selectOption(option)"
-              class="p-3 font-semibold hover:bg-gray-50 rounded-xl cursor-pointer transition-all text-sm text-gray-700 flex items-center justify-between group"
+              class="p-2.5 font-bold hover:bg-primary/5 rounded-lg cursor-pointer transition-all text-sm text-gray-800 flex items-center justify-between group"
             >
               <!-- Custom option slot -->
               <div class="flex-1">
@@ -88,13 +74,13 @@
                   {{ getLabel(option) }}
                 </template>
               </div>
-              <Icon v-if="getValue(option) === modelValue" name="lucide:check" class="w-4 h-4 text-[#033958]" />
+              <Check v-if="getValue(option) === modelValue" class="w-4 h-4 text-[#033958]" />
             </div>
             
             <!-- No results message -->
             <div 
               v-if="filteredOptions.length === 0" 
-              class="p-4 text-center text-sm text-gray-500"
+              class="p-4 text-center text-sm text-gray-800"
             >
               No results found for "{{ searchQuery }}"
             </div>
@@ -104,12 +90,7 @@
   
       <!-- Error message -->
       <div v-if="errorMessage && showError" class="mt-2 flex items-center text-red-600 text-sm">
-        <svg class="mr-2 w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
-             viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"/>
-          <line x1="12" x2="12" y1="8" y2="12"/>
-          <line x1="12" x2="12.01" y1="16" y2="16"/>
-        </svg>
+        <AlertCircle class="mr-2 w-4 h-4" />
         {{ errorMessage }}
       </div>
     </div>
@@ -117,6 +98,7 @@
   
   <script setup lang="ts">
   import { ref, computed, useId, onMounted, onUnmounted, nextTick } from 'vue'
+  import { Check, ChevronDown, Search, AlertCircle } from 'lucide-vue-next'
   
   // Props
   interface Props {

@@ -40,11 +40,27 @@ export const useBookings = () => {
         }
     };
 
+    const createBooking = async (payload: any) => {
+        loading.value = true;
+        try {
+            const res = await bookingsApiFactory.createBooking(payload);
+            if (res.status === 200 || res.status === 201) {
+                return res.data;
+            }
+        } catch (error: any) {
+            console.error(error);
+            throw error;
+        } finally {
+            loading.value = false;
+        }
+    };
+
     return {
         loading,
         bookings,
         stats,
         fetchBookings,
         fetchStats,
+        createBooking,
     };
 };

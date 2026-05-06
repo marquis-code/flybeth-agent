@@ -1,7 +1,7 @@
 <template>
   <div class="space-y-4">
     <div class="flex flex-wrap gap-2 p-3 bg-gray-50 border border-gray-100 rounded-2xl min-h-[56px] transition-all focus-within:bg-white focus-within:border-primary">
-      <div v-for="(tag, index) in modelValue" :key="index" class="flex items-center gap-2 px-3 py-1.5 bg-white border border-gray-200 rounded-xl shadow-sm text-[10px] font-black uppercase text-gray-700">
+      <div v-for="(tag, index) in modelValue" :key="index" class="flex items-center gap-2 px-3 py-1.5 bg-white border border-gray-200 rounded-xl shadow-sm text-sm  uppercase text-gray-800">
         <span>{{ tag }}</span>
         <button @click="removeTag(index)" class="hover:text-rose-500 transition-colors">
           <XMarkIcon class="h-3.5 w-3.5" />
@@ -14,10 +14,10 @@
         @keydown.space.prevent="addTag"
         @blur="addTag"
         :placeholder="modelValue.length === 0 ? placeholder : ''"
-        class="flex-grow bg-transparent border-none outline-none text-[11px] font-bold text-gray-900 min-w-[150px] placeholder:text-gray-300"
+        class="flex-grow bg-transparent border-none outline-none text-sm font-bold text-gray-900 min-w-[150px] placeholder:text-gray-800"
       />
     </div>
-    <p class="text-[9px] text-gray-400 font-bold uppercase tracking-widest px-2">Press enter, comma, or space to add address</p>
+    <p class="text-sm text-gray-800 font-bold uppercase tracking-widest px-2">Press enter, comma, or space to add address</p>
   </div>
 </template>
 

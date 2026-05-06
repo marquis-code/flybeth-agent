@@ -28,10 +28,46 @@ export const useFinance = () => {
         }
     };
 
+    const walletBalance = ref(0);
+    const transactions = ref([]);
+
+    const fetchWalletData = async () => {
+        try {
+            const [balRes, transRes] = await Promise.all([
+                GATEWAY_ENDPOINT_WITH_AUTH.get("/finance/wallet/balance"),
+                GATEWAY_ENDPOINT_WITH_AUTH.get("/finance/wallet/transactions")
+            ]);
+            walletBalance.value = balRes.data || 0;
+            transactions.value = transRes.data || [];
+        } catch (e) {
+            console.error("Failed to fetch wallet data");
+        }
+    };
+
+    const initializeTopUp = async (amount: number, currency: string) => {
+        try {
+            const res = await GATEWAY_ENDPOINT_WITH_AUTH.post("/payments/wallet/topup", {
+                amount,
+                currency,
+                callbackUrl: window.location.href
+            });
+            if (res.data?.url) {
+                window.location.href = res.data.url;
+            }
+        } catch (e) {
+            console.error("Failed to initialize top-up");
+            throw e;
+        }
+    };
+
     return {
         invoices,
         stats,
+        walletBalance,
+        transactions,
         loading,
-        fetchFinanceData
+        fetchFinanceData,
+        fetchWalletData,
+        initializeTopUp
     };
 };

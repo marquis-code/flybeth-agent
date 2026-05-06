@@ -39,7 +39,7 @@
               </div>
               <div>
                  <h4 class="text-sm  text-primary-dark">Keep an eye on your inbox</h4>
-                 <p class="text-[13px] text-neutral-400 mt-1 leading-relaxed">
+                 <p class="text-sm text-neutral-400 mt-1 leading-relaxed">
                    Flybeth is currently in an exclusive preview phase. We will reach out personally via email the absolute moment we launch!
                  </p>
               </div>
@@ -50,7 +50,7 @@
           <BaseButton type="button" variant="primary" size="lg" class="w-full !rounded-2xl" @click="navigateTo('/')">
              Return to Homepage
           </BaseButton>
-          <a href="mailto:support@flybeth.com" class="block text-xs font-bold text-neutral-400 hover:text-secondary transition-colors   mt-6">
+          <a href="mailto:support@flybeth.com" class="block text-sm font-bold text-neutral-400 hover:text-secondary transition-colors   mt-6">
             Contact Support
           </a>
         </div>

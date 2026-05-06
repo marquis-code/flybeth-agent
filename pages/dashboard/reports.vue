@@ -4,15 +4,15 @@
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2">
       <div class="space-y-0.5">
         <h2 class="text-2xl font-bold text-gray-900 ">Reports & Analytics</h2>
-        <p class="text-[10px] text-gray-400 font-bold  ">See how your business is growing over time</p>
+        <p class="text-sm text-gray-400 font-bold  ">See how your business is growing over time</p>
       </div>
       <div class="flex items-center gap-2">
-        <select v-model="days" class="px-3 py-2 bg-white border border-gray-200 rounded-lg text-xs font-bold text-gray-600 outline-none" @change="fetchAllAnalytics(days)">
+        <select v-model="days" class="px-3 py-2 bg-white border border-gray-200 rounded-lg text-sm font-bold text-gray-600 outline-none" @change="fetchAllAnalytics(days)">
           <option :value="7">Last 7 Days</option>
           <option :value="30">Last 30 Days</option>
           <option :value="90">Last 90 Days</option>
         </select>
-        <button class="px-4 py-2 bg-primary-dark text-white rounded-lg text-xs font-bold hover:bg-black transition-colors" @click="fetchAllAnalytics(days)">
+        <button class="px-4 py-2 bg-primary-dark text-white rounded-lg text-sm font-bold hover:bg-black transition-colors" @click="fetchAllAnalytics(days)">
           Refresh
         </button>
       </div>
@@ -24,9 +24,9 @@
          <div class="absolute -right-4 -top-4 opacity-5 rotate-12 transition-transform group-hover:scale-110">
             <component :is="stat.icon" class="h-20 w-20" />
          </div>
-         <p class="text-[10px] font-bold text-gray-400   mb-1">{{ stat.label }}</p>
+         <p class="text-sm font-bold text-gray-400   mb-1">{{ stat.label }}</p>
          <h4 class="text-2xl font-bold text-gray-900">{{ stat.value }}</h4>
-         <div v-if="stat.trend" class="mt-3 flex items-center text-[10px] font-bold" :class="stat.trend > 0 ? 'text-emerald-500' : 'text-rose-500'">
+         <div v-if="stat.trend" class="mt-3 flex items-center text-sm font-bold" :class="stat.trend > 0 ? 'text-emerald-500' : 'text-rose-500'">
             {{ stat.trend > 0 ? '▲' : '▼' }} {{ Math.abs(stat.trend) }}% since last time
          </div>
       </div>
@@ -35,23 +35,23 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <!-- Popular Routes -->
       <div class="space-y-4">
-         <h3 class="text-xs font-bold text-gray-400   px-1">Most Popular Trips</h3>
+         <h3 class="text-sm font-bold text-gray-400   px-1">Most Popular Trips</h3>
          <div class="bg-white border border-gray-100 rounded-xl overflow-hidden">
             <table class="w-full text-left">
                <thead>
                   <tr class="bg-gray-50/50 border-b border-gray-100">
-                     <th class="px-5 py-3 text-[9px] font-bold   text-gray-400">Where to</th>
-                     <th class="px-5 py-3 text-[9px] font-bold   text-gray-400">Total Bookings</th>
-                     <th class="px-5 py-3 text-[9px] font-bold   text-gray-400 text-right">Money Made</th>
+                     <th class="px-5 py-3 text-sm font-bold   text-gray-400">Where to</th>
+                     <th class="px-5 py-3 text-sm font-bold   text-gray-400">Total Bookings</th>
+                     <th class="px-5 py-3 text-sm font-bold   text-gray-400 text-right">Money Made</th>
                   </tr>
                </thead>
                <tbody class="divide-y divide-gray-50">
                   <tr v-if="loading" v-for="i in 5" :key="i"><td colspan="3" class="px-5 py-3 animate-pulse bg-gray-50/20"></td></tr>
-                  <tr v-else-if="!popularRoutes.length" class="text-center py-10"><td colspan="3" class="py-10 text-[10px] text-gray-400 font-bold ">No data yet</td></tr>
+                  <tr v-else-if="!popularRoutes.length" class="text-center py-10"><td colspan="3" class="py-10 text-sm text-gray-400 font-bold ">No data yet</td></tr>
                   <tr v-for="route in popularRoutes" :key="route.id" class="hover:bg-gray-50 transition-colors">
-                     <td class="px-5 py-3 text-xs font-bold text-gray-900">{{ route.origin }} to {{ route.destination }}</td>
-                     <td class="px-5 py-3 text-xs text-gray-600">{{ route.count }} Bookings</td>
-                     <td class="px-5 py-3 text-xs font-bold text-gray-900 text-right">${{ route.revenue.toLocaleString() }}</td>
+                     <td class="px-5 py-3 text-sm font-bold text-gray-900">{{ route.origin }} to {{ route.destination }}</td>
+                     <td class="px-5 py-3 text-sm text-gray-600">{{ route.count }} Bookings</td>
+                     <td class="px-5 py-3 text-sm font-bold text-gray-900 text-right">${{ route.revenue.toLocaleString() }}</td>
                   </tr>
                </tbody>
             </table>
@@ -60,19 +60,19 @@
 
       <!-- Service Type Breakdown -->
       <div class="space-y-4">
-         <h3 class="text-xs font-bold text-gray-400   px-1">What people are booking</h3>
+         <h3 class="text-sm font-bold text-gray-400   px-1">What people are booking</h3>
          <div class="bg-white border border-gray-100 rounded-xl p-5 min-h-[200px] flex items-center justify-center">
             <div class="text-center space-y-2">
                <ChartPieIcon class="h-8 w-8 text-gray-200 mx-auto" />
-               <p class="text-[10px] text-gray-400 font-bold  ">See your top services here</p>
+               <p class="text-sm text-gray-400 font-bold  ">See your top services here</p>
                <div class="flex gap-4 mt-4">
                   <div class="flex items-center gap-2">
                      <div class="h-2 w-2 rounded-full bg-primary"></div>
-                     <span class="text-[9px] font-bold  text-gray-500">Flights</span>
+                     <span class="text-sm font-bold  text-gray-500">Flights</span>
                   </div>
                   <div class="flex items-center gap-2">
                      <div class="h-2 w-2 rounded-full bg-secondary"></div>
-                     <span class="text-[9px] font-bold  text-gray-500">Hotels</span>
+                     <span class="text-sm font-bold  text-gray-500">Hotels</span>
                   </div>
                </div>
             </div>

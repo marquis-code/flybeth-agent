@@ -1,64 +1,87 @@
 <template>
-  <div class="bg-white">
-    <section class="relative pt-24 pb-16 lg:pt-32 lg:pb-24 overflow-hidden bg-primary-dark">
-      <div class="max-w-4xl mx-auto px-6 lg:px-10 space-y-16">
-        <div class="space-y-6">
-          <h2 class="text-xs  text-secondary  ">Join the network</h2>
-          <h1 class="text-5xl lg:text-7xl  text-white er leading-tight">
-             Careers in <br />
-             <span class="text-primary ">travel tech.</span>
-          </h1>
-          <p class="text-xl text-neutral-500 font-medium leading-relaxed">
-             We are building the world's most intelligent B2B travel infrastructure. Join a remote-first team of experts, engineers, and visionaries.
-          </p>
-        </div>
+  <div class="min-h-screen bg-white font-sans text-neutral-900 overflow-x-hidden pb-32">
+    <!-- Hero -->
+    <section class="pt-10 pb-16 bg-white relative">
+      <div class="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
+      <div class="max-w-4xl mx-auto px-6 text-center relative z-10 space-y-6">
+        <span class="text-xs font-bold text-primary uppercase tracking-widest">Careers</span>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 leading-tight">
+          Join the <span class="text-primary">journey.</span>
+        </h1>
+        <p class="text-lg text-neutral-500 font-medium leading-relaxed max-w-2xl mx-auto">
+          At Flybeth, we're building the future of travel technology. We're a small but mighty team with big ambitions.
+        </p>
+      </div>
+    </section>
 
-        <!-- Open Roles -->
-        <div class="space-y-10 pt-10">
-          <h3 class="text-2xl  text-primary-dark ">Open roles</h3>
-          <div class="space-y-4">
-             <div v-for="role in roles" :key="role.title" class="group bg-neutral-50 rounded-2xl p-8 border border-neutral-100 hover:bg-white hover:border-primary/20 hover:shadow-xl transition-all duration-300 flex flex-col md:flex-row md:items-center justify-between gap-6 cursor-pointer">
-                <div class="space-y-1">
-                   <h4 class="text-xl  text-primary-dark group-hover:text-primary transition-colors">{{ role.title }}</h4>
-                   <p class="text-sm font-bold text-neutral-400  ">{{ role.location }} • {{ role.type }}</p>
-                </div>
-                <div class="flex items-center space-x-2 text-primary">
-                    <span class="text-sm    opacity-0 group-hover:opacity-100 transition-opacity">Apply now</span>
-                    <ChevronRightIcon class="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                </div>
-             </div>
+    <!-- Empty State -->
+    <section class="py-24">
+      <div class="max-w-2xl mx-auto px-6 text-center">
+        <div class="bg-neutral-50 rounded-3xl p-16 border border-neutral-100 space-y-8">
+          
+          <!-- Icon -->
+          <div class="w-24 h-24 bg-primary/10 rounded-3xl flex items-center justify-center mx-auto">
+            <BriefcaseIcon class="h-12 w-12 text-primary" />
           </div>
-        </div>
 
-        <div class="bg-neutral-50 rounded-[3rem] p-10 lg:p-14 border border-neutral-100 text-center space-y-8">
-           <h3 class="text-3xl  text-primary-dark ">Don't see a fit?</h3>
-           <p class="text-neutral-500 text-lg font-medium leading-relaxed max-w-xl mx-auto">
-             We are always looking for exceptional talent in the GDS, NDC, and travel logistics space. Send your portfolio to our recruitment node.
-           </p>
-           <a href="mailto:careers@flybeth.com" class="inline-block px-10 py-4 bg-primary text-white    rounded-2xl shadow-xl shadow-primary/20 hover:scale-105 transition-all">
-             careers@flybeth.com
-           </a>
+          <h2 class="text-2xl font-bold text-neutral-900">No open positions right now</h2>
+          
+          <p class="text-neutral-500 font-medium leading-relaxed max-w-md mx-auto">
+            We're not actively hiring at the moment, but we're always interested in hearing from talented people. Drop us a line and we'll keep your details on file for future opportunities.
+          </p>
+
+          <div class="border-t border-neutral-100 pt-8 mt-8 space-y-4">
+            <p class="text-sm font-bold text-neutral-400 uppercase tracking-widest">Stay Connected</p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a href="mailto:careers@flybeth.com" class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-xl font-bold text-sm hover:bg-primary-dark transition-all shadow-lg shadow-primary/20">
+                <EnvelopeIcon class="h-4 w-4" />
+                Send Your CV
+              </a>
+              <NuxtLink to="/contact" class="inline-flex items-center gap-2 px-6 py-3 bg-neutral-100 text-neutral-600 rounded-xl font-bold text-sm hover:bg-neutral-200 transition-all">
+                Contact Us
+              </NuxtLink>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <footer class="py-12 bg-white text-center text-sm font-medium text-neutral-400 border-t border-neutral-100">
-        © 2026 Flybeth Careers. Remote-first since Day 1.
-    </footer>
+    <!-- Why Flybeth -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-6 lg:px-10">
+        <div class="bg-neutral-900 rounded-3xl p-12 lg:p-20 flex flex-col lg:flex-row items-center gap-16 relative overflow-hidden">
+           <div class="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent"></div>
+           <div class="lg:w-1/2 relative z-10 space-y-6">
+              <h2 class="text-3xl lg:text-4xl font-bold text-white leading-tight">
+                Why people love <br />working at <span class="text-primary">Flybeth.</span>
+              </h2>
+              <ul class="space-y-4">
+                <li v-for="perk in perks" :key="perk" class="flex items-center gap-3 text-white/70 font-medium">
+                  <CheckCircleIcon class="h-5 w-5 text-primary flex-shrink-0" />
+                  {{ perk }}
+                </li>
+              </ul>
+           </div>
+           <div class="lg:w-1/2 relative z-10">
+              <div class="rounded-2xl overflow-hidden shadow-2xl h-[350px]">
+                <img src="/images/redesign/careers_team.png" alt="Flybeth Team" class="w-full h-full object-cover" />
+              </div>
+           </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ChevronRightIcon } from '@heroicons/vue/24/outline'
+import { BriefcaseIcon, EnvelopeIcon, CheckCircleIcon } from '@heroicons/vue/24/outline'
 
-const roles = [
-  { title: 'Senior B2B Engineer', location: 'Remote', type: 'Full-time' },
-  { title: 'Regional node manager (EMEA)', location: 'Lagos/Remote', type: 'Full-time' },
-  { title: 'Global inventory analyst', status: 'online', location: 'Remote', type: 'Contract' },
-  { title: 'NDC implementation specialist', location: 'Remote', type: 'Full-time' }
+const perks = [
+  'Remote-first culture — work from anywhere in the world',
+  'Direct impact on a product used by 65,000+ agents globally',
+  'Competitive compensation with equity opportunities',
+  'Unlimited learning budget for conferences and courses',
+  'Annual team retreats in incredible destinations',
+  'Health insurance and wellness benefits'
 ]
 </script>
-
-<style scoped>
-. { font-weight: 900; }
-</style>

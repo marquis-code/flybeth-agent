@@ -3,11 +3,11 @@
     <div class="flex items-center justify-between">
       <div class="space-y-1">
         <h2 class="text-2xl font-bold text-gray-900 tracking-tight">Itinerary Builder</h2>
-        <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Construct, brand and share high-fidelity travel experiences with your clients</p>
+        <p class="text-sm text-gray-400 font-bold uppercase tracking-widest">Construct, brand and share high-fidelity travel experiences with your clients</p>
       </div>
       <button 
         @click="startNewItinerary"
-        class="px-5 py-2.5 bg-primary text-white text-[11px] font-bold rounded-xl hover:bg-black transition-all flex items-center shadow-lg shadow-primary/10"
+        class="px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-xl hover:bg-black transition-all flex items-center shadow-lg shadow-primary/10"
       >
         <PlusIcon class="h-4 w-4 mr-2" />
         Create Itinerary
@@ -22,8 +22,8 @@
     <div v-else-if="itinerariesList.length === 0" class="bg-white border-2 border-dashed border-gray-100 rounded-3xl p-32 text-center">
        <SparklesIcon class="h-16 w-16 text-primary/10 mx-auto mb-6" />
        <h3 class="text-lg font-bold text-gray-900 mb-2">Build Your First Masterpiece</h3>
-       <p class="text-[11px] text-gray-400 font-medium max-w-xs mx-auto mb-8">Impress your clients with beautifully curated, day-by-day travel plans that stand out from competitors.</p>
-       <button @click="startNewItinerary" class="px-8 py-3 bg-primary text-white text-[11px] font-bold rounded-xl shadow-lg">Begin Construction</button>
+       <p class="text-sm text-gray-400 font-medium max-w-xs mx-auto mb-8">Impress your clients with beautifully curated, day-by-day travel plans that stand out from competitors.</p>
+       <button @click="startNewItinerary" class="px-8 py-3 bg-primary text-white text-sm font-bold rounded-xl shadow-lg">Begin Construction</button>
     </div>
 
     <div v-else class="bg-white border border-gray-100 rounded-3xl overflow-hidden shadow-sm shadow-gray-100/10">
@@ -31,11 +31,11 @@
           <table class="w-full text-left">
              <thead>
                 <tr class="bg-gray-50/50">
-                   <th class="px-6 py-4 text-[9px] font-bold uppercase tracking-widest text-gray-400">Title & Destination</th>
-                   <th class="px-6 py-4 text-[9px] font-bold uppercase tracking-widest text-gray-400">Duration</th>
-                   <th class="px-6 py-4 text-[9px] font-bold uppercase tracking-widest text-gray-400">Creation Date</th>
-                   <th class="px-6 py-4 text-[9px] font-bold uppercase tracking-widest text-gray-400">Status</th>
-                   <th class="px-6 py-4 text-[9px] font-bold uppercase tracking-widest text-gray-400 text-right">Actions</th>
+                   <th class="px-6 py-4 text-sm font-bold uppercase tracking-widest text-gray-400">Title & Destination</th>
+                   <th class="px-6 py-4 text-sm font-bold uppercase tracking-widest text-gray-400">Duration</th>
+                   <th class="px-6 py-4 text-sm font-bold uppercase tracking-widest text-gray-400">Creation Date</th>
+                   <th class="px-6 py-4 text-sm font-bold uppercase tracking-widest text-gray-400">Status</th>
+                   <th class="px-6 py-4 text-sm font-bold uppercase tracking-widest text-gray-400 text-right">Actions</th>
                 </tr>
              </thead>
              <tbody class="divide-y divide-gray-50">
@@ -46,8 +46,8 @@
                              <img :src="iti.coverImage || 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=200'" class="w-full h-full object-cover" />
                          </div>
                          <div>
-                            <p class="text-[13px] font-black text-gray-900 group-hover:text-primary transition-colors">{{ iti.title }}</p>
-                            <div class="flex items-center text-[10px] text-gray-400 font-bold mt-0.5">
+                            <p class="text-sm  text-gray-900 group-hover:text-primary transition-colors">{{ iti.title }}</p>
+                            <div class="flex items-center text-sm text-gray-400 font-bold mt-0.5">
                                 <MapPinIcon class="h-3 w-3 mr-1" />
                                 {{ iti.destination }}
                             </div>
@@ -55,15 +55,15 @@
                       </div>
                    </td>
                    <td class="px-6 py-4">
-                      <span class="px-2 py-0.5 rounded-full text-[10px] font-black tracking-tighter bg-gray-100 text-gray-600 border border-gray-200">
+                      <span class="px-2 py-0.5 rounded-full text-sm  tracking-tighter bg-gray-100 text-gray-600 border border-gray-200">
                          {{ iti.days?.length || 0 }} Days
                       </span>
                    </td>
                    <td class="px-6 py-4">
-                      <span class="text-[10px] font-bold text-gray-500 uppercase">{{ new Date(iti.createdAt).toLocaleDateString() }}</span>
+                      <span class="text-sm font-bold text-gray-500 uppercase">{{ new Date(iti.createdAt).toLocaleDateString() }}</span>
                    </td>
                    <td class="px-6 py-4">
-                      <span class="px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-widest border border-emerald-100 bg-emerald-50 text-emerald-600">Active</span>
+                      <span class="px-2 py-0.5 rounded-full text-sm  uppercase tracking-widest border border-emerald-100 bg-emerald-50 text-emerald-600">Active</span>
                    </td>
                    <td class="px-6 py-4 text-right">
                       <div class="flex items-center justify-end space-x-2">
@@ -89,21 +89,21 @@
        <div class="space-y-8 pb-32">
           <!-- Step 1: Base Details -->
           <div class="space-y-6">
-             <h3 class="text-[11px] font-bold text-primary uppercase tracking-widest border-b border-gray-50 pb-2">1. Essential Narrative</h3>
+             <h3 class="text-sm font-bold text-primary uppercase tracking-widest border-b border-gray-50 pb-2">1. Essential Narrative</h3>
              <div class="grid grid-cols-2 gap-4">
                 <div class="space-y-1.5">
-                   <label class="text-[10px] font-bold text-gray-400 px-1">Itinerary Title</label>
-                   <input v-model="form.title" placeholder="e.g., Ultimate Greek Odyssey" class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-xs font-bold outline-none focus:border-primary transition-all" />
+                   <label class="text-sm font-bold text-gray-400 px-1">Itinerary Title</label>
+                   <input v-model="form.title" placeholder="e.g., Ultimate Greek Odyssey" class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-bold outline-none focus:border-primary transition-all" />
                 </div>
                 <div class="space-y-1.5 relative z-50">
-                   <label class="text-[10px] font-bold text-gray-400 px-1">Primary Destination</label>
-                   <input v-model="form.destination" @input="onLocationInput" @focus="onLocationInput" placeholder="Search... (e.g. Santorini, Greece)" class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-xs font-bold outline-none focus:border-primary transition-all relative z-50" autocomplete="off" />
+                   <label class="text-sm font-bold text-gray-400 px-1">Primary Destination</label>
+                   <input v-model="form.destination" @input="onLocationInput" @focus="onLocationInput" placeholder="Search... (e.g. Santorini, Greece)" class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-bold outline-none focus:border-primary transition-all relative z-50" autocomplete="off" />
                    
                    <Transition name="fade">
                       <div v-if="locationPredictions.length" class="absolute left-0 top-full mt-2 w-full max-h-[250px] overflow-y-auto bg-white border border-gray-100 rounded-2xl shadow-2xl z-[60] py-2 custom-scrollbar">
                           <div v-for="pred in locationPredictions" :key="pred.place_id" @click="selectPrediction(pred)" class="px-4 py-3 hover:bg-gray-50 cursor-pointer transition-all flex flex-col group border-b border-gray-50 last:border-0">
-                              <span class="text-[11px] font-bold text-gray-900 group-hover:text-primary-dark">{{ pred.structured_formatting?.main_text || pred.description }}</span>
-                              <span v-if="pred.structured_formatting?.secondary_text" class="text-[9px] font-medium text-gray-400 mt-0.5">{{ pred.structured_formatting.secondary_text }}</span>
+                              <span class="text-sm font-bold text-gray-900 group-hover:text-primary-dark">{{ pred.structured_formatting?.main_text || pred.description }}</span>
+                              <span v-if="pred.structured_formatting?.secondary_text" class="text-sm font-medium text-gray-400 mt-0.5">{{ pred.structured_formatting.secondary_text }}</span>
                           </div>
                       </div>
                    </Transition>
@@ -111,27 +111,27 @@
                 </div>
              </div>
              <div class="space-y-1.5">
-                <label class="text-[10px] font-bold text-gray-400 px-1">Compelling Description</label>
-                <textarea v-model="form.description" rows="3" class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-xs font-bold outline-none focus:border-primary transition-all resize-none"></textarea>
+                <label class="text-sm font-bold text-gray-400 px-1">Compelling Description</label>
+                <textarea v-model="form.description" rows="3" class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-bold outline-none focus:border-primary transition-all resize-none"></textarea>
              </div>
           </div>
 
           <!-- Step 2: Day Builder -->
           <div class="space-y-6">
              <div class="flex items-center justify-between border-b border-gray-50 pb-2">
-                <h3 class="text-[11px] font-bold text-primary uppercase tracking-widest">2. Day-by-Day Experience</h3>
-                <button @click="addDay" class="text-[10px] font-bold text-primary hover:underline">+ Add Sequential Day</button>
+                <h3 class="text-sm font-bold text-primary uppercase tracking-widest">2. Day-by-Day Experience</h3>
+                <button @click="addDay" class="text-sm font-bold text-primary hover:underline">+ Add Sequential Day</button>
              </div>
 
              <div class="space-y-6">
                 <div v-for="(day, idx) in form.days" :key="idx" class="p-6 bg-gray-50/50 rounded-3xl border border-gray-100 space-y-4 relative overflow-visible">
                    <div class="absolute top-0 right-0 p-4">
-                      <button @click="removeDay(idx)" class="p-2 text-gray-300 hover:text-rose-500 transition-all">
+                      <button @click="removeDay(idx)" class="p-2 text-gray-500 hover:text-rose-500 transition-all">
                          <TrashIcon class="h-4 w-4" />
                       </button>
                    </div>
                    <div class="flex items-center space-x-4">
-                      <div class="h-10 w-10 bg-primary text-white rounded-xl flex items-center justify-center font-black text-xs">D{{ idx + 1 }}</div>
+                      <div class="h-10 w-10 bg-primary text-white rounded-xl flex items-center justify-center  text-sm">D{{ idx + 1 }}</div>
                       <input v-model="day.title" placeholder="Day Theme (e.g. Sunset Arrival)" class="bg-transparent border-0 text-sm font-bold text-gray-900 outline-none w-full" />
                    </div>
                    
@@ -144,22 +144,22 @@
                                :value="timeOptions.find(t => t.value === act.time)?.label || act.time"
                                @click="activeTimePicker = activeTimePicker === `${idx}-${aIdx}` ? null : `${idx}-${aIdx}`"
                                placeholder="Time" 
-                               class="w-full px-2 py-1.5 bg-gray-50 border border-gray-100 rounded-lg text-[10px] font-bold text-center text-gray-900 outline-none hover:border-primary focus:border-primary cursor-pointer transition-all relative z-50 shrink-0"
+                               class="w-full px-2 py-1.5 bg-gray-50 border border-gray-100 rounded-lg text-sm font-bold text-center text-gray-900 outline-none hover:border-primary focus:border-primary cursor-pointer transition-all relative z-50 shrink-0"
                            />
                            <Transition name="fade">
                                <div v-if="activeTimePicker === `${idx}-${aIdx}`" class="absolute left-0 top-full mt-2 w-32 max-h-[220px] overflow-y-auto bg-white border border-gray-100 rounded-xl shadow-2xl z-[60] py-2 custom-scrollbar">
-                                   <div v-for="t in timeOptions" :key="t.value" @click="act.time = t.value; activeTimePicker = null" class="px-4 py-2 cursor-pointer transition-colors" :class="act.time === t.value ? 'bg-primary/5 text-primary-dark font-black' : 'hover:bg-gray-50 text-gray-600 hover:text-gray-900 font-bold'">
-                                       <span class="text-[10px]">{{ t.label }}</span>
+                                   <div v-for="t in timeOptions" :key="t.value" @click="act.time = t.value; activeTimePicker = null" class="px-4 py-2 cursor-pointer transition-colors" :class="act.time === t.value ? 'bg-primary/5 text-primary-dark ' : 'hover:bg-gray-50 text-gray-600 hover:text-gray-900 font-bold'">
+                                       <span class="text-sm">{{ t.label }}</span>
                                    </div>
                                </div>
                            </Transition>
                          </div>
-                         <input v-model="act.title" placeholder="Activity Title" class="flex-1 text-[10px] font-bold text-gray-600 outline-none bg-transparent relative z-20" />
-                         <button @click="day.activities.splice(aIdx, 1)" class="opacity-0 group-hover:opacity-100 transition-opacity p-1 text-gray-300 hover:text-rose-500">
+                         <input v-model="act.title" placeholder="Activity Title" class="flex-1 text-sm font-bold text-gray-600 outline-none bg-transparent relative z-20" />
+                         <button @click="day.activities.splice(aIdx, 1)" class="opacity-0 group-hover:opacity-100 transition-opacity p-1 text-gray-500 hover:text-rose-500">
                            <XMarkIcon class="h-3.5 w-3.5" />
                          </button>
                       </div>
-                      <button @click="day.activities.push({title: '', time: ''})" class="text-[10px] font-bold text-primary/60 hover:text-primary transition-all">+ Add Activity</button>
+                      <button @click="day.activities.push({title: '', time: ''})" class="text-sm font-bold text-primary/60 hover:text-primary transition-all">+ Add Activity</button>
                    </div>
                 </div>
              </div>
@@ -171,8 +171,8 @@
 
        <template #footer>
           <div class="flex items-center space-x-3">
-             <button @click="isBuilderOpen = false" class="px-6 py-3 bg-gray-800 text-white text-xs font-bold rounded-xl hover:bg-black transition-all shadow-lg">Save as Draft</button>
-             <button @click="handleSaveItinerary" :disabled="saving" class="flex-grow px-6 py-3 bg-primary-dark text-white text-xs font-bold rounded-xl hover:bg-black transition-all shadow-lg shadow-primary-dark/20 text-center">
+             <button @click="isBuilderOpen = false" class="px-6 py-3 bg-gray-800 text-white text-sm font-bold rounded-xl hover:bg-black transition-all shadow-lg">Save as Draft</button>
+             <button @click="handleSaveItinerary" :disabled="saving" class="flex-grow px-6 py-3 bg-primary-dark text-white text-sm font-bold rounded-xl hover:bg-black transition-all shadow-lg shadow-primary-dark/20 text-center">
                 {{ saving ? 'Syncing...' : 'Finalize & Publish Itinerary' }}
              </button>
           </div>

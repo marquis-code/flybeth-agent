@@ -11,8 +11,8 @@
             v-for="type in tripTypes" 
             :key="type.id"
             @click="tripType = type.id"
-            class="px-6 py-2.5 rounded-full text-xs   transition-all duration-300"
-            :class="tripType === type.id ? 'bg-primary-dark text-white shadow-lg' : 'text-gray-500 hover:text-primary'"
+            class="px-6 py-2.5 rounded-full text-sm   transition-all duration-300"
+            :class="tripType === type.id ? 'bg-primary-dark text-white shadow-lg' : 'text-gray-800 hover:text-primary'"
           >
             {{ type.label.toUpperCase() }}
           </button>
@@ -25,9 +25,9 @@
               @click="showTravelers = !showTravelers"
               class="flex items-center space-x-3 px-5 py-3 bg-white border border-gray-200 rounded-2xl hover:border-primary transition-all group h-[58px]"
             >
-              <UsersIcon class="h-5 w-5 text-gray-400 group-hover:text-primary" />
+              <UsersIcon class="h-5 w-5 text-gray-800 group-hover:text-primary" />
               <span class="text-sm font-bold text-gray-900">{{ totalTravelers }} Traveler{{ totalTravelers > 1 ? 's' : '' }}</span>
-              <ChevronDownIcon class="h-4 w-4 text-gray-400 transition-transform" :class="showTravelers ? 'rotate-180' : ''" />
+              <ChevronDownIcon class="h-4 w-4 text-gray-800 transition-transform" :class="showTravelers ? 'rotate-180' : ''" />
             </button>
             <!-- Travelers Dropdown -->
             <Transition name="slide-up">
@@ -35,11 +35,11 @@
                 <div v-for="cat in travelerCategories" :key="cat.id" class="flex items-center justify-between">
                   <div>
                     <p class="text-sm  text-gray-900">{{ cat.label }}</p>
-                    <p class="text-[10px] font-bold text-gray-400 mt-0.5">{{ cat.description }}</p>
+                    <p class="text-sm font-medium text-gray-800 mt-0.5">{{ cat.description }}</p>
                   </div>
                   <div class="flex items-center space-x-4">
                     <button @click="updateTravelerCount(cat.id, -1)" class="w-10 h-10 rounded-xl border border-gray-200 flex items-center justify-center hover:bg-gray-50 disabled:opacity-20 transition-all">-</button>
-                    <span class="text-lg  w-6 text-center">{{ travelerCounts[cat.id as keyof typeof travelerCounts] }}</span>
+                    <span class="text-sm  w-6 text-center">{{ travelerCounts[cat.id as keyof typeof travelerCounts] }}</span>
                     <button @click="updateTravelerCount(cat.id, 1)" class="w-10 h-10 rounded-xl border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-all">+</button>
                   </div>
                 </div>
@@ -54,9 +54,9 @@
               @click="showCabin = !showCabin"
               class="flex items-center space-x-3 px-5 py-2.5 bg-white border border-gray-200 rounded-2xl hover:border-primary transition-all group h-[58px]"
             >
-              <SparklesIcon class="h-5 w-5 text-gray-400 group-hover:text-primary" />
+              <SparklesIcon class="h-5 w-5 text-gray-800 group-hover:text-primary" />
               <span class="text-sm font-bold text-gray-900">{{ activeCabinLabel }}</span>
-              <ChevronDownIcon class="h-4 w-4 text-gray-400 transition-transform" :class="showCabin ? 'rotate-180' : ''" />
+              <ChevronDownIcon class="h-4 w-4 text-gray-800 transition-transform" :class="showCabin ? 'rotate-180' : ''" />
             </button>
             <!-- Cabin Dropdown -->
             <Transition name="slide-up">
@@ -64,16 +64,70 @@
                 <button 
                   v-for="cab in cabinClasses" :key="cab.id" 
                   @click="selectCabin(cab)"
-                  class="w-full text-left px-5 py-3.5 text-xs   rounded-xl transition-all"
-                  :class="cabinClass === cab.id ? 'bg-primary-dark text-white' : 'text-gray-500 hover:bg-gray-50'"
+                  class="w-full text-left px-5 py-3.5 text-sm   rounded-xl transition-all"
+                  :class="cabinClass === cab.id ? 'bg-primary-dark text-white' : 'text-gray-800 hover:bg-gray-50'"
                 >
                   {{ cab.label.toUpperCase() }}
                 </button>
               </div>
             </Transition>
           </div>
+
+          <!-- Advanced Search Toggle -->
+          <button 
+            @click="showAdvanced = !showAdvanced"
+            class="flex items-center space-x-2 px-5 py-2.5 bg-gray-50 border border-gray-200 rounded-2xl hover:bg-white hover:border-primary transition-all group h-[58px]"
+          >
+            <AdjustmentsHorizontalIcon class="h-5 w-5 text-gray-800 group-hover:text-primary" />
+            <span class="text-sm font-bold text-gray-800 group-hover:text-primary">ADVANCED</span>
+          </button>
         </div>
       </div>
+
+      <!-- Advanced Search Panel -->
+      <Transition name="slide-up">
+        <div v-if="showAdvanced" class="mb-10 p-8 bg-gray-50/50 rounded-[2rem] border border-gray-100 grid grid-cols-1 md:grid-cols-4 gap-6 animate-in fade-in slide-in-from-top-4">
+          <div class="space-y-3">
+            <label class="text-sm font-medium text-gray-800 uppercase tracking-widest">Preferred Airlines</label>
+            <AnimatedInput v-model="advancedParams.airline" label="e.g. Emirates" :icon="TicketIcon" />
+          </div>
+          <div class="space-y-3">
+            <label class="text-sm font-medium text-gray-800 uppercase tracking-widest">Max Stops</label>
+            <select v-model="advancedParams.stops" class="w-full h-[58px] px-5 bg-white border border-gray-200 rounded-2xl text-sm focus:border-primary focus:ring-0 transition-all">
+              <option value="">Any Stops</option>
+              <option value="0">Direct Only</option>
+              <option value="1">Up to 1 Stop</option>
+              <option value="2">Up to 2 Stops</option>
+            </select>
+          </div>
+          <div class="space-y-3">
+            <label class="text-sm font-medium text-gray-800 uppercase tracking-widest">Fare Type</label>
+            <div class="flex p-1 bg-white border border-gray-200 rounded-2xl h-[58px]">
+              <button 
+                @click="advancedParams.refundable = true"
+                class="flex-1 rounded-xl text-sm font-bold transition-all"
+                :class="advancedParams.refundable ? 'bg-primary-dark text-white' : 'text-gray-800'"
+              >REFUNDABLE</button>
+              <button 
+                @click="advancedParams.refundable = false"
+                class="flex-1 rounded-xl text-sm font-bold transition-all"
+                :class="!advancedParams.refundable ? 'bg-primary-dark text-white' : 'text-gray-800'"
+              >NON-REF</button>
+            </div>
+          </div>
+          <div class="space-y-3">
+            <label class="text-sm font-medium text-gray-800 uppercase tracking-widest">GDS Sources</label>
+            <div class="flex gap-2">
+              <button 
+                v-for="source in ['Amadeus', 'Duffel']" :key="source"
+                @click="toggleSource(source)"
+                class="px-4 py-2 rounded-xl border text-sm font-bold transition-all"
+                :class="advancedParams.sources.includes(source) ? 'bg-primary-dark text-white border-primary-dark' : 'bg-white text-gray-800 border-gray-200'"
+              >{{ source.toUpperCase() }}</button>
+            </div>
+          </div>
+        </div>
+      </Transition>
 
       <!-- Search Inputs Grid -->
       <div class="space-y-6">
@@ -84,8 +138,8 @@
         >
           <div v-if="tripType === 'multi'" class="lg:col-span-12 mb-2">
             <div class="flex items-center justify-between">
-              <h4 class="text-[10px]  text-primary  ">Flight {{ index + 1 }}</h4>
-              <button v-if="flightLegs.length > 1" @click="removeLeg(index)" class="text-[10px]  text-red-500   hover:underline">Remove</button>
+              <h4 class="text-sm  text-primary  ">Flight {{ index + 1 }}</h4>
+              <button v-if="flightLegs.length > 1" @click="removeLeg(index)" class="text-sm  text-red-500   hover:underline">Remove</button>
             </div>
           </div>
 
@@ -102,9 +156,9 @@
             <div v-if="activeLeg === index && activeSide === 'origin'" class="absolute top-full left-0 right-0 mt-3 bg-white border border-gray-200 shadow-2xl rounded-[2rem] z-[9999] max-h-[400px] overflow-y-auto p-3 animate-in fade-in slide-in-from-top-4">
               <div v-if="!airportResults.length" class="p-8 text-center space-y-4">
                 <div class="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto">
-                  <MagnifyingGlassIcon class="h-8 w-8 text-gray-300" />
+                  <MagnifyingGlassIcon class="h-8 w-8 text-gray-800" />
                 </div>
-                <p class="text-sm font-bold text-gray-400">Search by city or airport</p>
+                <p class="text-sm font-medium text-gray-800">Search by city or airport</p>
               </div>
               <button 
                 v-else
@@ -113,16 +167,16 @@
                 class="w-full flex items-center justify-between p-4 hover:bg-gray-50 rounded-2xl transition-all group border border-transparent hover:border-gray-100 mb-1"
               >
                 <div class="flex items-center space-x-4">
-                  <div class="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center text-gray-400 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+                  <div class="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center text-gray-800 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
                     <PaperAirplaneIcon class="h-6 w-6" />
                   </div>
                   <div class="text-left">
                     <p class="text-sm  text-gray-900 group-hover:text-primary transition-colors">{{ airport.address?.cityName }}, {{ airport.address?.countryName }}</p>
-                    <p class="text-[10px] font-bold text-gray-400">{{ airport.name }}</p>
+                    <p class="text-sm font-medium text-gray-800">{{ airport.name }}</p>
                   </div>
                 </div>
                 <div class="text-right">
-                  <span class="px-2 py-1 bg-gray-100 rounded text-[10px]  text-gray-500 group-hover:bg-primary group-hover:text-white transition-colors">{{ airport.iataCode }}</span>
+                  <span class="px-2 py-1 bg-gray-100 rounded text-sm  text-gray-800 group-hover:bg-primary group-hover:text-white transition-colors">{{ airport.iataCode }}</span>
                 </div>
               </button>
             </div>
@@ -130,7 +184,7 @@
 
           <!-- Swap Button (desktop) -->
           <div v-if="tripType !== 'multi'" class="hidden lg:flex lg:col-span-1 justify-center -mx-5 pb-5 z-20">
-            <button @click="swapLocations" class="w-12 h-12 rounded-2xl bg-white border border-gray-200 flex items-center justify-center text-gray-400 hover:text-primary hover:border-primary hover:scale-110 shadow-lg transition-all">
+            <button @click="swapLocations" class="w-12 h-12 rounded-2xl bg-white border border-gray-200 flex items-center justify-center text-gray-800 hover:text-primary hover:border-primary hover:scale-110 shadow-lg transition-all">
               <ArrowsRightLeftIcon class="h-5 w-5" />
             </button>
           </div>
@@ -148,9 +202,9 @@
             <div v-if="activeLeg === index && activeSide === 'dest'" class="absolute top-full left-0 right-0 mt-3 bg-white border border-gray-200 shadow-2xl rounded-[2rem] z-[9999] max-h-[400px] overflow-y-auto p-3 animate-in fade-in slide-in-from-top-4">
               <div v-if="!airportResults.length" class="p-8 text-center space-y-4">
                 <div class="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto">
-                  <MagnifyingGlassIcon class="h-8 w-8 text-gray-300" />
+                  <MagnifyingGlassIcon class="h-8 w-8 text-gray-800" />
                 </div>
-                <p class="text-sm font-bold text-gray-400">Search by city or airport</p>
+                <p class="text-sm font-medium text-gray-800">Search by city or airport</p>
               </div>
               <button 
                 v-else
@@ -159,16 +213,16 @@
                 class="w-full flex items-center justify-between p-4 hover:bg-gray-50 rounded-2xl transition-all group border border-transparent hover:border-gray-100 mb-1"
               >
                 <div class="flex items-center space-x-4">
-                  <div class="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center text-gray-400 group-hover:bg-secondary/10 group-hover:text-secondary transition-colors">
+                  <div class="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center text-gray-800 group-hover:bg-secondary/10 group-hover:text-secondary transition-colors">
                     <PaperAirplaneIcon class="h-6 w-6" />
                   </div>
                   <div class="text-left">
                     <p class="text-sm  text-gray-900 group-hover:text-secondary transition-colors">{{ airport.address?.cityName }}, {{ airport.address?.countryName }}</p>
-                    <p class="text-[10px] font-bold text-gray-400">{{ airport.name }}</p>
+                    <p class="text-sm font-medium text-gray-800">{{ airport.name }}</p>
                   </div>
                 </div>
                 <div class="text-right">
-                  <span class="px-2 py-1 bg-gray-100 rounded text-[10px]  text-gray-500 group-hover:bg-secondary group-hover:text-white transition-colors">{{ airport.iataCode }}</span>
+                  <span class="px-2 py-1 bg-gray-100 rounded text-sm  text-gray-800 group-hover:bg-secondary group-hover:text-white transition-colors">{{ airport.iataCode }}</span>
                 </div>
               </button>
             </div>
@@ -193,7 +247,7 @@
         <button 
           v-if="tripType === 'multi' && flightLegs.length < 5"
           @click="addLeg"
-          class="flex items-center space-x-3 text-xs   text-primary hover:text-primary-dark transition-all group"
+          class="flex items-center space-x-3 text-sm   text-primary hover:text-primary-dark transition-all group"
         >
           <div class="w-8 h-8 rounded-full border-2 border-primary flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all">
             <PlusIcon class="h-4 w-4" />
@@ -207,7 +261,7 @@
           :loading="isSearching" 
           variant="primary" 
           size="lg" 
-          class="px-12 h-[58px] rounded-[1.5rem]   text-xs shadow-2xl shadow-primary/20 hover:scale-[1.05] active:scale-95 transition-all"
+          class="px-12 h-[58px] rounded-[1.5rem]   text-sm shadow-2xl shadow-primary/20 hover:scale-[1.05] active:scale-95 transition-all"
         >
           <MagnifyingGlassIcon class="h-5 w-5 mr-3" />
           SEARCH FLIGHTS
@@ -219,10 +273,10 @@
     <Transition name="fade">
       <div v-if="flightResults.length > 0" class="border-t border-gray-200 bg-gray-50/50 p-8 lg:p-12">
         <div class="flex items-center justify-between mb-10">
-          <h3 class="text-xl  text-gray-900 ">Available Departures</h3>
-          <div class="flex items-center space-x-2 text-xs font-bold text-gray-500">
+          <h3 class="text-sm font-bold text-gray-900">Available Departures</h3>
+          <div class="flex items-center space-x-2 text-sm font-bold text-gray-800">
             <span>Sorted by</span>
-            <span class="text-primary ">Best value</span>
+            <span class="text-primary font-bold">Best Value</span>
           </div>
         </div>
         
@@ -233,52 +287,71 @@
             class="bg-white border border-gray-200 rounded-[2rem] p-8 hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 group relative overflow-hidden"
           >
             <!-- Badge -->
-            <div class="absolute top-0 right-10 px-4 py-1.5 bg-secondary text-[8px]  text-white rounded-b-xl   shadow-sm">Cheapest</div>
+            <div class="absolute top-0 right-10 px-4 py-1.5 bg-green-500 text-sm font-bold text-white rounded-b-xl shadow-sm">Cheapest</div>
 
-            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-10">
-              <div class="flex items-center space-x-8 flex-1">
-                <div class="w-20 h-20 bg-gray-50 rounded-3xl flex items-center justify-center p-4 border border-gray-100 group-hover:border-primary/20 transition-colors">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+              <!-- Airline Logo & Info -->
+              <div class="flex items-center gap-5 shrink-0">
+                <div class="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center p-3 border border-gray-100 group-hover:border-primary/20 transition-colors">
                   <img :src="`https://ui-avatars.com/api/?name=${flight.airline}&background=random&bold=true&color=fff&rounded=true`" class="w-full h-full object-contain" />
                 </div>
-                
-                <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-                  <div class="text-left">
-                    <p class="text-2xl  text-gray-900">{{ flight.departureTime || '09:00' }}</p>
-                    <p class="text-[10px]   text-gray-400 mt-1 ">{{ flight.origin || 'ABC' }}</p>
-                  </div>
-                  
-                  <div class="flex flex-col items-center justify-center relative">
-                    <p class="text-[9px]   text-gray-300  mb-4">6h 45m • Direct</p>
-                    <div class="w-full h-px bg-gray-100 relative mb-4">
-                      <div class="absolute top-1/2 left-0 -translate-y-1/2 w-2 h-2 rounded-full border-2 border-gray-200 bg-white"></div>
-                      <div class="absolute top-1/2 right-0 -translate-y-1/2 w-2 h-2 rounded-full border-2 border-gray-200 bg-white"></div>
-                      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-2">
-                        <PaperAirplaneIcon class="h-4 w-4 text-primary group-hover:translate-x-10 transition-transform duration-1000" />
-                      </div>
-                    </div>
-                    <p class="text-[10px] font-bold text-gray-400">{{ flight.airline }} {{ flight.flightNumber }}</p>
-                  </div>
-
-                  <div class="text-right">
-                    <p class="text-2xl  text-gray-900">{{ flight.arrivalTime || '15:45' }}</p>
-                    <p class="text-[10px]   text-gray-400 mt-1 ">{{ flight.destination || 'XYZ' }}</p>
-                  </div>
+                <div>
+                  <p class="text-sm font-bold text-gray-900">{{ flight.airline }}</p>
+                  <p class="text-sm font-semibold text-gray-800 mt-0.5">{{ flight.flightNumber }} · {{ flight.cabinClass || 'Economy' }}</p>
                 </div>
               </div>
 
-              <div class="flex items-center justify-between lg:flex-col lg:items-end lg:justify-center border-t lg:border-t-0 lg:border-l border-gray-100 pt-8 lg:pt-0 lg:pl-10 shrink-0 space-y-2">
-                <div class="text-left lg:text-right">
-                  <p class="text-sm font-bold text-gray-400 line-through">${{ (flight.price * 1.2).toFixed(2) }}</p>
-                  <p class="text-4xl  text-primary-dark er">${{ flight.price?.toFixed(2) }}</p>
+              <!-- Flight Route -->
+              <div class="flex-1 flex items-center justify-center gap-6 lg:gap-10">
+                <div class="text-center">
+                  <p class="text-sm  text-gray-900 tracking-tight">{{ flight.departureTime || '09:00' }}</p>
+                  <p class="text-sm font-bold text-gray-800 mt-1">{{ flight.origin || 'ABC' }}</p>
                 </div>
-                <BaseButton variant="primary" class="rounded-xl px-8 h-12 text-[10px]   shadow-lg active:scale-95 transition-all">SELECT FLIGHT</BaseButton>
+                
+                <div class="flex flex-col items-center justify-center flex-1 max-w-[200px]">
+                  <p class="text-sm font-semibold text-gray-800 mb-2">{{ flight.stops === 0 ? 'Non-stop' : (flight.stops || 0) + ' stop' + ((flight.stops || 0) > 1 ? 's' : '') }}</p>
+                  <div class="w-full h-px bg-gray-200 relative">
+                    <div class="absolute top-1/2 left-0 -translate-y-1/2 w-2.5 h-2.5 rounded-full border-2 border-gray-300 bg-white"></div>
+                    <div class="absolute top-1/2 right-0 -translate-y-1/2 w-2.5 h-2.5 rounded-full border-2 border-gray-300 bg-white"></div>
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-2">
+                      <PaperAirplaneIcon class="h-4 w-4 text-primary group-hover:translate-x-10 transition-transform duration-1000" />
+                    </div>
+                  </div>
+                  <p class="text-sm font-medium text-gray-800 mt-2 uppercase tracking-wider">{{ flight.duration || '' }}</p>
+                </div>
+
+                <div class="text-center">
+                  <p class="text-sm  text-gray-900 tracking-tight">{{ flight.arrivalTime || '15:45' }}</p>
+                  <p class="text-sm font-bold text-gray-800 mt-1">{{ flight.destination || 'XYZ' }}</p>
+                </div>
+              </div>
+
+              <!-- Price & Action -->
+              <div class="flex items-center lg:flex-col lg:items-end gap-4 border-t lg:border-t-0 lg:border-l border-gray-100 pt-6 lg:pt-0 lg:pl-8 shrink-0">
+                <div class="text-left lg:text-right">
+                  <p class="text-sm font-medium text-gray-800 line-through">${{ (flight.price * 1.2).toFixed(2) }}</p>
+                  <p class="text-lg  text-gray-900 tracking-tight">${{ flight.price?.toFixed(2) }}</p>
+                  <p class="text-sm font-semibold text-primary mt-0.5">+ {{ flight.agentCommission ? '$' + flight.agentCommission.toFixed(2) : '$0' }} commission</p>
+                </div>
+                <BaseButton @click="selectFlight(flight)" variant="primary" class="rounded-xl px-6 h-11 text-sm font-bold shadow-lg active:scale-95 transition-all">Book Selection</BaseButton>
               </div>
             </div>
           </div>
         </div>
       </div>
     </Transition>
+
   </div>
+
+  <!-- Booking Flow Overlay -->
+  <Teleport to="body">
+    <FlightBookingWizard 
+      v-if="activeStep === 'booking'" 
+      :selected-flight="selectedFlight" 
+      :travelers="travelerCounts"
+      @close="activeStep = 'search'" 
+    />
+  </Teleport>
 </template>
 
 <script setup lang="ts">
@@ -298,8 +371,11 @@ import {
   PaperAirplaneIcon,
   XMarkIcon,
   UsersIcon,
-  MagnifyingGlassIcon
+  MagnifyingGlassIcon,
+  AdjustmentsHorizontalIcon,
+  TicketIcon
 } from '@heroicons/vue/24/outline'
+import FlightBookingWizard from './FlightBookingWizard.vue'
 
 const { airportResults, flightResults, isSearching, searchAirports, searchFlights } = useFlights()
 
@@ -313,6 +389,30 @@ const tripTypes = [
 const flightLegs = ref([
   { originQuery: '', originCode: '', destQuery: '', destCode: '', departureDate: '' }
 ])
+
+// Advanced Search
+const showAdvanced = ref(false)
+const advancedParams = ref({
+  airline: '',
+  stops: '',
+  refundable: true,
+  sources: ['Amadeus']
+})
+
+const toggleSource = (source: string) => {
+  const index = advancedParams.value.sources.indexOf(source)
+  if (index > -1) advancedParams.value.sources.splice(index, 1)
+  else advancedParams.value.sources.push(source)
+}
+
+// Booking State
+const activeStep = ref('search')
+const selectedFlight = ref<any>(null)
+
+const selectFlight = (flight: any) => {
+  selectedFlight.value = flight
+  activeStep.value = 'booking'
+}
 const dateRange = ref({ start: '', end: '' })
 const returnDate = computed(() => dateRange.value.end)
 

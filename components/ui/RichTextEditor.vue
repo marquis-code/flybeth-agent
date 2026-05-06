@@ -5,23 +5,23 @@
       <!-- Formatting Group -->
       <div class="flex items-center space-x-1 pr-3 border-r border-gray-200">
         <button v-for="h in [1, 2, 3]" :key="h" @click="editor.chain().focus().toggleHeading({ level: h }).run()" 
-          class="px-2.5 py-1.5 rounded-xl hover:bg-white hover:shadow-sm transition-all text-gray-400 font-black text-[10px] uppercase"
+          class="px-2.5 py-1.5 rounded-xl hover:bg-white hover:shadow-sm transition-all text-gray-800  text-sm uppercase"
           :class="{ 'bg-white shadow-sm text-primary': editor.isActive('heading', { level: h }) }">
           H{{ h }}
         </button>
       </div>
 
       <div class="flex items-center space-x-1 px-3 border-r border-gray-200">
-        <button @click="editor.chain().focus().toggleBold().run()" class="p-2.5 rounded-xl hover:bg-white transition-all text-gray-400"
+        <button @click="editor.chain().focus().toggleBold().run()" class="p-2.5 rounded-xl hover:bg-white transition-all text-gray-800"
           :class="{ 'bg-white shadow-sm text-primary': editor.isActive('bold') }" v-html="BoldIcon">
         </button>
-        <button @click="editor.chain().focus().toggleItalic().run()" class="p-2.5 rounded-xl hover:bg-white transition-all text-gray-400"
-          :class="{ 'bg-white shadow-sm text-primary': editor.isActive('italic') }" v-html="ItalicIcon">
+        <button @click="editor.chain().focus().toggle().run()" class="p-2.5 rounded-xl hover:bg-white transition-all text-gray-800"
+          :class="{ 'bg-white shadow-sm text-primary': editor.isActive('') }" v-html="Icon">
         </button>
-        <button @click="editor.chain().focus().toggleUnderline().run()" class="p-2.5 rounded-xl hover:bg-white transition-all text-gray-400"
+        <button @click="editor.chain().focus().toggleUnderline().run()" class="p-2.5 rounded-xl hover:bg-white transition-all text-gray-800"
           :class="{ 'bg-white shadow-sm text-primary': editor.isActive('underline') }" v-html="UnderlineIcon">
         </button>
-        <button @click="editor.chain().focus().toggleStrike().run()" class="p-2.5 rounded-xl hover:bg-white transition-all text-gray-400"
+        <button @click="editor.chain().focus().toggleStrike().run()" class="p-2.5 rounded-xl hover:bg-white transition-all text-gray-800"
           :class="{ 'bg-white shadow-sm text-primary': editor.isActive('strike') }">
           <s>S</s>
         </button>
@@ -29,15 +29,15 @@
 
       <!-- Alignment Group -->
       <div class="flex items-center space-x-1 px-3 border-r border-gray-200">
-        <button @click="editor.chain().focus().setTextAlign('left').run()" class="p-2.5 rounded-xl hover:bg-white transition-all text-gray-400"
+        <button @click="editor.chain().focus().setTextAlign('left').run()" class="p-2.5 rounded-xl hover:bg-white transition-all text-gray-800"
           :class="{ 'bg-white shadow-sm text-primary': editor.isActive({ textAlign: 'left' }) }">
           <Bars3BottomLeftIcon class="h-4 w-4" />
         </button>
-        <button @click="editor.chain().focus().setTextAlign('center').run()" class="p-2.5 rounded-xl hover:bg-white transition-all text-gray-400"
+        <button @click="editor.chain().focus().setTextAlign('center').run()" class="p-2.5 rounded-xl hover:bg-white transition-all text-gray-800"
           :class="{ 'bg-white shadow-sm text-primary': editor.isActive({ textAlign: 'center' }) }">
           <Bars3Icon class="h-4 w-4" />
         </button>
-        <button @click="editor.chain().focus().setTextAlign('right').run()" class="p-2.5 rounded-xl hover:bg-white transition-all text-gray-400"
+        <button @click="editor.chain().focus().setTextAlign('right').run()" class="p-2.5 rounded-xl hover:bg-white transition-all text-gray-800"
           :class="{ 'bg-white shadow-sm text-primary': editor.isActive({ textAlign: 'right' }) }">
           <Bars3BottomRightIcon class="h-4 w-4" />
         </button>
@@ -45,10 +45,10 @@
 
       <!-- List Group -->
       <div class="flex items-center space-x-1 px-3 border-r border-gray-200">
-        <button @click="editor.chain().focus().toggleBulletList().run()" class="p-2.5 rounded-xl hover:bg-white transition-all text-gray-400"
+        <button @click="editor.chain().focus().toggleBulletList().run()" class="p-2.5 rounded-xl hover:bg-white transition-all text-gray-800"
           :class="{ 'bg-white shadow-sm text-primary': editor.isActive('bulletList') }" v-html="ListIcon">
         </button>
-        <button @click="editor.chain().focus().toggleOrderedList().run()" class="p-2.5 rounded-xl hover:bg-white transition-all text-gray-400"
+        <button @click="editor.chain().focus().toggleOrderedList().run()" class="p-2.5 rounded-xl hover:bg-white transition-all text-gray-800"
           :class="{ 'bg-white shadow-sm text-primary': editor.isActive('orderedList') }">
           <ListBulletIcon class="h-4 w-4" />
         </button>
@@ -56,13 +56,13 @@
 
       <!-- Embedding Group -->
       <div class="flex items-center space-x-1 px-3 border-r border-gray-200">
-        <button @click="setLink" class="p-2.5 rounded-xl hover:bg-white transition-all text-gray-400" :class="{ 'bg-white shadow-sm text-primary': editor.isActive('link') }">
+        <button @click="setLink" class="p-2.5 rounded-xl hover:bg-white transition-all text-gray-800" :class="{ 'bg-white shadow-sm text-primary': editor.isActive('link') }">
           <LinkIcon class="h-4 w-4" />
         </button>
-        <button @click="addImage" class="p-2.5 rounded-xl hover:bg-white transition-all text-gray-400">
+        <button @click="addImage" class="p-2.5 rounded-xl hover:bg-white transition-all text-gray-800">
           <PhotoIcon class="h-4 w-4" />
         </button>
-        <button @click="editor.chain().focus().toggleBlockquote().run()" class="p-2.5 rounded-xl hover:bg-white transition-all text-gray-400"
+        <button @click="editor.chain().focus().toggleBlockquote().run()" class="p-2.5 rounded-xl hover:bg-white transition-all text-gray-800"
           :class="{ 'bg-white shadow-sm text-primary': editor.isActive('blockquote') }">
           <ChatBubbleLeftRightIcon class="h-4 w-4" />
         </button>
@@ -70,13 +70,13 @@
 
       <!-- Utility Group -->
       <div class="flex items-center space-x-1 pl-3">
-        <button @click="editor.chain().focus().undo().run()" class="p-2.5 rounded-xl hover:bg-white transition-all text-gray-400">
+        <button @click="editor.chain().focus().undo().run()" class="p-2.5 rounded-xl hover:bg-white transition-all text-gray-800">
           <ArrowUturnLeftIcon class="h-4 w-4" />
         </button>
-        <button @click="editor.chain().focus().redo().run()" class="p-2.5 rounded-xl hover:bg-white transition-all text-gray-400">
+        <button @click="editor.chain().focus().redo().run()" class="p-2.5 rounded-xl hover:bg-white transition-all text-gray-800">
           <ArrowUturnRightIcon class="h-4 w-4" />
         </button>
-        <button @click="editor.chain().focus().unsetAllMarks().run()" class="p-2.5 rounded-xl hover:bg-white transition-all text-gray-400">
+        <button @click="editor.chain().focus().unsetAllMarks().run()" class="p-2.5 rounded-xl hover:bg-white transition-all text-gray-800">
            <NoSymbolIcon class="h-4 w-4" />
         </button>
       </div>
@@ -88,7 +88,7 @@
     </div>
     
     <!-- Status Footer -->
-    <div class="px-8 py-3 bg-gray-50 border-t border-gray-100 flex items-center justify-between text-[9px] font-black text-gray-400 uppercase tracking-[0.2em]">
+    <div class="px-8 py-3 bg-gray-50 border-t border-gray-100 flex items-center justify-between text-sm font-semibold text-gray-800 uppercase ">
        <div class="flex items-center space-x-6">
           <div class="flex items-center gap-2">
              <span class="text-primary">{{ editor.storage.characterCount.characters() }}</span>
@@ -134,7 +134,7 @@ import {
 } from '@heroicons/vue/24/outline'
 
 const BoldIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bold"><path d="M6 12h9a4 4 0 0 1 0 8H6v-8Z"/><path d="M6 4h8a4 4 0 0 1 0 8H6V4Z"/></svg>`
-const ItalicIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 4h-9"/><path d="M14 20H5"/><path d="M15 4L9 20"/></svg>`
+const Icon = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 4h-9"/><path d="M14 20H5"/><path d="M15 4L9 20"/></svg>`
 const UnderlineIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-underline"><path d="M6 3v7a6 6 0 0 0 12 0V3"/><line x1="4" x2="20" y1="21" y2="21"/></svg>`
 const ListIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-list"><line x1="8" x2="21" y1="6" y2="6"/><line x1="8" x2="21" y1="12" y2="12"/><line x1="8" x2="21" y1="18" y2="18"/><line x1="3" x2="3.01" y1="6" y2="6"/><line x1="3" x2="3.01" y1="12" y2="12"/><line x1="3" x2="3.01" y1="18" y2="18"/></svg>`
 
@@ -226,7 +226,7 @@ watch(() => props.modelValue, (val) => {
 .ProseMirror blockquote {
   padding-left: 1.5rem;
   border-left: 4px solid #F3F4F6;
-  font-style: italic;
+  font-style: ;
   color: #6B7280;
 }
 .custom-scrollbar::-webkit-scrollbar {
@@ -243,7 +243,7 @@ watch(() => props.modelValue, (val) => {
   background: #E5E7EB;
 }
 .ProseMirror em {
-  font-style: italic !important;
+  font-style:  !important;
 }
 .ProseMirror strong {
   font-weight: 700 !important;

@@ -1,28 +1,32 @@
 <template>
   <div class="min-h-screen bg-white flex flex-col font-sans">
     <SiteHeader />
-    <main class="flex-grow pt-[88px] lg:pt-[104px]">
+    <main :class="['flex-grow', $route.path === '/' ? '' : 'pt-[72px] lg:pt-[88px]']">
       <slot />
     </main>
     
     <!-- Footer Section -->
-    <footer class="bg-neutral-900 py-20 mt-auto">
+    <footer class="bg-[#050505] py-32 mt-auto border-t border-white/5">
       <div class="max-w-7xl mx-auto px-6 lg:px-10">
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-12 lg:gap-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-16 lg:gap-12">
           <!-- Brand -->
-          <div class="col-span-2 lg:col-span-2 space-y-8">
+          <div class="col-span-2 lg:col-span-2 space-y-10">
             <img src="@/assets/img/logo.png" class="h-10 w-auto brightness-0 invert" alt="Flybeth" />
-            <p class="text-neutral-400 font-medium max-w-sm leading-relaxed">
-              <strong>FLYBETH LLC</strong><br>
-              1880 S Dairy Ashford Rd, Suite 207, Houston, TX 77077 United States.<br>
-              <span class="block mt-2 font-bold text-white">+1 844 FLYBETH (359-2384)</span>
-              <span class="block text-brand-orange font-medium">Hello@flybeth.com</span>
-            </p>
+            <div class="space-y-6">
+              <p class="text-neutral-500 font-medium max-w-sm leading-relaxed text-sm">
+                <span class="text-white font-bold tracking-widest uppercase text-xs block mb-2">Headquarters</span>
+                1880 S Dairy Ashford Rd, Suite 207, Houston, TX 77077 United States.
+              </p>
+              <div class="flex flex-col space-y-2">
+                <a href="tel:+1844FLYBETH" class="text-xl  text-white hover:text-primary transition-colors tracking-tighter">+1 844 FLYBETH</a>
+                <a href="mailto:hello@flybeth.com" class="text-sm font-bold text-primary tracking-widest uppercase">hello@flybeth.com</a>
+              </div>
+            </div>
           </div>
 
           <!-- Links -->
           <div v-for="(group, title) in footerLinks" :key="title" class="space-y-6">
-            <h4 class="text-xs  text-white  ">{{ title }}</h4>
+            <h4 class="text-sm  text-white  ">{{ title }}</h4>
             <ul class="space-y-4">
               <li v-for="link in group" :key="link.name">
                 <NuxtLink :to="link.path" class="text-[14px] text-neutral-500 hover:text-white transition-colors font-bold">{{ link.name }}</NuxtLink>
@@ -32,10 +36,10 @@
         </div>
 
         <div class="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p class="text-xs font-bold text-neutral-600  ">© 2026 FLYBETH LLC. All rights reserved.</p>
+          <p class="text-sm font-bold text-neutral-600  ">© 2026 FLYBETH LLC. All rights reserved.</p>
           <div class="flex items-center space-x-8">
-            <NuxtLink to="/terms" class="text-xs font-bold text-neutral-500 hover:text-white transition-colors  ">Terms</NuxtLink>
-            <NuxtLink to="/privacy" class="text-xs font-bold text-neutral-500 hover:text-white transition-colors  ">Privacy</NuxtLink>
+            <NuxtLink to="/terms" class="text-sm font-bold text-neutral-500 hover:text-white transition-colors  ">Terms</NuxtLink>
+            <NuxtLink to="/privacy" class="text-sm font-bold text-neutral-500 hover:text-white transition-colors  ">Privacy</NuxtLink>
           </div>
         </div>
       </div>
@@ -62,7 +66,7 @@
         </div>
 
         <div class="space-y-2">
-          <h3 class="text-2xl font-black text-primary-dark ">{{ options.title }}</h3>
+          <h3 class="text-2xl  text-primary-dark ">{{ options.title }}</h3>
           <p class="text-[15px] font-medium text-neutral-500 leading-relaxed px-4">
             {{ options.message }}
           </p>

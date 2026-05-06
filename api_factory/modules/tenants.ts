@@ -7,4 +7,7 @@ export const tenantsApiFactory = {
   getTenant(id: string) {
     return GATEWAY_ENDPOINT_WITH_AUTH.get(`/tenants/${id}`);
   },
+  updateBranding(id: string, payload: any) {
+    return GATEWAY_ENDPOINT_WITH_AUTH.patch(`/tenants/${id}/branding`, payload);
+  },
 };

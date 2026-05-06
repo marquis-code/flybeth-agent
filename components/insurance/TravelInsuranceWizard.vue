@@ -7,8 +7,8 @@
       <!-- Header Area -->
       <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8 mb-10 pb-8 border-b border-gray-100">
         <div class="space-y-1">
-          <h2 class="text-3xl  text-gray-900  ">Travel Protection</h2>
-          <p class="text-xs font-bold text-gray-400  ">Secure your journey with global coverage</p>
+          <h2 class="text-lg  text-gray-900  ">Travel Protection</h2>
+          <p class="text-sm font-medium text-gray-800  ">Secure your journey with global coverage</p>
         </div>
       </div>
 
@@ -32,7 +32,7 @@
 
       <!-- Bottom Actions -->
       <div class="mt-12 flex flex-col sm:flex-row sm:items-center justify-between gap-8 pt-8 border-t border-gray-100">
-        <div class="flex items-center space-x-6 text-xs   text-gray-500 ">
+        <div class="flex items-center space-x-6 text-sm   text-gray-800 ">
           <div class="flex items-center space-x-2">
             <div class="w-2 h-2 rounded-full bg-blue-500"></div>
             <span>Medical Coverage</span>
@@ -48,7 +48,7 @@
           :loading="isSearching" 
           variant="primary" 
           size="lg" 
-          class="px-12 h-[58px] rounded-[1.5rem]   text-xs shadow-2xl shadow-primary/20 hover:scale-[1.05] active:scale-95 transition-all "
+          class="px-12 h-[58px] rounded-[1.5rem]   text-sm shadow-2xl shadow-primary/20 hover:scale-[1.05] active:scale-95 transition-all "
         >
           <MagnifyingGlassIcon class="h-5 w-5 mr-3" />
           Get Quote

@@ -1,17 +1,17 @@
 <template>
   <div class="bg-white">
     <!-- About Hero -->
-    <section class="pt-48 pb-24 bg-white relative overflow-hidden">
+    <section class="pt-10 pb-24 bg-white relative overflow-hidden">
       <!-- Decorative background blur -->
       <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
       
       <div class="max-w-4xl mx-auto px-6 text-center space-y-8">
-        <h1 class="text-6xl lg:text-7xl  text-primary-dark er leading-tight">
+        <h1 class="text-4xl lg:text-5xl font-bold text-neutral-900 leading-tight">
           Empowering the world's <br />
-          <span class="text-secondary ">elite travel advisors.</span>
+          <span class="text-primary">travel professionals.</span>
         </h1>
-        <p class="text-xl text-neutral-500 font-medium leading-relaxed max-w-3xl mx-auto">
-          Flybeth was founded on a simple premise: that travel agents deserve the same cutting-edge infrastructure as the world's largest online booking engines.
+        <p class="text-lg text-neutral-500 font-medium leading-relaxed max-w-2xl mx-auto">
+          Flybeth gives travel agents the same powerful tools as the world's largest online booking sites.
         </p>
       </div>
     </section>
@@ -19,19 +19,19 @@
     <!-- Mission Section -->
     <section class="py-24 bg-neutral-50 border-y border-neutral-100">
       <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
-        <div class="space-y-8">
-          <h2 class="text-4xl  text-primary-dark ">Our mission</h2>
-          <p class="text-lg text-neutral-600 leading-relaxed font-medium">
-            We provide a high-performance B2B travel framework that connects regional agents directly to global GDS and NDC pools. By bypassing traditional retail layers, we enable our partners to secure market-leading wholesale rates and maximize their operational profitability.
+        <div class="space-y-6">
+          <h2 class="text-3xl font-bold text-neutral-900">Our mission</h2>
+          <p class="text-base text-neutral-600 leading-relaxed font-medium">
+            We connect local agents directly to thousands of airlines and hotels worldwide. By removing unnecessary middlemen, we help our partners get better prices and make more profit on every booking.
           </p>
           <div class="grid grid-cols-2 gap-8 pt-4">
             <div>
-              <p class="text-3xl  text-primary mb-1">2018</p>
-              <p class="text-sm font-bold text-neutral-400  ">Established</p>
+              <p class="text-3xl font-bold text-primary mb-1">2018</p>
+              <p class="text-xs font-bold text-neutral-400 uppercase tracking-widest">Established</p>
             </div>
             <div>
-              <p class="text-3xl  text-secondary mb-1">45+</p>
-              <p class="text-sm font-bold text-neutral-400  ">Global nodes</p>
+              <p class="text-3xl font-bold text-secondary mb-1">100+</p>
+              <p class="text-xs font-bold text-neutral-400 uppercase tracking-widest">Global Partners</p>
             </div>
           </div>
         </div>
@@ -45,9 +45,9 @@
     <!-- Why Flybeth -->
     <section class="py-32 bg-white">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-20 space-y-4">
-          <h2 class="text-sm  text-secondary ">The Flybeth edge</h2>
-          <h3 class="text-5xl  text-primary-dark er">Why partners choose us.</h3>
+        <div class="text-center mb-16 space-y-3">
+          <span class="text-xs font-bold text-primary uppercase tracking-widest">Your Advantage</span>
+          <h3 class="text-3xl lg:text-4xl font-bold text-neutral-900">Why partners choose us.</h3>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
@@ -63,12 +63,12 @@
     </section>
 
     <!-- CTA Section -->
-    <footer class="bg-primary-dark py-24 text-center">
-      <div class="max-w-4xl mx-auto px-6 space-y-10">
-        <h2 class="text-5xl  text-white er">Ready to join the network?</h2>
-        <div class="flex items-center justify-center space-x-6">
-          <BaseButton to="/auth/register" variant="primary" size="lg" class="px-12 shadow-2xl shadow-primary/20">Get started now</BaseButton>
-          <NuxtLink to="/contact" class="text-sm font-bold text-white hover:text-secondary transition-colors underline underline-offset-8 decoration-white/30">Speak to an advisor</NuxtLink>
+    <footer class="bg-neutral-900 py-20 text-center">
+      <div class="max-w-4xl mx-auto px-6 space-y-8">
+        <h2 class="text-3xl lg:text-4xl font-bold text-white leading-tight">Ready to join our network?</h2>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <BaseButton to="/auth/register" variant="primary" size="md" class="px-12 shadow-2xl shadow-primary/20">Get started now</BaseButton>
+          <NuxtLink to="/contact" class="text-sm font-bold text-white hover:underline underline-offset-8 decoration-primary/50">Speak with us</NuxtLink>
         </div>
       </div>
     </footer>
@@ -80,18 +80,18 @@ import { GlobeAltIcon, ChartBarIcon, ShieldCheckIcon } from '@heroicons/vue/24/o
 
 const whyChooseUs = [
   {
-    title: 'Direct API fulfillment',
-    description: 'We eliminate the middleman. Your bookings are issued directly through our Amadeus and Sabre clusters, ensuring instant ticketing and valid PNRs.',
+    title: 'Instant Booking',
+    description: 'No waiting around. Your bookings are confirmed instantly with thousands of airlines and hotels worldwide.',
     icon: GlobeAltIcon
   },
   {
-    title: 'Market-leading margins',
-    description: 'Bypass retail markups completely. Our partners access the same wholesale rates used by global OTA giants, allowing for significantly higher profitability.',
+    title: 'Better Profits',
+    description: 'Get access to direct prices that others don\'t see. Boost your earnings on every ticket and room you sell.',
     icon: ChartBarIcon
   },
   {
-    title: 'Bank-grade security',
-    description: 'Our platform is built on enterprise-grade infrastructure, with every transaction validated through multi-tiered encryption and fraud detection nodes.',
+    title: 'Secure & Reliable',
+    description: 'Your transactions and data are protected by top-tier security systems, ensuring peace of mind for you and your clients.',
     icon: ShieldCheckIcon
   }
 ]
