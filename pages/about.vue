@@ -1,24 +1,24 @@
 <template>
   <div class="bg-white">
     <!-- About Hero -->
-    <section class="pt-10 pb-24 bg-white relative overflow-hidden">
+    <section class="pt-10 pb-16 lg:pb-24 bg-white relative overflow-hidden">
       <!-- Decorative background blur -->
       <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
       
-      <div class="max-w-4xl mx-auto px-6 text-center space-y-8">
-        <h1 class="text-4xl lg:text-5xl font-bold text-neutral-900 leading-tight">
+      <div class="max-w-4xl mx-auto px-6 text-center space-y-6">
+        <h1 class="text-3xl lg:text-4xl font-bold text-neutral-900 leading-tight">
           Empowering the world's <br />
           <span class="text-primary">travel professionals.</span>
         </h1>
-        <p class="text-lg text-neutral-500 font-medium leading-relaxed max-w-2xl mx-auto">
+        <p class="text-base text-neutral-500 font-medium leading-relaxed max-w-2xl mx-auto">
           Flybeth gives travel agents the same powerful tools as the world's largest online booking sites.
         </p>
       </div>
     </section>
 
     <!-- Mission Section -->
-    <section class="py-24 bg-neutral-50 border-y border-neutral-100">
-      <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+    <section class="py-16 lg:py-24 bg-neutral-50 border-y border-neutral-100">
+      <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
         <div class="space-y-6">
           <h2 class="text-3xl font-bold text-neutral-900">Our mission</h2>
           <p class="text-base text-neutral-600 leading-relaxed font-medium">
@@ -27,11 +27,11 @@
           <div class="grid grid-cols-2 gap-8 pt-4">
             <div>
               <p class="text-3xl font-bold text-primary mb-1">2018</p>
-              <p class="text-xs font-bold text-neutral-400 uppercase tracking-widest">Established</p>
+              <p class="text-xs font-bold text-neutral-400 uppercase ">Established</p>
             </div>
             <div>
               <p class="text-3xl font-bold text-secondary mb-1">100+</p>
-              <p class="text-xs font-bold text-neutral-400 uppercase tracking-widest">Global Partners</p>
+              <p class="text-xs font-bold text-neutral-400 uppercase ">Global Partners</p>
             </div>
           </div>
         </div>
@@ -43,31 +43,31 @@
     </section>
 
     <!-- Why Flybeth -->
-    <section class="py-32 bg-white">
+    <section class="py-16 lg:py-24 bg-white">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-16 space-y-3">
-          <span class="text-xs font-bold text-primary uppercase tracking-widest">Your Advantage</span>
-          <h3 class="text-3xl lg:text-4xl font-bold text-neutral-900">Why partners choose us.</h3>
+        <div class="text-center mb-12 space-y-3">
+          <span class="text-xs font-bold text-primary uppercase ">Your Advantage</span>
+          <h3 class="text-2xl lg:text-3xl font-bold text-neutral-900">Why partners choose us.</h3>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
           <div v-for="feature in whyChooseUs" :key="feature.title" class="space-y-6 group">
-            <div class="w-16 h-16 bg-neutral-50 rounded-2xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-sm border border-neutral-100">
-              <component :is="feature.icon" class="h-8 w-8" />
+            <div class="w-12 h-12 bg-neutral-50 rounded-2xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-sm border border-neutral-100">
+              <component :is="feature.icon" class="h-6 w-6" />
             </div>
-            <h4 class="text-2xl  text-primary-dark ">{{ feature.title }}</h4>
-            <p class="text-neutral-500 font-medium leading-relaxed">{{ feature.description }}</p>
+            <h4 class="text-xl font-bold text-primary-dark ">{{ feature.title }}</h4>
+            <p class="text-sm text-neutral-500 font-medium leading-relaxed">{{ feature.description }}</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- CTA Section -->
-    <footer class="bg-neutral-900 py-20 text-center">
-      <div class="max-w-4xl mx-auto px-6 space-y-8">
-        <h2 class="text-3xl lg:text-4xl font-bold text-white leading-tight">Ready to join our network?</h2>
+    <footer class="bg-neutral-900 py-16 text-center">
+      <div class="max-w-4xl mx-auto px-6 space-y-6">
+        <h2 class="text-2xl lg:text-3xl font-bold text-white leading-tight">Ready to join our network?</h2>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <BaseButton to="/auth/register" variant="primary" size="md" class="px-12 shadow-2xl shadow-primary/20">Get started now</BaseButton>
+          <BaseButton to="/auth/register" variant="primary" size="md" class="px-8 py-3 font-bold text-sm shadow-2xl shadow-primary/20">Get started now</BaseButton>
           <NuxtLink to="/contact" class="text-sm font-bold text-white hover:underline underline-offset-8 decoration-primary/50">Speak with us</NuxtLink>
         </div>
       </div>

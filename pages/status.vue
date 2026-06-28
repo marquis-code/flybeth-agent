@@ -3,7 +3,7 @@
     <section class="py-24 bg-white relative">
       <div class="max-w-4xl mx-auto px-6 lg:px-10 space-y-16">
         <div class="text-center space-y-6">
-          <span class="text-xs font-bold text-primary uppercase tracking-widest">Live Updates</span>
+          <span class="text-xs font-bold text-primary uppercase ">Live Updates</span>
           <h1 class="text-4xl lg:text-5xl font-bold text-neutral-900 leading-tight">
              System <br />
              <span class="text-primary">status.</span>
@@ -17,10 +17,10 @@
         <div class="bg-neutral-50 rounded-[3rem] p-10 border border-neutral-100 shadow-sm relative overflow-hidden group">
            <div class="flex flex-col md:flex-row items-center justify-between gap-8 border-b border-neutral-200 pb-10">
               <div class="space-y-1 text-center md:text-left">
-                 <p class="text-xs font-bold text-neutral-400 uppercase tracking-widest">Overall Status</p>
-                 <h2 class="text-3xl font-bold text-green-600 tracking-tight">All systems operational</h2>
+                 <p class="text-xs font-bold text-neutral-400 uppercase ">Overall Status</p>
+                 <h2 class="text-3xl font-bold text-green-600 ">All systems operational</h2>
               </div>
-              <div class="px-6 py-2 bg-green-50 text-green-700 rounded-full text-xs font-bold border border-green-200 uppercase tracking-widest">
+              <div class="px-6 py-2 bg-green-50 text-green-700 rounded-full text-xs font-bold border border-green-200 uppercase ">
                  Running Smoothly
               </div>
            </div>

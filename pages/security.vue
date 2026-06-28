@@ -4,7 +4,7 @@
       <div class="max-w-4xl mx-auto px-6 lg:px-10 space-y-12">
         <div class="space-y-6">
         <div class="space-y-6">
-          <span class="text-xs font-bold text-primary uppercase tracking-widest">Enterprise Protection</span>
+          <span class="text-xs font-bold text-primary uppercase ">Enterprise Protection</span>
           <h1 class="text-4xl lg:text-5xl font-bold text-neutral-900 leading-tight">
             Our commitment to <br />
             <span class="text-primary">your security.</span>

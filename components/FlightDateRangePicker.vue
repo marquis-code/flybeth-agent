@@ -7,12 +7,12 @@
       class="w-full cursor-pointer flex flex-col justify-center select-none whitespace-nowrap"
       :class="variant === 'minimal' ? 'min-h-0 px-0 pt-0 pb-0' : 'px-4 pt-3 pb-2 min-h-[68px]'"
     >
-      <p v-if="variant !== 'minimal'" class="text-sm font-bold text-neutral-400 mb-0.5 group-hover:text-gray-900 transition-colors uppercase tracking-widest leading-none">
+      <p v-if="variant !== 'minimal'" class="text-sm font-bold text-neutral-400 mb-0.5 group-hover:text-gray-900 transition-colors uppercase  leading-none">
         {{ mode === 'oneway' ? 'Departure' : 'Trip Dates' }}
       </p>
       <div class="flex items-center gap-2">
         <Calendar class="h-3.5 w-3.5 text-primary shrink-0" />
-        <span class="text-sm font-bold tracking-tight">
+        <span class="text-sm font-bold ">
           <template v-if="mode === 'oneway'">
             <span :class="startDate ? 'text-gray-900' : 'text-gray-800'">
               {{ startDate ? formatDisplay(startDate) : 'Select date' }}
@@ -63,8 +63,8 @@
               </button>
 
               <div class="flex-1 grid gap-4 text-center" :class="isMobile ? 'grid-cols-1' : 'grid-cols-2'">
-                <p class="text-sm  text-gray-900 uppercase tracking-widest">{{ monthName(currentYear, currentMonth) }}</p>
-                <p v-if="!isMobile" class="text-sm  text-gray-900 uppercase tracking-widest">{{ monthName(nextMonthYear, nextMonthIndex) }}</p>
+                <p class="text-sm  text-gray-900 uppercase ">{{ monthName(currentYear, currentMonth) }}</p>
+                <p v-if="!isMobile" class="text-sm  text-gray-900 uppercase ">{{ monthName(nextMonthYear, nextMonthIndex) }}</p>
               </div>
 
               <button

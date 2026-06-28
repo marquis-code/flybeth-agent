@@ -23,10 +23,10 @@
             v-for="item in navItems" 
             :key="item.path" 
             :to="item.path"
-            class="px-5 py-2 text-[13px] font-bold tracking-wide transition-all duration-500 relative group"
+            class="px-5 py-2 text-[13px] font-bold  transition-all duration-500 relative group"
             :class="[
-              isScrolled ? 'text-primary-dark hover:text-primary' : 'text-white/80 hover:text-white',
-              $route.path === item.path ? (isScrolled ? 'text-primary' : 'text-white') : ''
+              isScrolled ? 'text-primary-dark hover:text-primary' : 'text-neutral-600 hover:text-primary',
+              $route.path === item.path ? 'text-primary' : ''
             ]"
           >
             {{ item.name }}
@@ -123,7 +123,7 @@
             <!-- User menu can stay proportional -->
           </template>
           <template v-else>
-            <NuxtLink to="/auth/login" class="text-[13px] font-bold tracking-wide transition-all duration-300"
+            <NuxtLink to="/auth/login" class="text-[13px] font-bold  transition-all duration-300"
                       :class="isScrolled ? 'text-primary-dark hover:text-primary' : 'text-white hover:text-primary'">
               Sign In
             </NuxtLink>

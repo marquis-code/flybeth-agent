@@ -2,29 +2,30 @@
   <div class="min-h-screen bg-white flex flex-col sm:items-center sm:justify-center p-0 sm:p-6 lg:p-10 font-sans">
     <div class="max-w-7xl w-full flex-1 grid lg:grid-cols-2 sm:gap-12 items-center bg-white rounded-none sm:rounded-[3rem] sm:border border-neutral-100 sm:shadow-2xl shadow-neutral-100 overflow-hidden min-h-screen sm:min-h-[85vh]">
       <!-- Brand & Visual Section -->
-      <div class="hidden lg:flex flex-col justify-between p-10 bg-neutral-50 relative overflow-hidden group h-full">
-        <div class="absolute inset-0 bg-white/20 backdrop-blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
-        
-        <div class="relative z-10 flex items-center space-x-3 cursor-pointer" @click="navigateTo('/')">
-          <img src="@/assets/img/logo.png" class="w-auto h-12" alt="logo"  />
-        </div>
+      <div class="hidden lg:flex p-6 relative h-full">
+        <div class="w-full h-full relative rounded-[2.5rem] overflow-hidden shadow-2xl bg-gradient-to-br from-[#060B28] via-[#0A125E] to-[#0A125E] flex flex-col justify-between p-12">
+          
+          <div class="relative z-10 flex items-center space-x-3 cursor-pointer" @click="navigateTo('/')">
+            <img src="@/assets/img/logo.png" class="w-auto h-10 brightness-0 invert" alt="logo"  />
+          </div>
 
-        <div class="relative z-10 space-y-8">
-          <h2 class="text-5xl  text-primary-dark leading-tight">
-            Manage your <br />
-            travel empire <br />
-            with <span class="text-secondary">precision.</span>
-          </h2>
-          <p class="text-lg text-neutral-400 font-medium max-w-sm border-l-2 border-secondary/20 pl-6 leading-relaxed">
-            Access global wholesale inventory and intelligent analytics through the Flybeth Agent Network.
-          </p>
-        </div>
+          <div class="relative z-10 space-y-8 text-white mt-auto mb-10">
+            <h2 class="text-4xl lg:text-[44px] font-bold leading-[1.15]">
+              Manage your <br />
+              travel empire <br />
+              with <span class="text-[#3B5BFF]">precision.</span>
+            </h2>
+            <p class="text-base lg:text-lg text-white/80 font-medium max-w-sm border-l-2 border-[#3B5BFF] pl-6 leading-relaxed">
+              Access global wholesale inventory and intelligent analytics through the Flybeth Agent Network.
+            </p>
+          </div>
 
-        <div class="relative z-10 pt-12 border-t border-neutral-200/50">
-          <div class="flex flex-wrap items-center gap-6 opacity-40 grayscale group-hover:opacity-100 transition-all duration-1000">
-             <span class="text-xl ">Trusted</span>
-             <span class="text-xl ">Reliable</span>
-             <span class="text-xl ">v1.0</span>
+          <div class="relative z-10 pt-8 border-t border-white/10">
+            <div class="flex flex-wrap items-center gap-6 text-white/60 font-semibold text-[13px]">
+               <span class="hover:text-white transition-colors cursor-pointer">Trusted</span>
+               <span class="hover:text-white transition-colors cursor-pointer">Reliable</span>
+               <span class="hover:text-white transition-colors cursor-pointer">v1.0</span>
+            </div>
           </div>
         </div>
       </div>

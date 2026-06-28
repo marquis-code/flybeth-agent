@@ -13,6 +13,7 @@ interface AncillaryPrices {
     bags: number
     seats: number
     insurance: number
+    vipSupport: number
 }
 
 const currencies = ref<Currency[]>([])
@@ -23,7 +24,7 @@ const currentCurrency = ref<Currency>({
     flag: 'https://flagcdn.com/us.svg',
     rate: 1
 })
-const ancillaryPrices = ref<AncillaryPrices>({ bags: 25, seats: 15, insurance: 12 })
+const ancillaryPrices = ref<AncillaryPrices>({ bags: 25, seats: 15, insurance: 12, vipSupport: 15 })
 const isLoading = ref(false)
 
 const flagMap: Record<string, string> = {
@@ -83,7 +84,8 @@ export function useSettings() {
                 ancillaryPrices.value = {
                     bags: configData.ancillaryPrices.bags ?? 25,
                     seats: configData.ancillaryPrices.seats ?? 15,
-                    insurance: configData.ancillaryPrices.insurance ?? 12
+                    insurance: configData.ancillaryPrices.insurance ?? 12,
+                    vipSupport: configData.ancillaryPrices.vipSupport ?? 15
                 }
             }
         } catch (error) {

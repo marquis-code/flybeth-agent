@@ -61,7 +61,7 @@
             <Menu class="h-5 w-5" />
           </button>
           <div class="flex items-baseline space-x-3">
-            <h1 class="text-xl font-bold text-gray-900 tracking-tight">{{ currentPageTitle }}</h1>
+            <h1 class="text-xl font-bold text-gray-900 ">{{ currentPageTitle }}</h1>
           </div>
         </div>
 
@@ -77,7 +77,7 @@
 
           <button @click="isSearchModalOpen = true" class="hidden sm:flex items-center bg-gray-50 hover:bg-white rounded-lg px-4 py-2 transition-all w-48 lg:w-64 border border-gray-100 hover:border-primary/20 group">
             <Search class="h-3.5 w-3.5 text-gray-400 group-hover:text-primary mr-3" />
-            <span class="text-sm text-gray-400 font-medium flex-grow tracking-wide text-left">Search everything...</span>
+            <span class="text-sm text-gray-400 font-medium flex-grow  text-left">Search everything...</span>
             <span class="text-sm text-gray-400 px-1.5 py-0.5 border border-gray-200 rounded">⌘K</span>
           </button>
           
@@ -87,7 +87,7 @@
           
           <!-- Currency Selection -->
           <button @click="isSettingsOpen = true" class="flex items-center space-x-2 bg-gray-50 hover:bg-white rounded-lg px-4 py-2 border border-gray-100 hover:border-primary/20 transition-all group">
-            <span class="text-sm  text-gray-900 group-hover:text-primary uppercase tracking-widest">{{ currentCurrency.code }}</span>
+            <span class="text-sm  text-gray-900 group-hover:text-primary uppercase ">{{ currentCurrency.code }}</span>
             <div class="w-6 h-4 overflow-hidden rounded shadow-sm border border-gray-100">
                <img :src="currentCurrency.flag" class="w-full h-full object-cover" />
             </div>
@@ -107,7 +107,7 @@
                <div class="max-h-80 overflow-y-auto custom-scrollbar">
                   <div v-if="notifications.length === 0" class="p-10 text-center text-gray-500">
                      <Bell class="h-8 w-8 mx-auto mb-2 opacity-20" />
-                     <p class="text-sm uppercase font-bold tracking-widest">No New Alerts</p>
+                     <p class="text-sm uppercase font-bold ">No New Alerts</p>
                   </div>
                   <div v-for="n in notifications" :key="n._id" @click="markAsRead(n._id)" class="p-4 border-b border-gray-50 hover:bg-gray-50 transition-colors cursor-pointer group">
                      <div class="flex items-start space-x-3">
@@ -208,7 +208,7 @@
         
         <div v-else-if="searchResults.length > 0" class="overflow-y-auto no-scrollbar">
            <div v-for="(group, type) in groupedResults" :key="type" class="p-2">
-              <h5 class="px-2 py-1 text-sm font-bold text-gray-400 uppercase tracking-widest bg-gray-50 rounded">{{ type }}s</h5>
+              <h5 class="px-2 py-1 text-sm font-bold text-gray-400 uppercase  bg-gray-50 rounded">{{ type }}s</h5>
               <div v-for="res in group" :key="res.id" @click="handleResultClick(res)" class="p-3 hover:bg-primary/5 rounded-lg cursor-pointer flex items-center justify-between group transition-colors">
                  <div class="flex items-center space-x-3">
                     <div class="p-1.5 bg-white border border-gray-100 rounded-lg group-hover:border-primary/20 transition-colors">
@@ -216,7 +216,7 @@
                     </div>
                     <div>
                        <p class="text-sm font-bold text-gray-800">{{ res.title }}</p>
-                       <p class="text-sm text-gray-400 font-medium tracking-wide">{{ res.subtitle }}</p>
+                       <p class="text-sm text-gray-400 font-medium ">{{ res.subtitle }}</p>
                     </div>
                  </div>
                  <ChevronRight class="h-3 w-3 text-gray-500 group-hover:text-primary transition-colors" />

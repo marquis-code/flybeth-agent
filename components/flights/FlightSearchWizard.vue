@@ -88,11 +88,11 @@
       <Transition name="slide-up">
         <div v-if="showAdvanced" class="mb-10 p-8 bg-gray-50/50 rounded-[2rem] border border-gray-100 grid grid-cols-1 md:grid-cols-4 gap-6 animate-in fade-in slide-in-from-top-4">
           <div class="space-y-3">
-            <label class="text-sm font-medium text-gray-800 uppercase tracking-widest">Preferred Airlines</label>
+            <label class="text-sm font-medium text-gray-800 uppercase ">Preferred Airlines</label>
             <AnimatedInput v-model="advancedParams.airline" label="e.g. Emirates" :icon="TicketIcon" />
           </div>
           <div class="space-y-3">
-            <label class="text-sm font-medium text-gray-800 uppercase tracking-widest">Max Stops</label>
+            <label class="text-sm font-medium text-gray-800 uppercase ">Max Stops</label>
             <select v-model="advancedParams.stops" class="w-full h-[58px] px-5 bg-white border border-gray-200 rounded-2xl text-sm focus:border-primary focus:ring-0 transition-all">
               <option value="">Any Stops</option>
               <option value="0">Direct Only</option>
@@ -101,7 +101,7 @@
             </select>
           </div>
           <div class="space-y-3">
-            <label class="text-sm font-medium text-gray-800 uppercase tracking-widest">Fare Type</label>
+            <label class="text-sm font-medium text-gray-800 uppercase ">Fare Type</label>
             <div class="flex p-1 bg-white border border-gray-200 rounded-2xl h-[58px]">
               <button 
                 @click="advancedParams.refundable = true"
@@ -116,7 +116,7 @@
             </div>
           </div>
           <div class="space-y-3">
-            <label class="text-sm font-medium text-gray-800 uppercase tracking-widest">GDS Sources</label>
+            <label class="text-sm font-medium text-gray-800 uppercase ">GDS Sources</label>
             <div class="flex gap-2">
               <button 
                 v-for="source in ['Amadeus', 'Duffel']" :key="source"
@@ -304,7 +304,7 @@
               <!-- Flight Route -->
               <div class="flex-1 flex items-center justify-center gap-6 lg:gap-10">
                 <div class="text-center">
-                  <p class="text-sm  text-gray-900 tracking-tight">{{ flight.departureTime || '09:00' }}</p>
+                  <p class="text-sm  text-gray-900 ">{{ flight.departureTime || '09:00' }}</p>
                   <p class="text-sm font-bold text-gray-800 mt-1">{{ flight.origin || 'ABC' }}</p>
                 </div>
                 
@@ -317,11 +317,11 @@
                       <PaperAirplaneIcon class="h-4 w-4 text-primary group-hover:translate-x-10 transition-transform duration-1000" />
                     </div>
                   </div>
-                  <p class="text-sm font-medium text-gray-800 mt-2 uppercase tracking-wider">{{ flight.duration || '' }}</p>
+                  <p class="text-sm font-medium text-gray-800 mt-2 uppercase ">{{ flight.duration || '' }}</p>
                 </div>
 
                 <div class="text-center">
-                  <p class="text-sm  text-gray-900 tracking-tight">{{ flight.arrivalTime || '15:45' }}</p>
+                  <p class="text-sm  text-gray-900 ">{{ flight.arrivalTime || '15:45' }}</p>
                   <p class="text-sm font-bold text-gray-800 mt-1">{{ flight.destination || 'XYZ' }}</p>
                 </div>
               </div>
@@ -330,7 +330,7 @@
               <div class="flex items-center lg:flex-col lg:items-end gap-4 border-t lg:border-t-0 lg:border-l border-gray-100 pt-6 lg:pt-0 lg:pl-8 shrink-0">
                 <div class="text-left lg:text-right">
                   <p class="text-sm font-medium text-gray-800 line-through">${{ (flight.price * 1.2).toFixed(2) }}</p>
-                  <p class="text-lg  text-gray-900 tracking-tight">${{ flight.price?.toFixed(2) }}</p>
+                  <p class="text-lg  text-gray-900 ">${{ flight.price?.toFixed(2) }}</p>
                   <p class="text-sm font-semibold text-primary mt-0.5">+ {{ flight.agentCommission ? '$' + flight.agentCommission.toFixed(2) : '$0' }} commission</p>
                 </div>
                 <BaseButton @click="selectFlight(flight)" variant="primary" class="rounded-xl px-6 h-11 text-sm font-bold shadow-lg active:scale-95 transition-all">Book Selection</BaseButton>

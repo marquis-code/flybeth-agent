@@ -2,7 +2,7 @@
   <div class="bg-white border border-gray-100 rounded-[1.5rem] p-4 lg:p-5 hover:border-primary/40 hover:shadow-[0_20px_50px_rgba(0,0,0,0.04)] transition-all duration-500 group relative overflow-hidden flex flex-col lg:flex-row gap-6 lg:items-center">
     
     <!-- Premium Badge -->
-    <div v-if="offer.priceWithCommission < 500" class="absolute top-0 left-8 px-4 py-1.5 bg-emerald-500 text-sm  text-white rounded-b-xl shadow-sm uppercase tracking-widest z-10">
+    <div v-if="offer.priceWithCommission < 500" class="absolute top-0 left-8 px-4 py-1.5 bg-emerald-500 text-sm  text-white rounded-b-xl shadow-sm uppercase  z-10">
       Great Value
     </div>
 
@@ -12,10 +12,10 @@
         <img :src="offer.airlineLogo" :alt="offer.airline" class="w-full h-full object-contain" />
       </div>
       <div class="lg:w-full">
-        <h4 class="text-sm  text-gray-900 tracking-tight leading-none uppercase truncate">{{ offer.airline }}</h4>
+        <h4 class="text-sm  text-gray-900  leading-none uppercase truncate">{{ offer.airline }}</h4>
         <div class="flex items-center justify-center gap-1.5 mt-2">
-           <span class="px-1.5 py-0.5 bg-gray-900 text-white text-sm  rounded uppercase tracking-tighter">{{ offer.flightNumbers[0] }}</span>
-           <span class="text-sm font-medium text-gray-800 uppercase tracking-tighter">{{ offer.cabinClass.toLowerCase() }}</span>
+           <span class="px-1.5 py-0.5 bg-gray-900 text-white text-sm  rounded uppercase er">{{ offer.flightNumbers[0] }}</span>
+           <span class="text-sm font-medium text-gray-800 uppercase er">{{ offer.cabinClass.toLowerCase() }}</span>
         </div>
       </div>
     </div>
@@ -23,8 +23,8 @@
     <!-- 2. Flight Path (Creative Visualization) -->
     <div class="flex-1 flex items-center justify-between gap-4 lg:gap-8 px-4 lg:px-6 border-y lg:border-y-0 lg:border-x border-gray-50 py-4 lg:py-0">
       <div class="text-left">
-        <p class="text-sm font-semibold text-gray-800 uppercase tracking-[0.15em] mb-1">{{ offer.origin }}</p>
-        <p class="text-2xl  text-gray-900 tracking-tight leading-none">{{ formatTime(offer.departureTime) }}</p>
+        <p class="text-sm font-semibold text-gray-800 uppercase  mb-1">{{ offer.origin }}</p>
+        <p class="text-2xl  text-gray-900  leading-none">{{ formatTime(offer.departureTime) }}</p>
       </div>
 
       <div class="flex-1 flex flex-col items-center">
@@ -38,16 +38,16 @@
            </div>
         </div>
         <div class="text-center">
-           <p class="text-sm  text-gray-900 uppercase tracking-[0.15em] leading-none">{{ formatDuration(offer.duration) }}</p>
-           <p class="text-sm font-bold mt-1,5 uppercase tracking-tighter" :class="offer.stops === 0 ? 'text-emerald-500' : 'text-amber-500'">
+           <p class="text-sm  text-gray-900 uppercase  leading-none">{{ formatDuration(offer.duration) }}</p>
+           <p class="text-sm font-bold mt-1,5 uppercase er" :class="offer.stops === 0 ? 'text-emerald-500' : 'text-amber-500'">
               {{ offer.stops === 0 ? 'Direct' : `${offer.stops} Stop${offer.stops > 1 ? 's' : ''}` }}
            </p>
         </div>
       </div>
 
       <div class="text-right">
-        <p class="text-sm font-semibold text-gray-800 uppercase tracking-[0.15em] mb-1">{{ offer.destination }}</p>
-        <p class="text-2xl  text-gray-900 tracking-tight leading-none">{{ formatTime(offer.arrivalTime) }}</p>
+        <p class="text-sm font-semibold text-gray-800 uppercase  mb-1">{{ offer.destination }}</p>
+        <p class="text-2xl  text-gray-900  leading-none">{{ formatTime(offer.arrivalTime) }}</p>
       </div>
     </div>
 
@@ -73,12 +73,12 @@
       </div>
 
       <div class="flex flex-col lg:items-end gap-0.5 mb-4">
-        <p class="text-sm font-semibold text-gray-800 uppercase tracking-widest">Guaranteed Price</p>
+        <p class="text-sm font-semibold text-gray-800 uppercase ">Guaranteed Price</p>
         <div class="flex items-baseline gap-0.5">
-          <span class="text-[32px]  text-gray-900 tracking-tighter leading-none">{{ formatPrice(offer.priceWithCommission) }}</span>
+          <span class="text-[32px]  text-gray-900 er leading-none">{{ formatPrice(offer.priceWithCommission) }}</span>
         </div>
         <div class="flex items-center gap-2 mt-0.5">
-           <div class="px-1.5 py-0.5 bg-emerald-50 text-emerald-500 text-sm  rounded uppercase tracking-tighter">
+           <div class="px-1.5 py-0.5 bg-emerald-50 text-emerald-500 text-sm  rounded uppercase er">
               + {{ formatPrice(offer.priceWithCommission - offer.price) }} Margin
            </div>
         </div>
@@ -86,7 +86,7 @@
 
       <button 
         @click="$emit('select', offer)"
-        class="w-full lg:w-36 h-12 bg-neutral-900 text-white rounded-xl  text-sm uppercase tracking-[0.1em] hover:bg-primary active:scale-95 transition-all shadow-md shadow-neutral-100 hover:shadow-primary/30"
+        class="w-full lg:w-36 h-12 bg-neutral-900 text-white rounded-xl  text-sm uppercase  hover:bg-primary active:scale-95 transition-all shadow-md shadow-neutral-100 hover:shadow-primary/30"
       >
         Book Now
       </button>

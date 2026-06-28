@@ -36,7 +36,7 @@
         </span>
       </div>
 
-      <p v-if="selectedLocationSub && !showDropdown" class="text-sm text-neutral-400 font-bold mt-0.5 truncate uppercase tracking-tight">
+      <p v-if="selectedLocationSub && !showDropdown" class="text-sm text-neutral-400 font-bold mt-0.5 truncate uppercase ">
         {{ selectedLocationSub }}
       </p>
     </div>
@@ -90,7 +90,7 @@
 
             <!-- Search results -->
             <div v-if="results.length" class="max-h-[340px] overflow-y-auto rounded-b-2xl no-scrollbar">
-              <p class="px-5 pt-3 pb-1.5 text-sm  text-neutral-400 uppercase tracking-widest">
+              <p class="px-5 pt-3 pb-1.5 text-sm  text-neutral-400 uppercase ">
                 Cities
               </p>
               <div
@@ -106,7 +106,7 @@
                   <p class="text-sm font-bold text-gray-900 group-hover/item:text-primary transition-colors truncate">
                     {{ res.address?.cityName || res.name }}, {{ res.address?.countryName || res.address?.countryCode }}
                   </p>
-                  <p class="text-sm text-neutral-400 font-bold truncate mt-0.5 uppercase tracking-tighter">
+                  <p class="text-sm text-neutral-400 font-bold truncate mt-0.5 uppercase er">
                     {{ res.name }}
                   </p>
                 </div>
@@ -119,18 +119,18 @@
             <!-- Loading -->
             <div v-else-if="isLoading" class="py-10 text-center rounded-b-2xl">
               <div class="animate-spin h-6 w-6 border-2 border-gray-200 border-t-primary rounded-full mx-auto mb-3" />
-              <p class="text-sm text-neutral-400  uppercase tracking-widest">Searching cities...</p>
+              <p class="text-sm text-neutral-400  uppercase ">Searching cities...</p>
             </div>
 
             <!-- No results -->
             <div v-else-if="!isLoading && searchQuery.length >= 2" class="py-10 text-center rounded-b-2xl">
               <MapPin class="h-8 w-8 text-gray-100 mx-auto mb-3" />
-              <p class="text-sm text-gray-800  uppercase tracking-widest">No results for "{{ searchQuery }}"</p>
+              <p class="text-sm text-gray-800  uppercase ">No results for "{{ searchQuery }}"</p>
             </div>
 
             <!-- Popular destinations -->
             <div v-else class="pb-3 rounded-b-2xl">
-              <p class="px-5 pt-3 pb-2 text-sm  text-neutral-400 uppercase tracking-widest">
+              <p class="px-5 pt-3 pb-2 text-sm  text-neutral-400 uppercase ">
                 Popular Destinations
               </p>
               <div class="grid grid-cols-2 gap-0">
@@ -147,7 +147,7 @@
                     <p class="text-sm font-bold text-gray-800 group-hover/sug:text-gray-900 transition-colors truncate leading-tight">
                       {{ dest.city }}
                     </p>
-                    <p class="text-sm  text-primary  tracking-widest uppercase">{{ dest.iataCode }}</p>
+                    <p class="text-sm  text-primary   uppercase">{{ dest.iataCode }}</p>
                   </div>
                 </div>
               </div>

@@ -12,7 +12,7 @@
     <section class="py-24 bg-white relative">
       <div class="max-w-4xl mx-auto px-6 lg:px-10 space-y-16">
         <div class="space-y-6">
-          <span class="text-xs font-bold text-primary uppercase tracking-widest">Our Platform</span>
+          <span class="text-xs font-bold text-primary uppercase ">Our Platform</span>
           <h1 class="text-4xl lg:text-5xl font-bold text-neutral-900 leading-tight">
              {{ pageContent.title }}
           </h1>
@@ -33,7 +33,7 @@
            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10"></div>
            <img :src="pageContent.image" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-1000" />
            <div class="absolute bottom-10 left-10 z-20 space-y-2">
-              <span class="text-xs font-bold text-primary uppercase tracking-widest bg-white/90 px-3 py-1 rounded-full">System Active</span>
+              <span class="text-xs font-bold text-primary uppercase  bg-white/90 px-3 py-1 rounded-full">System Active</span>
               <h3 class="text-2xl font-bold text-white shadow-sm">{{ pageContent.ctaTitle }}</h3>
            </div>
         </div>

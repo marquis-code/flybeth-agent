@@ -21,7 +21,7 @@
             <div :class="width" class="w-screen bg-white flex flex-col shadow-2xl border-gray-100">
               <div class="border-b border-gray-50 flex items-center justify-center">
                 <div class="px-6 py-4 w-full max-w-4xl flex items-center justify-between">
-                  <h3 class="text-sm  text-gray-900 uppercase tracking-widest">{{ title }}</h3>
+                  <h3 class="text-sm  text-gray-900 uppercase ">{{ title }}</h3>
                   <button @click="$emit('close')" class="p-1.5 rounded-lg hover:bg-gray-50 transition-colors text-gray-800 hover:text-gray-900">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />

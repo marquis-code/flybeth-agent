@@ -12,10 +12,10 @@
               </button>
               <div>
                 <div class="flex items-center gap-2">
-                  <h2 class="text-sm lg:text-sm  text-gray-900 tracking-tight lowercase first-letter:uppercase">{{ query.origin }} to {{ query.destination }}</h2>
-                  <div class="px-2 py-0.5 bg-primary/10 text-primary text-sm  rounded-full uppercase tracking-widest">Live</div>
+                  <h2 class="text-sm lg:text-sm  text-gray-900  lowercase first-letter:uppercase">{{ query.origin }} to {{ query.destination }}</h2>
+                  <div class="px-2 py-0.5 bg-primary/10 text-primary text-sm  rounded-full uppercase ">Live</div>
                 </div>
-                <p class="text-sm font-medium text-gray-800 uppercase tracking-widest mt-0.5">
+                <p class="text-sm font-medium text-gray-800 uppercase  mt-0.5">
                   {{ formatDate(query.departureDate) }} • {{ query.adults }} Traveler(s) • {{ query.cabinClass }}
                 </p>
               </div>
@@ -24,7 +24,7 @@
             <div class="flex items-center gap-3">
               <div class="hidden lg:flex items-center gap-2 px-4 py-2 bg-gray-50 rounded-xl border border-gray-100">
                 <Sparkles class="h-3.5 w-3.5 text-primary" />
-                <span class="text-sm  text-gray-900 uppercase tracking-widest">{{ results.length }} Matches</span>
+                <span class="text-sm  text-gray-900 uppercase ">{{ results.length }} Matches</span>
               </div>
               <button @click="$emit('close')" class="lg:hidden w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-800">
                 <Filter class="h-4 w-4" />
@@ -41,12 +41,12 @@
             <div class="space-y-8">
               <div class="flex items-center justify-between">
                 <h3 class="text-sm font-semibold text-gray-800 uppercase ">Refine Search</h3>
-                <button @click="resetFilters" class="text-sm  text-primary uppercase tracking-widest hover:underline">Clear All</button>
+                <button @click="resetFilters" class="text-sm  text-primary uppercase  hover:underline">Clear All</button>
               </div>
 
               <!-- Stops -->
               <div class="space-y-4">
-                <label class="text-sm  text-gray-900 uppercase tracking-widest">Flight Stops</label>
+                <label class="text-sm  text-gray-900 uppercase ">Flight Stops</label>
                 <div class="space-y-3">
                   <label v-for="stopIdx in [0, 1, 2]" :key="stopIdx" class="flex items-center gap-3 cursor-pointer group" @click="toggleStopFilter(stopIdx)">
                     <div 
@@ -64,7 +64,7 @@
 
               <!-- Airlines -->
               <div class="space-y-4">
-                <label class="text-sm  text-gray-900 uppercase tracking-widest">Preferred Airlines</label>
+                <label class="text-sm  text-gray-900 uppercase ">Preferred Airlines</label>
                 <div class="space-y-3 max-h-[250px] overflow-y-auto pr-2 no-scrollbar">
                   <label v-for="airline in uniqueAirlines" :key="airline" class="flex items-center gap-3 cursor-pointer group" @click="toggleAirlineFilter(airline)">
                     <div 
@@ -80,7 +80,7 @@
 
               <!-- Price Slider -->
               <div class="space-y-5">
-                <label class="text-sm  text-gray-900 uppercase tracking-widest">Price Limit</label>
+                <label class="text-sm  text-gray-900 uppercase ">Price Limit</label>
                 <div class="space-y-4">
                   <input 
                     type="range" 
@@ -101,7 +101,7 @@
               <!-- Protection Overlay -->
                <div class="bg-neutral-900 rounded-[2.5rem] p-8 text-white relative overflow-hidden group mt-10">
                   <div class="absolute top-0 right-0 w-24 h-24 bg-primary/20 rounded-full translate-x-12 -translate-y-12 blur-2xl"></div>
-                  <h4 class="text-sm  uppercase tracking-widest text-white/80 mb-4">Agent Tip</h4>
+                  <h4 class="text-sm  uppercase  text-white/80 mb-4">Agent Tip</h4>
                   <p class="text-sm font-bold leading-relaxed">Book with 'Secure Settlement' to guarantee pricing for 24 hours.</p>
                </div>
             </div>
@@ -112,7 +112,7 @@
             <div class="max-w-[900px] mx-auto space-y-6 pb-20">
               <div v-if="filteredResults.length > 0" class="flex items-center justify-between px-2">
                  <p class="text-sm font-semibold text-gray-800 uppercase ">{{ filteredResults.length }} Results Found</p>
-                 <div class="flex items-center gap-2 text-sm  text-primary uppercase tracking-widest">
+                 <div class="flex items-center gap-2 text-sm  text-primary uppercase ">
                     Sorted by: Best Value
                  </div>
               </div>
@@ -131,9 +131,9 @@
                 <div class="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-8">
                   <Search class="h-10 w-10 text-gray-600" />
                 </div>
-                <h4 class="text-sm  text-gray-900 uppercase tracking-widest">No Matches Found</h4>
+                <h4 class="text-sm  text-gray-900 uppercase ">No Matches Found</h4>
                 <p class="text-sm text-gray-800 mt-3 font-bold px-12">Adjust your filters to see more available departures for this route.</p>
-                <button @click="resetFilters" class="mt-10 px-8 py-4 bg-primary text-white rounded-2xl  text-sm uppercase tracking-widest shadow-lg shadow-primary/20">Reset All Filters</button>
+                <button @click="resetFilters" class="mt-10 px-8 py-4 bg-primary text-white rounded-2xl  text-sm uppercase  shadow-lg shadow-primary/20">Reset All Filters</button>
               </div>
             </div>
           </main>

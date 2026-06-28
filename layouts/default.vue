@@ -14,12 +14,12 @@
             <img src="@/assets/img/logo.png" class="h-10 w-auto brightness-0 invert" alt="Flybeth" />
             <div class="space-y-6">
               <p class="text-neutral-500 font-medium max-w-sm leading-relaxed text-sm">
-                <span class="text-white font-bold tracking-widest uppercase text-xs block mb-2">Headquarters</span>
+                <span class="text-white font-bold  uppercase text-xs block mb-2">Headquarters</span>
                 1880 S Dairy Ashford Rd, Suite 207, Houston, TX 77077 United States.
               </p>
               <div class="flex flex-col space-y-2">
-                <a href="tel:+1844FLYBETH" class="text-xl  text-white hover:text-primary transition-colors tracking-tighter">+1 844 FLYBETH</a>
-                <a href="mailto:hello@flybeth.com" class="text-sm font-bold text-primary tracking-widest uppercase">hello@flybeth.com</a>
+                <a href="tel:+1844FLYBETH" class="text-xl  text-white hover:text-primary transition-colors er">+1 844 FLYBETH</a>
+                <a href="mailto:hello@flybeth.com" class="text-sm font-bold text-primary  uppercase">hello@flybeth.com</a>
               </div>
             </div>
           </div>

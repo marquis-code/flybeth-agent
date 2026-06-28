@@ -12,7 +12,7 @@ export const useRealtime = () => {
   const connect = () => {
     if (socket.value && socket.value.connected) return;
 
-    const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : '';
+    const token = useCookie('accessToken').value || '';
     
     // We allow connection without token for guest chat, 
     // but we log it for debugging

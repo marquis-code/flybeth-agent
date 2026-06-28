@@ -17,7 +17,7 @@
         class="flex-grow bg-transparent border-none outline-none text-sm font-bold text-gray-900 min-w-[150px] placeholder:text-gray-800"
       />
     </div>
-    <p class="text-sm text-gray-800 font-bold uppercase tracking-widest px-2">Press enter, comma, or space to add address</p>
+    <p class="text-sm text-gray-800 font-bold uppercase  px-2">Press enter, comma, or space to add address</p>
   </div>
 </template>
 

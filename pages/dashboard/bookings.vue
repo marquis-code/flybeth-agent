@@ -4,7 +4,7 @@
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
       <div class="space-y-0.5">
         <h2 class="text-2xl font-bold text-gray-900">Bookings</h2>
-        <p class="text-sm text-gray-400 font-bold uppercase tracking-widest">View and manage your traveler bookings</p>
+        <p class="text-sm text-gray-400 font-bold uppercase ">View and manage your traveler bookings</p>
       </div>
       <div class="flex items-center space-x-2">
          <button class="px-4 py-2 text-sm font-bold border border-gray-200 rounded-lg bg-white text-gray-600 hover:bg-gray-50 transition-colors" @click="showWizard = !showWizard">
@@ -23,7 +23,7 @@
           v-for="wt in wizardTabs" 
           :key="wt.name"
           @click="wizardTab = wt.name"
-          class="px-6 py-2 text-sm  uppercase tracking-widest rounded-xl transition-all"
+          class="px-6 py-2 text-sm  uppercase  rounded-xl transition-all"
           :class="wizardTab === wt.name ? 'bg-primary text-white' : 'text-gray-400 hover:text-gray-900'"
         >
           {{ wt.label }}
@@ -32,7 +32,7 @@
       <div class="bg-white rounded-3xl p-12 border border-gray-100 flex flex-col items-center justify-center text-center space-y-4">
           <MagnifyingGlassIcon class="h-10 w-10 text-gray-100" />
           <div>
-             <p class="text-sm  text-gray-900 uppercase tracking-widest">Search for {{ wizardTab }}</p>
+             <p class="text-sm  text-gray-900 uppercase ">Search for {{ wizardTab }}</p>
              <p class="text-sm text-gray-400 font-medium">Use the global search or specific tabs to find inventory</p>
           </div>
       </div>
@@ -45,7 +45,7 @@
             v-for="tab in serviceTabs" 
             :key="tab.name"
             @click="activeTab = tab.name"
-            class="px-6 py-2.5 rounded-xl text-sm  uppercase tracking-widest transition-all whitespace-nowrap"
+            class="px-6 py-2.5 rounded-xl text-sm  uppercase  transition-all whitespace-nowrap"
             :class="activeTab === tab.name ? 'bg-primary/5 text-primary border border-primary/10' : 'text-gray-400 hover:text-gray-600 border border-transparent'"
           >
             {{ tab.label }}
@@ -86,7 +86,7 @@
                          <div class="h-20 w-20 bg-gray-50 rounded-full flex items-center justify-center mb-6">
                             <TicketIcon class="h-10 w-10 text-gray-200" />
                          </div>
-                         <h3 class="text-sm  text-gray-400 uppercase tracking-widest">No Bookings Found</h3>
+                         <h3 class="text-sm  text-gray-400 uppercase ">No Bookings Found</h3>
                          <p class="text-sm text-gray-400 mt-2 font-medium">No travel records matched your criteria.</p>
                       </div>
                    </td>
@@ -97,12 +97,12 @@
                          <div class="h-8 w-8 rounded-lg bg-gray-50 flex items-center justify-center border border-gray-100 font-mono text-sm  text-gray-500 group-hover:bg-primary group-hover:text-white transition-all">
                             ID
                          </div>
-                         <span class="font-mono text-sm  text-gray-900 tracking-tighter">{{ item.pnr }}</span>
+                         <span class="font-mono text-sm  text-gray-900 er">{{ item.pnr }}</span>
                       </div>
                    </td>
                    <td class="px-8 py-5">
                       <div class="flex flex-col">
-                         <span class="text-sm  text-gray-900 uppercase tracking-tight">{{ item.contactDetails?.name || 'Unknown' }}</span>
+                         <span class="text-sm  text-gray-900 uppercase ">{{ item.contactDetails?.name || 'Unknown' }}</span>
                          <span class="text-sm text-gray-400 font-bold uppercase mt-0.5">{{ item.user?.email || item.contactDetails?.email }}</span>
                       </div>
                    </td>
@@ -111,14 +111,14 @@
                          <div class="p-1.5 bg-gray-50 rounded-lg group-hover:bg-white transition-colors">
                             <component :is="getTypeIcon(item)" class="h-3.5 w-3.5 text-gray-400 group-hover:text-primary" />
                          </div>
-                         <span class="text-sm  text-gray-500 uppercase tracking-widest">{{ getServiceType(item) }}</span>
+                         <span class="text-sm  text-gray-500 uppercase ">{{ getServiceType(item) }}</span>
                       </div>
                    </td>
                    <td class="px-8 py-5">
-                      <span class="px-2.5 py-1 rounded-lg text-sm  uppercase tracking-tighter border transition-colors" :class="statusClass(item.status)">{{ item.status }}</span>
+                      <span class="px-2.5 py-1 rounded-lg text-sm  uppercase er border transition-colors" :class="statusClass(item.status)">{{ item.status }}</span>
                    </td>
                    <td class="px-8 py-5 text-right">
-                      <span class="text-sm  text-gray-900 tracking-tight">${{ item.pricing?.totalAmount?.toLocaleString() }}</span>
+                      <span class="text-sm  text-gray-900 ">${{ item.pricing?.totalAmount?.toLocaleString() }}</span>
                    </td>
                    <td class="px-8 py-5 text-right">
                       <button class="p-2.5 hover:bg-white hover:shadow-sm rounded-xl transition-all border border-transparent hover:border-gray-100">
@@ -138,21 +138,21 @@
           <div class="flex justify-between items-start">
              <div class="space-y-1.5">
                 <p class="text-sm  text-white/40 uppercase ">Traveler</p>
-                <h4 class="text-2xl  tracking-tight uppercase">{{ selectedBooking.contactDetails?.name }}</h4>
+                <h4 class="text-2xl   uppercase">{{ selectedBooking.contactDetails?.name }}</h4>
              </div>
              <div class="text-right">
                 <p class="text-sm  text-white/40 uppercase ">Total Price</p>
-                <p class="text-3xl  text-white tracking-tighter">${{ selectedBooking.pricing?.totalAmount?.toLocaleString() }}</p>
+                <p class="text-3xl  text-white er">${{ selectedBooking.pricing?.totalAmount?.toLocaleString() }}</p>
              </div>
           </div>
        </div>
 
        <div class="grid grid-cols-2 gap-4">
-          <button class="flex items-center justify-center gap-3 p-5 bg-gray-50 rounded-3xl text-sm  uppercase tracking-widest" @click="handlePrint">
+          <button class="flex items-center justify-center gap-3 p-5 bg-gray-50 rounded-3xl text-sm  uppercase " @click="handlePrint">
              <PrinterIcon class="h-4 w-4" />
              Print Ticket
           </button>
-          <button class="flex items-center justify-center gap-3 p-5 bg-gray-50 rounded-3xl text-sm  uppercase tracking-widest">
+          <button class="flex items-center justify-center gap-3 p-5 bg-gray-50 rounded-3xl text-sm  uppercase ">
              <EnvelopeIcon class="h-4 w-4" />
              Send Invoice
           </button>
@@ -160,7 +160,7 @@
 
        <div class="space-y-8">
           <div v-if="selectedBooking.flights?.length" class="p-6 bg-gray-50 rounded-3xl border border-gray-100">
-             <h5 class="text-sm  text-gray-900 uppercase tracking-widest mb-4">Flights</h5>
+             <h5 class="text-sm  text-gray-900 uppercase  mb-4">Flights</h5>
              <div v-for="(f, i) in selectedBooking.flights" :key="i" class="flex justify-between items-center text-sm">
                 <span>{{ f.flight?.flightNumber }} • {{ f.flight?.origin }} to {{ f.flight?.destination }}</span>
                 <span>{{ formatDate(f.flight?.departureDate) }}</span>
@@ -168,10 +168,41 @@
           </div>
 
           <div v-if="selectedBooking.stays?.length" class="p-6 bg-gray-50 rounded-3xl border border-gray-100">
-             <h5 class="text-sm  text-gray-900 uppercase tracking-widest mb-4">Hotels</h5>
+             <h5 class="text-sm  text-gray-900 uppercase  mb-4">Hotels</h5>
              <div v-for="(s, i) in selectedBooking.stays" :key="i" class="flex justify-between items-center text-sm">
                 <span>{{ s.stay?.name }}</span>
                 <span>{{ formatDate(s.checkIn) }}</span>
+             </div>
+          </div>
+       </div>
+
+       <!-- Pricing Breakdown -->
+       <div class="space-y-4">
+          <h5 class="text-sm font-bold text-gray-900 uppercase">Pricing Breakdown</h5>
+          <div class="p-6 bg-gray-50 rounded-3xl border border-gray-100 space-y-3">
+             <div class="flex justify-between items-center text-sm">
+                <span class="text-gray-500">Base Fare (Incl. Platform Margins)</span>
+                <span class="font-bold text-gray-900">${{ selectedBooking.pricing?.baseFare?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) || '0.00' }}</span>
+             </div>
+             <div class="flex justify-between items-center text-sm">
+                <span class="text-gray-500">Taxes</span>
+                <span class="font-bold text-gray-900">${{ selectedBooking.pricing?.taxes?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) || '0.00' }}</span>
+             </div>
+             <div v-if="selectedBooking.pricing?.vipSupportAmount" class="flex justify-between items-center text-sm">
+                <span class="text-gray-500">VIP Priority Support</span>
+                <span class="font-bold text-gray-900">${{ selectedBooking.pricing?.vipSupportAmount?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) || '0.00' }}</span>
+             </div>
+             <div v-if="selectedBooking.pricing?.insuranceAmount" class="flex justify-between items-center text-sm">
+                <span class="text-gray-500">Insurance</span>
+                <span class="font-bold text-gray-900">${{ selectedBooking.pricing?.insuranceAmount?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) || '0.00' }}</span>
+             </div>
+             <div v-if="selectedBooking.pricing?.platformCommission" class="flex justify-between items-center text-sm pt-2 border-t border-gray-200">
+                <span class="text-gray-500">Platform Commission (Deducted)</span>
+                <span class="font-bold text-rose-500">-${{ selectedBooking.pricing?.platformCommission?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) || '0.00' }}</span>
+             </div>
+             <div v-if="selectedBooking.pricing?.tenantMarkup" class="flex justify-between items-center text-sm">
+                <span class="text-gray-500">Your Markup (Profit)</span>
+                <span class="font-bold text-emerald-500">+${{ selectedBooking.pricing?.tenantMarkup?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) || '0.00' }}</span>
              </div>
           </div>
        </div>
@@ -180,7 +211,7 @@
        <div class="pt-10 border-t border-gray-50">
           <button 
             v-if="selectedBooking.status !== 'CANCELLED'"
-            class="w-full py-5 border-2 border-dashed border-rose-100 text-rose-500 text-sm  uppercase tracking-widest rounded-[2rem] hover:bg-rose-50 hover:border-rose-200 transition-all"
+            class="w-full py-5 border-2 border-dashed border-rose-100 text-rose-500 text-sm  uppercase  rounded-[2rem] hover:bg-rose-50 hover:border-rose-200 transition-all"
             @click="handleCancelRequest(selectedBooking)"
           >
              Cancel Entire Booking

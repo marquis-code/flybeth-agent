@@ -26,7 +26,7 @@
           v-for="tab in tabs"
           :key="tab.name"
           @click="currentTab = tab.name"
-          class="flex items-center gap-2 px-6 py-5 text-sm font-bold tracking-tight transition-all border-b-2 whitespace-nowrap group translate-y-[1px]"
+          class="flex items-center gap-2 px-6 py-5 text-sm font-bold  transition-all border-b-2 whitespace-nowrap group translate-y-[1px]"
           :class="currentTab === tab.name
             ? 'text-primary border-primary'
             : 'text-gray-800 border-transparent hover:text-gray-800'"
@@ -77,14 +77,14 @@
             <div class="flex items-center gap-6">
               <div class="flex items-center gap-2">
                 <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span class="text-sm font-medium text-gray-800 uppercase tracking-widest">Confidential Agent Pricing</span>
+                <span class="text-sm font-medium text-gray-800 uppercase ">Confidential Agent Pricing</span>
               </div>
               <button @click="showHotelAdvancedSearch = !showHotelAdvancedSearch" class="flex items-center gap-2 text-gray-800 hover:text-primary transition-all">
-                <span class="text-sm font-bold uppercase tracking-widest">Advanced Search</span>
+                <span class="text-sm font-bold uppercase ">Advanced Search</span>
                 <ChevronDown class="h-3 w-3 transition-transform" :class="{ 'rotate-180': showHotelAdvancedSearch }" />
               </button>
             </div>
-            <button @click="handleSearch" class="h-10 px-8 bg-neutral-900 text-white rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-black transition-all shadow-lg flex items-center gap-2">
+            <button @click="handleSearch" class="h-10 px-8 bg-neutral-900 text-white rounded-xl font-bold text-sm uppercase  hover:bg-black transition-all shadow-lg flex items-center gap-2">
               <Search class="h-3.5 w-3.5" />
               Search Hotels
             </button>
@@ -148,19 +148,19 @@
           <Transition name="fade-slide">
             <div v-if="showFlightAdvancedSearch" class="pt-6 border-t border-gray-50 grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
               <div class="space-y-2">
-                <label class="text-sm font-semibold text-gray-800 uppercase tracking-widest pl-1">Adults</label>
+                <label class="text-sm font-semibold text-gray-800 uppercase  pl-1">Adults</label>
                 <SelectInput v-model="flightTravelers.adults" label="" :options="[1,2,3,4,5,6,7,8]" variant="minimal" />
               </div>
               <div class="space-y-2">
-                <label class="text-sm font-semibold text-gray-800 uppercase tracking-widest pl-1">Children</label>
+                <label class="text-sm font-semibold text-gray-800 uppercase  pl-1">Children</label>
                 <SelectInput v-model="flightTravelers.children" label="" :options="[0,1,2,3,4,5,6]" variant="minimal" />
               </div>
               <div class="space-y-2">
-                <label class="text-sm font-semibold text-gray-800 uppercase tracking-widest pl-1">Infants</label>
+                <label class="text-sm font-semibold text-gray-800 uppercase  pl-1">Infants</label>
                 <SelectInput v-model="flightTravelers.infants" label="" :options="[0,1,2,3,4]" variant="minimal" />
               </div>
               <div class="space-y-2">
-                <label class="text-sm font-semibold text-gray-800 uppercase tracking-widest pl-1">Cabin Class</label>
+                <label class="text-sm font-semibold text-gray-800 uppercase  pl-1">Cabin Class</label>
                 <SelectInput v-model="flightClass" label="" :options="flightClasses" variant="minimal" />
               </div>
             </div>
@@ -208,7 +208,7 @@
         </div>
 
         <div class="flex justify-end pt-4">
-           <button @click="handleSearch" class="h-10 px-10 bg-neutral-900 text-white rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-black transition-all shadow-lg flex items-center gap-2">
+           <button @click="handleSearch" class="h-10 px-10 bg-neutral-900 text-white rounded-xl font-bold text-sm uppercase  hover:bg-black transition-all shadow-lg flex items-center gap-2">
              <Search class="h-3.5 w-3.5" />
              Search {{ currentTab }}
            </button>

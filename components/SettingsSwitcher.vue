@@ -12,10 +12,10 @@
 
         <!-- Compact Header & Tab Switcher -->
         <div class="pt-8 px-8 pb-4 border-b border-gray-50">
-          <h2 class="text-sm  text-gray-400 uppercase  mb-6">Pipeline Preferences</h2>
+          <h2 class="text-sm  text-gray-400   mb-6">Pipeline Preferences</h2>
           <div class="flex bg-gray-100 p-1.5 rounded-2xl">
             <button 
-              class="flex-1 py-3 text-sm  uppercase  rounded-xl transition-all duration-500 bg-white text-primary shadow-sm"
+              class="flex-1 py-3 text-sm    rounded-xl transition-all duration-500 bg-white text-primary shadow-sm"
             >
               Currency
             </button>
@@ -36,7 +36,7 @@
               >
                 <img :src="currency.flag" class="h-4 w-6 object-cover rounded shadow-sm mb-2 border border-gray-100" />
                 <div class="text-sm font-bold text-gray-900">{{ currency.code }}</div>
-                <div class="text-sm text-gray-400 font-bold tracking-widest">{{ currency.symbol }}</div>
+                <div class="text-sm text-gray-400 font-bold ">{{ currency.symbol }}</div>
                 
                 <div v-if="currentCurrency.code === currency.code" class="absolute top-2 right-2">
                    <Check class="h-3 w-3 text-primary" />
@@ -48,12 +48,12 @@
 
         <!-- Compact Footer Action -->
         <div class="px-8 py-5 bg-gray-50/50 border-t border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-4">
-           <p class="text-[10px]  text-gray-400 uppercase tracking-widest text-center sm:text-left">
+           <p class="text-sm  text-gray-400   text-center sm:text-left">
              Update your settlement currency for current pipeline
            </p>
            <button 
              @click="$emit('close')" 
-             class="w-full sm:w-auto px-10 py-3 bg-neutral-900 text-white text-[10px]  uppercase  rounded-full shadow-xl shadow-neutral-100 hover:scale-105 active:scale-95 transition-all "
+             class="w-full sm:w-auto px-10 py-3 bg-neutral-900 text-white text-sm    rounded-full shadow-xl shadow-neutral-100 hover:scale-105 active:scale-95 transition-all "
            >
               Apply Changes
            </button>

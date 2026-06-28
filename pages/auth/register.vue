@@ -2,32 +2,33 @@
   <div class="min-h-screen bg-white flex flex-col sm:items-center sm:justify-center p-0 sm:p-6 lg:p-10 font-sans">
     <div class="max-w-7xl w-full flex-1 grid lg:grid-cols-2 sm:gap-12 bg-white rounded-none sm:rounded-[3rem] sm:border border-neutral-100 sm:shadow-2xl shadow-neutral-100 min-h-screen sm:min-h-[85vh]">
       <!-- Agency Advantage Section -->
-      <div class="hidden lg:flex flex-col justify-between p-10 bg-neutral-50 relative group h-full">
-        <div class="absolute inset-0 bg-white/20 backdrop-blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
-        
-        <div class="relative z-10 flex items-center space-x-3 cursor-pointer" @click="navigateTo('/')">
-           <img src="@/assets/img/logo.png" class="w-auto h-12" alt="logo"  />
-        </div>
+      <div class="hidden lg:flex p-6 relative h-full">
+        <div class="w-full h-full relative rounded-[2.5rem] overflow-hidden shadow-2xl bg-gradient-to-br from-[#060B28] via-[#0A125E] to-[#0A125E] flex flex-col justify-between p-12">
+          
+          <div class="relative z-10 flex items-center space-x-3 cursor-pointer" @click="navigateTo('/')">
+             <img src="@/assets/img/logo.png" class="w-auto h-10 brightness-0 invert" alt="logo"  />
+          </div>
 
-        <div class="relative z-10 space-y-8">
-          <h2 class="text-5xl  text-primary-dark leading-tight">
-            Scale Your <br />
-            Agency Without <br />
-            <span class="text-secondary">Limits.</span>
-          </h2>
-          <p class="text-lg text-neutral-400 font-medium max-w-md border-l-2 border-secondary/20 pl-6 leading-relaxed">
-            Join the Flybeth Agent Network and unlock global wholesale rates across flights and luxury stays.
-          </p>
-        </div>
+          <div class="relative z-10 space-y-8 text-white mt-auto mb-10">
+            <h2 class="text-4xl lg:text-[44px] font-bold leading-[1.15]">
+              Scale Your <br />
+              Agency Without <br />
+              <span class="text-[#3B5BFF]">Limits.</span>
+            </h2>
+            <p class="text-base lg:text-lg text-white/80 font-medium max-w-sm border-l-2 border-[#3B5BFF] pl-6 leading-relaxed">
+              Join the Flybeth Agent Network and unlock global wholesale rates across flights and luxury stays.
+            </p>
+          </div>
 
-        <div class="relative z-10 space-y-6 pt-12 border-t border-neutral-200/50">
-          <div v-for="perk in perks" :key="perk.title" class="flex items-start space-x-4">
-            <div class="w-8 h-8 rounded-lg bg-secondary/10 flex items-center justify-center shrink-0">
-              <CheckIcon class="w-4 h-4 text-secondary" />
-            </div>
-            <div>
-              <p class="text-sm  text-primary-dark">{{ perk.title }}</p>
-              <p class="text-sm text-neutral-500 mt-1">{{ perk.desc }}</p>
+          <div class="relative z-10 space-y-6 pt-8 border-t border-white/10">
+            <div v-for="perk in perks" :key="perk.title" class="flex items-start space-x-4">
+              <div class="w-8 h-8 rounded-lg bg-[#3B5BFF]/20 flex items-center justify-center shrink-0">
+                <CheckIcon class="w-4 h-4 text-[#3B5BFF]" />
+              </div>
+              <div>
+                <p class="text-sm font-bold text-white">{{ perk.title }}</p>
+                <p class="text-sm text-white/70 mt-1">{{ perk.desc }}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -38,15 +39,15 @@
         <div class="max-w-xl w-full mx-auto space-y-8">
           <div class="space-y-4">
             <div class="flex items-center justify-between">
-              <span class="text-sm font-bold text-primary">Step {{ currentStep }} of 8</span>
+              <span class="text-sm font-bold text-primary">Step {{ currentVisibleIndex + 1 }} of {{ totalVisibleSteps }}</span>
               <div class="flex space-x-1">
-                <div v-for="s in 8" :key="s" :class="['h-1 w-6 rounded-full transition-all duration-500', s <= currentStep ? 'bg-primary' : 'bg-neutral-100']"></div>
+                <div v-for="(_, idx) in totalVisibleSteps" :key="idx" :class="['h-1 w-6 rounded-full transition-all duration-500', idx <= currentVisibleIndex ? 'bg-primary' : 'bg-neutral-100']"></div>
               </div>
             </div>
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div class="space-y-1">
-                <h1 class="text-2xl font-bold text-neutral-900 leading-tight">{{ stepTitles[currentStep-1] }}</h1>
-                <p class="text-neutral-500 text-sm font-medium">{{ stepDescriptions[currentStep-1] }}</p>
+                <h1 class="text-2xl font-bold text-neutral-900 leading-tight">{{ currentStepTitle }}</h1>
+                <p class="text-neutral-500 text-sm font-medium">{{ currentStepDesc }}</p>
               </div>
               <div v-if="currentStep === 1" class="shrink-0">
                 <p class="text-sm text-neutral-500">
@@ -60,6 +61,43 @@
           <form @submit.prevent="handleSubmit" class="space-y-8">
             <!-- Step 1: Account Creation -->
             <div v-if="currentStep === 1" class="space-y-6">
+              <div class="relative mb-2">
+                <label class="text-sm uppercase font-semibold text-gray-800 left-3 top-2 absolute z-10 pointer-events-none">Agent Type</label>
+                
+                <!-- Custom Dropdown Button -->
+                <div 
+                  class="w-full py-3 pt-7 pb-2 px-3 bg-gray-50 border border-gray-300 rounded-xl cursor-pointer flex justify-between items-center group hover:border-primary transition-colors"
+                  @click="isAgentTypeDropdownOpen = !isAgentTypeDropdownOpen"
+                >
+                  <span class="text-sm font-bold text-gray-900 truncate pr-4">
+                    {{ form.agencyType === 'agency' ? 'Business Agency (I have a registered business)' : 'Independent Agent (I am registering as an individual)' }}
+                  </span>
+                  <svg class="w-4 h-4 text-gray-500 transition-transform duration-300 shrink-0" :class="isAgentTypeDropdownOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                
+                <!-- Dropdown Overlay to catch outside clicks -->
+                <div v-if="isAgentTypeDropdownOpen" class="fixed inset-0 z-40" @click="isAgentTypeDropdownOpen = false"></div>
+                
+                <!-- Dropdown Menu -->
+                <div v-if="isAgentTypeDropdownOpen" class="absolute z-50 mt-2 w-full bg-[#525252] rounded-xl shadow-xl overflow-hidden py-1 border border-[#3f3f3f]">
+                  <div 
+                    class="px-4 py-3 text-sm font-semibold cursor-pointer transition-colors flex items-center justify-between"
+                    :class="form.agencyType === 'agency' ? 'bg-[#508BFF] text-white' : 'text-white hover:bg-[#666666]'"
+                    @click="form.agencyType = 'agency'; isAgentTypeDropdownOpen = false"
+                  >
+                    Business Agency (I have a registered business)
+                    <CheckIcon v-if="form.agencyType === 'agency'" class="w-4 h-4" />
+                  </div>
+                  <div 
+                    class="px-4 py-3 text-sm font-semibold cursor-pointer transition-colors flex items-center justify-between"
+                    :class="form.agencyType === 'independent_agent' ? 'bg-[#508BFF] text-white' : 'text-white hover:bg-[#666666]'"
+                    @click="form.agencyType = 'independent_agent'; isAgentTypeDropdownOpen = false"
+                  >
+                    Independent Agent (I am registering as an individual)
+                    <CheckIcon v-if="form.agencyType === 'independent_agent'" class="w-4 h-4" />
+                  </div>
+                </div>
+              </div>
               <div class="relative">
                 <AnimatedInput v-model="form.email" label="Email Address" type="email" required :errorMessage="formErrors.email" :hasError="!!formErrors.email" />
                 <div class="absolute right-4 top-1/2 -translate-y-1/2">
@@ -88,10 +126,10 @@
                     <img :src="form.agencyLogo" class="w-full h-full object-contain" />
                   </div>
                   <div class="flex flex-col items-center">
-                    <h4 class="text-sm font-bold text-primary-dark tracking-tight">Business Logo</h4>
-                    <p class="text-sm text-green-600 font-bold flex items-center mt-1 uppercase tracking-widest"><CheckCircleIcon class="w-3 h-3 mr-1" /> Ready for dashboard</p>
+                    <h4 class="text-sm font-bold text-primary-dark ">Business Logo</h4>
+                    <p class="text-sm text-green-600 font-bold flex items-center mt-1 uppercase "><CheckCircleIcon class="w-3 h-3 mr-1" /> Ready for dashboard</p>
                     <input type="file" @change="handleFileUpload($event, 'image', 'agencyLogo')" class="hidden" id="logoUpload" accept="image/*">
-                    <button type="button" @click="$el.querySelector('#logoUpload').click()" class="text-sm text-secondary  uppercase tracking-widest mt-4 hover:underline">
+                    <button type="button" @click="$el.querySelector('#logoUpload').click()" class="text-sm text-secondary  uppercase  mt-4 hover:underline">
                       Replace Brand Logo
                     </button>
                   </div>
@@ -101,20 +139,20 @@
                     <img v-if="!uploadingFields.agencyLogo" src="@/assets/img/logo.png" class="w-8 h-8 opacity-20 grayscale" />
                     <div v-else class="w-6 h-6 border-2 border-secondary border-t-transparent rounded-full animate-spin"></div>
                   </div>
-                  <h4 class="text-sm font-bold text-primary-dark tracking-tighter">Upload Agency Logo</h4>
+                  <h4 class="text-sm font-bold text-primary-dark er">Upload Agency Logo</h4>
                   <p class="text-sm text-neutral-400 font-medium max-w-[200px] mx-auto leading-snug">Required for your professional dashboard and invoice headers.</p>
                   <input type="file" @change="handleFileUpload($event, 'image', 'agencyLogo')" class="hidden" id="logoUpload" accept="image/*">
                   <BaseButton :loading="uploadingFields.agencyLogo" type="button" variant="primary" size="sm" @click="$el.querySelector('#logoUpload').click()" class="mt-4">
                     Select Logo
                   </BaseButton>
-                  <p v-if="formErrors.agencyLogo" class="text-sm text-red-500  mt-2 uppercase tracking-tighter">{{ formErrors.agencyLogo }}</p>
+                  <p v-if="formErrors.agencyLogo" class="text-sm text-red-500  mt-2 uppercase er">{{ formErrors.agencyLogo }}</p>
                 </template>
               </div>
             </div>
 
             <!-- Step 3: Business Information -->
             <div v-if="currentStep === 3" class="space-y-6">
-              <div class="relative">
+              <div class="relative" v-if="form.agencyType === 'agency'">
                 <AnimatedInput v-model="form.registrationNumber" label="Registration Number" required :errorMessage="formErrors.registrationNumber" :hasError="!!formErrors.registrationNumber" />
                 <div class="absolute right-4 top-1/2 -translate-y-1/2">
                   <InfoTooltip text="Enter your official business registration number (e.g., RC Number for Nigeria or EIN for US)." />
@@ -122,15 +160,15 @@
               </div>
               <div class="grid md:grid-cols-2 gap-6">
                 <SelectInput v-model="form.country" label="Country" :options="countries" required :errorMessage="formErrors.country" :hasError="!!formErrors.country" />
-                <AnimatedInput v-model="form.website" label="Website / Social (Optional)" />
+                <AnimatedInput v-if="form.agencyType === 'agency'" v-model="form.website" label="Website / Social (Optional)" />
               </div>
-              <GoogleAddressAutocomplete 
+              <AnimatedInput 
                 v-model="form.businessAddress" 
-                label="Business Address" 
-                placeholder="Start typing your address..." 
-                :api-key="(runtimeConfig.public.googleMapsApiKey as string)"
-                @address-selected="handleAddressSelected"
-               :errorMessage="formErrors.businessAddress" :hasError="!!formErrors.businessAddress" />
+                :label="form.agencyType === 'agency' ? 'Business Address' : 'Residential Address'" 
+                required 
+                :errorMessage="formErrors.businessAddress" 
+                :hasError="!!formErrors.businessAddress" 
+              />
             </div>
 
             <!-- Step 4: Contact Information -->
@@ -359,12 +397,13 @@
                   </div>
                 </div>
               </div>
-              <GoogleAddressAutocomplete 
+              <AnimatedInput 
                 v-model="form.billingAddress" 
                 label="Billing Address" 
-                placeholder="Enter your registered billing address..." 
-                :api-key="(runtimeConfig.public.googleMapsApiKey as string)"
-               :errorMessage="formErrors.billingAddress" :hasError="!!formErrors.billingAddress" />
+                required 
+                :errorMessage="formErrors.billingAddress" 
+                :hasError="!!formErrors.billingAddress" 
+              />
             </div>
 
             <div v-if="currentStep === 8" class="space-y-4">
@@ -381,12 +420,12 @@
             </div>
 
             <div class="flex items-center justify-between pt-10 border-t border-neutral-100">
-              <BaseButton v-if="currentStep > 1" type="button" variant="secondary" @click="currentStep--" class="px-8">
+              <BaseButton v-if="currentVisibleIndex > 0" type="button" variant="secondary" @click="prevStep" class="px-8">
                 Go Back
               </BaseButton>
               <div v-else></div>
               
-              <BaseButton v-if="currentStep < 8" type="button" variant="primary" @click="nextStep" class="px-10">
+              <BaseButton v-if="currentVisibleIndex < totalVisibleSteps - 1" type="button" variant="primary" @click="nextStep" class="px-10">
                 Next Step
               </BaseButton>
               <BaseButton v-else type="submit" variant="primary" :loading="loading" class="px-10">
@@ -413,7 +452,6 @@ import {
 import SelectInput from '~/components/ui/SelectInput.vue'
 import AnimatedInput from '~/components/ui/AnimatedInput.vue'
 import PhoneNumberInput from '~/components/ui/PhoneNumberInput.vue'
-import GoogleAddressAutocomplete from '~/components/ui/GoogleAddressAutocomplete.vue'
 import InfoTooltip from '~/components/ui/InfoTooltip.vue'
 import { useAuth } from '@/composables/modules/auth/useAuth'
 import { useUpload } from '@/composables/core/useUpload'
@@ -436,6 +474,7 @@ const { banks, loadingBanks, verifyingAccount, fetchBanks, verifyAccount } = use
 const { showToast } = useCustomToast()
 const currentStep = ref(1)
 const sameAsPhone = ref(true)
+const isAgentTypeDropdownOpen = ref(false)
 const formErrors = ref<Record<string, string>>({})
 
 const validateStep = (step: number) => {
@@ -455,12 +494,14 @@ const validateStep = (step: number) => {
     if (!form.value.confirmPassword) setError('confirmPassword', 'Please confirm your password')
     else if (form.value.password !== form.value.confirmPassword) setError('confirmPassword', 'Passwords do not match')
   } else if (step === 2) {
-    if (!form.value.agencyName) setError('agencyName', 'Agency Name is required')
-    if (!form.value.agencyLogo) setError('agencyLogo', 'Brand Logo is required')
+    if (form.value.agencyType === 'agency') {
+      if (!form.value.agencyName) setError('agencyName', 'Agency Name is required')
+      if (!form.value.agencyLogo) setError('agencyLogo', 'Brand Logo is required')
+    }
   } else if (step === 3) {
-    if (!form.value.registrationNumber) setError('registrationNumber', 'Registration Number is required')
+    if (form.value.agencyType === 'agency' && !form.value.registrationNumber) setError('registrationNumber', 'Registration Number is required')
     if (!form.value.country) setError('country', 'Country is required')
-    if (!form.value.businessAddress) setError('businessAddress', 'Business Address is required')
+    if (!form.value.businessAddress) setError('businessAddress', 'Address is required')
   } else if (step === 4) {
     if (!form.value.firstName) setError('firstName', 'First Name is required')
     if (!form.value.lastName) setError('lastName', 'Last Name is required')
@@ -470,11 +511,13 @@ const validateStep = (step: number) => {
     if (!form.value.idCardUrl) setError('idCardUrl', 'Government ID is required')
     if (!form.value.selfieUrl) setError('selfieUrl', 'Selfie Verification is required')
   } else if (step === 6) {
-    if (form.value.country === 'Nigeria' && !form.value.cacCertificateUrl) {
-      setError('cacCertificateUrl', 'CAC Certificate is required')
-    } else if (form.value.country === 'United States') {
-      if (!form.value.ein) setError('ein', 'EIN is required')
-      if (!form.value.llcDocsUrl) setError('llcDocsUrl', 'LLC Documents are required')
+    if (form.value.agencyType === 'agency') {
+      if (form.value.country === 'Nigeria' && !form.value.cacCertificateUrl) {
+        setError('cacCertificateUrl', 'CAC Certificate is required')
+      } else if (form.value.country === 'United States') {
+        if (!form.value.ein) setError('ein', 'EIN is required')
+        if (!form.value.llcDocsUrl) setError('llcDocsUrl', 'LLC Documents are required')
+      }
     }
   } else if (step === 7) {
     if (!form.value.bankCode) setError('bankCode', 'Bank selection is required')
@@ -496,6 +539,7 @@ definePageMeta({
 })
 
 const form = ref({
+  agencyType: 'agency',
   email: '',
   password: '',
   confirmPassword: '',
@@ -530,7 +574,7 @@ const form = ref({
 const stepTitles = [
   'Create your account',
   'Your agency brand',
-  'Business details',
+  'Address & details',
   'Main contact info',
   'Identity check',
   'Verification docs',
@@ -541,13 +585,26 @@ const stepTitles = [
 const stepDescriptions = [
   'Let\'s build your secure gateway to the Flybeth network.',
   'Define your brand name and professional logo.',
-  'Tell us about your organization and regional focus.',
+  'Tell us about your location and regional focus.',
   'Who will be the primary lead for this partner account?',
   'KYC is essential for maintaining our secure marketplace.',
   'Dynamic compliance based on your operating region.',
   'Where should we send your wholesale profit payouts?',
   'Carefully review and submit your partner application.'
 ]
+
+const visibleSteps = computed(() => {
+  if (form.value.agencyType === 'independent_agent') {
+    return [1, 3, 4, 5, 7, 8]
+  }
+  return [1, 2, 3, 4, 5, 6, 7, 8]
+})
+
+const currentVisibleIndex = computed(() => visibleSteps.value.indexOf(currentStep.value))
+const totalVisibleSteps = computed(() => visibleSteps.value.length)
+
+const currentStepTitle = computed(() => stepTitles[currentStep.value - 1])
+const currentStepDesc = computed(() => stepDescriptions[currentStep.value - 1])
 
 const submissionTerms = [
   { id: 'terms', label: 'I agree to the overarching Terms and Conditions of the Flybeth Agent Network.' },
@@ -644,16 +701,15 @@ watch(currentStep, (newStep) => {
 })
 
 const nextStep = () => {
-  if (currentStep.value === 8) return
+  if (currentVisibleIndex.value === totalVisibleSteps.value - 1) return
   if (validateStep(currentStep.value)) {
-    currentStep.value++
+    currentStep.value = visibleSteps.value[currentVisibleIndex.value + 1] as number
   }
 }
 
-const handleAddressSelected = (data: any) => {
-  form.value.businessAddress = data.address
-  // You could also store coordinates if the schema supported it
-  console.log('Location selected:', data.coordinates)
+const prevStep = () => {
+  if (currentVisibleIndex.value === 0) return
+  currentStep.value = visibleSteps.value[currentVisibleIndex.value - 1] as number
 }
 
 const handleFileUpload = async (event: any, type: 'image' | 'document', field: string) => {
@@ -693,22 +749,23 @@ const handleSubmit = async () => {
 
   try {
     const payload = {
+      agencyType: form.value.agencyType,
       email: form.value.email,
       password: form.value.password,
-      agencyName: form.value.agencyName,
-      registrationNumber: form.value.registrationNumber,
+      agencyName: form.value.agencyType === 'agency' ? form.value.agencyName : undefined,
+      registrationNumber: form.value.agencyType === 'agency' ? form.value.registrationNumber : undefined,
       country: form.value.country,
       businessAddress: form.value.businessAddress,
-      website: form.value.website,
+      website: form.value.agencyType === 'agency' ? form.value.website : undefined,
       firstName: form.value.firstName,
       lastName: form.value.lastName,
       phone: form.value.phone,
       whatsappNumber: sameAsPhone.value ? form.value.phone : form.value.whatsappNumber,
       idCardUrl: form.value.idCardUrl,
       selfieUrl: form.value.selfieUrl,
-      cacCertificateUrl: form.value.cacCertificateUrl,
-      llcDocsUrl: form.value.llcDocsUrl,
-      ein: form.value.ein,
+      cacCertificateUrl: form.value.agencyType === 'agency' ? form.value.cacCertificateUrl : undefined,
+      llcDocsUrl: form.value.agencyType === 'agency' ? form.value.llcDocsUrl : undefined,
+      ein: form.value.agencyType === 'agency' ? form.value.ein : undefined,
       billingAddress: form.value.billingAddress,
       bankAccountDetails: {
         bankName: form.value.bankName,
@@ -716,7 +773,7 @@ const handleSubmit = async () => {
         accountNumber: form.value.accountNumber,
         accountHolder: form.value.accountHolder,
       },
-      agencyLogo: form.value.agencyLogo,
+      agencyLogo: form.value.agencyType === 'agency' ? form.value.agencyLogo : undefined,
       role: 'agent'
     }
     

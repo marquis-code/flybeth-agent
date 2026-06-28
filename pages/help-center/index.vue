@@ -8,7 +8,7 @@
       <div class="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
         <div class="flex flex-col lg:flex-row items-center gap-20">
           <div class="lg:w-1/2 space-y-8">
-             <span class="text-xs font-bold text-primary uppercase tracking-widest">Help Center</span>
+             <span class="text-xs font-bold text-primary uppercase ">Help Center</span>
              <h1 class="text-4xl lg:text-5xl font-bold text-neutral-900 leading-tight">
                 How can we <br />
                 <span class="text-primary">help you today?</span>

@@ -1,50 +1,50 @@
 <template>
   <div class="bg-white">
     <!-- Features Hero -->
-    <section class="py-24 lg:py-32 bg-neutral-50 border-b border-neutral-100 overflow-hidden relative">
+    <section class="py-16 lg:py-24 bg-neutral-50 border-b border-neutral-100 overflow-hidden relative">
       <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
       
       <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <div class="space-y-6">
-          <span class="text-xs font-bold text-primary uppercase tracking-widest">Our Platform</span>
-          <h1 class="text-4xl lg:text-5xl font-bold text-neutral-900 leading-tight">
+          <span class="text-xs font-bold text-primary uppercase ">Our Platform</span>
+          <h1 class="text-3xl lg:text-4xl font-bold text-neutral-900 leading-tight">
             Smart tools for <br />
             <span class="text-primary">everyone.</span>
           </h1>
-          <p class="text-lg text-neutral-500 font-medium leading-relaxed max-w-xl">
+          <p class="text-base text-neutral-500 font-medium leading-relaxed max-w-xl">
             Flybeth provides a simple set of tools designed to modernize your travel agency, from searching for flights to managing your earnings.
           </p>
           <div class="flex items-center space-x-6">
-             <BaseButton to="/auth/register" variant="primary" size="md" class="px-8">Get Started</BaseButton>
+             <BaseButton to="/auth/register" variant="primary" size="sm" class="px-6 py-3 font-bold">Get Started</BaseButton>
              <NuxtLink to="/help-center" class="text-sm font-bold text-neutral-400 hover:text-primary transition-colors">Help Center</NuxtLink>
           </div>
         </div>
         <div class="relative">
-           <div class="bg-white rounded-[2.5rem] p-4 lg:p-6 border border-neutral-100 shadow-2xl">
-              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200" class="rounded-[1.5rem] lg:rounded-[2rem] w-full h-[400px] object-cover" alt="Analytics Dashboard" />
+           <div class="bg-white rounded-[2rem] p-4 lg:p-6 border border-neutral-100 shadow-2xl">
+              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200" class="rounded-[1.5rem] w-full h-[300px] object-cover" alt="Analytics Dashboard" />
            </div>
         </div>
       </div>
     </section>
 
     <!-- Feature Grid -->
-    <section class="py-32 bg-white">
+    <section class="py-16 lg:py-24 bg-white">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
           <div v-for="feature in features" :key="feature.title" class="space-y-6 group">
-            <div class="w-16 h-16 bg-neutral-50 rounded-2xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-sm border border-neutral-100">
-              <component :is="feature.icon" class="h-8 w-8" />
+            <div class="w-12 h-12 bg-neutral-50 rounded-2xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-sm border border-neutral-100">
+              <component :is="feature.icon" class="h-6 w-6" />
             </div>
-            <h4 class="text-2xl  text-primary-dark ">{{ feature.title }}</h4>
-            <p class="text-neutral-500 font-medium leading-relaxed">{{ feature.description }}</p>
+            <h4 class="text-xl font-bold text-primary-dark ">{{ feature.title }}</h4>
+            <p class="text-sm text-neutral-500 font-medium leading-relaxed">{{ feature.description }}</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Detailed Section: Inventory -->
-    <section class="py-24 bg-neutral-50 border-y border-neutral-100">
-       <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-20">
+    <section class="py-16 lg:py-24 bg-neutral-50 border-y border-neutral-100">
+       <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-16">
           <div class="flex-1 space-y-6 order-2 md:order-1">
              <h2 class="text-3xl font-bold text-neutral-900 leading-tight">Thousands of hotels. <br />Available instantly.</h2>
              <p class="text-base text-neutral-600 leading-relaxed font-medium">

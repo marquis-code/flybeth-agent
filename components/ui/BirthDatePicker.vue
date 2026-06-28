@@ -8,7 +8,7 @@
       <label 
         :class="[
           'absolute transition-all duration-300 ease-in-out pointer-events-none z-10',
-          showCalendar || modelValue ? 'text-[10px] uppercase font-bold text-primary left-4 top-2 tracking-widest' : 'text-sm font-bold text-gray-800 left-11 top-1/2 -translate-y-1/2'
+          showCalendar || modelValue ? 'text-sm uppercase font-bold text-primary left-4 top-2 ' : 'text-sm font-bold text-gray-800 left-11 top-1/2 -translate-y-1/2'
         ]"
       >
         {{ placeholder }}
@@ -92,7 +92,7 @@
             <div class="grid grid-cols-7 px-4">
               <div
                 v-for="d in dayHeaders" :key="d"
-                class="text-center text-sm font-medium text-gray-800 py-1.5 uppercase tracking-wider"
+                class="text-center text-sm font-medium text-gray-800 py-1.5 uppercase "
               >{{ d }}</div>
             </div>
 

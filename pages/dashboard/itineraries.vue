@@ -2,8 +2,8 @@
   <div class="space-y-6">
     <div class="flex items-center justify-between">
       <div class="space-y-1">
-        <h2 class="text-2xl font-bold text-gray-900 tracking-tight">Itinerary Builder</h2>
-        <p class="text-sm text-gray-400 font-bold uppercase tracking-widest">Construct, brand and share high-fidelity travel experiences with your clients</p>
+        <h2 class="text-2xl font-bold text-gray-900 ">Itinerary Builder</h2>
+        <p class="text-sm text-gray-400 font-bold uppercase ">Construct, brand and share high-fidelity travel experiences with your clients</p>
       </div>
       <button 
         @click="startNewItinerary"
@@ -31,11 +31,11 @@
           <table class="w-full text-left">
              <thead>
                 <tr class="bg-gray-50/50">
-                   <th class="px-6 py-4 text-sm font-bold uppercase tracking-widest text-gray-400">Title & Destination</th>
-                   <th class="px-6 py-4 text-sm font-bold uppercase tracking-widest text-gray-400">Duration</th>
-                   <th class="px-6 py-4 text-sm font-bold uppercase tracking-widest text-gray-400">Creation Date</th>
-                   <th class="px-6 py-4 text-sm font-bold uppercase tracking-widest text-gray-400">Status</th>
-                   <th class="px-6 py-4 text-sm font-bold uppercase tracking-widest text-gray-400 text-right">Actions</th>
+                   <th class="px-6 py-4 text-sm font-bold uppercase  text-gray-400">Title & Destination</th>
+                   <th class="px-6 py-4 text-sm font-bold uppercase  text-gray-400">Duration</th>
+                   <th class="px-6 py-4 text-sm font-bold uppercase  text-gray-400">Creation Date</th>
+                   <th class="px-6 py-4 text-sm font-bold uppercase  text-gray-400">Status</th>
+                   <th class="px-6 py-4 text-sm font-bold uppercase  text-gray-400 text-right">Actions</th>
                 </tr>
              </thead>
              <tbody class="divide-y divide-gray-50">
@@ -55,7 +55,7 @@
                       </div>
                    </td>
                    <td class="px-6 py-4">
-                      <span class="px-2 py-0.5 rounded-full text-sm  tracking-tighter bg-gray-100 text-gray-600 border border-gray-200">
+                      <span class="px-2 py-0.5 rounded-full text-sm  er bg-gray-100 text-gray-600 border border-gray-200">
                          {{ iti.days?.length || 0 }} Days
                       </span>
                    </td>
@@ -63,7 +63,7 @@
                       <span class="text-sm font-bold text-gray-500 uppercase">{{ new Date(iti.createdAt).toLocaleDateString() }}</span>
                    </td>
                    <td class="px-6 py-4">
-                      <span class="px-2 py-0.5 rounded-full text-sm  uppercase tracking-widest border border-emerald-100 bg-emerald-50 text-emerald-600">Active</span>
+                      <span class="px-2 py-0.5 rounded-full text-sm  uppercase  border border-emerald-100 bg-emerald-50 text-emerald-600">Active</span>
                    </td>
                    <td class="px-6 py-4 text-right">
                       <div class="flex items-center justify-end space-x-2">
@@ -89,7 +89,7 @@
        <div class="space-y-8 pb-32">
           <!-- Step 1: Base Details -->
           <div class="space-y-6">
-             <h3 class="text-sm font-bold text-primary uppercase tracking-widest border-b border-gray-50 pb-2">1. Essential Narrative</h3>
+             <h3 class="text-sm font-bold text-primary uppercase  border-b border-gray-50 pb-2">1. Essential Narrative</h3>
              <div class="grid grid-cols-2 gap-4">
                 <div class="space-y-1.5">
                    <label class="text-sm font-bold text-gray-400 px-1">Itinerary Title</label>
@@ -119,7 +119,7 @@
           <!-- Step 2: Day Builder -->
           <div class="space-y-6">
              <div class="flex items-center justify-between border-b border-gray-50 pb-2">
-                <h3 class="text-sm font-bold text-primary uppercase tracking-widest">2. Day-by-Day Experience</h3>
+                <h3 class="text-sm font-bold text-primary uppercase ">2. Day-by-Day Experience</h3>
                 <button @click="addDay" class="text-sm font-bold text-primary hover:underline">+ Add Sequential Day</button>
              </div>
 

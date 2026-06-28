@@ -2,8 +2,8 @@
   <div class="space-y-6">
     <div class="flex items-center justify-between">
       <div class="space-y-1">
-        <h2 class="text-2xl font-bold text-gray-900 tracking-tight">Holiday Management</h2>
-        <p class="text-sm text-gray-400 font-bold uppercase tracking-widest">Construct and deploy curated travel bundles and dynamic commercial offers</p>
+        <h2 class="text-2xl font-bold text-gray-900 ">Holiday Management</h2>
+        <p class="text-sm text-gray-400 font-bold uppercase ">Construct and deploy curated travel bundles and dynamic commercial offers</p>
       </div>
       <button 
         @click="isCreateDrawerOpen = true"
@@ -20,7 +20,7 @@
 
     <div class="space-y-4">
        <div class="flex items-center justify-between">
-          <h3 class="text-sm font-bold text-gray-400 uppercase tracking-widest">Active Commercial Offers</h3>
+          <h3 class="text-sm font-bold text-gray-400 uppercase ">Active Commercial Offers</h3>
           <div class="flex space-x-2">
              <button class="px-3 py-1.5 text-sm font-bold border border-gray-100 rounded-lg hover:bg-gray-50 transition-all">Trending</button>
              <button class="px-3 py-1.5 text-sm font-bold border border-gray-100 rounded-lg hover:bg-gray-50 transition-all">My Customs</button>
@@ -49,7 +49,7 @@
                 </div>
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
                 <div class="absolute bottom-4 left-4 right-4">
-                   <div class="flex items-center space-x-2 text-white/70 text-sm font-bold uppercase tracking-widest mb-1">
+                   <div class="flex items-center space-x-2 text-white/70 text-sm font-bold uppercase  mb-1">
                       <component v-for="icon in (pkg.includes || [])" :key="icon" :is="getIcon(icon)" class="h-3 w-3" />
                    </div>
                    <h4 class="text-lg font-bold text-white">{{ pkg.title }}</h4>
@@ -82,7 +82,7 @@
     <BaseSidedrawer :show="isCreateDrawerOpen" title="New Dynamic Offer Architecture" @close="isCreateDrawerOpen = false">
        <form @submit.prevent="handleCreatePackage" class="space-y-6">
           <div class="space-y-4 pt-2 border-b border-gray-50 pb-4">
-             <label class="text-sm font-bold text-gray-400 px-1 uppercase tracking-widest">Cover Picture</label>
+             <label class="text-sm font-bold text-gray-400 px-1 uppercase ">Cover Picture</label>
              <div class="relative group cursor-pointer border-2 border-dashed border-gray-200 rounded-xl overflow-hidden h-32 flex items-center justify-center bg-gray-50 hover:border-primary transition-colors" @click="triggerFileUpload">
                 <img v-if="form.image" :src="form.image" class="absolute inset-0 w-full h-full object-cover" />
                 <div v-else class="text-center">
@@ -123,7 +123,7 @@
           </div>
 
           <div class="space-y-3">
-             <label class="text-sm font-bold text-gray-400 px-1 uppercase tracking-widest">Included Services</label>
+             <label class="text-sm font-bold text-gray-400 px-1 uppercase ">Included Services</label>
              <div class="grid grid-cols-2 gap-3">
                 <button type="button" v-for="srv in services" :key="srv.id" @click="toggleService(srv.id)" class="flex items-center space-x-3 p-3 rounded-xl border transition-all" :class="form.includes.includes(srv.id) ? 'border-primary bg-primary/5' : 'border-gray-50 bg-gray-50'">
                    <component :is="srv.icon" class="h-4 w-4" :class="form.includes.includes(srv.id) ? 'text-primary' : 'text-gray-400'" />

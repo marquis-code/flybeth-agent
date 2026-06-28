@@ -11,8 +11,8 @@
               <Plane class="h-5 w-5 lg:h-6 lg:h-6" />
             </div>
             <div>
-              <h2 class="text-sm lg:text-sm  text-gray-900 tracking-tight">Booking Pipeline</h2>
-              <div class="flex items-center space-x-2 text-sm font-medium text-gray-800 uppercase tracking-widest">
+              <h2 class="text-sm lg:text-sm  text-gray-900 ">Booking Pipeline</h2>
+              <div class="flex items-center space-x-2 text-sm font-medium text-gray-800 uppercase ">
                 <span>{{ selectedFlight?.airline }}</span>
                 <span class="w-1 h-1 rounded-full bg-gray-300"></span>
                 <span>{{ selectedFlight?.flightNumber }}</span>
@@ -32,7 +32,7 @@
                   <span v-else>{{ idx + 1 }}</span>
                 </div>
                 <div class="flex flex-col hidden sm:flex">
-                  <span class="text-sm lg:text-sm font-bold uppercase tracking-widest transition-colors" :class="currentStepIndex >= idx ? 'text-gray-900' : 'text-gray-800'">{{ step.title }}</span>
+                  <span class="text-sm lg:text-sm font-bold uppercase  transition-colors" :class="currentStepIndex >= idx ? 'text-gray-900' : 'text-gray-800'">{{ step.title }}</span>
                   <span class="text-sm font-medium text-gray-800 mt-0.5 whitespace-nowrap">{{ step.desc }}</span>
                 </div>
               </div>
@@ -60,8 +60,8 @@
               <div v-if="currentStep === 'cart'" class="space-y-8 lg:space-y-12">
                 <section class="space-y-6">
                   <div class="flex items-center justify-between px-2">
-                    <h3 class="text-sm lg:text-lg  text-gray-900 tracking-tight">Traveler Details</h3>
-                    <div class="px-4 py-1.5 bg-gray-900 text-sm  text-white rounded-full uppercase tracking-widest">Agent Portal</div>
+                    <h3 class="text-sm lg:text-lg  text-gray-900 ">Traveler Details</h3>
+                    <div class="px-4 py-1.5 bg-gray-900 text-sm  text-white rounded-full uppercase ">Agent Portal</div>
                   </div>
                   
                   <!-- Passenger Forms -->
@@ -72,12 +72,12 @@
                     
                     <div class="flex items-center space-x-3 text-primary">
                       <UserIcon class="h-5 w-5" />
-                      <span class="text-sm  uppercase tracking-widest">Passenger {{ idx + 1 }}</span>
+                      <span class="text-sm  uppercase ">Passenger {{ idx + 1 }}</span>
                     </div>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                       <div class="space-y-3">
-                         <label class="text-sm font-bold text-gray-800 uppercase tracking-widest ml-1">Title</label>
+                         <label class="text-sm font-bold text-gray-800 uppercase  ml-1">Title</label>
                          <select v-model="p.title" class="w-full h-14 bg-gray-50 border border-gray-100 rounded-2xl px-5 text-sm font-bold text-gray-900 focus:bg-white focus:ring-1 focus:ring-primary outline-none transition-all">
                            <option value="mr">Mr</option>
                            <option value="mrs">Mrs</option>
@@ -88,7 +88,7 @@
                       <AnimatedInput v-model="p.firstName" label="First Name" :icon="UserIcon" />
                       <AnimatedInput v-model="p.lastName" label="Last Name" :icon="UserIcon" />
                       <div class="space-y-3">
-                         <label class="text-sm font-bold text-gray-800 uppercase tracking-widest ml-1">Gender</label>
+                         <label class="text-sm font-bold text-gray-800 uppercase  ml-1">Gender</label>
                          <select v-model="p.gender" class="w-full h-14 bg-gray-50 border border-gray-100 rounded-2xl px-5 text-sm font-bold text-gray-900 focus:bg-white focus:ring-1 focus:ring-primary outline-none transition-all">
                            <option value="male">Male</option>
                            <option value="female">Female</option>
@@ -104,7 +104,7 @@
                   <!-- Add Passenger Button -->
                   <button @click="addPassenger" class="w-full py-6 border-2 border-dashed border-gray-100 rounded-[2.5rem] flex items-center justify-center space-x-3 text-gray-800 hover:border-primary hover:text-primary hover:bg-primary/5 transition-all group">
                     <PlusIcon class="h-6 w-6 group-hover:scale-110 transition-transform" />
-                    <span class="text-sm  uppercase tracking-widest">Add Another Passenger</span>
+                    <span class="text-sm  uppercase ">Add Another Passenger</span>
                   </button>
                 </section>
 
@@ -117,8 +117,8 @@
                             <BanknotesIcon class="h-5 w-5 text-primary" />
                           </div>
                           <div>
-                            <h4 class="text-sm lg:text-sm  text-gray-900 tracking-tight leading-none">Earnings & Adjustments</h4>
-                            <p class="text-sm font-medium text-gray-800 uppercase tracking-widest mt-2">Personalize your agency margins</p>
+                            <h4 class="text-sm lg:text-sm  text-gray-900  leading-none">Earnings & Adjustments</h4>
+                            <p class="text-sm font-medium text-gray-800 uppercase  mt-2">Personalize your agency margins</p>
                           </div>
                         </div>
                       </div>
@@ -155,17 +155,17 @@
 
               <!-- Step 2: Final Summary -->
               <div v-if="currentStep === 'review'" class="space-y-8 lg:space-y-12">
-                <h3 class="text-sm lg:text-lg  text-gray-900 tracking-tight px-2">Final Summary</h3>
+                <h3 class="text-sm lg:text-lg  text-gray-900  px-2">Final Summary</h3>
                 
                 <div class="space-y-6 lg:space-y-8">
                   <!-- Trip Summary -->
                   <div class="bg-white rounded-[2.5rem] p-8 lg:p-10 border border-gray-100 shadow-sm relative overflow-hidden group">
                     <div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-1000"></div>
-                    <h4 class="text-sm font-semibold text-gray-800 uppercase tracking-widest mb-10 pb-4 border-b border-gray-50">Itinerary Overview</h4>
+                    <h4 class="text-sm font-semibold text-gray-800 uppercase  mb-10 pb-4 border-b border-gray-50">Itinerary Overview</h4>
                     <div class="flex items-center justify-between">
                       <div>
-                        <p class="text-lg  text-gray-900 tracking-tight">{{ selectedFlight.origin }}</p>
-                        <p class="text-sm font-semibold text-gray-800 mt-2 uppercase tracking-widest">{{ formatTime(selectedFlight.departureTime) }}</p>
+                        <p class="text-lg  text-gray-900 ">{{ selectedFlight.origin }}</p>
+                        <p class="text-sm font-semibold text-gray-800 mt-2 uppercase ">{{ formatTime(selectedFlight.departureTime) }}</p>
                       </div>
                       <div class="flex-1 px-8 lg:px-16">
                         <div class="h-px bg-gray-100 relative">
@@ -173,15 +173,15 @@
                         </div>
                       </div>
                       <div class="text-right">
-                        <p class="text-lg  text-gray-900 tracking-tight">{{ selectedFlight.destination }}</p>
-                        <p class="text-sm font-semibold text-gray-800 mt-2 uppercase tracking-widest">{{ formatTime(selectedFlight.arrivalTime) }}</p>
+                        <p class="text-lg  text-gray-900 ">{{ selectedFlight.destination }}</p>
+                        <p class="text-sm font-semibold text-gray-800 mt-2 uppercase ">{{ formatTime(selectedFlight.arrivalTime) }}</p>
                       </div>
                     </div>
                   </div>
 
                   <!-- Travelers List -->
                   <div class="bg-white rounded-[2.5rem] p-8 lg:p-10 border border-gray-100 shadow-sm">
-                    <h4 class="text-sm font-semibold text-gray-800 uppercase tracking-widest mb-8 pb-4 border-b border-gray-50">Traveler Roster</h4>
+                    <h4 class="text-sm font-semibold text-gray-800 uppercase  mb-8 pb-4 border-b border-gray-50">Traveler Roster</h4>
                     <div class="divide-y divide-gray-50">
                       <div v-for="(p, idx) in form.passengers" :key="idx" class="py-5 flex items-center justify-between group">
                         <div class="flex items-center space-x-5">
@@ -191,7 +191,7 @@
                             <p class="text-sm font-medium text-gray-800 mt-1">{{ p.passport }}</p>
                           </div>
                         </div>
-                        <span class="text-sm  px-4 py-1.5 bg-gray-50 rounded-full text-gray-800 uppercase tracking-widest">ADULT</span>
+                        <span class="text-sm  px-4 py-1.5 bg-gray-50 rounded-full text-gray-800 uppercase ">ADULT</span>
                       </div>
                     </div>
                   </div>
@@ -234,13 +234,13 @@
                   <div class="bg-primary text-white px-6 py-5 flex items-center justify-between rounded-t-[2rem]">
                     <div class="flex items-center gap-4">
                       <div class="flex items-center justify-center w-8 h-8 rounded-xl bg-white/20 backdrop-blur-sm text-white  text-sm">3</div>
-                      <h3 class="text-sm  tracking-tight underline-offset-4 decoration-white/30">Secure Payment</h3>
+                      <h3 class="text-sm   underline-offset-4 decoration-white/30">Secure Payment</h3>
                     </div>
                     <Lock class="h-5 w-5 text-white/80" />
                   </div>
                   
                   <div class="bg-white text-gray-900 p-8">
-                    <div class="flex flex-col gap-4 text-sm font-semibold text-gray-800 uppercase tracking-widest border-b border-gray-50 pb-8 mb-8">
+                    <div class="flex flex-col gap-4 text-sm font-semibold text-gray-800 uppercase  border-b border-gray-50 pb-8 mb-8">
                       <span class="shrink-0 text-gray-900 mb-2">Select Payment Routing:</span>
                       
                       <!-- Flybeth Wallet Option -->
@@ -255,13 +255,13 @@
                               <BanknotesIcon class="h-7 w-7" />
                             </div>
                             <div>
-                              <p class="text-base  text-gray-900 tracking-tight">Flybeth Wallet</p>
-                              <p class="text-xs font-semibold text-primary uppercase tracking-[0.1em] mt-1">Instant Confirmation & Ticketing</p>
+                              <p class="text-base  text-gray-900 ">Flybeth Wallet</p>
+                              <p class="text-xs font-semibold text-primary uppercase  mt-1">Instant Confirmation & Ticketing</p>
                             </div>
                           </div>
                           <div class="text-right">
                             <p class="text-lg  text-gray-900">{{ formatPrice(agentWallet.balance) }}</p>
-                            <p class="text-xs font-bold text-gray-800 uppercase tracking-widest mt-1">Balance</p>
+                            <p class="text-xs font-bold text-gray-800 uppercase  mt-1">Balance</p>
                           </div>
                         </div>
                         <div v-if="form.paymentMethod === 'wallet'" class="absolute -top-3 -right-3 w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white border-4 border-white shadow-lg">
@@ -281,8 +281,8 @@
                               <CreditCardIcon class="h-7 w-7" />
                             </div>
                             <div>
-                              <p class="text-base  text-gray-900 tracking-tight">Card / Direct Transfer</p>
-                              <p class="text-xs font-semibold text-gray-800 uppercase tracking-[0.1em] mt-1">48 Hours Confirmation Process</p>
+                              <p class="text-base  text-gray-900 ">Card / Direct Transfer</p>
+                              <p class="text-xs font-semibold text-gray-800 uppercase  mt-1">48 Hours Confirmation Process</p>
                             </div>
                           </div>
                         </div>
@@ -307,7 +307,7 @@
                        </div>
                     </div>
                       <div class="space-y-3">
-                        <label class="text-sm font-semibold text-gray-800 uppercase tracking-widest ml-1">Full Name on Card</label>
+                        <label class="text-sm font-semibold text-gray-800 uppercase  ml-1">Full Name on Card</label>
                         <input 
                           v-model="form.cardDetails.name" 
                           @input="validateField('name')"
@@ -316,13 +316,13 @@
                           :class="cardErrors.name ? 'border-red-500 bg-red-50' : 'border-gray-100'"
                           placeholder="John Doe"
                         />
-                        <div v-if="cardErrors.name" class="flex items-center gap-2 text-sm text-red-500  uppercase tracking-wider ml-1 mt-1">
+                        <div v-if="cardErrors.name" class="flex items-center gap-2 text-sm text-red-500  uppercase  ml-1 mt-1">
                           <AlertCircle class="h-3 w-3" />
                           {{ cardErrors.name }}
                         </div>
                       </div>
                       <div class="space-y-3">
-                        <label class="text-sm font-semibold text-gray-800 uppercase tracking-widest ml-1">Card Number</label>
+                        <label class="text-sm font-semibold text-gray-800 uppercase  ml-1">Card Number</label>
                         <div class="relative group">
                           <input 
                             v-model="form.cardDetails.number" 
@@ -334,18 +334,18 @@
                             placeholder="•••• •••• •••• ••••"
                           />
                           <div class="absolute right-4 top-1/2 -translate-y-1/2 flex items-center space-x-1.5 grayscale group-focus-within:grayscale-0 transition-all">
-                             <div class="w-7 h-4 bg-blue-500/10 rounded flex items-center justify-center text-[10px]  text-blue-600 italic">VISA</div>
-                             <div class="w-7 h-4 bg-rose-500/10 rounded flex items-center justify-center text-[10px]  text-rose-600 italic">MC</div>
-                             <div class="w-7 h-4 bg-sky-500/10 rounded flex items-center justify-center text-[10px]  text-sky-600 italic">AX</div>
+                             <div class="w-7 h-4 bg-blue-500/10 rounded flex items-center justify-center text-sm  text-blue-600 italic">VISA</div>
+                             <div class="w-7 h-4 bg-rose-500/10 rounded flex items-center justify-center text-sm  text-rose-600 italic">MC</div>
+                             <div class="w-7 h-4 bg-sky-500/10 rounded flex items-center justify-center text-sm  text-sky-600 italic">AX</div>
                           </div>
                         </div>
-                        <div v-if="cardErrors.number" class="flex items-center gap-2 text-sm text-red-500  uppercase tracking-wider ml-1 mt-1">
+                        <div v-if="cardErrors.number" class="flex items-center gap-2 text-sm text-red-500  uppercase  ml-1 mt-1">
                           <AlertCircle class="h-3 w-3" />
                           {{ cardErrors.number }}
                         </div>
                       </div>
                       <div class="space-y-3">
-                        <label class="text-sm font-semibold text-gray-800 uppercase tracking-widest ml-1">Expiration Metadata</label>
+                        <label class="text-sm font-semibold text-gray-800 uppercase  ml-1">Expiration Metadata</label>
                         <div class="grid grid-cols-2 gap-4">
                            <SelectInput 
                              v-model="form.cardDetails.expMonth"
@@ -366,14 +366,14 @@
                              @update:model-value="validateField('expYear')"
                            />
                         </div>
-                        <div v-if="cardErrors.expMonth || cardErrors.expYear" class="flex items-center gap-2 text-sm text-red-500  uppercase tracking-wider ml-1 mt-1">
+                        <div v-if="cardErrors.expMonth || cardErrors.expYear" class="flex items-center gap-2 text-sm text-red-500  uppercase  ml-1 mt-1">
                           <AlertCircle class="h-3 w-3" />
                           Expiry is required
                         </div>
                       </div>
 
                       <div class="space-y-3">
-                        <label class="text-sm font-semibold text-gray-800 uppercase tracking-widest ml-1">CVV / CVC</label>
+                        <label class="text-sm font-semibold text-gray-800 uppercase  ml-1">CVV / CVC</label>
                         <div class="flex flex-col gap-1">
                           <div class="relative max-w-[120px] group">
                             <input 
@@ -382,14 +382,14 @@
                               type="password" 
                               maxlength="4" 
                               placeholder="•••" 
-                              class="w-full h-14 bg-gray-50 border border-gray-100 rounded-2xl px-5 text-sm  tracking-widest focus:bg-white focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all" 
+                              class="w-full h-14 bg-gray-50 border border-gray-100 rounded-2xl px-5 text-sm   focus:bg-white focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all" 
                               :class="cardErrors.cvv ? 'border-red-500 bg-red-50' : 'border-gray-100'"
                             />
                             <div class="absolute right-4 top-1/2 -translate-y-1/2">
                               <Lock class="h-4 w-4 text-gray-600 group-focus-within:text-primary transition-colors" />
                             </div>
                           </div>
-                          <div v-if="cardErrors.cvv" class="flex items-center gap-2 text-sm text-red-500  uppercase tracking-wider ml-1 mt-1">
+                          <div v-if="cardErrors.cvv" class="flex items-center gap-2 text-sm text-red-500  uppercase  ml-1 mt-1">
                             <AlertCircle class="h-3 w-3" />
                             {{ cardErrors.cvv }}
                           </div>
@@ -403,13 +403,13 @@
                 <div class="bg-white border border-gray-100 rounded-[2rem] overflow-visible shadow-sm hover:shadow-md transition-shadow z-[10]">
                   <div class="bg-primary text-white px-6 py-5 flex items-center gap-4 rounded-t-[2rem]">
                     <div class="flex items-center justify-center w-8 h-8 rounded-xl bg-white/20 backdrop-blur-sm text-white  text-sm">4</div>
-                    <h3 class="text-sm  tracking-tight">Billing Particulars</h3>
+                    <h3 class="text-sm  ">Billing Particulars</h3>
                   </div>
                   
                   <div class="bg-white text-gray-900 p-8">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                       <div class="space-y-3 md:col-span-2">
-                        <label class="text-sm font-semibold text-gray-800 uppercase tracking-widest ml-1">Street Address</label>
+                        <label class="text-sm font-semibold text-gray-800 uppercase  ml-1">Street Address</label>
                         <GoogleAddressAutocomplete 
                           v-model="form.billingDetails.address" 
                           label="Address Lookup"
@@ -419,7 +419,7 @@
                         />
                       </div>
                       <div class="space-y-3">
-                        <label class="text-sm font-semibold text-gray-800 uppercase tracking-widest ml-1">Country</label>
+                        <label class="text-sm font-semibold text-gray-800 uppercase  ml-1">Country</label>
                         <SelectInput 
                           v-model="form.billingDetails.country" 
                           label="Select Country"
@@ -429,7 +429,7 @@
                         />
                       </div>
                       <div class="space-y-3">
-                         <label class="text-sm font-semibold text-gray-800 uppercase tracking-widest ml-1">State / Province</label>
+                         <label class="text-sm font-semibold text-gray-800 uppercase  ml-1">State / Province</label>
                          <SelectInput 
                           v-model="form.billingDetails.state" 
                           label="Select State"
@@ -440,7 +440,7 @@
                         />
                       </div>
                       <div class="space-y-3">
-                        <label class="text-sm font-semibold text-gray-800 uppercase tracking-widest ml-1">City</label>
+                        <label class="text-sm font-semibold text-gray-800 uppercase  ml-1">City</label>
                         <SelectInput 
                           v-model="form.billingDetails.city" 
                           label="Select City"
@@ -450,7 +450,7 @@
                         />
                       </div>
                       <div class="space-y-3">
-                        <label class="text-sm font-semibold text-gray-800 uppercase tracking-widest ml-1">Postal Code</label>
+                        <label class="text-sm font-semibold text-gray-800 uppercase  ml-1">Postal Code</label>
                         <input v-model="form.billingDetails.postalCode" type="text" class="w-full h-14 bg-gray-50 border border-gray-100 rounded-2xl px-5 text-sm font-bold focus:bg-white focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all" />
                       </div>
                     </div>
@@ -476,43 +476,43 @@
             <div class="lg:col-span-4 sticky lg:top-8 space-y-8">
               <div class="bg-white rounded-[2.5rem] p-8 lg:p-10 border border-gray-100 shadow-sm relative overflow-hidden group">
                 <div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-1000"></div>
-                <h4 class="text-sm  text-gray-900 uppercase tracking-widest mb-10 pb-4 border-b border-gray-50">Payment Summary</h4>
+                <h4 class="text-sm  text-gray-900 uppercase  mb-10 pb-4 border-b border-gray-50">Payment Summary</h4>
                 <div class="space-y-6">
-                  <div class="flex justify-between items-center text-sm font-medium text-gray-800 uppercase tracking-widest">
+                  <div class="flex justify-between items-center text-sm font-medium text-gray-800 uppercase ">
                     <span>Base Fare (Net)</span>
                     <span class="text-gray-900">{{ formatPrice(selectedFlight?.price) }}</span>
                   </div>
-                  <div class="flex justify-between items-center text-sm font-medium text-gray-800 uppercase tracking-widest">
+                  <div class="flex justify-between items-center text-sm font-medium text-gray-800 uppercase ">
                     <span>Initial Commission</span>
-                    <span class="text-emerald-500  tracking-tight">+{{ formatPrice(selectedFlight?.priceWithCommission - selectedFlight?.price) }}</span>
+                    <span class="text-emerald-500  ">+{{ formatPrice(selectedFlight?.priceWithCommission - selectedFlight?.price) }}</span>
                   </div>
-                  <div v-if="form.agentServiceFee" class="flex justify-between items-center text-sm font-medium text-gray-800 uppercase tracking-widest">
+                  <div v-if="form.agentServiceFee" class="flex justify-between items-center text-sm font-medium text-gray-800 uppercase ">
                     <span>Agent Service Fee</span>
-                    <span class="text-gray-900  tracking-tight">+{{ formatPrice(form.agentServiceFee) }}</span>
+                    <span class="text-gray-900  ">+{{ formatPrice(form.agentServiceFee) }}</span>
                   </div>
-                  <div v-if="form.adultMarkup" class="flex justify-between items-center text-sm font-medium text-gray-800 uppercase tracking-widest">
+                  <div v-if="form.adultMarkup" class="flex justify-between items-center text-sm font-medium text-gray-800 uppercase ">
                     <span>Custom Markups</span>
-                    <span class="text-gray-900  tracking-tight">+{{ formatPrice(form.adultMarkup * travelers.adults) }}</span>
+                    <span class="text-gray-900  ">+{{ formatPrice(form.adultMarkup * travelers.adults) }}</span>
                   </div>
-                  <div v-if="form.hasInsurance" class="flex justify-between items-center text-sm font-medium text-gray-800 uppercase tracking-widest">
+                  <div v-if="form.hasInsurance" class="flex justify-between items-center text-sm font-medium text-gray-800 uppercase ">
                     <span>Travel Protection</span>
-                    <span class="text-gray-900  tracking-tight">+{{ formatPrice(25 * travelers.adults) }}</span>
+                    <span class="text-gray-900  ">+{{ formatPrice(25 * travelers.adults) }}</span>
                   </div>
-                  <div v-if="seatPrice" class="flex justify-between items-center text-sm font-medium text-gray-800 uppercase tracking-widest">
+                  <div v-if="seatPrice" class="flex justify-between items-center text-sm font-medium text-gray-800 uppercase ">
                     <span>Seat Selection</span>
-                    <span class="text-gray-900  tracking-tight">+{{ formatPrice(seatPrice) }}</span>
+                    <span class="text-gray-900  ">+{{ formatPrice(seatPrice) }}</span>
                   </div>
                   
                   <div class="pt-8 border-t-2 border-dashed border-gray-100 mt-8">
                     <div class="flex justify-between items-end">
-                      <p class="text-sm font-semibold text-gray-800 uppercase tracking-widest">Amount Due</p>
-                      <p class="text-2xl  text-gray-900 tracking-tighter leading-none">{{ formatPrice(totalAmount) }}</p>
+                      <p class="text-sm font-semibold text-gray-800 uppercase ">Amount Due</p>
+                      <p class="text-2xl  text-gray-900 er leading-none">{{ formatPrice(totalAmount) }}</p>
                     </div>
-                    <p class="text-sm font-bold text-emerald-500 uppercase tracking-widest mt-2 text-right italic">Guaranteed Payment</p>
+                    <p class="text-sm font-bold text-emerald-500 uppercase  mt-2 text-right italic">Guaranteed Payment</p>
                   </div>
                 </div>
               </div>
-              <p class="text-center text-sm font-medium text-gray-800 uppercase tracking-widest">Secure Agent Pipeline • Offer Ref: {{ selectedFlight?.offerId?.slice(-8) }}</p>
+              <p class="text-center text-sm font-medium text-gray-800 uppercase ">Secure Agent Pipeline • Offer Ref: {{ selectedFlight?.offerId?.slice(-8) }}</p>
             </div>
           </div>
 
@@ -522,18 +522,18 @@
                 <CheckBadgeIcon class="h-20 w-20 text-green-500" />
              </div>
              <div>
-                <h3 class="text-5xl  text-gray-900 mb-4 tracking-tight">Booking Secured!</h3>
+                <h3 class="text-5xl  text-gray-900 mb-4 ">Booking Secured!</h3>
                 <p class="text-sm text-gray-800">Your trip is manifested. Reference # {{ bookingRef }}</p>
              </div>
 
              <div class="inline-flex items-center space-x-4 bg-gray-50 p-6 rounded-[2rem] border border-gray-100">
                 <div class="text-left pr-12 border-r border-gray-200">
-                   <p class="text-sm font-medium text-gray-800 uppercase tracking-widest">Notification Status</p>
+                   <p class="text-sm font-medium text-gray-800 uppercase ">Notification Status</p>
                    <p class="text-sm font-bold text-gray-900 mt-1">Invoice Sent to Agent & Admin</p>
                 </div>
                 <div class="text-left pl-8">
-                   <p class="text-sm font-medium text-gray-800 uppercase tracking-widest">Generated PNR</p>
-                   <p class="text-sm  text-primary tracking-widest mt-1">{{ bookingRef }}</p>
+                   <p class="text-sm font-medium text-gray-800 uppercase ">Generated PNR</p>
+                   <p class="text-sm  text-primary  mt-1">{{ bookingRef }}</p>
                 </div>
              </div>
 
@@ -560,8 +560,8 @@
 
         <div class="flex items-center space-x-4 lg:space-x-8">
            <div class="text-right hidden sm:block">
-             <p class="text-sm font-semibold text-gray-800 uppercase tracking-widest mb-1">Amount Due</p>
-             <p class="text-sm lg:text-lg  text-gray-900 tracking-tighter">{{ formatPrice(totalAmount) }}</p>
+             <p class="text-sm font-semibold text-gray-800 uppercase  mb-1">Amount Due</p>
+             <p class="text-sm lg:text-lg  text-gray-900 er">{{ formatPrice(totalAmount) }}</p>
            </div>
            
            <BaseButton 

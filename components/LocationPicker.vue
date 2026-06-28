@@ -36,7 +36,7 @@
         </span>
       </div>
 
-      <p v-if="selectedLocationSub && !showDropdown" class="text-sm text-neutral-400 font-bold mt-0.5 truncate uppercase tracking-tight">
+      <p v-if="selectedLocationSub && !showDropdown" class="text-sm text-neutral-400 font-bold mt-0.5 truncate uppercase ">
         {{ selectedLocationSub }}
       </p>
     </div>
@@ -95,8 +95,8 @@
                 </svg>
               </div>
               <div class="min-w-0">
-                <p class="text-sm  text-gray-900 uppercase tracking-widest leading-none">Detect My Location</p>
-                <p class="text-sm text-gray-800 font-bold mt-1 uppercase tracking-tighter">Instant proximity lookup</p>
+                <p class="text-sm  text-gray-900 uppercase  leading-none">Detect My Location</p>
+                <p class="text-sm text-gray-800 font-bold mt-1 uppercase er">Instant proximity lookup</p>
               </div>
             </div>
 
@@ -135,7 +135,7 @@
             <!-- Loading -->
             <div v-else-if="isLoading" class="py-16 text-center">
               <div class="animate-spin h-8 w-8 border-3 border-gray-100 border-t-primary rounded-full mx-auto mb-4" />
-              <p class="text-sm font-semibold text-gray-800 uppercase tracking-widest">Scanning Global Database...</p>
+              <p class="text-sm font-semibold text-gray-800 uppercase ">Scanning Global Database...</p>
             </div>
 
             <!-- No results -->
@@ -143,7 +143,7 @@
               <div class="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4">
                 <MapPin class="h-8 w-8 text-gray-600" />
               </div>
-              <p class="text-sm  text-gray-900 uppercase tracking-widest">No Matches Found</p>
+              <p class="text-sm  text-gray-900 uppercase ">No Matches Found</p>
               <p class="text-sm text-gray-800 mt-2 font-bold px-10">Try searching for a different city or airport code.</p>
             </div>
 
@@ -166,7 +166,7 @@
                     <p class="text-[13px]  text-gray-800 group-hover/sug:text-gray-900 transition-colors truncate">
                       {{ dest.city }}
                     </p>
-                    <p class="text-sm  text-primary  tracking-widest">{{ dest.iataCode }}</p>
+                    <p class="text-sm  text-primary  ">{{ dest.iataCode }}</p>
                   </div>
                 </div>
               </div>

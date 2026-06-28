@@ -4,7 +4,7 @@
     <section class="pt-10 pb-16 bg-white relative">
       <div class="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
       <div class="max-w-4xl mx-auto px-6 text-center relative z-10 space-y-6">
-        <span class="text-xs font-bold text-primary uppercase tracking-widest">Careers</span>
+        <span class="text-xs font-bold text-primary uppercase ">Careers</span>
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 leading-tight">
           Join the <span class="text-primary">journey.</span>
         </h1>
@@ -31,7 +31,7 @@
           </p>
 
           <div class="border-t border-neutral-100 pt-8 mt-8 space-y-4">
-            <p class="text-sm font-bold text-neutral-400 uppercase tracking-widest">Stay Connected</p>
+            <p class="text-sm font-bold text-neutral-400 uppercase ">Stay Connected</p>
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a href="mailto:careers@flybeth.com" class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-xl font-bold text-sm hover:bg-primary-dark transition-all shadow-lg shadow-primary/20">
                 <EnvelopeIcon class="h-4 w-4" />

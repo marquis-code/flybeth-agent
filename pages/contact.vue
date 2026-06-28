@@ -7,7 +7,7 @@
         <!-- Left: Contact Details -->
         <div class="space-y-12">
           <div class="space-y-6">
-            <span class="text-xs font-bold text-primary uppercase tracking-widest">Contact Us</span>
+            <span class="text-xs font-bold text-primary uppercase ">Contact Us</span>
             <h1 class="text-4xl lg:text-5xl font-bold text-neutral-900 leading-tight">
               Ready to grow your <br />
               <span class="text-primary">travel agency?</span>

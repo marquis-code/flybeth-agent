@@ -2,8 +2,8 @@
   <div class="space-y-6">
     <div class="flex items-center justify-between">
       <div class="space-y-1">
-        <h2 class="text-2xl font-bold text-gray-900 tracking-tight">Traveler List</h2>
-        <p class="text-sm text-gray-400 font-bold uppercase tracking-widest">Manage your customers, their documents and booking history</p>
+        <h2 class="text-2xl font-bold text-gray-900 ">Traveler List</h2>
+        <p class="text-sm text-gray-400 font-bold uppercase ">Manage your customers, their documents and booking history</p>
       </div>
       <button 
         @click="openAddDrawer"
@@ -21,7 +21,7 @@
            <component :is="stat.icon" class="h-6 w-6" :class="stat.color" />
         </div>
         <div class="space-y-0.5">
-          <p class="text-sm font-bold text-gray-400 uppercase tracking-widest">{{ stat.label }}</p>
+          <p class="text-sm font-bold text-gray-400 uppercase ">{{ stat.label }}</p>
           <p class="text-xl font-bold text-gray-900">{{ stat.value }}</p>
         </div>
       </div>
@@ -33,11 +33,11 @@
         <table class="w-full text-left">
           <thead>
             <tr class="bg-gray-50/50 border-b border-gray-100">
-               <th class="px-6 py-4 text-sm  uppercase tracking-widest text-gray-400">FullName</th>
-               <th class="px-6 py-4 text-sm  uppercase tracking-widest text-gray-400">Contact Details</th>
-               <th class="px-6 py-4 text-sm  uppercase tracking-widest text-gray-400">Gender & DOB</th>
-               <th class="px-6 py-4 text-sm  uppercase tracking-widest text-gray-400">Documents</th>
-               <th class="px-6 py-4 text-sm  uppercase tracking-widest text-gray-400 text-right">Actions</th>
+               <th class="px-6 py-4 text-sm  uppercase  text-gray-400">FullName</th>
+               <th class="px-6 py-4 text-sm  uppercase  text-gray-400">Contact Details</th>
+               <th class="px-6 py-4 text-sm  uppercase  text-gray-400">Gender & DOB</th>
+               <th class="px-6 py-4 text-sm  uppercase  text-gray-400">Documents</th>
+               <th class="px-6 py-4 text-sm  uppercase  text-gray-400 text-right">Actions</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-50">
@@ -55,8 +55,8 @@
                       {{ traveler.firstName[0] }}{{ traveler.lastName[0] }}
                     </div>
                     <div>
-                      <p class="text-sm  text-gray-900 uppercase tracking-tight">{{ traveler.firstName }} {{ traveler.lastName }}</p>
-                      <span class="text-sm px-1.5 py-0.5 bg-gray-50 text-gray-500 font-bold uppercase tracking-tighter rounded border border-gray-100">{{ traveler.type }}</span>
+                      <p class="text-sm  text-gray-900 uppercase ">{{ traveler.firstName }} {{ traveler.lastName }}</p>
+                      <span class="text-sm px-1.5 py-0.5 bg-gray-50 text-gray-500 font-bold uppercase er rounded border border-gray-100">{{ traveler.type }}</span>
                     </div>
                   </div>
                 </td>
@@ -67,7 +67,7 @@
                   </div>
                 </td>
                 <td class="px-6 py-4">
-                  <div class="flex items-center text-sm font-bold text-gray-500 uppercase tracking-widest">
+                  <div class="flex items-center text-sm font-bold text-gray-500 uppercase ">
                     <span class="px-2 py-0.5 bg-gray-50 rounded">{{ traveler.gender }}</span>
                     <span class="mx-2 opacity-20">/</span>
                     <span>{{ formatDate(traveler.dateOfBirth) }}</span>
@@ -76,7 +76,7 @@
                 <td class="px-6 py-4">
                    <div class="flex items-center space-x-2">
                       <div :class="traveler.documents?.length ? 'bg-emerald-500' : 'bg-amber-400'" class="h-1.5 w-1.5 rounded-full"></div>
-                      <span class="text-sm  text-gray-500 uppercase tracking-tighter">{{ traveler.documents?.length ? traveler.documents.length + ' Docs Saved' : 'No Docs' }}</span>
+                      <span class="text-sm  text-gray-500 uppercase er">{{ traveler.documents?.length ? traveler.documents.length + ' Docs Saved' : 'No Docs' }}</span>
                    </div>
                 </td>
                 <td class="px-6 py-4 text-right">
@@ -119,7 +119,7 @@
                   <div v-if="uploadingPic" class="h-8 w-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
                   <template v-else>
                      <CameraIcon class="h-7 w-7 mb-1" />
-                     <span class="text-sm  uppercase tracking-widest text-center px-4">Upload Photo</span>
+                     <span class="text-sm  uppercase  text-center px-4">Upload Photo</span>
                   </template>
                </div>
                <div v-if="uploadingPic" class="absolute inset-0 bg-white/60 flex items-center justify-center rounded-[2rem]">
@@ -127,22 +127,22 @@
                </div>
            </div>
            <div class="flex-1 space-y-2 text-left">
-              <h4 class="text-sm  text-gray-900 uppercase tracking-tight">Traveler Details</h4>
+              <h4 class="text-sm  text-gray-900 uppercase ">Traveler Details</h4>
               <p class="text-sm text-gray-400 font-medium leading-relaxed">Please make sure the names match the traveler's passport exactly to avoid issues during travel.</p>
            </div>
         </div>
 
         <div class="grid grid-cols-3 gap-6">
            <div class="space-y-2 text-left">
-              <label class="text-sm  text-gray-400 uppercase tracking-widest px-1">First Name</label>
+              <label class="text-sm  text-gray-400 uppercase  px-1">First Name</label>
               <input v-model="form.firstName" type="text" required class="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-2xl text-sm font-bold outline-none focus:bg-white focus:border-primary transition-all shadow-sm shadow-black/5" />
            </div>
            <div class="space-y-2 text-left">
-              <label class="text-sm  text-gray-400 uppercase tracking-widest px-1">Last Name</label>
+              <label class="text-sm  text-gray-400 uppercase  px-1">Last Name</label>
               <input v-model="form.lastName" type="text" required class="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-2xl text-sm font-bold outline-none focus:bg-white focus:border-primary transition-all shadow-sm shadow-black/5" />
            </div>
            <div class="space-y-2 text-left">
-              <label class="text-sm  text-gray-400 uppercase tracking-widest px-1">Gender</label>
+              <label class="text-sm  text-gray-400 uppercase  px-1">Gender</label>
               <select v-model="form.gender" class="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-2xl text-sm font-bold outline-none focus:bg-white focus:border-primary transition-all uppercase shadow-sm shadow-black/5">
                  <option value="male">MALE</option>
                  <option value="female">FEMALE</option>
@@ -153,22 +153,22 @@
 
         <div class="grid grid-cols-2 gap-6">
            <div class="space-y-2 text-left">
-              <label class="text-sm  text-gray-400 uppercase tracking-widest px-1">Email Address</label>
+              <label class="text-sm  text-gray-400 uppercase  px-1">Email Address</label>
               <input v-model="form.email" type="email" required class="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-2xl text-sm font-bold outline-none focus:bg-white focus:border-primary transition-all shadow-sm shadow-black/5" />
            </div>
            <div class="space-y-2 text-left">
-              <label class="text-sm  text-gray-400 uppercase tracking-widest px-1">Phone Number</label>
+              <label class="text-sm  text-gray-400 uppercase  px-1">Phone Number</label>
               <input v-model="form.phone" type="tel" class="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-2xl text-sm font-bold outline-none focus:bg-white focus:border-primary transition-all shadow-sm shadow-black/5" />
            </div>
         </div>
 
         <div class="grid grid-cols-3 gap-6">
            <div class="space-y-2 col-span-1 text-left">
-              <label class="text-sm  text-gray-400 uppercase tracking-widest px-1">Date of Birth</label>
+              <label class="text-sm  text-gray-400 uppercase  px-1">Date of Birth</label>
               <input v-model="form.dateOfBirth" type="date" required class="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-2xl text-sm font-bold outline-none focus:bg-white focus:border-primary transition-all shadow-sm shadow-black/5" />
            </div>
            <div class="space-y-2 col-span-2 text-left">
-              <label class="text-sm  text-gray-400 uppercase tracking-widest px-1">Passport Number</label>
+              <label class="text-sm  text-gray-400 uppercase  px-1">Passport Number</label>
               <input v-model="form.passportNumber" type="text" placeholder="Enter Passport Number" class="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-2xl text-sm font-bold outline-none focus:bg-white focus:border-primary transition-all uppercase shadow-sm shadow-black/5" />
            </div>
         </div>
@@ -187,7 +187,7 @@
                     <DocumentIcon v-else class="h-6 w-6 text-gray-500" />
                  </div>
                  <div class="flex-1 min-w-0">
-                    <p class="text-sm  text-gray-900 truncate uppercase tracking-tighter">{{ doc.name }}</p>
+                    <p class="text-sm  text-gray-900 truncate uppercase er">{{ doc.name }}</p>
                     <p class="text-sm text-gray-400 uppercase ">Saved File</p>
                  </div>
                  <button type="button" @click="form.documents.splice(idx, 1)" class="p-2 text-rose-500 hover:bg-rose-50 rounded-xl transition-all"><XMarkIcon class="h-4 w-4" /></button>
@@ -198,7 +198,7 @@
                   <div v-if="uploadingDoc" class="h-6 w-6 border-2 border-primary border-t-transparent rounded-full animate-spin mb-2"></div>
                   <template v-else>
                      <CloudArrowUpIcon class="h-6 w-6 mb-2" />
-                     <span class="text-sm  uppercase tracking-widest text-center">Upload New Document</span>
+                     <span class="text-sm  uppercase  text-center">Upload New Document</span>
                   </template>
                </div>
            </div>
@@ -207,7 +207,7 @@
         <!-- Document Selection Modal -->
         <div v-if="isDocModalOpen" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 text-left">
             <div class="bg-white rounded-[2.5rem] p-10 max-w-md w-full shadow-2xl">
-                <h3 class="text-sm  text-gray-900 uppercase tracking-widest mb-6">Select Document Type</h3>
+                <h3 class="text-sm  text-gray-900 uppercase  mb-6">Select Document Type</h3>
                 <div class="space-y-3">
                     <button v-for="type in [
                         'Passport', 
@@ -216,7 +216,7 @@
                         'Yellow Fever Certificate', 
                         'Identity Card'
                     ]" :key="type" @click="confirmDocUpload(type)" class="w-full text-left p-4 rounded-2xl border border-gray-100 hover:bg-primary hover:text-white hover:border-primary transition-all flex items-center justify-between group">
-                        <span class="text-sm font-bold uppercase tracking-tight">{{ type }}</span>
+                        <span class="text-sm font-bold uppercase ">{{ type }}</span>
                         <ArrowRightIcon class="h-4 w-4 text-gray-200 group-hover:text-white" />
                     </button>
                 </div>

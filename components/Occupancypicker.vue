@@ -6,12 +6,12 @@
       class="w-full cursor-pointer flex flex-col justify-center select-none"
       :class="displayVariant === 'minimal' ? 'min-h-0 px-0 pt-0 pb-0' : 'px-4 pt-3 pb-2 min-h-[68px]'"
     >
-      <p v-if="label && displayVariant !== 'minimal'" class="text-sm font-bold text-neutral-400 mb-0.5 group-hover:text-gray-900 transition-colors uppercase tracking-widest leading-none">
+      <p v-if="label && displayVariant !== 'minimal'" class="text-sm font-bold text-neutral-400 mb-0.5 group-hover:text-gray-900 transition-colors uppercase  leading-none">
         {{ label }}
       </p>
       <div class="flex items-center gap-2">
         <Users v-if="displayVariant !== 'minimal'" class="h-3.5 w-3.5 text-gray-800 shrink-0" />
-        <span class="text-sm font-bold text-gray-900 tracking-tight">{{ summary }}</span>
+        <span class="text-sm font-bold text-gray-900 ">{{ summary }}</span>
       </div>
     </div>
 
@@ -46,7 +46,7 @@
               class="flex items-center justify-between"
             >
               <div>
-                <p class="text-[13px]  text-gray-900 uppercase tracking-widest">{{ row.label }}</p>
+                <p class="text-[13px]  text-gray-900 uppercase ">{{ row.label }}</p>
                 <p v-if="row.note" class="text-sm text-neutral-400 font-bold uppercase">{{ row.note }}</p>
               </div>
               <div class="flex items-center gap-3">

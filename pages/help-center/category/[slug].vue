@@ -50,7 +50,7 @@
     <!-- Simple Footer -->
     <footer class="bg-neutral-50 py-12 border-t border-neutral-100 mt-20">
       <div class="max-w-7xl mx-auto px-6 text-center">
-        <p class="text-sm text-neutral-500 font-medium tracking-wide">© 2026 Flybeth B2B Travel Technologies. All rights reserved.</p>
+        <p class="text-sm text-neutral-500 font-medium ">© 2026 Flybeth B2B Travel Technologies. All rights reserved.</p>
       </div>
     </footer>
   </div>

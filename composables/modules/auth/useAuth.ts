@@ -11,21 +11,23 @@ export const useAuth = () => {
   const { showLoader, hideLoader } = useGlobalLoader();
 
   /**
-   * Persist auth state to localStorage only.
+   * Persist auth state to cookies only.
    */
   const persistSession = (accessToken: string, refreshToken: string, userData: any) => {
-    if (!import.meta.client) return;
+    const accessTokenCookie = useCookie("accessToken", { maxAge: 7 * 24 * 60 * 60, path: "/", sameSite: "lax" });
+    const refreshTokenCookie = useCookie("refreshToken", { maxAge: 30 * 24 * 60 * 60, path: "/", sameSite: "lax" });
+    const userProfileCookie = useCookie("user_profile", { maxAge: 7 * 24 * 60 * 60, path: "/", sameSite: "lax" });
+
+    accessTokenCookie.value = accessToken;
+    refreshTokenCookie.value = refreshToken;
+    userProfileCookie.value = JSON.stringify(userData);
     
-    localStorage.setItem("accessToken", accessToken);
-    localStorage.setItem("refreshToken", refreshToken);
-    localStorage.setItem("user_profile", JSON.stringify(userData));
-    
-    // Nuke cookies just in case the backend or other parts of the app are trying to set them
-    const cookieNames = ['accessToken', 'refreshToken', 'user_profile'];
-    cookieNames.forEach(name => {
-      document.cookie = `${name}=; path=/; max-age=0`;
-      document.cookie = `${name}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
-    });
+    // Nuke localStorage just in case legacy tokens remain
+    if (import.meta.client) {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      localStorage.removeItem("user_profile");
+    }
   };
 
   const login = async (payload: any) => {

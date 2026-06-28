@@ -30,7 +30,7 @@ export default {
       },
       fontFamily: {
         serif: ['Spectral', 'serif'],
-        sans: ['Roboto', 'sans-serif'],
+        sans: ['Inter', 'sans-serif'],
       }
     },
   },

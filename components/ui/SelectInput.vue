@@ -6,7 +6,7 @@
           :for="inputId"
           :class="[
             'absolute transition-all duration-300 ease-in-out pointer-events-none z-10',
-            isFocused || modelValue ? 'text-sm uppercase font-semibold text-gray-800 left-3 top-2 tracking-widest' : 'text-sm font-bold text-gray-800 left-3 top-[1.1rem]'
+            isFocused || modelValue ? 'text-sm uppercase font-semibold text-gray-800 left-3 top-2 ' : 'text-sm font-bold text-gray-800 left-3 top-[1.1rem]'
           ]"
         >
           {{ label }}

@@ -5,7 +5,7 @@
       <div class="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
       <div class="max-w-4xl mx-auto px-6 relative z-10">
         <div class="max-w-3xl space-y-6">
-          <span class="text-xs font-bold text-primary uppercase tracking-widest">Our People</span>
+          <span class="text-xs font-bold text-primary uppercase ">Our People</span>
           <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 leading-tight">
             Meet the team behind <br />
             <span class="text-primary">Flybeth.</span>
@@ -29,7 +29,7 @@
             </div>
           </div>
           <div class="lg:w-3/5 space-y-6">
-            <span class="text-xs font-bold text-primary uppercase tracking-widest">Founder & CEO</span>
+            <span class="text-xs font-bold text-primary uppercase ">Founder & CEO</span>
             <h2 class="text-3xl lg:text-4xl font-bold text-neutral-900">{{ ceo.name }}</h2>
             <p class="text-base text-neutral-500 font-medium leading-relaxed">
               {{ ceo.bio }}

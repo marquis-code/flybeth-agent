@@ -2,21 +2,21 @@
   <div class="seat-selection-container space-y-8 animate-in fade-in duration-500">
     <div class="flex items-center justify-between">
       <div class="space-y-1">
-        <h3 class="text-xl  text-gray-900 tracking-tight">Select Your Seats</h3>
-        <p class="text-sm font-medium text-gray-800 uppercase tracking-widest">Personalize your journey for every passenger</p>
+        <h3 class="text-xl  text-gray-900 ">Select Your Seats</h3>
+        <p class="text-sm font-medium text-gray-800 uppercase ">Personalize your journey for every passenger</p>
       </div>
       <div class="flex items-center gap-4">
         <div class="flex items-center gap-2">
           <div class="w-3 h-3 rounded-full bg-primary shadow-[0_0_8px_rgba(var(--primary-rgb),0.5)]"></div>
-          <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Available</span>
+          <span class="text-sm font-bold text-gray-400 uppercase ">Available</span>
         </div>
         <div class="flex items-center gap-2">
           <div class="w-3 h-3 rounded-full bg-gray-200"></div>
-          <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Occupied</span>
+          <span class="text-sm font-bold text-gray-400 uppercase ">Occupied</span>
         </div>
         <div class="flex items-center gap-2">
           <div class="w-3 h-3 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></div>
-          <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Selected</span>
+          <span class="text-sm font-bold text-gray-400 uppercase ">Selected</span>
         </div>
       </div>
     </div>
@@ -36,7 +36,7 @@
         <AlertTriangle class="h-8 w-8" />
       </div>
       <p class="text-sm font-bold text-red-900">{{ error }}</p>
-      <button @click="fetchSeatmap" class="px-6 py-2 bg-red-500 text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-red-600 transition-all">Retry</button>
+      <button @click="fetchSeatmap" class="px-6 py-2 bg-red-500 text-white rounded-xl text-xs font-bold uppercase  hover:bg-red-600 transition-all">Retry</button>
     </div>
 
     <!-- Seat Map Content -->
@@ -62,10 +62,10 @@
               </div>
               <div>
                 <p class="text-sm  text-gray-900">{{ p.firstName }} {{ p.lastName }}</p>
-                <p v-if="selectedSeats[idx]" class="text-[10px] font-bold text-emerald-500 uppercase tracking-widest mt-1">
+                <p v-if="selectedSeats[idx]" class="text-sm font-bold text-emerald-500 uppercase  mt-1">
                   Seat {{ selectedSeats[idx].designator }} ({{ formatPrice(selectedSeats[idx].price) }})
                 </p>
-                <p v-else class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">No seat selected</p>
+                <p v-else class="text-sm font-bold text-gray-400 uppercase  mt-1">No seat selected</p>
               </div>
             </div>
             <div v-if="selectedSeats[idx]" class="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center text-white">
@@ -77,10 +77,10 @@
 
         <div class="bg-gray-900 rounded-[2.5rem] p-8 text-white space-y-6 mt-10">
           <div class="flex justify-between items-center">
-            <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Total Surcharges</span>
+            <span class="text-xs font-bold text-gray-400 uppercase ">Total Surcharges</span>
             <span class="text-xl ">{{ formatPrice(totalSeatPrice) }}</span>
           </div>
-          <p class="text-[10px] text-gray-400 leading-relaxed font-medium">Prices include applicable agency margins. Seats are subject to airline availability at the point of ticketing.</p>
+          <p class="text-sm text-gray-400 leading-relaxed font-medium">Prices include applicable agency margins. Seats are subject to airline availability at the point of ticketing.</p>
         </div>
       </div>
 
@@ -92,7 +92,7 @@
            <button 
              v-for="(map, idx) in seatmaps" :key="idx"
              @click="activeMapIdx = idx"
-             class="px-6 py-3 rounded-2xl text-[10px]  uppercase tracking-widest whitespace-nowrap transition-all border"
+             class="px-6 py-3 rounded-2xl text-sm  uppercase  whitespace-nowrap transition-all border"
              :class="activeMapIdx === idx ? 'bg-gray-900 text-white border-gray-900' : 'bg-gray-50 text-gray-800 border-gray-100 hover:bg-white'"
            >
              {{ map.segment_id ? "Segment " + (idx + 1) : "Flight" }}
@@ -108,7 +108,7 @@
           <div v-if="currentMap" class="space-y-12 pb-24">
             <div v-for="(cabin, cIdx) in currentMap.cabins" :key="cIdx" class="space-y-8">
               <div class="text-center">
-                <span class="px-6 py-2 bg-gray-50 rounded-xl text-[10px]  text-gray-400 uppercase  border border-gray-50">
+                <span class="px-6 py-2 bg-gray-50 rounded-xl text-sm  text-gray-400 uppercase  border border-gray-50">
                   {{ cabin.name || 'Cabin' }}
                 </span>
               </div>
@@ -183,7 +183,7 @@
     <!-- Empty State -->
     <div v-else class="bg-gray-50 border-2 border-dashed border-gray-100 rounded-[2.5rem] py-24 text-center">
        <Armchair class="h-12 w-12 text-gray-300 mx-auto mb-6" />
-       <p class="text-sm font-bold text-gray-400 uppercase tracking-widest">Seat Selection Unavailable for this Flight</p>
+       <p class="text-sm font-bold text-gray-400 uppercase ">Seat Selection Unavailable for this Flight</p>
     </div>
   </div>
 </template>

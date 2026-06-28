@@ -2,8 +2,8 @@
   <div class="space-y-6">
     <div class="flex items-center justify-between">
       <div class="space-y-1">
-        <h2 class="text-2xl font-bold text-gray-900 tracking-tight">Email Campaigns</h2>
-        <p class="text-sm text-gray-400 font-bold uppercase tracking-widest">Send newsletters and special offers to your travelers</p>
+        <h2 class="text-2xl font-bold text-gray-900 ">Email Campaigns</h2>
+        <p class="text-sm text-gray-400 font-bold uppercase ">Send newsletters and special offers to your travelers</p>
       </div>
       <button 
         @click="openCreateModal"
@@ -31,8 +31,8 @@
                 <component :is="stat.icon" class="h-6 w-6" :class="stat.color" />
              </div>
              <div class="space-y-0.5">
-                <p class="text-sm  text-gray-400 uppercase tracking-widest">{{ stat.label }}</p>
-                <p class="text-xl  text-gray-900 tracking-tight">{{ stat.value }}</p>
+                <p class="text-sm  text-gray-400 uppercase ">{{ stat.label }}</p>
+                <p class="text-xl  text-gray-900 ">{{ stat.value }}</p>
              </div>
           </div>
        </template>
@@ -42,8 +42,8 @@
        <div class="lg:col-span-12 space-y-4">
           <div class="flex items-center justify-between">
              <div class="flex items-center gap-1 p-1 bg-gray-50 rounded-xl">
-                <button @click="activeTab = 'campaigns'" class="px-5 py-2 text-sm  uppercase tracking-widest rounded-lg transition-all" :class="activeTab === 'campaigns' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-400 hover:text-gray-600'">My Campaigns</button>
-                <button @click="activeTab = 'templates'" class="px-5 py-2 text-sm  uppercase tracking-widest rounded-lg transition-all" :class="activeTab === 'templates' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-400 hover:text-gray-600'">Templates</button>
+                <button @click="activeTab = 'campaigns'" class="px-5 py-2 text-sm  uppercase  rounded-lg transition-all" :class="activeTab === 'campaigns' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-400 hover:text-gray-600'">My Campaigns</button>
+                <button @click="activeTab = 'templates'" class="px-5 py-2 text-sm  uppercase  rounded-lg transition-all" :class="activeTab === 'templates' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-400 hover:text-gray-600'">Templates</button>
              </div>
              <button v-if="activeTab === 'templates' && templates.length === 0" @click="handleSeedTemplates" class="px-4 py-2 bg-violet-600 text-white text-sm  uppercase rounded-xl hover:bg-violet-700 transition-all shadow-lg shadow-violet-600/20">Generate Templates</button>
           </div>
@@ -69,12 +69,12 @@
                       </div>
                       <div class="min-w-0 flex-grow">
                          <div class="flex items-center gap-3">
-                            <h4 class="text-sm  text-gray-900 leading-tight tracking-tight truncate">{{ campaign.title }}</h4>
-                            <span v-if="campaign.isTemplate" class="shrink-0 px-2 py-0.5 text-[7px]  uppercase tracking-wider rounded-full bg-violet-50 text-violet-600 border border-violet-100">Template</span>
+                            <h4 class="text-sm  text-gray-900 leading-tight  truncate">{{ campaign.title }}</h4>
+                            <span v-if="campaign.isTemplate" class="shrink-0 px-2 py-0.5 text-[7px]  uppercase  rounded-full bg-violet-50 text-violet-600 border border-violet-100">Template</span>
                          </div>
                          <p class="text-sm text-gray-400 font-bold mt-1 truncate max-w-sm">{{ campaign.subject }}</p>
                          <div class="flex items-center flex-wrap gap-x-4 gap-y-1 mt-2.5">
-                            <span class="px-2.5 py-0.5 text-sm  uppercase tracking-tighter rounded-full border transition-colors" :class="statusClass(campaign.status)">{{ campaign.status }}</span>
+                            <span class="px-2.5 py-0.5 text-sm  uppercase er rounded-full border transition-colors" :class="statusClass(campaign.status)">{{ campaign.status }}</span>
                             <span class="text-sm font-bold text-gray-500 flex items-center gap-1">
                                <EnvelopeIcon class="h-3 w-3" />
                                {{ campaign.recipientCount || 0 }} recipients
@@ -127,8 +127,8 @@
              </button>
              <div class="h-8 w-px bg-gray-100"></div>
              <div>
-                <h3 class="text-lg  text-gray-900 tracking-tight uppercase">{{ editMode ? 'Update Campaign' : 'Create New Email Campaign' }}</h3>
-                <p class="text-sm text-gray-400 font-bold uppercase tracking-widest">{{ editMode ? 'Modify your existing draft or schedule' : 'Assemble a new newsletter or promotion for your travelers' }}</p>
+                <h3 class="text-lg  text-gray-900  uppercase">{{ editMode ? 'Update Campaign' : 'Create New Email Campaign' }}</h3>
+                <p class="text-sm text-gray-400 font-bold uppercase ">{{ editMode ? 'Modify your existing draft or schedule' : 'Assemble a new newsletter or promotion for your travelers' }}</p>
              </div>
           </div>
           <div class="flex items-center space-x-4">
@@ -145,25 +145,25 @@
              <!-- Sidebar Info -->
              <div class="space-y-8">
                 <section class="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm space-y-6">
-                   <h4 class="text-sm  text-gray-900 uppercase tracking-widest flex items-center gap-2">
+                   <h4 class="text-sm  text-gray-900 uppercase  flex items-center gap-2">
                       <InformationCircleIcon class="h-4 w-4 text-primary" />
                       Campaign Setup
                    </h4>
                    
                    <div class="space-y-4">
                       <div class="space-y-1.5">
-                         <label class="text-sm  text-gray-400 uppercase tracking-widest px-1">Campaign Name</label>
+                         <label class="text-sm  text-gray-400 uppercase  px-1">Campaign Name</label>
                          <input v-model="campaignForm.title" placeholder="e.g., Summer Holiday Flash Sale" class="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-2xl text-sm font-bold outline-none focus:bg-white focus:border-primary transition-all shadow-sm" />
                       </div>
                       <div class="space-y-1.5">
-                         <label class="text-sm  text-gray-400 uppercase tracking-widest px-1">Email Subject</label>
+                         <label class="text-sm  text-gray-400 uppercase  px-1">Email Subject</label>
                          <input v-model="campaignForm.subject" placeholder="What they see in their inbox" class="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-2xl text-sm font-bold outline-none focus:bg-white focus:border-primary transition-all shadow-sm" />
                       </div>
                    </div>
                 </section>
 
                 <section class="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm space-y-6">
-                   <h4 class="text-sm  text-gray-900 uppercase tracking-widest flex items-center gap-2">
+                   <h4 class="text-sm  text-gray-900 uppercase  flex items-center gap-2">
                       <UsersIcon class="h-4 w-4 text-primary" />
                       Target Audience
                    </h4>
@@ -179,7 +179,7 @@
                         ]"
                       />
                       <div v-if="campaignForm.target === 'specific'" class="space-y-1.5">
-                         <label class="text-sm  text-gray-400 uppercase tracking-widest px-1">Recipient List</label>
+                         <label class="text-sm  text-gray-400 uppercase  px-1">Recipient List</label>
                          <TagInput 
                             v-model="campaignForm.customRecipients"
                             placeholder="Type email and press enter or comma..."
@@ -189,7 +189,7 @@
                 </section>
 
                 <section class="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm space-y-6">
-                   <h4 class="text-sm  text-gray-900 uppercase tracking-widest flex items-center gap-2">
+                   <h4 class="text-sm  text-gray-900 uppercase  flex items-center gap-2">
                       <ClockIcon class="h-4 w-4 text-primary" />
                       Transmission Timing
                    </h4>
@@ -200,7 +200,7 @@
                            v-for="mode in ['immediate', 'custom']" 
                            :key="mode"
                            @click="schedulingMode = mode"
-                           class="py-3 text-sm  uppercase tracking-widest rounded-xl transition-all"
+                           class="py-3 text-sm  uppercase  rounded-xl transition-all"
                            :class="schedulingMode === mode ? 'bg-white text-primary shadow-sm' : 'text-gray-400 hover:text-gray-600'"
                          >
                             {{ mode === 'immediate' ? 'Send Now' : 'Schedule for later' }}
@@ -208,7 +208,7 @@
                       </div>
 
                       <div v-if="schedulingMode === 'custom'" class="space-y-1.5 animate-in slide-in-from-top-2 duration-300">
-                         <label class="text-sm  text-gray-400 uppercase tracking-widest px-1">Specify Date & Time</label>
+                         <label class="text-sm  text-gray-400 uppercase  px-1">Specify Date & Time</label>
                          <input 
                            v-model="campaignForm.scheduledAt" 
                            type="datetime-local" 
@@ -242,7 +242,7 @@
                                <CameraIcon class="h-8 w-8 text-primary" />
                             </div>
                             <div class="space-y-1">
-                               <p class="text-sm  text-gray-900 uppercase tracking-widest">Header Image</p>
+                               <p class="text-sm  text-gray-900 uppercase ">Header Image</p>
                                <p class="text-sm text-gray-400 font-bold uppercase">Best size: 1200x600px</p>
                             </div>
                          </div>
@@ -250,7 +250,7 @@
                       </div>
 
                       <div class="space-y-4">
-                         <label class="text-sm  text-gray-900 uppercase tracking-widest px-2">Email Body Content</label>
+                         <label class="text-sm  text-gray-900 uppercase  px-2">Email Body Content</label>
                          <RichTextEditor v-model="campaignForm.content" class="min-h-[500px]" />
                       </div>
                    </div>
@@ -260,7 +260,7 @@
                          <SparklesIcon class="h-5 w-5 text-primary" />
                       </div>
                       <div class="space-y-1">
-                         <p class="text-sm  text-primary uppercase tracking-widest">Branding Engine Active</p>
+                         <p class="text-sm  text-primary uppercase ">Branding Engine Active</p>
                          <p class="text-sm text-primary/70 font-medium leading-relaxed">Flybeth will automatically attach your agency's logo, color palette, and contact signature to the footer of this transmission.</p>
                       </div>
                    </div>
@@ -284,38 +284,38 @@
           </div>
 
           <div class="space-y-2">
-             <h3 class="text-2xl  text-gray-900 tracking-tight">{{ selectedCampaign.title }}</h3>
-             <p class="text-sm font-bold text-gray-500 uppercase tracking-widest">{{ selectedCampaign.subject }}</p>
+             <h3 class="text-2xl  text-gray-900 ">{{ selectedCampaign.title }}</h3>
+             <p class="text-sm font-bold text-gray-500 uppercase ">{{ selectedCampaign.subject }}</p>
           </div>
 
           <div class="grid grid-cols-2 gap-4">
              <div class="p-4 bg-gray-50 rounded-2xl border border-gray-100">
-                <p class="text-sm  text-gray-400 uppercase tracking-widest mb-1">Recipients</p>
+                <p class="text-sm  text-gray-400 uppercase  mb-1">Recipients</p>
                 <p class="text-xl font-bold text-gray-900">{{ selectedCampaign.recipientCount || 0 }}</p>
              </div>
              <div class="p-4 bg-gray-50 rounded-2xl border border-gray-100">
-                <p class="text-sm  text-gray-400 uppercase tracking-widest mb-1">Date Sent</p>
+                <p class="text-sm  text-gray-400 uppercase  mb-1">Date Sent</p>
                 <p class="text-xl font-bold text-gray-900">{{ selectedCampaign.sentAt ? formatDate(selectedCampaign.sentAt) : 'Pending' }}</p>
              </div>
              <div class="p-4 bg-gray-50 rounded-2xl border border-gray-100">
-                <p class="text-sm  text-gray-400 uppercase tracking-widest mb-1">Target Audience</p>
+                <p class="text-sm  text-gray-400 uppercase  mb-1">Target Audience</p>
                 <p class="text-sm font-bold text-gray-900 capitalize">{{ selectedCampaign.filters?.target || 'All' }}</p>
              </div>
              <div class="p-4 bg-gray-50 rounded-2xl border border-gray-100">
-                <p class="text-sm  text-gray-400 uppercase tracking-widest mb-1">Created</p>
+                <p class="text-sm  text-gray-400 uppercase  mb-1">Created</p>
                 <p class="text-sm font-bold text-gray-900">{{ formatDate(selectedCampaign.createdAt) }}</p>
              </div>
           </div>
 
           <div v-if="selectedCampaign.filters?.emails?.length" class="space-y-3">
-             <h4 class="text-sm  text-gray-900 uppercase tracking-widest">Recipient Emails</h4>
+             <h4 class="text-sm  text-gray-900 uppercase ">Recipient Emails</h4>
              <div class="flex flex-wrap gap-2">
                 <span v-for="email in selectedCampaign.filters.emails" :key="email" class="px-3 py-1.5 bg-blue-50 text-sm font-bold text-blue-600 rounded-full border border-blue-100">{{ email }}</span>
              </div>
           </div>
 
           <div class="space-y-4">
-             <h4 class="text-sm  text-gray-900 uppercase tracking-widest border-b border-gray-50 pb-2">Email Content Preview</h4>
+             <h4 class="text-sm  text-gray-900 uppercase  border-b border-gray-50 pb-2">Email Content Preview</h4>
              <div class="prose prose-sm max-w-none text-gray-600 rounded-2xl bg-gray-50/50 p-6 border border-gray-100" v-html="selectedCampaign.content"></div>
           </div>
 

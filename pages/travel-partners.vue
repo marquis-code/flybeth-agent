@@ -4,7 +4,7 @@
     <section class=" pb-20 bg-[#fafaf9] relative overflow-hidden">
       <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
       <div class="max-w-4xl mx-auto px-6 text-center relative z-10 space-y-6">
-        <span class="inline-block text-xs font-bold text-primary uppercase tracking-widest">Our Network</span>
+        <span class="inline-block text-xs font-bold text-primary uppercase ">Our Network</span>
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 leading-tight">
           We work with the <br />
           <span class="text-primary">world's best brands.</span>
@@ -25,7 +25,7 @@
              <div class="h-20 w-44 bg-neutral-50 rounded-2xl flex items-center justify-center p-6 transition-all duration-500 group-hover:scale-105 group-hover:shadow-xl group-hover:bg-white border border-neutral-100">
                 <img :src="p.logo" class="h-full w-full object-contain opacity-80 group-hover:opacity-100 transition-all duration-500" :alt="p.name" />
              </div>
-             <span class="text-xs font-bold text-neutral-300 uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">{{ p.name }}</span>
+             <span class="text-xs font-bold text-neutral-300 uppercase  opacity-0 group-hover:opacity-100 transition-opacity">{{ p.name }}</span>
           </div>
         </div>
       </div>
@@ -37,7 +37,7 @@
              <div class="h-20 w-44 bg-neutral-50 rounded-2xl flex items-center justify-center p-6 transition-all duration-500 group-hover:scale-105 group-hover:shadow-xl group-hover:bg-white border border-neutral-100">
                 <img :src="p.logo" class="h-full w-full object-contain opacity-80 group-hover:opacity-100 transition-all duration-500" :alt="p.name" />
              </div>
-             <span class="text-xs font-bold text-neutral-300 uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">{{ p.name }}</span>
+             <span class="text-xs font-bold text-neutral-300 uppercase  opacity-0 group-hover:opacity-100 transition-opacity">{{ p.name }}</span>
           </div>
         </div>
       </div>
@@ -49,7 +49,7 @@
              <div class="h-20 w-44 bg-neutral-50 rounded-2xl flex items-center justify-center p-6 transition-all duration-500 group-hover:scale-105 group-hover:shadow-xl group-hover:bg-white border border-neutral-100">
                 <img :src="p.logo" class="h-full w-full object-contain opacity-80 group-hover:opacity-100 transition-all duration-500" :alt="p.name" />
              </div>
-             <span class="text-xs font-bold text-neutral-300 uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">{{ p.name }}</span>
+             <span class="text-xs font-bold text-neutral-300 uppercase  opacity-0 group-hover:opacity-100 transition-opacity">{{ p.name }}</span>
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@
               </div>
            </div>
            <div class="lg:w-1/2 space-y-8 order-first lg:order-none">
-              <span class="text-xs font-bold text-primary uppercase tracking-widest">Why Partner With Flybeth</span>
+              <span class="text-xs font-bold text-primary uppercase ">Why Partner With Flybeth</span>
               <h2 class="text-4xl lg:text-5xl font-bold text-neutral-900 leading-tight">
                 Reach agents who are <br />
                 <span class="text-primary">ready to sell.</span>
@@ -76,7 +76,7 @@
               <div class="grid grid-cols-2 gap-8 pt-4">
                  <div v-for="s in stats" :key="s.label" class="space-y-1">
                     <p class="text-3xl  text-primary">{{ s.value }}</p>
-                    <p class="text-xs font-bold text-neutral-400 uppercase tracking-widest">{{ s.label }}</p>
+                    <p class="text-xs font-bold text-neutral-400 uppercase ">{{ s.label }}</p>
                  </div>
               </div>
            </div>

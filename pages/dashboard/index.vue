@@ -27,14 +27,14 @@
           <div class="p-3 rounded-2xl bg-gray-50 text-gray-400 group-hover:bg-primary/10 group-hover:text-primary transition-all">
             <component :is="stat.icon" class="h-6 w-6" />
           </div>
-          <div v-if="stat.increase" class="flex items-center space-x-1 text-emerald-500 bg-emerald-50 px-2 py-0.5 rounded-full text-xs  uppercase tracking-widest">
+          <div v-if="stat.increase" class="flex items-center space-x-1 text-emerald-500 bg-emerald-50 px-2 py-0.5 rounded-full text-xs   ">
             <ArrowUpIcon class="h-3 w-3" />
             <span>{{ stat.increase }}</span>
           </div>
         </div>
         <div>
-          <h3 class="text-xs  text-gray-400 uppercase tracking-widest mb-1">{{ stat.name }}</h3>
-          <p class="text-2xl  text-gray-900 tracking-tight group-hover:text-primary transition-colors">{{ stat.value }}</p>
+          <h3 class="text-xs  text-gray-400   mb-1">{{ stat.name }}</h3>
+          <p class="text-2xl  text-gray-900  group-hover:text-primary transition-colors">{{ stat.value }}</p>
         </div>
       </div>
     </div>
@@ -113,7 +113,7 @@
 
         <!-- Quick Links -->
         <div class="bg-white border border-gray-100 p-6 rounded-xl space-y-4">
-           <h3 class="text-sm font-bold text-gray-400 uppercase tracking-widest ">Quick Actions</h3>
+           <h3 class="text-sm font-bold text-gray-400   ">Quick Actions</h3>
            <div class="grid grid-cols-2 gap-3">
               <button 
                 v-for="action in quickActions" 
@@ -130,12 +130,12 @@
         <!-- Notifications -->
         <div class="bg-white border border-gray-100 rounded-xl overflow-hidden">
            <div class="p-4 border-b border-gray-50 bg-gray-50/50 flex items-center justify-between">
-              <h3 class="text-sm font-bold text-gray-400 uppercase tracking-widest ">Recent Alerts</h3>
+              <h3 class="text-sm font-bold text-gray-400   ">Recent Alerts</h3>
               <div v-if="unreadCount > 0" class="px-1.5 py-0.5 bg-rose-500 text-white text-sm  rounded">{{ unreadCount }}</div>
            </div>
            <div class="divide-y divide-gray-50 max-h-[400px] overflow-y-auto no-scrollbar">
               <div v-if="!notifications.length" class="p-8 text-center text-gray-400">
-                 <p class="text-sm font-bold uppercase tracking-widest ">No alerts</p>
+                 <p class="text-sm font-bold   ">No alerts</p>
               </div>
               <div v-for="n in notifications.slice(0, 5)" :key="n._id" class="p-4 hover:bg-gray-50 transition-colors cursor-pointer group">
                  <div class="flex items-start space-x-3">
@@ -143,13 +143,13 @@
                     <div class="flex-grow">
                        <p class="text-sm font-bold text-gray-800">{{ n.title }}</p>
                        <p class="text-sm text-gray-500 line-clamp-2 mt-0.5">{{ n.message }}</p>
-                       <span class="text-sm text-gray-400 font-bold uppercase mt-2 block">{{ formatDate(n.createdAt) }}</span>
+                       <span class="text-sm text-gray-400 font-bold  mt-2 block">{{ formatDate(n.createdAt) }}</span>
                     </div>
                  </div>
               </div>
            </div>
            <div class="p-3 bg-gray-50/50 text-center border-t border-gray-100">
-              <button class="text-sm font-bold text-primary hover:underline uppercase tracking-widest" @click="navigateTo('/dashboard/notifications')">View All Notifications</button>
+              <button class="text-sm font-bold text-primary hover:underline  " @click="navigateTo('/dashboard/notifications')">View All Notifications</button>
            </div>
         </div>
       </div>

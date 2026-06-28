@@ -35,9 +35,9 @@ export const useTransfers = () => {
           passengers: query.passengers,
           transferType: 'ALL',
         })
-        if (res.data?.data?.length > 0) {
-          transferResults.value = res.data.data
-          showToast({ title: 'Success', message: `Found ${res.data.data.length} transfer options.`, toastType: 'success' })
+        if (res.data?.data?.results?.length > 0) {
+          transferResults.value = res.data.data.results
+          showToast({ title: 'Success', message: `Found ${res.data.data.results.length} transfer options.`, toastType: 'success' })
           return
         }
       } catch (err) {

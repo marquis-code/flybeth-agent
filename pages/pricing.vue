@@ -162,7 +162,7 @@ const enterpriseFeatures = [
 /* ── Hero ─────────────────────────────────────────────────────────── */
 .ap-hero {
   position: relative;
-  padding: 120px 0 160px;
+  padding: 80px 0 100px;
   text-align: center;
 }
 
@@ -186,7 +186,7 @@ const enterpriseFeatures = [
   padding: 6px 16px; border-radius: 100px; margin-bottom: 24px; border: 1px solid rgba(0, 102, 255, 0.2);
 }
 
-.ap-h { font-size: 56px; font-weight: 800; line-height: 1.1; margin-bottom: 24px; letter-spacing: -0.04em; }
+.ap-h { font-size: 40px; font-weight: 800; line-height: 1.15; margin-bottom: 20px; letter-spacing: -0.04em; }
 .ap-grad { background: linear-gradient(to right, #0066ff, #00ffcc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 .ap-p { font-size: 18px; color: #a1a1aa; line-height: 1.6; max-width: 600px; margin: 0 auto; }
 
@@ -198,8 +198,8 @@ const enterpriseFeatures = [
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 32px;
-  padding: 48px 40px;
+  border-radius: 24px;
+  padding: 32px 24px;
   display: flex;
   flex-direction: column;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -231,10 +231,10 @@ const enterpriseFeatures = [
 .ap-card-tag--blue { color: #0066ff; }
 .ap-card-tag--white { color: #fff; }
 
-.ap-card-h { font-size: 28px; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.02em; }
+.ap-card-h { font-size: 20px; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.02em; }
 .ap-card-price { display: flex; align-items: baseline; gap: 4px; margin-bottom: 16px; }
 .ap-card-cur { font-size: 20px; font-weight: 700; color: #71717a; }
-.ap-card-val { font-size: 48px; font-weight: 800; letter-spacing: -0.03em; }
+.ap-card-val { font-size: 36px; font-weight: 800; letter-spacing: -0.03em; }
 .ap-card-sub { font-size: 14px; font-weight: 600; color: #71717a; }
 .ap-card-desc { font-size: 14px; color: #71717a; line-height: 1.5; }
 
@@ -247,8 +247,8 @@ const enterpriseFeatures = [
 
 .ap-card-ft { mt: auto; }
 .ap-btn {
-  display: flex; align-items: center; justify-content: center; height: 56px; border-radius: 16px;
-  font-size: 15px; font-weight: 700; text-decoration: none; transition: all 0.3s;
+  display: flex; align-items: center; justify-content: center; height: 44px; border-radius: 12px;
+  font-size: 14px; font-weight: 700; text-decoration: none; transition: all 0.3s;
 }
 .ap-btn--primary { background: #0066ff; color: #fff; }
 .ap-btn--primary:hover { background: #0052cc; box-shadow: 0 8px 24px rgba(0, 102, 255, 0.3); }
@@ -270,6 +270,6 @@ const enterpriseFeatures = [
   .ap-grid { grid-template-columns: 1fr; gap: 24px; padding: 0 20px; }
   .ap-card--high { transform: none; }
   .ap-card--high:hover { transform: translateY(-8px); }
-  .ap-h { font-size: 40px; }
+  .ap-h { font-size: 28px; }
 }
 </style>

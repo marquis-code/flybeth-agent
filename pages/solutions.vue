@@ -4,28 +4,28 @@
     <section class="pt-10 pb-20 bg-white relative">
       <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
       <div class="max-w-4xl mx-auto px-6 text-center space-y-6 relative z-10">
-        <span class="inline-block text-xs font-bold text-primary uppercase tracking-widest mb-2">What We Offer</span>
-        <h1 class="text-4xl lg:text-6xl font-bold text-neutral-900 leading-tight">
+        <span class="inline-block text-xs font-bold text-primary uppercase  mb-2">What We Offer</span>
+        <h1 class="text-3xl lg:text-5xl font-bold text-neutral-900 leading-tight">
           Solutions for every <br />
           <span class="text-primary">travel business.</span>
         </h1>
-        <p class="text-lg text-neutral-500 font-medium leading-relaxed max-w-2xl mx-auto">
+        <p class="text-base text-neutral-500 font-medium leading-relaxed max-w-2xl mx-auto">
           From independent home-based advisors to global travel consolidators, Flybeth provides the flexible infrastructure you need to thrive.
         </p>
       </div>
     </section>
 
     <!-- Solutions Cards -->
-    <section class="pb-32 px-6">
-      <div class="max-w-7xl mx-auto space-y-16">
+    <section class="pb-16 lg:pb-24 px-6">
+      <div class="max-w-7xl mx-auto space-y-12">
         <div v-for="(solution, idx) in solutions" :key="solution.title" 
-             class="group bg-neutral-50 rounded-3xl p-10 lg:p-16 border border-neutral-100 flex flex-col lg:flex-row gap-16 items-center hover:bg-white hover:shadow-2xl transition-all duration-700">
+             class="group bg-neutral-50 rounded-3xl p-8 lg:p-12 border border-neutral-100 flex flex-col lg:flex-row gap-12 items-center hover:bg-white hover:shadow-2xl transition-all duration-700">
           
           <div class="flex-1 space-y-6" :class="{ 'lg:order-2': idx % 2 !== 0 }">
              <div class="inline-flex py-1.5 px-4 bg-primary/10 text-primary text-xs font-bold rounded-full border border-primary/20">
                 {{ solution.tag }}
              </div>
-             <h2 class="text-3xl lg:text-4xl font-bold text-neutral-900">{{ solution.title }}</h2>
+             <h2 class="text-2xl lg:text-3xl font-bold text-neutral-900">{{ solution.title }}</h2>
              <p class="text-base text-neutral-500 leading-relaxed font-medium">{{ solution.description }}</p>
              <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <li v-for="item in solution.bullets" :key="item" class="flex items-center space-x-3 text-sm font-medium text-neutral-600">
@@ -39,17 +39,17 @@
           </div>
 
           <div class="flex-1 relative" :class="{ 'lg:order-1': idx % 2 !== 0 }">
-             <img :src="solution.image" class="rounded-3xl shadow-xl w-full h-[380px] object-cover border border-neutral-100 group-hover:scale-[1.02] transition-transform duration-700" :alt="solution.title" />
+             <img :src="solution.image" class="rounded-3xl shadow-xl w-full h-[300px] object-cover border border-neutral-100 group-hover:scale-[1.02] transition-transform duration-700" :alt="solution.title" />
           </div>
         </div>
       </div>
     </section>
 
     <!-- Testimonial -->
-    <section class="py-24 bg-neutral-900 text-white relative overflow-hidden">
-        <div class="max-w-4xl mx-auto px-6 text-center space-y-8 relative z-10">
-           <ChatBubbleBottomCenterIcon class="h-12 w-12 text-primary/40 mx-auto" />
-           <p class="text-2xl lg:text-3xl font-medium leading-relaxed ">
+    <section class="py-16 lg:py-24 bg-neutral-900 text-white relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-6 text-center space-y-6 relative z-10">
+           <ChatBubbleBottomCenterIcon class="h-10 w-10 text-primary/40 mx-auto" />
+           <p class="text-xl lg:text-2xl font-medium leading-relaxed ">
               "We've doubled our booking volume without adding a single administrative staff member. Flybeth's automation is unrivaled."
            </p>
            <div>
@@ -60,10 +60,10 @@
     </section>
 
     <!-- Bottom CTA -->
-    <section class="py-24 text-center bg-white">
-      <h2 class="text-3xl lg:text-4xl font-bold mb-4 text-neutral-900">Ready to simplify your travel business?</h2>
-      <p class="text-neutral-500 font-medium text-lg mb-10 max-w-lg mx-auto">Start free today. No credit card required.</p>
-      <BaseButton to="/auth/register" size="md" variant="primary" class="px-12 py-4 font-bold text-sm">Create Your Account</BaseButton>
+    <section class="py-16 text-center bg-white">
+      <h2 class="text-2xl lg:text-3xl font-bold mb-4 text-neutral-900">Ready to simplify your travel business?</h2>
+      <p class="text-neutral-500 font-medium text-base mb-8 max-w-lg mx-auto">Start free today. No credit card required.</p>
+      <BaseButton to="/auth/register" size="md" variant="primary" class="px-8 py-3 font-bold text-sm">Create Your Account</BaseButton>
     </section>
   </div>
 </template>

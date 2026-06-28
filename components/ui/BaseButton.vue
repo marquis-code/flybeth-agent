@@ -78,7 +78,7 @@ const sizeClasses = computed(() => {
 
 const buttonClasses = computed(() => {
   return [
-    'inline-flex items-center justify-center  uppercase tracking-widest rounded-2xl transition-all duration-500 transform active:scale-[0.95] outline-none focus:outline-none focus:ring-0 disabled:opacity-50 disabled:cursor-not-allowed',
+    'inline-flex items-center justify-center  uppercase  rounded-2xl transition-all duration-500 transform active:scale-[0.95] outline-none focus:outline-none focus:ring-0 disabled:opacity-50 disabled:cursor-not-allowed',
     variantClasses.value,
     sizeClasses.value,
     props.block ? 'w-full flex' : ''

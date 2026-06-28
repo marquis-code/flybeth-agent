@@ -2,19 +2,19 @@ import { ref, computed, onMounted } from "vue";
 import { usersApiFactory } from "@/api_factory/modules/users";
 import { uploadApiFactory } from "@/api_factory/modules/upload";
 
-const getUserFromStorage = () => {
-    if (!import.meta.client) return null;
-    const stored = localStorage.getItem('user_profile');
-    if (!stored || stored === 'undefined' || stored === 'null') return null;
+// Read from cookie at setup phase to initialize the ref
+const _globalUser = ref(null);
+const _globalLoading = ref(false);
+
+const getUserFromCookie = () => {
+    const stored = useCookie('user_profile').value;
+    if (!stored) return null;
     try {
-        return JSON.parse(stored);
+        return typeof stored === 'string' ? JSON.parse(stored) : stored;
     } catch (e) {
         return null;
     }
 };
-
-const _globalUser = ref(getUserFromStorage());
-const _globalLoading = ref(false);
 
 export const useUser = () => {
     const user = _globalUser;
@@ -23,12 +23,10 @@ export const useUser = () => {
     // ─── Actions ─────────────────────────────────────────────────────────────
     const setUser = (newUser: any) => {
         user.value = newUser;
-        if (import.meta.client) {
-            if (newUser) {
-                localStorage.setItem('user_profile', JSON.stringify(newUser));
-            } else {
-                localStorage.removeItem('user_profile');
-            }
+        if (newUser) {
+            useCookie('user_profile', { maxAge: 7 * 24 * 60 * 60, path: "/", sameSite: "lax" }).value = JSON.stringify(newUser);
+        } else {
+            useCookie('user_profile').value = null;
         }
     };
 
@@ -76,16 +74,14 @@ export const useUser = () => {
     const logOut = () => {
         user.value = null;
         if (import.meta.client) {
+            useCookie('accessToken').value = null;
+            useCookie('refreshToken').value = null;
+            useCookie('user_profile').value = null;
+            
+            // Clean localStorage just in case
             localStorage.removeItem('accessToken');
             localStorage.removeItem('refreshToken');
             localStorage.removeItem('user_profile');
-            
-            // Nuclear cookie cleanup (just in case any old ones linger)
-            const cookieNames = ['accessToken', 'refreshToken', 'user_profile'];
-            cookieNames.forEach(name => {
-              document.cookie = `${name}=; path=/; max-age=0`;
-              document.cookie = `${name}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
-            });
 
             window.location.href = "/auth/login";
         }
@@ -93,10 +89,12 @@ export const useUser = () => {
 
     const isLoggedIn = computed(() => !!user.value);
 
-    // Dummy for compatibility
-    const token = ref("");
+    const token = computed(() => useCookie('accessToken').value || "");
 
     onMounted(() => {
+        if (!_globalUser.value) {
+            _globalUser.value = getUserFromCookie();
+        }
         fetchProfile()
     })
 
