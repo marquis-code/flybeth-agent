@@ -303,9 +303,6 @@
                          <p class="text-sm text-gray-800 mt-2">Bookings made with card or bank transfer require verification. Flights are not guaranteed until payment is reconciled, which may take up to 48 hours.</p>
                        </div>
                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8">
-                          <!-- Card fields go here... -->
-                       </div>
-                    </div>
                       <div class="space-y-3">
                         <label class="text-sm font-semibold text-gray-800 uppercase  ml-1">Full Name on Card</label>
                         <input 
@@ -398,6 +395,7 @@
                     </div>
                   </div>
                 </div>
+              </div>
 
                 <!-- Billing Details Section -->
                 <div class="bg-white border border-gray-100 rounded-[2rem] overflow-visible shadow-sm hover:shadow-md transition-shadow z-[10]">

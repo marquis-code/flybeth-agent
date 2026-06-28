@@ -166,7 +166,7 @@
                 <ShieldCheckIcon class="h-6 w-6 text-primary" />
                 <span class="text-sm font-bold">Encrypted Checkout</span>
              </div>
-             <img src="/stripe-badge.png" class="h-6 opacity-60" />
+             <div class="px-3 py-1 bg-white/10 rounded-lg text-xs font-bold text-white uppercase tracking-wider">Secured by Stripe</div>
           </div>
 
           <button @click="handleTopUp" :disabled="isTopUpProcessing" class="w-full h-16 bg-primary text-white rounded-2xl  uppercase  flex items-center justify-center transition-all hover:shadow-xl hover:shadow-primary/20 disabled:grayscale">
