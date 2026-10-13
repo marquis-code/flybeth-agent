@@ -16,6 +16,28 @@ const getUserFromCookie = () => {
     }
 };
 
+/**
+ * Resolve the tenant id from a user object.
+ *
+ * The backend user document exposes `tenant`, NOT `tenantId`, and it may be
+ * returned either as a raw id string or as a populated Tenant object
+ * (e.g. `usersService.findById()` populates it). Both shapes are handled here
+ * so every caller can rely on a single helper.
+ */
+export const resolveTenantId = (user: any): string | null => {
+    const tenant = user?.tenant;
+    if (!tenant) return null;
+    if (typeof tenant === 'string') return tenant;
+    // Populated object (Mongoose document / lean object)
+    if (tenant._id) return String(tenant._id);
+    if (tenant.id) return String(tenant.id);
+    // Raw BSON ObjectId (not yet serialised)
+    if (typeof (tenant as any).toHexString === 'function') {
+        return String((tenant as any).toHexString());
+    }
+    return null;
+};
+
 export const useUser = () => {
     const user = _globalUser;
     const loading = _globalLoading;
@@ -109,4 +131,13 @@ export const useUser = () => {
         logOut,
         isLoggedIn
     };
+};
+
+/**
+ * Reactive tenant id for the currently authenticated user.
+ * Returns `null` until the user (or their populated tenant) is available.
+ */
+export const useTenantId = () => {
+    const { user } = useUser();
+    return computed(() => resolveTenantId(user.value));
 };

@@ -209,12 +209,12 @@
                 </div>
 
                 <div class="flex flex-wrap gap-4">
-                  <div v-for="spec in [
+                  <div v-for="(spec, i) in [
                     {label: car.specs?.transmission, icon: '⚙️'},
                     {label: car.specs?.fuel, icon: '⛽'},
-                    {label: `${car.capacity?.passengers} Pass`, icon: '👥'},
-                    {label: `${car.capacity?.luggage} Bags`, icon: '🧳'}
-                  ]" :key="spec.label" class="flex items-center space-x-2 px-3 py-1.5 bg-gray-50 rounded-lg border border-gray-100/50">
+                    {label: car.capacity?.passengers ? `${car.capacity.passengers} Pass` : null, icon: '👥'},
+                    {label: car.capacity?.luggage ? `${car.capacity.luggage} Bags` : null, icon: '🧳'}
+                  ].filter(s => !!s.label)" :key="i" class="flex items-center space-x-2 px-3 py-1.5 bg-gray-50 rounded-lg border border-gray-100/50">
                     <span class="text-sm">{{ spec.icon }}</span>
                     <span class="text-sm  text-gray-800  ">{{ spec.label }}</span>
                   </div>
@@ -231,6 +231,15 @@
             </div>
           </div>
         </div>
+      </div>
+    </Transition>
+
+    <!-- Empty state: shown after a search that returned no real inventory -->
+    <Transition name="fade">
+      <div v-if="hasSearched && !isSearching && carResults.length === 0" class="border-t border-gray-200 bg-gray-50/50 p-12 text-center">
+        <TruckIcon class="h-10 w-10 text-gray-300 mx-auto mb-3" />
+        <p class="text-sm font-bold text-gray-500">No vehicles available</p>
+        <p class="text-sm font-medium text-gray-400 mt-1">We couldn't find any rental cars for this search. Try a different location or date range.</p>
       </div>
     </Transition>
   </div>

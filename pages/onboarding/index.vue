@@ -304,7 +304,7 @@ import PhoneNumberInput from '~/components/ui/PhoneNumberInput.vue'
 import FileUpload from '~/components/ui/FileUpload.vue'
 import BaseButton from '~/components/ui/BaseButton.vue'
 import { useAuth } from '@/composables/modules/auth/useAuth'
-import { useUser } from '@/composables/modules/auth/user'
+import { useUser, resolveTenantId } from '@/composables/modules/auth/user'
 import { useTenants } from '@/composables/modules/tenants/useTenants'
 import { useUpload } from '@/composables/core/useUpload'
 import { useCustomToast } from '@/composables/core/useCustomToast'
@@ -346,10 +346,14 @@ const form = ref({
 })
 
 onMounted(async () => {
-  if (user.value?.tenant) {
-    const data = await getTenant(user.value.tenant)
+  // `user.tenant` may be a populated Tenant object (usersService.findById()
+  // populates it) — passing the object straight into the URL produced
+  // "Invalid ID format: [object Object]". Always pass the resolved id.
+  const tenantId = resolveTenantId(user.value)
+  if (tenantId) {
+    const data = await getTenant(tenantId)
     if (data) {
-      currentStep.value = data.onboardingStep || 1
+      currentStep.value = data.onboardingStep || data.step || 1
       form.value = { ...form.value, ...data }
       form.value.agencyName = data.name || ''
     }
@@ -438,8 +442,9 @@ const prevStep = () => {
 }
 
 const saveProgress = async () => {
-    if (user.value?.tenant) {
-        await updateOnboarding(user.value.tenant, {
+    const tenantId = resolveTenantId(user.value)
+    if (tenantId) {
+        await updateOnboarding(tenantId, {
             ...form.value,
             step: currentStep.value,
             name: form.value.agencyName

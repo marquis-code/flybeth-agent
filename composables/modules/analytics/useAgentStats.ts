@@ -1,6 +1,6 @@
 import { ref } from "vue";
 import { GATEWAY_ENDPOINT_WITH_AUTH } from "@/api_factory/axios.config";
-import { useUser } from "../auth/user";
+import { useUser, resolveTenantId } from "../auth/user";
 
 export const useAgentStats = () => {
     const statsData = ref({
@@ -14,13 +14,21 @@ export const useAgentStats = () => {
     const { user } = useUser();
 
     const fetchStats = async () => {
-        if (!user.value?.tenantId) return;
+        const tenantId = resolveTenantId(user.value);
+        if (!tenantId) return;
         loading.value = true;
         try {
             const res = await GATEWAY_ENDPOINT_WITH_AUTH.get("/analytics/agent", {
-                params: { tenantId: user.value.tenantId }
+                params: { tenantId }
             });
-            statsData.value = res.data || statsData.value;
+            // The backend wraps every response as
+            // { success, data, message, timestamp } — unwrap exactly one level.
+            const payload = res.data?.data ?? res.data;
+            if (payload && typeof payload === "object") {
+                // Merge so missing keys keep their safe defaults instead of
+                // leaving `undefined` behind for the template to trip over.
+                statsData.value = { ...statsData.value, ...payload };
+            }
         } catch (e) {
             console.error("Failed to fetch agent stats");
         } finally {

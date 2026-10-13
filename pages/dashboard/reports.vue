@@ -51,7 +51,7 @@
                   <tr v-for="route in popularRoutes" :key="route.id" class="hover:bg-gray-50 transition-colors">
                      <td class="px-5 py-3 text-sm font-bold text-gray-900">{{ route.origin }} to {{ route.destination }}</td>
                      <td class="px-5 py-3 text-sm text-gray-600">{{ route.count }} Bookings</td>
-                     <td class="px-5 py-3 text-sm font-bold text-gray-900 text-right">${{ route.revenue.toLocaleString() }}</td>
+                     <td class="px-5 py-3 text-sm font-bold text-gray-900 text-right">${{ (Number(route.revenue) || 0).toLocaleString() }}</td>
                   </tr>
                </tbody>
             </table>
@@ -85,7 +85,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue'
 import { useAnalytics } from '@/composables/modules/analytics/useAnalytics'
-import { useUser } from '@/composables/modules/auth/user'
+import { useUser, resolveTenantId } from '@/composables/modules/auth/user'
 import { 
   ChartBarIcon, 
   CurrencyDollarIcon, 
@@ -105,7 +105,11 @@ const days = ref(30)
 const { user } = useUser()
 const { loading, bookingStats, revenueStats, popularRoutes, fetchAllAnalytics } = useAnalytics()
 
-watch(() => user.value?.tenantId, (newId) => {
+// `tenant` (not `tenantId`) is the backend field; it may be an id string or a
+// populated object.
+const tenantId = computed(() => resolveTenantId(user.value))
+
+watch(tenantId, (newId) => {
   if (newId) {
     fetchAllAnalytics(days.value)
   }
@@ -114,7 +118,7 @@ watch(() => user.value?.tenantId, (newId) => {
 const summaryStats = computed(() => [
   {
     label: 'Total Money Made',
-    value: revenueStats.value ? `$${revenueStats.value.totalRevenue.toLocaleString()}` : '$0',
+    value: `$${(Number(revenueStats.value?.totalRevenue) || 0).toLocaleString()}`,
     icon: CurrencyDollarIcon,
     trend: 14.2
   },

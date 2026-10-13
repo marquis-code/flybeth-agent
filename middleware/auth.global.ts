@@ -1,15 +1,31 @@
 export default defineNuxtRouteMiddleware((to) => {
   // ─── Client-side only ──────────────────────────────────────────────────────
-  // localStorage is not available on the server.
+  // Authentication is enforced on the client, exactly as before.
   if (import.meta.server) return
 
   // ─── Read Authentication State ─────────────────────────────────────────────
-  const token = localStorage.getItem('accessToken')
-  const userProfile = localStorage.getItem('user_profile')
+  // SINGLE SOURCE OF TRUTH: cookies.
+  //
+  // `useAuth.persistSession()` writes the `accessToken` / `refreshToken` /
+  // `user_profile` cookies, `api_factory/axios.config.ts` reads those same
+  // cookies for the `Authorization` header and the refresh flow, and
+  // `useUser()` hydrates `user_profile` from the cookie. The middleware must
+  // read the same place — reading localStorage here (which nothing ever wrote)
+  // was what produced the infinite login loop.
+  const token = useCookie<string | null>('accessToken').value
+  const userProfile = useCookie<string | null>('user_profile').value
 
   // Aggressive validation: Token must exist and look like a JWT (3 parts)
-  const hasValidToken = !!token && token.split('.').length === 3
-  const hasUser = !!userProfile && userProfile !== 'undefined' && userProfile !== 'null'
+  const hasValidToken =
+    !!token &&
+    token !== 'null' &&
+    token !== 'undefined' &&
+    token.split('.').length === 3
+  const hasUser =
+    !!userProfile &&
+    userProfile !== 'undefined' &&
+    userProfile !== 'null' &&
+    userProfile !== '{}'
 
   const isAuthenticated = hasValidToken && hasUser
 

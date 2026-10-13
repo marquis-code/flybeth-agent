@@ -616,6 +616,7 @@ import SeatSelectionUI from '@/components/flights/SeatSelectionUI.vue'
 import { useBookings } from '@/composables/modules/bookings/useBookings'
 import { useSettings } from '@/composables/useSettings'
 import { useCustomToast } from '@/composables/core/useCustomToast'
+import { GATEWAY_ENDPOINT_WITH_AUTH } from '@/api_factory/axios.config'
 
 const { formatPrice, currentCurrency } = useSettings()
 
@@ -717,10 +718,14 @@ const agentWallet = ref({ balance: 0 })
 
 const fetchWallet = async () => {
   try {
-    const res = await axios.get(`${runtimeConfig.public.apiBase}/finance/wallet/balance`, {
-       headers: { Authorization: `Bearer ${localStorage.getItem('auth_token')}` }
-    })
-    agentWallet.value.balance = res.data
+    // Use the shared API factory so the request always targets the fully
+    // prefixed base (`https://…/api/v1`). The previous raw axios call used
+    // `runtimeConfig.public.apiBase` (no `/api/v1` in .env) which 404'd.
+    // Auth comes from the axios interceptor (cookie `accessToken`).
+    const res = await GATEWAY_ENDPOINT_WITH_AUTH.get('/finance/wallet/balance')
+    // Backend envelope: { success, data, message, timestamp }
+    const balance = res.data?.data ?? res.data
+    agentWallet.value.balance = Number(balance) || 0
   } catch (err) {
     console.error('Failed to fetch wallet', err)
   }

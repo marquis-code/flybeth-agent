@@ -1,13 +1,18 @@
 import { useChat } from '../modules/chat/useChat'
 import { useUser } from '../modules/auth/user'
 import { useRoute } from 'vue-router'
+import { API_BASE_URL } from '@/api_factory/axios.config'
 
 export const useTracking = () => {
     const { activeRoom } = useChat()
     const { user } = useUser()
     const route = useRoute()
-    const config = useRuntimeConfig()
-    const gateway = config.public.GATEWAY_ENDPOINT
+
+    // Shared, fully-prefixed API base (…/api/v1). `config.public.GATEWAY_ENDPOINT`
+    // never existed, which sent tracking events to the literal URL
+    // "undefined/tracking/event". `/tracking` is not in the backend's
+    // prefix-rewrite list, so the `/api/v1` segment is required here.
+    const gateway = String(API_BASE_URL || '').replace(/\/+$/, '')
     
     // Persistent guest ID in cookies
     const guestCookie = useCookie('flybeth_agent_guest_id', { maxAge: 30 * 24 * 60 * 60 })

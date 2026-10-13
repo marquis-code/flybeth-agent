@@ -120,8 +120,9 @@ const errors = reactive({
   password: ''
 })
 
-// Agressively clear ANY old cookies on mount of the login page
-// to ensure a clean slate for the localStorage system.
+// The login page is the logged-out landing page: clear stale auth cookies on
+// mount so a leftover/expired token can never bounce the user back to the
+// dashboard. Cookies are the single source of truth for auth.
 onMounted(() => {
   if (import.meta.client) {
     const cookieNames = ['accessToken', 'refreshToken', 'user_profile'];
@@ -135,10 +136,10 @@ onMounted(() => {
 const handleLogin = async () => {
   try {
     const res = await login(form);
-    // login composable already handles localStorage persistence
+    // login composable already persisted the session cookies
     if (!res.requiresOtp && (res.tokens || res.accessToken)) {
        // Using window.location.replace for a hard redirect to ensure
-       // middleware picks up the new localStorage state.
+       // the middleware picks up the new cookie session.
        window.location.replace('/dashboard')
     } else {
       localStorage.setItem('verify_email', form.email)

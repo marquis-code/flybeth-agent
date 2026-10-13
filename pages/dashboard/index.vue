@@ -160,7 +160,7 @@
 <script setup lang="ts">
 import { onMounted, ref, computed, watch } from 'vue'
 import { useBookings } from '@/composables/modules/bookings/useBookings'
-import { useUser } from '@/composables/modules/auth/user'
+import { useUser, resolveTenantId } from '@/composables/modules/auth/user'
 import { useConfirmation } from '@/composables/core/useConfirmation'
 import { useNotifications } from '@/composables/core/useNotifications'
 import { useAgentStats } from '@/composables/modules/analytics/useAgentStats'
@@ -200,7 +200,11 @@ const { confirm } = useConfirmation()
 
 const loading = computed(() => bookingsLoading.value || statsLoading.value)
 
-watch(() => user.value?.tenantId, (newId) => {
+// The backend user field is `tenant` (id string or populated object), never
+// `tenantId`. Resolve it through the shared helper and watch the resolved id.
+const tenantId = computed(() => resolveTenantId(user.value))
+
+watch(tenantId, (newId) => {
   if (newId) {
     fetchBookings({ limit: 8 })
     fetchStats()
@@ -221,19 +225,19 @@ const quickActions = [
 const stats = computed(() => [
   {
     name: 'Money Earned',
-    value: statsData.value ? formatPrice(statsData.value.totalRevenue) : formatPrice(0),
+    value: formatPrice(Number(statsData.value?.totalRevenue) || 0),
     icon: CurrencyDollarIcon,
     increase: '+12.5%'
   },
   {
     name: 'Active Bookings',
-    value: statsData.value?.activeBookings.toLocaleString() || '0',
+    value: statsData.value?.activeBookings?.toLocaleString() ?? '0',
     icon: TicketIcon,
     increase: '+3.2%'
   },
   {
     name: 'Total Bookings',
-    value: statsData.value?.totalBookings.toLocaleString() || '0',
+    value: statsData.value?.totalBookings?.toLocaleString() ?? '0',
     icon: GiftIcon,
     increase: '+8.1%'
   },
@@ -255,7 +259,7 @@ const bookingHeaders = [
 const totalEarnings = computed(() => statsData.value?.totalRevenue || 0)
 
 onMounted(async () => {
-  if (user.value?.tenantId) {
+  if (tenantId.value) {
     Promise.all([
       fetchBookings({ limit: 10 }),
       fetchStats(),

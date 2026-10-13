@@ -242,7 +242,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from "vue"
 import { useBookings } from "@/composables/modules/bookings/useBookings"
-import { useUser } from "@/composables/modules/auth/user"
+import { useUser, resolveTenantId } from "@/composables/modules/auth/user"
 import { useConfirmation } from "@/composables/core/useConfirmation"
 import { 
   PaperAirplaneIcon, BuildingOfficeIcon, TicketIcon, MagnifyingGlassIcon,
@@ -263,7 +263,11 @@ const showWizard = ref(false)
 const wizardTab = ref("Flights")
 const searchQuery = ref("")
 
-watch(() => user.value?.tenantId, (newId) => { if (newId) fetchBookings() }, { immediate: true })
+// The backend user field is `tenant` (id string or populated object), not
+// `tenantId`.
+const tenantId = computed(() => resolveTenantId(user.value))
+
+watch(tenantId, (newId) => { if (newId) fetchBookings() }, { immediate: true })
 
 const wizardTabs = [
   { name: "Flights", label: "Flights" },

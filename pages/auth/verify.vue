@@ -105,23 +105,18 @@ const handleVerify = async () => {
     })
     
     localStorage.removeItem('verify_email')
-    
-    // Auth-related localStorage state is already handled by useAuth.verifyOtp
-    
-    // Nuclear cookie cleanup (just in case)
-    if (import.meta.client) {
-      const cookieNames = ['accessToken', 'refreshToken', 'user_profile'];
-      cookieNames.forEach(name => {
-        document.cookie = `${name}=; path=/; max-age=0`;
-        document.cookie = `${name}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
-      });
-    }
+
+    // NOTE: do NOT clear the auth cookies here. `verifyOtp()` just wrote
+    // `accessToken` / `refreshToken` / `user_profile` via `persistSession()`
+    // and those cookies are the single source of truth the middleware reads.
+    // Wiping them here (as this page used to) sent the user straight back to
+    // /auth/login in an infinite loop.
 
     if (res?.user?.status === 'pending') {
       window.location.replace('/auth/success')
     } else {
-      // Use location.replace for a hard redirect to ensure
-      // middleware picks up the new localStorage state.
+      // Use location.replace for a hard redirect so the freshly written
+      // cookies are picked up by the global auth middleware.
       window.location.replace('/dashboard')
     }
   } catch (error) {

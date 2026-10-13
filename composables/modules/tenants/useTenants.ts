@@ -18,7 +18,8 @@ export const useTenants = () => {
                 message: "Your onboarding information has been updated.",
                 toastType: "success",
             });
-            return res.data;
+            // Backend envelope: { success, data, message, timestamp }
+            return res.data?.data ?? res.data;
         } catch (error: any) {
             showToast({
                 title: "Error",
@@ -35,8 +36,10 @@ export const useTenants = () => {
         loading.value = true;
         try {
             const res = await tenantsApiFactory.getTenant(id);
-            tenant.value = res.data;
-            return res.data;
+            // Backend envelope: { success, data, message, timestamp }
+            const data = res.data?.data ?? res.data;
+            tenant.value = data;
+            return data;
         } catch (error: any) {
             console.error(error);
         } finally {

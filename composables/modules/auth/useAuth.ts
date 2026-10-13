@@ -11,19 +11,33 @@ export const useAuth = () => {
   const { showLoader, hideLoader } = useGlobalLoader();
 
   /**
-   * Persist auth state to cookies only.
+   * Persist auth state to cookies — the single source of truth shared with the
+   * auth middleware (`middleware/auth.global.ts`), `useUser()` and the axios
+   * interceptors (`api_factory/axios.config.ts`).
    */
   const persistSession = (accessToken: string, refreshToken: string, userData: any) => {
     const accessTokenCookie = useCookie("accessToken", { maxAge: 7 * 24 * 60 * 60, path: "/", sameSite: "lax" });
     const refreshTokenCookie = useCookie("refreshToken", { maxAge: 30 * 24 * 60 * 60, path: "/", sameSite: "lax" });
     const userProfileCookie = useCookie("user_profile", { maxAge: 7 * 24 * 60 * 60, path: "/", sameSite: "lax" });
 
+    const profileJson = JSON.stringify(userData);
+
     accessTokenCookie.value = accessToken;
     refreshTokenCookie.value = refreshToken;
-    userProfileCookie.value = JSON.stringify(userData);
-    
-    // Nuke localStorage just in case legacy tokens remain
+    userProfileCookie.value = profileJson;
+
+    // Nuxt's cookie ref only flushes to `document.cookie` on the next tick,
+    // but login/verify hard-redirect with `window.location.replace()` straight
+    // away. Write the cookies synchronously too so the middleware can never
+    // miss them.
     if (import.meta.client) {
+      const maxAgeAccess = 7 * 24 * 60 * 60;
+      const maxAgeRefresh = 30 * 24 * 60 * 60;
+      document.cookie = `accessToken=${encodeURIComponent(accessToken || "")}; path=/; max-age=${maxAgeAccess}; SameSite=Lax`;
+      document.cookie = `refreshToken=${encodeURIComponent(refreshToken || "")}; path=/; max-age=${maxAgeRefresh}; SameSite=Lax`;
+      document.cookie = `user_profile=${encodeURIComponent(profileJson)}; path=/; max-age=${maxAgeAccess}; SameSite=Lax`;
+
+      // Nuke localStorage just in case legacy tokens remain
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       localStorage.removeItem("user_profile");

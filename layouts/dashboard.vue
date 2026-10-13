@@ -265,7 +265,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watch, onMounted } from 'vue'
-import { useUser } from '@/composables/modules/auth/user'
+import { useUser, resolveTenantId } from '@/composables/modules/auth/user'
 import { useConfirmation } from '@/composables/core/useConfirmation'
 import { useNotifications } from '@/composables/core/useNotifications'
 import ConfirmModal from '@/components/ConfirmModal.vue'
@@ -375,7 +375,7 @@ const handleSearch = async () => {
    
    isSearching.value = true
    try {
-      const tenantId = user.value?.tenant?._id || user.value?.tenant
+      const tenantId = resolveTenantId(user.value)
       const [uRes, bRes] = await Promise.all([
          usersApiFactory.getTenantUsers({ search: globalSearchQuery.value, limit: 5 }),
          bookingsApiFactory.getTenantBookings(tenantId, { search: globalSearchQuery.value, limit: 5 })

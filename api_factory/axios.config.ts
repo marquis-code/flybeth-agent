@@ -5,6 +5,15 @@ const $GATEWAY_ENDPOINT = rawBaseUrl.endsWith("/api/v1")
   ? rawBaseUrl 
   : `${rawBaseUrl.replace(/\/+$/, '')}/api/v1`;
 
+/**
+ * Fully-qualified API base including the `/api/v1` prefix
+ * (e.g. `https://api.flybeth.com/api/v1`).
+ *
+ * Exported so non-axios callers (`$fetch`) use the exact same base as the
+ * axios instances instead of inventing their own (possibly prefix-less) URL.
+ */
+export const API_BASE_URL = $GATEWAY_ENDPOINT;
+
 export const GATEWAY_ENDPOINT = axios.create({
   baseURL: $GATEWAY_ENDPOINT,
   withCredentials: true,
@@ -42,6 +51,19 @@ GATEWAY_ENDPOINT_WITH_AUTH.interceptors.request.use((config) => {
 let isRefreshing = false;
 let failedQueue: any[] = [];
 
+/**
+ * The portal probes protected endpoints (e.g. `/users/me`) while the user is
+ * still on the sign-in pages. Those probes legitimately 401, and hard-redirecting
+ * on them reloads the page mid-login — which aborts the in-flight
+ * `POST /auth/login` and makes signing in impossible. Never redirect or clear
+ * cookies from an auth route; the auth pages manage that themselves.
+ */
+const isAuthRoute = () => {
+  if (!import.meta.client) return false;
+  const path = window.location.pathname || '';
+  return path === '/' || path.startsWith('/auth');
+};
+
 const processQueue = (error: any, token: string | null = null) => {
   failedQueue.forEach(prom => {
     if (error) {
@@ -76,7 +98,7 @@ GATEWAY_ENDPOINT_WITH_AUTH.interceptors.response.use(
       const refreshToken = import.meta.client ? getCookie('refreshToken') : null;
 
       if (!refreshToken) {
-         if (import.meta.client) {
+         if (import.meta.client && !isAuthRoute()) {
             setCookie('accessToken', '', -1);
             setCookie('refreshToken', '', -1);
             setCookie('user_profile', '', -1);
@@ -86,7 +108,14 @@ GATEWAY_ENDPOINT_WITH_AUTH.interceptors.response.use(
       }
 
       try {
-        const { data } = await GATEWAY_ENDPOINT.post('/auth/refresh', { refreshToken });
+        // The refresh token is sent in the body AND as the `x-refresh-token`
+        // header: the backend `jwt-refresh` strategy accepts either (the
+        // SameSite=Lax cookie is not sent on cross-site API calls).
+        const { data } = await GATEWAY_ENDPOINT.post(
+          '/auth/refresh',
+          { refreshToken },
+          { headers: { 'x-refresh-token': refreshToken } },
+        );
         
         const newToken = data?.data?.accessToken || data?.accessToken;
         const newRefreshToken = data?.data?.refreshToken || data?.refreshToken;
@@ -104,7 +133,7 @@ GATEWAY_ENDPOINT_WITH_AUTH.interceptors.response.use(
         }
       } catch (refreshError) {
         processQueue(refreshError, null);
-        if (import.meta.client) {
+        if (import.meta.client && !isAuthRoute()) {
             setCookie('accessToken', '', -1);
             setCookie('refreshToken', '', -1);
             setCookie('user_profile', '', -1);
