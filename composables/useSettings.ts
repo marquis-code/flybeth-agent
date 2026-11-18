@@ -16,6 +16,13 @@ interface AncillaryPrices {
     vipSupport: number
 }
 
+export interface AncillaryPricingTypes {
+    bags: 'percentage' | 'fixed'
+    seats: 'percentage' | 'fixed'
+    insurance: 'percentage' | 'fixed'
+    vipSupport: 'percentage' | 'fixed'
+}
+
 const currencies = ref<Currency[]>([])
 const currentCurrency = ref<Currency>({ 
     code: 'USD', 
@@ -25,6 +32,12 @@ const currentCurrency = ref<Currency>({
     rate: 1
 })
 const ancillaryPrices = ref<AncillaryPrices>({ bags: 25, seats: 15, insurance: 12, vipSupport: 15 })
+const ancillaryPricingTypes = ref<AncillaryPricingTypes>({
+    bags: 'fixed',
+    seats: 'fixed',
+    insurance: 'fixed',
+    vipSupport: 'fixed'
+})
 const isLoading = ref(false)
 
 const flagMap: Record<string, string> = {
@@ -88,6 +101,15 @@ export function useSettings() {
                     vipSupport: configData.ancillaryPrices.vipSupport ?? 15
                 }
             }
+
+            if (configData?.ancillaryPricingTypes) {
+                ancillaryPricingTypes.value = {
+                    bags: configData.ancillaryPricingTypes.bags || 'fixed',
+                    seats: configData.ancillaryPricingTypes.seats || 'fixed',
+                    insurance: configData.ancillaryPricingTypes.insurance || 'fixed',
+                    vipSupport: configData.ancillaryPricingTypes.vipSupport || 'fixed'
+                }
+            }
         } catch (error) {
             console.error('[useSettings] Failed to load platform settings:', error)
         } finally {
@@ -121,6 +143,7 @@ export function useSettings() {
         currentCurrency,
         currencies,
         ancillaryPrices,
+        ancillaryPricingTypes,
         isLoading,
         setCurrency,
         formatPrice,
