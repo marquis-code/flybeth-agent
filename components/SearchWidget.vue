@@ -84,7 +84,7 @@
                 <ChevronDown class="h-3 w-3 transition-transform" :class="{ 'rotate-180': showHotelAdvancedSearch }" />
               </button>
             </div>
-            <button @click="handleSearch" class="h-10 px-8 bg-neutral-900 text-white rounded-xl font-bold text-sm uppercase  hover:bg-black transition-all shadow-lg flex items-center gap-2">
+            <button @click="handleSearch" class="h-10 px-8 bg-neutral-900 text-white rounded-full font-bold text-sm uppercase hover:bg-black transition-all shadow-lg flex items-center gap-2">
               <Search class="h-3.5 w-3.5" />
               Search Hotels
             </button>
@@ -138,7 +138,7 @@
               </div>
               Advanced Search
             </button>
-            <button @click="handleSearch" class="hidden md:flex h-12 px-10 bg-neutral-900 text-white rounded-2xl  text-sm uppercase  hover:bg-black transition-all shadow-xl items-center gap-3">
+            <button @click="handleSearch" class="hidden md:flex h-12 px-10 bg-neutral-900 text-white rounded-full text-sm uppercase hover:bg-black transition-all shadow-xl items-center gap-3">
               <Search class="h-4 w-4" />
               Find Flights
             </button>
@@ -168,7 +168,7 @@
 
           <!-- Mobile Only Search Button -->
           <div class="md:hidden pt-4">
-            <button @click="handleSearch" class="w-full h-14 bg-neutral-900 text-white rounded-[1.5rem]  text-sm uppercase  hover:bg-black transition-all shadow-xl flex items-center justify-center gap-3">
+            <button @click="handleSearch" class="w-full h-14 bg-neutral-900 text-white rounded-full text-sm uppercase hover:bg-black transition-all shadow-xl flex items-center justify-center gap-3">
               <Search class="h-5 w-5" />
               Find Flights
             </button>
@@ -208,7 +208,7 @@
         </div>
 
         <div class="flex justify-end pt-4">
-           <button @click="handleSearch" class="h-10 px-10 bg-neutral-900 text-white rounded-xl font-bold text-sm uppercase  hover:bg-black transition-all shadow-lg flex items-center gap-2">
+           <button @click="handleSearch" class="h-10 px-10 bg-neutral-900 text-white rounded-full font-bold text-sm uppercase hover:bg-black transition-all shadow-lg flex items-center gap-2">
              <Search class="h-3.5 w-3.5" />
              Search {{ currentTab }}
            </button>
